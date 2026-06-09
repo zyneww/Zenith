@@ -68,8 +68,14 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
         }
       };
 
-      ws.onclose = () => {
-        console.log("🔴 WebSocket disconnected");
+      ws.onclose = (event) => {
+        const wasClean = event.wasClean;
+        const code = event.code;
+        if (!wasClean) {
+          console.warn(`🔴 WebSocket disconnected (code: ${code}, server may be unreachable)`);
+        } else {
+          console.log("🔴 WebSocket disconnected cleanly");
+        }
         setIsConnected(false);
         socketRef.current = null;
 
@@ -91,7 +97,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
       };
 
       ws.onerror = (error) => {
-        console.error("WebSocket error:", error);
+        console.warn("WebSocket connection error (server may be down):", WS_URL);
       };
     } catch (err) {
       console.error("Failed to create WebSocket:", err);

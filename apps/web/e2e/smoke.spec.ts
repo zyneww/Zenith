@@ -10,6 +10,7 @@ test.describe("smoke", () => {
   test("markets page renders", async ({ page }) => {
     const response = await page.goto("/fr/markets")
     expect(response?.ok()).toBeTruthy()
+    await page.waitForSelector("h1", { timeout: 5000 })
     await expect(page.getByRole("heading", { name: "Marchés" })).toBeVisible()
   })
 

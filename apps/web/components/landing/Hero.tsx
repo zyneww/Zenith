@@ -193,39 +193,8 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        {/* Sub-CTA text */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
-          className="text-xs text-gray-500 mb-16"
-        >
-          $0 forever, no credit card needed
-        </motion.p>
-
-        {/* Keyboard shortcut tip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.6 }}
-          className="text-xs text-gray-500 mb-8"
-        >
-          {t("keyboardHint")}
-        </motion.div>
-
-        {/* Powered by */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-          className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[10px] text-gray-600 font-semibold uppercase tracking-wider"
-        >
-          <span className="text-gray-700">{t("poweredBy")}</span>
-          <span className="hover:text-gray-400 transition-colors cursor-default">Binance</span>
-          <span className="hover:text-gray-400 transition-colors cursor-default">CoinGecko</span>
-          <span className="hover:text-gray-400 transition-colors cursor-default">QuestDB</span>
-          <span className="hover:text-gray-400 transition-colors cursor-default">Dragonfly</span>
-        </motion.div>
+        {/* Scroll spacer */}
+        <div className="h-16" />
       </div>
 
       {/* Scroll indicator — clickable, positioned higher */}

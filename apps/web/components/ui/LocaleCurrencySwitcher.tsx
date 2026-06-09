@@ -10,12 +10,21 @@ import { useCurrency, ALL_CURRENCIES, CURRENCY_SYMBOLS, type Currency } from "@/
 
 type Mode = "language" | "currency";
 
+type Position = "up" | "down";
+
 interface LocaleCurrencySwitcherProps {
   mode?: Mode;
   compact?: boolean;
+  iconOnly?: boolean;
+  position?: Position;
 }
 
-export default function LocaleCurrencySwitcher({ mode: initialMode = "language", compact = false }: LocaleCurrencySwitcherProps) {
+export default function LocaleCurrencySwitcher({
+  mode: initialMode = "language",
+  compact = false,
+  iconOnly = false,
+  position = "down",
+}: LocaleCurrencySwitcherProps) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>(initialMode);
   const ref = useRef<HTMLDivElement>(null);
@@ -45,6 +54,11 @@ export default function LocaleCurrencySwitcher({ mode: initialMode = "language",
     setOpen(false);
   };
 
+  const dropdownPositionClass =
+    position === "up"
+      ? "right-0 bottom-full mb-2"
+      : "right-0 top-full mt-2";
+
   return (
     <div ref={ref} className="relative">
       <button
@@ -54,9 +68,11 @@ export default function LocaleCurrencySwitcher({ mode: initialMode = "language",
         aria-label={mode === "language" ? "Change language" : "Change currency"}
       >
         {mode === "language" ? (
-          <>
+          iconOnly ? (
+            <Globe className="w-4 h-4" />
+          ) : (
             <span>{LOCALE_LABELS[currentLocale as Locale] ?? currentLocale}</span>
-          </>
+          )
         ) : (
           <>
             <Coins className="w-3.5 h-3.5" />
@@ -71,11 +87,11 @@ export default function LocaleCurrencySwitcher({ mode: initialMode = "language",
           <>
             <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.95 }}
+              initial={{ opacity: 0, y: position === "up" ? 8 : -8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.95 }}
+              exit={{ opacity: 0, y: position === "up" ? 8 : -8, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="absolute right-0 bottom-full mb-2 w-56 bg-[#131722] border border-[#1f2937] rounded-xl shadow-2xl z-50 overflow-hidden"
+              className={`absolute ${dropdownPositionClass} w-56 bg-[#131722] border border-[#1f2937] rounded-xl shadow-2xl z-50 overflow-hidden`}
             >
               {/* Mode tabs (if both modes allowed) */}
               {initialMode === "language" && false && (

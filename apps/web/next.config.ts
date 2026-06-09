@@ -6,6 +6,24 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
+  turbopack: {
+    root: "/home/we/Documents/CODE/ZENITH",
+  },
+  // Polyfill process for client-side code
+  env: {
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  },
+  // Workaround for Turbopack + Clerk process.js polyfill issue
+  webpack: (config) => {
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...config.resolve?.fallback,
+        process: require.resolve("process/browser"),
+      },
+    };
+    return config;
+  },
   images: {
     remotePatterns: [
       {
@@ -48,7 +66,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=31536000, must-revalidate",
           },
         ],
       },
@@ -57,7 +75,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=31536000, must-revalidate",
           },
         ],
       },

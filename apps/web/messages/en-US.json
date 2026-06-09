@@ -110,6 +110,24 @@
       ],
       "mockupLabel": "Websocket Feed",
       "mockupSummary": "2,875 msgs/10s"
+    },
+    "items": {
+      "realtime": {
+        "title": "Real-time data",
+        "desc": "Direct WebSocket streams from Binance, CoinGecko. Sub-second latency, never stale cache."
+      },
+      "alerts": {
+        "title": "Smart alerts",
+        "desc": "Push, email, Discord notifications. Thresholds, conditions, complex triggers. No more FOMO."
+      },
+      "charts": {
+        "title": "Pro charts",
+        "desc": "Lightweight Charts, custom indicators, multi-timeframe. For pros, without the complexity."
+      },
+      "portfolio": {
+        "title": "Portfolio tracker",
+        "desc": "Track positions, P&L, allocation. Multi-wallet, multi-currency, tax-friendly."
+      }
     }
   },
   "marketOverview": {

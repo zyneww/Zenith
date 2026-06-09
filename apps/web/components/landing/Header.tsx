@@ -120,8 +120,8 @@ export default function Header() {
 
         {/* ─── Actions ─── */}
         <div className="flex items-center self-center justify-end gap-3">
-          {/* Language + Currency switcher */}
-          <LocaleCurrencySwitcher mode="language" />
+          {/* Language switcher */}
+          <LocaleCurrencySwitcher mode="language" iconOnly />
 
           {/* Search icon */}
           <button

@@ -65,7 +65,7 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="relative border-t border-white/5 bg-[#0a0d13] pt-20 pb-8 overflow-hidden">
+    <footer className="relative border-t border-white/5 bg-[#0a0d13] pt-20 pb-8">
       {/* Subtle top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-cyan/40 to-transparent" />
 
@@ -83,7 +83,7 @@ export default function Footer() {
                 alt="Zenith"
                 width={140}
                 height={40}
-                className="h-9 w-auto transition-transform group-hover:scale-105"
+                className="h-28 w-auto max-w-full transition-transform group-hover:scale-105"
               />
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed mb-8 max-w-xs">
@@ -92,11 +92,11 @@ export default function Footer() {
             <div className="flex flex-col gap-3 mb-6">
               <div className="flex items-center gap-3 text-xs text-gray-500">
                 <span className="text-gray-600 uppercase tracking-wider text-[10px]">{t("language")}</span>
-                <LocaleCurrencySwitcher mode="language" />
+                <LocaleCurrencySwitcher mode="language" position="up" />
               </div>
               <div className="flex items-center gap-3 text-xs text-gray-500">
                 <span className="text-gray-600 uppercase tracking-wider text-[10px]">{t("currency")}</span>
-                <LocaleCurrencySwitcher mode="currency" />
+                <LocaleCurrencySwitcher mode="currency" position="up" />
               </div>
             </div>
             <div className="flex gap-2">

@@ -60,7 +60,7 @@ function formatPrice(price: number): string {
   return `$${price.toFixed(6)}`;
 }
 
-export default async function MarketsPage({ params }: { params: Promise<{ locale: string }> }) {
+export default function MarketsPage() {
 const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
