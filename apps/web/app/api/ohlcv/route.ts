@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { getOHLCV } from "@/lib/db/questdb";
+import { createRateLimitMiddleware, rateLimits } from "@/lib/rate-limit";
+
+const marketRateLimit = createRateLimitMiddleware(rateLimits.market);
 
 // Mock OHLCV data generator (fallback if QuestDB unavailable)
 function generateOHLCV(symbol: string, timeframe: string, limit: number = 100) {
@@ -34,6 +37,12 @@ function generateOHLCV(symbol: string, timeframe: string, limit: number = 100) {
 }
 
 export async function GET(request: Request) {
+  // Rate limiting
+  const rateLimitResponse = await marketRateLimit(request);
+  if (rateLimitResponse) {
+    return rateLimitResponse;
+  }
+
   const { searchParams } = new URL(request.url);
   const symbol = searchParams.get("symbol") || "BTC";
   const timeframe = searchParams.get("timeframe") || "1h";

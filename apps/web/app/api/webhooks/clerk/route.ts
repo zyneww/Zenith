@@ -4,10 +4,18 @@ import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
 import { users } from "@/lib/db/schema"
 import { eq } from "drizzle-orm"
+import { createRateLimitMiddleware, rateLimits } from "@/lib/rate-limit"
 
 const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
+const webhookRateLimit = createRateLimitMiddleware(rateLimits.webhook)
 
 export async function POST(req: Request) {
+  // Rate limiting
+  const rateLimitResponse = await webhookRateLimit(req)
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
+
   if (!WEBHOOK_SECRET) {
     console.error("CLERK_WEBHOOK_SECRET not configured")
     return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 })
