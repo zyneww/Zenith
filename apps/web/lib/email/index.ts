@@ -1,7 +1,18 @@
 // apps/web/lib/email/index.ts
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time errors when API key is missing
+let resend: Resend | null = null;
+function getResend(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY not configured');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 export interface EmailTemplate {
   subject: string;
@@ -516,8 +527,14 @@ export async function sendEmail({
 
   const { subject, html, text } = templateFn(data);
 
+  // If RESEND_API_KEY is missing, log and return mock success
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('RESEND_API_KEY not configured, email not sent:', { to, subject });
+    return { success: true, id: 'mock-email-id' };
+  }
+
   try {
-    const result = await resend.emails.send({
+    const result = await getResend().emails.send({
       from: 'Zenith <alerts@zenith.xyz>',
       to,
       subject,
