@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { getOHLCV } from "@/lib/db/questdb";
 
-// Mock OHLCV data generator
+// Mock OHLCV data generator (fallback if QuestDB unavailable)
 function generateOHLCV(symbol: string, timeframe: string, limit: number = 100) {
   const data = [];
   const now = Date.now();
@@ -38,11 +39,38 @@ export async function GET(request: Request) {
   const timeframe = searchParams.get("timeframe") || "1h";
   const limit = parseInt(searchParams.get("limit") || "100");
   
-  const data = generateOHLCV(symbol, timeframe, limit);
-  
-  return NextResponse.json({
-    symbol,
-    timeframe,
-    data,
-  });
+  try {
+    // Try to get real data from QuestDB
+    const data = await getOHLCV(symbol, timeframe, limit);
+    
+    if (data.length === 0) {
+      // Fallback to mock if no data in QuestDB yet
+      const mockData = generateOHLCV(symbol, timeframe, limit);
+      return NextResponse.json({
+        symbol,
+        timeframe,
+        data: mockData,
+        source: "mock",
+        note: "QuestDB has no data for this symbol yet. Ingestion pipeline not running.",
+      });
+    }
+    
+    return NextResponse.json({
+      symbol,
+      timeframe,
+      data,
+      source: "questdb",
+    });
+  } catch (error) {
+    console.error("QuestDB error:", error);
+    // Fallback to mock data on error
+    const mockData = generateOHLCV(symbol, timeframe, limit);
+    return NextResponse.json({
+      symbol,
+      timeframe,
+      data: mockData,
+      source: "mock",
+      error: (error as Error).message,
+    });
+  }
 }
