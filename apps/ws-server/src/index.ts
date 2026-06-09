@@ -1,5 +1,4 @@
-import { Server } from "socket.io";
-import { createServer } from "http";
+// apps/ws-server/src/index.ts
 import BinanceConsumer from "./binance.js";
 import DragonflyClient from "./dragonfly.js";
 
@@ -26,96 +25,80 @@ const TRACKED_SYMBOLS = [
   "avaxusdt",
 ];
 
+// Client tracking
+interface ClientInfo {
+  ip: string;
+  symbols: Set<string>;
+  connectedAt: number;
+}
+
+const clients = new Map<any, ClientInfo>();
+
 // Simple rate limiter per IP: max 10 connections per IP
 const connectionCounts = new Map<string, number>();
 const MAX_CONNECTIONS_PER_IP = 10;
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 
-async function main() {
-  console.log("🚀 Zenith WS Server starting...");
+// Get client IP from request
+function getClientIP(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+  return "unknown";
+}
 
-  // HTTP server for Socket.IO
-  const httpServer = createServer();
-  const io = new Server(httpServer, {
-    cors: {
-      origin: (origin, callback) => {
-        if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-          callback(null, true);
-        } else {
-          console.warn(`CORS blocked origin: ${origin}`);
-          callback(new Error("Not allowed by CORS"), false);
-        }
-      },
-      methods: ["GET", "POST"],
-    },
-    transports: ["websocket", "polling"],
-  });
+// Check if origin is allowed
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return true;
+  return ALLOWED_ORIGINS.includes(origin);
+}
+
+async function main() {
+  console.log("🚀 Zenith WS Server starting (Bun native WebSocket)...");
 
   // Dragonfly client
   const dragonfly = new DragonflyClient(DRAGONFLY_URL);
   await dragonfly.connect();
 
-  // Subscribe to price updates from Dragonfly and broadcast to Socket.IO clients
+  // Subscribe to price updates from Dragonfly and broadcast to WebSocket clients
   dragonfly.subscribe("prices", (message) => {
     try {
       const data = JSON.parse(message);
       const symbol = data.symbol?.toLowerCase();
-      if (symbol) {
-        // Broadcast only to clients subscribed to this symbol
-        io.to(`sym:${symbol}`).emit("price_update", data);
-      } else {
-        // Fallback: broadcast to all if no symbol found
-        io.emit("price_update", data);
+      if (!symbol) return;
+
+      // Broadcast to all clients subscribed to this symbol
+      const broadcastMessage = JSON.stringify({ type: "price_update", data });
+      let sentCount = 0;
+
+      for (const [ws, info] of clients.entries()) {
+        if (info.symbols.has(symbol)) {
+          try {
+            ws.send(broadcastMessage);
+            sentCount++;
+          } catch (err) {
+            // Client disconnected, will be cleaned up on close
+          }
+        }
+      }
+
+      // Also broadcast to clients with no specific subscription (fallback)
+      if (sentCount === 0) {
+        for (const [ws, info] of clients.entries()) {
+          if (info.symbols.size === 0) {
+            try {
+              ws.send(broadcastMessage);
+            } catch (err) {
+              // Client disconnected
+            }
+          }
+        }
       }
     } catch (err) {
       console.error("Error parsing price message:", err);
     }
   });
-
-  // Socket.IO connection handling
-  io.on("connection", (socket) => {
-    const clientIp = socket.handshake.headers["x-forwarded-for"] ||
-      socket.handshake.address || "unknown";
-    const ipKey = String(clientIp).split(",")[0].trim();
-
-    // Rate limiting
-    const currentCount = connectionCounts.get(ipKey) || 0;
-    if (currentCount >= MAX_CONNECTIONS_PER_IP) {
-      console.warn(`Rate limit exceeded for IP ${ipKey}`);
-      socket.emit("error", "Rate limit exceeded. Too many connections.");
-      socket.disconnect(true);
-      return;
-    }
-    connectionCounts.set(ipKey, currentCount + 1);
-
-    console.log(`Client connected: ${socket.id} from ${ipKey}`);
-
-    socket.on("subscribe_symbols", (symbols: string[]) => {
-      console.log(`Client ${socket.id} subscribed to:`, symbols);
-      // Leave previous symbol rooms
-      const currentRooms = Array.from(socket.rooms).filter((r) => r.startsWith("sym:"));
-      currentRooms.forEach((room) => socket.leave(room));
-      // Join new symbol rooms
-      symbols.forEach((s) => {
-        socket.join(`sym:${s.toLowerCase()}`);
-      });
-    });
-
-    socket.on("disconnect", () => {
-      console.log(`Client disconnected: ${socket.id}`);
-      const count = connectionCounts.get(ipKey) || 1;
-      if (count <= 1) {
-        connectionCounts.delete(ipKey);
-      } else {
-        connectionCounts.set(ipKey, count - 1);
-      }
-    });
-  });
-
-  // Rate limiter cleanup window
-  setInterval(() => {
-    connectionCounts.clear();
-  }, RATE_LIMIT_WINDOW_MS);
 
   // Binance WebSocket consumer
   const binance = new BinanceConsumer(BINANCE_WS_URL, TRACKED_SYMBOLS);
@@ -123,37 +106,130 @@ async function main() {
     // Publish to Dragonfly
     dragonfly.publish("prices", JSON.stringify(trade));
   });
-
   binance.connect();
 
-  // Health check endpoint
-  httpServer.on("request", (req, res) => {
-    if (req.url === "/health") {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(
-        JSON.stringify({
-          status: "ok",
-          uptime: process.uptime(),
-          connections: io.engine.clientsCount,
-          symbols: TRACKED_SYMBOLS,
-        })
-      );
-      return;
-    }
+  // Bun server with WebSocket support
+  const server = Bun.serve({
+    port: PORT,
+    fetch(req, server) {
+      const url = new URL(req.url);
+      const origin = req.headers.get("origin");
+
+      // CORS check
+      if (!isAllowedOrigin(origin)) {
+        console.warn(`CORS blocked origin: ${origin}`);
+        return new Response("Not allowed by CORS", { status: 403 });
+      }
+
+      // Health check endpoint
+      if (url.pathname === "/health") {
+        return new Response(
+          JSON.stringify({
+            status: "ok",
+            uptime: process.uptime(),
+            connections: clients.size,
+            symbols: TRACKED_SYMBOLS,
+            server: "bun-native-ws",
+          }),
+          {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": origin || "*",
+            },
+          }
+        );
+      }
+
+      // WebSocket upgrade endpoint
+      if (url.pathname === "/ws") {
+        const ip = getClientIP(req);
+
+        // Rate limiting
+        const currentCount = connectionCounts.get(ip) || 0;
+        if (currentCount >= MAX_CONNECTIONS_PER_IP) {
+          console.warn(`Rate limit exceeded for IP ${ip}`);
+          return new Response("Rate limit exceeded", { status: 429 });
+        }
+
+        const success = server.upgrade(req, {
+          data: { ip } as any,
+        });
+
+        if (success) {
+          connectionCounts.set(ip, currentCount + 1);
+          return undefined as any; // Bun expects this for successful upgrade
+        }
+
+        return new Response("WebSocket upgrade failed", { status: 400 });
+      }
+
+      return new Response("Not found", { status: 404 });
+    },
+    websocket: {
+      open(ws) {
+        const ip = (ws.data as any)?.ip || "unknown";
+        clients.set(ws, {
+          ip,
+          symbols: new Set(),
+          connectedAt: Date.now(),
+        });
+        console.log(`🟢 Client connected: ${ip} (total: ${clients.size})`);
+      },
+
+      message(ws, message) {
+        const info = clients.get(ws);
+        if (!info) return;
+
+        try {
+          const text = typeof message === "string" ? message : message.toString();
+          const cmd = JSON.parse(text);
+
+          if (cmd.type === "subscribe_symbols" && Array.isArray(cmd.symbols)) {
+            info.symbols.clear();
+            cmd.symbols.forEach((s: string) => {
+              info.symbols.add(s.toLowerCase());
+            });
+            console.log(`📡 Client ${info.ip} subscribed to:`, [...info.symbols]);
+          }
+        } catch (err) {
+          console.error("Error parsing WebSocket message:", err);
+        }
+      },
+
+      close(ws) {
+        const info = clients.get(ws);
+        if (info) {
+          const ip = info.ip;
+          const count = connectionCounts.get(ip) || 1;
+          if (count <= 1) {
+            connectionCounts.delete(ip);
+          } else {
+            connectionCounts.set(ip, count - 1);
+          }
+          clients.delete(ws);
+          console.log(`🔴 Client disconnected: ${ip} (total: ${clients.size})`);
+        }
+      },
+    },
   });
 
-  httpServer.listen(PORT, () => {
-    console.log(`✅ WS Server listening on port ${PORT}`);
-    console.log(`📡 Tracking ${TRACKED_SYMBOLS.length} symbols from Binance`);
-    console.log(`🐉 Dragonfly Pub/Sub: ${DRAGONFLY_URL}`);
-    console.log(`🔒 CORS origins: ${ALLOWED_ORIGINS.join(", ")}`);
-  });
+  console.log(`✅ WS Server listening on port ${PORT}`);
+  console.log(`📡 Tracking ${TRACKED_SYMBOLS.length} symbols from Binance`);
+  console.log(`🐉 Dragonfly Pub/Sub: ${DRAGONFLY_URL}`);
+  console.log(`🔒 CORS origins: ${ALLOWED_ORIGINS.join(", ")}`);
+  console.log(`🚀 Bun native WebSocket enabled`);
+
+  // Rate limiter cleanup window
+  setInterval(() => {
+    connectionCounts.clear();
+    console.log("🧹 Rate limiter window reset");
+  }, RATE_LIMIT_WINDOW_MS);
 
   // Graceful shutdown
   process.on("SIGTERM", async () => {
     console.log("SIGTERM received, shutting down gracefully...");
-    io.close();
-    httpServer.close();
+    server.stop();
     await dragonfly.disconnect();
     binance.disconnect();
     process.exit(0);
