@@ -1,6 +1,7 @@
 // apps/web/lib/queue/index.ts
 import { Queue, Worker, Job } from 'bullmq';
 import Redis from 'ioredis';
+import { sendEmail } from '../email';
 
 const redisConnection = new Redis(process.env.DRAGONFLY_URL || 'redis://:dragonfly_dev@localhost:6379', {
   maxRetriesPerRequest: null,
@@ -156,10 +157,19 @@ export const emailWorker = new Worker<EmailJobData>(
     const { to, template, data } = job.data;
     console.log(`📧 Sending email to ${to} (template: ${template})`);
     
-    // TODO: Implement actual email sending with Resend
-    console.log(`Email data:`, data);
-    
-    return { sent: true, to, template };
+    try {
+      const result = await sendEmail({
+        to,
+        template: template as any,
+        data,
+      });
+      
+      console.log(`✅ Email sent to ${to}: ${result.id}`);
+      return { sent: true, to, template, id: result.id };
+    } catch (error) {
+      console.error(`❌ Failed to send email to ${to}:`, error);
+      throw error;
+    }
   },
   { connection: redisConnection }
 );
