@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "הפסגה שלך, השווקים שלך, הבהירות שלך",
+    "description": "פלטפורמת מודיעין פיננסי רב-נכסי. קריפטו, פורקס, סחורות. בזמן אמת, גרפים מקצועיים, התראות חכמות.",
+    "ogLocale": "he"
+  },
+  "common": {
+    "loading": "טוען...",
+    "error": "אירעה שגיאה",
+    "retry": "נסה שוב",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "save": "שמור",
+    "close": "סגור",
+    "back": "חזרה",
+    "next": "הבא",
+    "previous": "הקודם",
+    "search": "חיפוש",
+    "comingSoon": "בקרוב",
+    "comingSoonDesc": "הדף הזה בבנייה. חזרו בקרוב."
+  },
+  "a11y": {
+    "skipToContent": "דלג לתוכן הראשי",
+    "changeLanguage": "שנה שפה",
+    "changeCurrency": "שנה מטבע",
+    "openMenu": "פתח תפריט",
+    "closeMenu": "סגור תפריט"
+  },
+  "header": {
+    "nav": {
+      "markets": "שווקים",
+      "news": "חדשות",
+      "tools": "כלים",
+      "help": "עזרה"
+    },
+    "cta": "התחל",
+    "search": "חיפוש",
+    "openCommandPalette": "פתח לוח פקודות",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "בטא",
+    "badgeText": "התראות בזמן אמת זמינות כעת",
+    "title": "הפסגה שלך,",
+    "titleLine2": "השווקים שלך,",
+    "titleLine3": "ה{clarity} שלך.",
+    "clarity": "בהירות",
+    "subtitle": "כל הכספים שלך במקום אחד, בזמן אמת, ללא רעש. גרפים מקצועיים, התראות חכמות, מהיר במיוחד. למתחילים ולמשתמשים מתקדמים.",
+    "ctaPrimary": "התחל בחינם",
+    "ctaSecondary": "חקור שווקים",
+    "ctaSecondarySub": "חינם — ללא צורך בכרטיס אשראי",
+    "poweredBy": "מופעל על ידי",
+    "scroll": "גלול",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "פלטפורמה אחת, כל המערכת האקולוגית",
+    "subtitle": "כל מה שאתה צריך כדי לנתח שווקים, לקבל החלטות מושכלות, ולעקוב אחר התיק שלך בזמן אמת.",
+    "items": {
+      "realtime": {
+        "title": "נתונים בזמן אמת",
+        "desc": "שידורי WebSocket ישירים מ-Binance, CoinGecko. השהייה של פחות משנייה, ללא מטמון ישן."
+      },
+      "alerts": {
+        "title": "התראות חכמות",
+        "desc": "התראות push, דוא\"ל, Discord. ספים, תנאים, טריגרים מורכבים. סוף ל-FOMO."
+      },
+      "charts": {
+        "title": "גרפים מקצועיים",
+        "desc": "Lightweight Charts, אינדיקטורים מותאמים אישית, מסגרות זמן מרובות. למקצוענים, ללא מורכבות."
+      },
+      "portfolio": {
+        "title": "תיק",
+        "desc": "עקוב אחר פוזיציות, P&L, הקצאה. ארנקים מרובים, מטבעות מרובים, ידידותי למס."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "סקירת שוק",
+    "subtitle": "מצב שווקי הקריפטו, הפורקס והסחורות במבט אחד",
+    "tabs": {
+      "all": "הכל",
+      "crypto": "קריפטו",
+      "forex": "פורקס",
+      "commodities": "סחורות"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "צלילה לעומק קריפטו",
+    "subtitle": "נתונים על השרשרת, מדדים חברתיים, דומיננטיות ופירעונות",
+    "metrics": {
+      "marketCap": "שווי שוק",
+      "volume24h": "נפח 24 שעות",
+      "dominance": "דומיננטיות BTC",
+      "fearGreed": "פחד ותאווה"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "כלים מהירים",
+    "subtitle": "ממירים, מחשבונים, סקרינר — בלחיצה אחת",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "מוכן לעלות לשלב הבא?",
+    "subtitle": "הצטרף לאלפי סוחרים שמשתמשים ב-Zenith כדי לעקוב, לנתח ולחזות שווקים.",
+    "primary": "צור את החשבון החינמי שלי",
+    "secondary": "צפה בהדגמה",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "הפסגה שלך, השווקים שלך, הבהירות שלך. פלטפורמת מודיעין קריפטו רב-נכסית, מצב כהה מובנה, עוצבה באירופה.",
+    "dataAttribution": "עוצבה בבלגיה. נתוני שוק בזמן אמת מ-Binance ו-CoinGecko.",
+    "copyright": "© 2026 Zenith. כל הזכויות שמורות.",
+    "sections": {
+      "product": "מוצר",
+      "community": "קהילה",
+      "resources": "משאבים",
+      "legal": "משפטי"
+    },
+    "product": {
+      "markets": "שווקים",
+      "screener": "סקרינר",
+      "portfolio": "תיק"
+    },
+    "community": {
+      "forum": "פורום",
+      "ideas": "רעיונות מסחר",
+      "indicators": "אינדיקטורים ואסטרטגיות",
+      "education": "חינוך",
+      "contact": "צור קשר"
+    },
+    "resources": {
+      "api": "API",
+      "status": "סטטוס"
+    },
+    "legal": {
+      "terms": "תנאי שימוש",
+      "privacy": "פרטיות",
+      "cookies": "עוגיות",
+      "accessibility": "נגישות"
+    },
+    "language": "שפה",
+    "currency": "מטבע"
+  },
+  "markets": {
+    "title": "שווקים",
+    "subtitle": "כל הנכסים בזמן אמת",
+    "rank": "דירוג",
+    "name": "שם",
+    "price": "מחיר",
+    "h1": "שעה",
+    "h24": "24 שעות",
+    "d7": "7 ימים",
+    "marketCap": "שווי שוק",
+    "volume": "נפח",
+    "category": "קטגוריה"
+  },
+  "portfolio": {
+    "title": "תיק",
+    "subtitle": "עקוב אחר פוזיציות וביצועים"
+  },
+  "news": {
+    "crypto": "חדשות קריפטו",
+    "forex": "חדשות פורקס",
+    "markets": "חדשות שווקים",
+    "economicCalendar": "לוח שנה כלכלי",
+    "technicalAnalysis": "ניתוח טכני"
+  },
+  "tools": {
+    "watchlist": "רשימת מעקב",
+    "alerts": "התראות",
+    "heatmaps": "מפות חום"
+  },
+  "help": {
+    "why": "למה Zenith",
+    "contact": "צור קשר",
+    "faq": "שאלות נפוצות",
+    "support": "תמיכה",
+    "subscription": "מנוי ומחירים"
+  },
+  "legal": {
+    "terms": "תנאי שימוש",
+    "privacy": "פרטיות",
+    "cookies": "עוגיות",
+    "accessibility": "נגישות"
+  },
+  "resources": {
+    "api": "API",
+    "status": "סטטוס"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

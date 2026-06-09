@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "Tu cima, tus mercados, tu claridad",
+    "description": "Plataforma de inteligencia financiera multi-activo. Cripto, forex, materias primas. Tiempo real, gráficos pro, alertas inteligentes.",
+    "ogLocale": "es"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "comingSoon": "Próximamente",
+    "comingSoonDesc": "Esta página está en construcción. Vuelve pronto."
+  },
+  "a11y": {
+    "skipToContent": "Ir al contenido principal",
+    "changeLanguage": "Cambiar idioma",
+    "changeCurrency": "Cambiar moneda",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "header": {
+    "nav": {
+      "markets": "Mercados",
+      "news": "Noticias",
+      "tools": "Herramientas",
+      "help": "Ayuda"
+    },
+    "cta": "Empezar",
+    "search": "Buscar",
+    "openCommandPalette": "Abrir paleta de comandos",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "BETA",
+    "badgeText": "Alertas en tiempo real ya disponibles",
+    "title": "Tu cima,",
+    "titleLine2": "tus mercados,",
+    "titleLine3": "tu {clarity}.",
+    "clarity": "claridad",
+    "subtitle": "Todas tus finanzas en un solo lugar, en tiempo real, sin ruido. Gráficos pro, alertas inteligentes, ultrarrápido. Pensado para principiantes y power users.",
+    "ctaPrimary": "Empezar gratis",
+    "ctaSecondary": "Explorar mercados",
+    "ctaSecondarySub": "Gratis — sin tarjeta de crédito",
+    "poweredBy": "Con datos de",
+    "scroll": "Desliza",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "Una plataforma, todo el ecosistema",
+    "subtitle": "Todo lo que necesitas para analizar mercados, tomar decisiones informadas y seguir tu portfolio en tiempo real.",
+    "items": {
+      "realtime": {
+        "title": "Datos en tiempo real",
+        "desc": "Streams WebSocket directos de Binance, CoinGecko. Latencia sub-segundo, nunca caché obsoleto."
+      },
+      "alerts": {
+        "title": "Alertas inteligentes",
+        "desc": "Notificaciones push, email, Discord. Umbrales, condiciones, triggers complejos. Se acabó el FOMO."
+      },
+      "charts": {
+        "title": "Gráficos pro",
+        "desc": "Lightweight Charts, indicadores custom, multi-timeframe. Para pros, sin complejidad."
+      },
+      "portfolio": {
+        "title": "Portfolio",
+        "desc": "Sigue posiciones, P&L, asignación. Multi-wallet, multi-moneda, fiscal-friendly."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "Resumen de mercados",
+    "subtitle": "El estado de los mercados cripto, forex y materias primas de un vistazo",
+    "tabs": {
+      "all": "Todo",
+      "crypto": "Cripto",
+      "forex": "Forex",
+      "commodities": "Materias primas"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "Cripto a fondo",
+    "subtitle": "Datos on-chain, métricas sociales, dominancia y liquidaciones",
+    "metrics": {
+      "marketCap": "Capitalización",
+      "volume24h": "Volumen 24h",
+      "dominance": "Dominancia BTC",
+      "fearGreed": "Miedo & Codicia"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "Herramientas rápidas",
+    "subtitle": "Conversores, calculadoras, screener — en un clic",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "¿Listo para subir de nivel?",
+    "subtitle": "Únete a miles de traders que usan Zenith para seguir, analizar y anticipar mercados.",
+    "primary": "Crear mi cuenta gratis",
+    "secondary": "Ver la demo",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "Tu cima, tus mercados, tu claridad. Plataforma de inteligencia cripto multi-activo, modo oscuro nativo, diseñada en Europa.",
+    "dataAttribution": "Diseñado en Bélgica. Datos de mercado en tiempo real por Binance & CoinGecko.",
+    "copyright": "© 2026 Zenith. Todos los derechos reservados.",
+    "sections": {
+      "product": "Producto",
+      "community": "Comunidad",
+      "resources": "Recursos",
+      "legal": "Legal"
+    },
+    "product": {
+      "markets": "Mercados",
+      "screener": "Screener",
+      "portfolio": "Portfolio"
+    },
+    "community": {
+      "forum": "Foro",
+      "ideas": "Ideas de trading",
+      "indicators": "Indicadores y estrategias",
+      "education": "Educación",
+      "contact": "Contáctanos"
+    },
+    "resources": {
+      "api": "API",
+      "status": "Estado"
+    },
+    "legal": {
+      "terms": "Términos de uso",
+      "privacy": "Privacidad",
+      "cookies": "Cookies",
+      "accessibility": "Accesibilidad"
+    },
+    "language": "Idioma",
+    "currency": "Moneda"
+  },
+  "markets": {
+    "title": "Mercados",
+    "subtitle": "Todos los activos en tiempo real",
+    "rank": "Rank",
+    "name": "Nombre",
+    "price": "Precio",
+    "h1": "1h",
+    "h24": "24h",
+    "d7": "7d",
+    "marketCap": "Capitalización",
+    "volume": "Volumen",
+    "category": "Categoría"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Sigue tus posiciones y rendimiento"
+  },
+  "news": {
+    "crypto": "Noticias cripto",
+    "forex": "Noticias forex",
+    "markets": "Noticias mercados",
+    "economicCalendar": "Calendario económico",
+    "technicalAnalysis": "Análisis técnico"
+  },
+  "tools": {
+    "watchlist": "Watchlist",
+    "alerts": "Alertas",
+    "heatmaps": "Heatmaps"
+  },
+  "help": {
+    "why": "Por qué Zenith",
+    "contact": "Contáctanos",
+    "faq": "FAQ",
+    "support": "Soporte",
+    "subscription": "Suscripción y precios"
+  },
+  "legal": {
+    "terms": "Términos de uso",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "accessibility": "Accesibilidad"
+  },
+  "resources": {
+    "api": "API",
+    "status": "Estado"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

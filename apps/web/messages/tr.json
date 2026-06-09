@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "Doruk noktanız, piyasalarınız, netliğiniz",
+    "description": "Çok varlıklı finansal istihbarat platformu. Kripto, forex, emtia. Gerçek zamanlı, profesyonel grafikler, akıllı uyarılar.",
+    "ogLocale": "tr"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "retry": "Yeniden dene",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "save": "Kaydet",
+    "close": "Kapat",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "search": "Ara",
+    "comingSoon": "Yakında",
+    "comingSoonDesc": "Bu sayfa yapım aşamasında. Yakında tekrar gelin."
+  },
+  "a11y": {
+    "skipToContent": "Ana içeriğe geç",
+    "changeLanguage": "Dil değiştir",
+    "changeCurrency": "Para birimi değiştir",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
+  },
+  "header": {
+    "nav": {
+      "markets": "Piyasalar",
+      "news": "Haberler",
+      "tools": "Araçlar",
+      "help": "Yardım"
+    },
+    "cta": "Başla",
+    "search": "Ara",
+    "openCommandPalette": "Komut paletini aç",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "BETA",
+    "badgeText": "Gerçek zamanlı uyarılar artık mevcut",
+    "title": "Doruk noktanız,",
+    "titleLine2": "piyasalarınız,",
+    "titleLine3": "sizin {clarity}.",
+    "clarity": "netliğiniz",
+    "subtitle": "Tüm finansal bilgileriniz tek bir yerde, gerçek zamanlı, gürültüsüz. Profesyonel grafikler, akıllı uyarılar, çok hızlı. Yeni başlayanlar ve uzmanlar için.",
+    "ctaPrimary": "Ücretsiz başla",
+    "ctaSecondary": "Piyasaları keşfet",
+    "ctaSecondarySub": "Ücretsiz — kredi kartı gerekmez",
+    "poweredBy": "Destekleyenler",
+    "scroll": "Kaydır",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "Tek platform, tüm ekosistem",
+    "subtitle": "Piyasaları analiz etmek, bilinçli kararlar vermek ve portföyünüzü gerçek zamanlı takip etmek için ihtiyacınız olan her şey.",
+    "items": {
+      "realtime": {
+        "title": "Gerçek zamanlı veri",
+        "desc": "Binance ve CoinGecko'dan doğrudan WebSocket akışları. Bir saniyenin altında gecikme, asla eski önbellek."
+      },
+      "alerts": {
+        "title": "Akıllı uyarılar",
+        "desc": "Push, e-posta, Discord bildirimleri. Eşikler, koşullar, karmaşık tetikleyiciler. FOMO'ya son."
+      },
+      "charts": {
+        "title": "Profesyonel grafikler",
+        "desc": "Lightweight Charts, özel göstergeler, çoklu zaman dilimi. Uzmanlar için, karmaşıklık olmadan."
+      },
+      "portfolio": {
+        "title": "Portföy",
+        "desc": "Pozisyonları, P&L'yi, dağılımı takip edin. Çoklu cüzdan, çoklu para birimi, vergi dostu."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "Piyasa genel bakış",
+    "subtitle": "Kripto, forex ve emtia piyasalarının durumu bir bakışta",
+    "tabs": {
+      "all": "Hepsi",
+      "crypto": "Kripto",
+      "forex": "Forex",
+      "commodities": "Emtia"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "Kripto derinlemesine",
+    "subtitle": "On-chain veriler, sosyal metrikler, dominans ve likidasyonlar",
+    "metrics": {
+      "marketCap": "Piyasa değeri",
+      "volume24h": "24s hacim",
+      "dominance": "BTC dominansı",
+      "fearGreed": "Korku & Hırs"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "Hızlı araçlar",
+    "subtitle": "Dönüştürücüler, hesaplayıcılar, screener — tek tıkla",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "Bir üst seviyeye geçmeye hazır mısınız?",
+    "subtitle": "Piyasaları takip etmek, analiz etmek ve öngörmek için Zenith kullanan binlerce trader'a katılın.",
+    "primary": "Ücretsiz hesap oluştur",
+    "secondary": "Demoyu gör",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "Doruk noktanız, piyasalarınız, netliğiniz. Çok varlıklı kripto istihbarat platformu, yerel karanlık mod, Avrupa'da tasarlandı.",
+    "dataAttribution": "Belçika'da tasarlandı. Gerçek zamanlı piyasa verileri Binance & CoinGecko tarafından.",
+    "copyright": "© 2026 Zenith. Tüm hakları saklıdır.",
+    "sections": {
+      "product": "Ürün",
+      "community": "Topluluk",
+      "resources": "Kaynaklar",
+      "legal": "Yasal"
+    },
+    "product": {
+      "markets": "Piyasalar",
+      "screener": "Screener",
+      "portfolio": "Portföy"
+    },
+    "community": {
+      "forum": "Forum",
+      "ideas": "Trading fikirleri",
+      "indicators": "Göstergeler ve stratejiler",
+      "education": "Eğitim",
+      "contact": "İletişim"
+    },
+    "resources": {
+      "api": "API",
+      "status": "Durum"
+    },
+    "legal": {
+      "terms": "Kullanım koşulları",
+      "privacy": "Gizlilik",
+      "cookies": "Çerezler",
+      "accessibility": "Erişilebilirlik"
+    },
+    "language": "Dil",
+    "currency": "Para birimi"
+  },
+  "markets": {
+    "title": "Piyasalar",
+    "subtitle": "Tüm varlıklar gerçek zamanlı",
+    "rank": "Sıra",
+    "name": "İsim",
+    "price": "Fiyat",
+    "h1": "1s",
+    "h24": "24s",
+    "d7": "7g",
+    "marketCap": "Piyasa değeri",
+    "volume": "Hacim",
+    "category": "Kategori"
+  },
+  "portfolio": {
+    "title": "Portföy",
+    "subtitle": "Pozisyonları ve performansı takip et"
+  },
+  "news": {
+    "crypto": "Kripto haberleri",
+    "forex": "Forex haberleri",
+    "markets": "Piyasa haberleri",
+    "economicCalendar": "Ekonomik takvim",
+    "technicalAnalysis": "Teknik analiz"
+  },
+  "tools": {
+    "watchlist": "İzleme listesi",
+    "alerts": "Uyarılar",
+    "heatmaps": "Isı haritaları"
+  },
+  "help": {
+    "why": "Neden Zenith",
+    "contact": "İletişim",
+    "faq": "SSS",
+    "support": "Destek",
+    "subscription": "Abonelik ve fiyatlar"
+  },
+  "legal": {
+    "terms": "Kullanım koşulları",
+    "privacy": "Gizlilik",
+    "cookies": "Çerezler",
+    "accessibility": "Erişilebilirlik"
+  },
+  "resources": {
+    "api": "API",
+    "status": "Durum"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

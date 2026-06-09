@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "จุดสูงสุดของคุณ ตลาดของคุณ ความชัดเจนของคุณ",
+    "description": "แพลตฟอร์มข่าวกรองการเงินหลายสินทรัพย์ คริปโต ฟอเร็กซ์ สินค้าโภคภัณฑ์ แบบเรียลไทม์ กราฟมืออาชีพ การแจ้งเตือนอัจฉริยะ",
+    "ogLocale": "th"
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "retry": "ลองอีกครั้ง",
+    "cancel": "ยกเลิก",
+    "confirm": "ยืนยัน",
+    "save": "บันทึก",
+    "close": "ปิด",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "search": "ค้นหา",
+    "comingSoon": "เร็วๆ นี้",
+    "comingSoonDesc": "หน้านี้อยู่ระหว่างการพัฒนา กลับมาเร็วๆ นี้"
+  },
+  "a11y": {
+    "skipToContent": "ข้ามไปยังเนื้อหาหลัก",
+    "changeLanguage": "เปลี่ยนภาษา",
+    "changeCurrency": "เปลี่ยนสกุลเงิน",
+    "openMenu": "เปิดเมนู",
+    "closeMenu": "ปิดเมนู"
+  },
+  "header": {
+    "nav": {
+      "markets": "ตลาด",
+      "news": "ข่าว",
+      "tools": "เครื่องมือ",
+      "help": "ช่วยเหลือ"
+    },
+    "cta": "เริ่มต้น",
+    "search": "ค้นหา",
+    "openCommandPalette": "เปิดคำสั่งพาเลท",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "เบต้า",
+    "badgeText": "การแจ้งเตือนเรียลไทม์พร้อมใช้งานแล้ว",
+    "title": "จุดสูงสุดของคุณ",
+    "titleLine2": "ตลาดของคุณ",
+    "titleLine3": "{clarity} ของคุณ",
+    "clarity": "ความชัดเจน",
+    "subtitle": "การเงินทั้งหมดของคุณในที่เดียว เรียลไทม์ ไม่มีเสียงรบกวน กราฟมืออาชีพ การแจ้งเตือนอัจฉริยะ เร็วมาก สำหรับผู้เริ่มต้นและผู้ใช้ขั้นสูง",
+    "ctaPrimary": "เริ่มฟรี",
+    "ctaSecondary": "สำรวจตลาด",
+    "ctaSecondarySub": "ฟรี — ไม่ต้องใช้บัตรเครดิต",
+    "poweredBy": "ขับเคลื่อนโดย",
+    "scroll": "เลื่อน",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "แพลตฟอร์มเดียว ทั้งระบบนิเวศ",
+    "subtitle": "ทุกสิ่งที่คุณต้องการเพื่อวิเคราะห์ตลาด ตัดสินใจอย่างรอบรู้ และติดตามพอร์ตโฟลิโอแบบเรียลไทม์",
+    "items": {
+      "realtime": {
+        "title": "ข้อมูลเรียลไทม์",
+        "desc": "สตรีม WebSocket โดยตรงจาก Binance, CoinGecko ความหน่วงต่ำกว่า 1 วินาที ไม่มีแคชเก่า"
+      },
+      "alerts": {
+        "title": "การแจ้งเตือนอัจฉริยะ",
+        "desc": "การแจ้งเตือนแบบพุช อีเมล Discord เกณฑ์ เงื่อนไข ทริกเกอร์ที่ซับซ้อน ลาก่อน FOMO"
+      },
+      "charts": {
+        "title": "กราฟมืออาชีพ",
+        "desc": "Lightweight Charts ตัวบ่งชี้แบบกำหนดเอง หลายไทม์เฟรม สำหรับมืออาชีพ ไม่ซับซ้อน"
+      },
+      "portfolio": {
+        "title": "พอร์ตโฟลิโอ",
+        "desc": "ติดตามตำแหน่ง P&L การจัดสรร หลายกระเป๋า หลายสกุลเงิน เป็นมิตรกับภาษี"
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "ภาพรวมตลาด",
+    "subtitle": "สถานะของตลาดคริปโต ฟอเร็กซ์ และสินค้าโภคภัณฑ์ในช่วงสั้นๆ",
+    "tabs": {
+      "all": "ทั้งหมด",
+      "crypto": "คริปโต",
+      "forex": "ฟอเร็กซ์",
+      "commodities": "สินค้าโภคภัณฑ์"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "เจาะลึกคริปโต",
+    "subtitle": "ข้อมูลออนเชน เมตริกทางสังคม การครอบงำ และการชำระบัญชี",
+    "metrics": {
+      "marketCap": "มูลค่าตลาด",
+      "volume24h": "ปริมาณ 24 ชม.",
+      "dominance": "การครอบงำของ BTC",
+      "fearGreed": "ความกลัว & ความโลภ"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "เครื่องมือด่วน",
+    "subtitle": "ตัวแปลง เครื่องคิดเลข สกรีนเนอร์ — ในคลิกเดียว",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "พร้อมที่จะขึ้นสู่ระดับถัดไปหรือยัง?",
+    "subtitle": "เข้าร่วมเทรดเดอร์หลายพันคนที่ใช้ Zenith เพื่อติดตาม วิเคราะห์ และคาดการณ์ตลาด",
+    "primary": "สร้างบัญชีฟรีของฉัน",
+    "secondary": "ดูเดโม",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "จุดสูงสุดของคุณ ตลาดของคุณ ความชัดเจนของคุณ แพลตฟอร์มข่าวกรองคริปโตหลายสินทรัพย์ โหมดมืดดั้งเดิม ออกแบบในยุโรป",
+    "dataAttribution": "ออกแบบในเบลเยียม ข้อมูลตลาดเรียลไทม์โดย Binance & CoinGecko",
+    "copyright": "© 2026 Zenith สงวนลิขสิทธิ์",
+    "sections": {
+      "product": "ผลิตภัณฑ์",
+      "community": "ชุมชน",
+      "resources": "ทรัพยากร",
+      "legal": "กฎหมาย"
+    },
+    "product": {
+      "markets": "ตลาด",
+      "screener": "สกรีนเนอร์",
+      "portfolio": "พอร์ตโฟลิโอ"
+    },
+    "community": {
+      "forum": "ฟอรั่ม",
+      "ideas": "ไอเดียการเทรด",
+      "indicators": "ตัวบ่งชี้ & กลยุทธ์",
+      "education": "การศึกษา",
+      "contact": "ติดต่อเรา"
+    },
+    "resources": {
+      "api": "API",
+      "status": "สถานะ"
+    },
+    "legal": {
+      "terms": "ข้อกำหนดการใช้งาน",
+      "privacy": "ความเป็นส่วนตัว",
+      "cookies": "คุกกี้",
+      "accessibility": "การเข้าถึง"
+    },
+    "language": "ภาษา",
+    "currency": "สกุลเงิน"
+  },
+  "markets": {
+    "title": "ตลาด",
+    "subtitle": "สินทรัพย์ทั้งหมดแบบเรียลไทม์",
+    "rank": "อันดับ",
+    "name": "ชื่อ",
+    "price": "ราคา",
+    "h1": "1 ชม.",
+    "h24": "24 ชม.",
+    "d7": "7 วัน",
+    "marketCap": "มูลค่าตลาด",
+    "volume": "ปริมาณ",
+    "category": "หมวดหมู่"
+  },
+  "portfolio": {
+    "title": "พอร์ตโฟลิโอ",
+    "subtitle": "ติดตามตำแหน่งและผลการดำเนินงาน"
+  },
+  "news": {
+    "crypto": "ข่าวคริปโต",
+    "forex": "ข่าวฟอเร็กซ์",
+    "markets": "ข่าวตลาด",
+    "economicCalendar": "ปฏิทินเศรษฐกิจ",
+    "technicalAnalysis": "การวิเคราะห์ทางเทคนิค"
+  },
+  "tools": {
+    "watchlist": "รายการเฝ้าดู",
+    "alerts": "การแจ้งเตือน",
+    "heatmaps": "แผนที่ความร้อน"
+  },
+  "help": {
+    "why": "ทำไมต้อง Zenith",
+    "contact": "ติดต่อเรา",
+    "faq": "คำถามที่พบบ่อย",
+    "support": "ฝ่ายสนับสนุน",
+    "subscription": "การสมัครสมาชิก & ราคา"
+  },
+  "legal": {
+    "terms": "ข้อกำหนดการใช้งาน",
+    "privacy": "ความเป็นส่วนตัว",
+    "cookies": "คุกกี้",
+    "accessibility": "การเข้าถึง"
+  },
+  "resources": {
+    "api": "API",
+    "status": "สถานะ"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

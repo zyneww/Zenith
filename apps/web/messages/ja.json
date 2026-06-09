@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "あなたの頂点、あなたの市場、あなたの明快さ",
+    "description": "マルチアセット金融インテリジェンスプラットフォーム。暗号資産、FX、コモディティ。リアルタイム、プロ級のチャート、スマートアラート。",
+    "ogLocale": "ja"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存",
+    "close": "閉じる",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "search": "検索",
+    "comingSoon": "近日公開",
+    "comingSoonDesc": "このページは構築中です。後でもう一度お越しください。"
+  },
+  "a11y": {
+    "skipToContent": "メインコンテンツへスキップ",
+    "changeLanguage": "言語を変更",
+    "changeCurrency": "通貨を変更",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
+  },
+  "header": {
+    "nav": {
+      "markets": "マーケット",
+      "news": "ニュース",
+      "tools": "ツール",
+      "help": "ヘルプ"
+    },
+    "cta": "はじめる",
+    "search": "検索",
+    "openCommandPalette": "コマンドパレットを開く",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "ベータ",
+    "badgeText": "リアルタイムアラートが利用可能に",
+    "title": "あなたの頂点、",
+    "titleLine2": "あなたの市場、",
+    "titleLine3": "あなたの{clarity}。",
+    "clarity": "明快さ",
+    "subtitle": "すべての金融情報を一か所で、リアルタイム、ノイズなし。プロ仕様のチャート、スマートアラート、超高速。初心者からパワーユーザーまで。",
+    "ctaPrimary": "無料で始める",
+    "ctaSecondary": "マーケットを見る",
+    "ctaSecondarySub": "無料 — クレジットカード不要",
+    "poweredBy": "データ提供",
+    "scroll": "スクロール",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "ワンプラットフォーム、エコシステム全体",
+    "subtitle": "市場分析、意思決定、ポートフォリオ追跡に必要なすべてをリアルタイムで。",
+    "items": {
+      "realtime": {
+        "title": "リアルタイムデータ",
+        "desc": "Binance、CoinGeckoから直接WebSocketストリーム。サブ秒レイテンシー、古いキャッシュなし。"
+      },
+      "alerts": {
+        "title": "スマートアラート",
+        "desc": "プッシュ、メール、Discord通知。閾値、条件、複雑なトリガー。FOMOはもう終わり。"
+      },
+      "charts": {
+        "title": "プロチャート",
+        "desc": "Lightweight Charts、カスタム指標、マルチタイムフレーム。プロのために、シンプルに。"
+      },
+      "portfolio": {
+        "title": "ポートフォリオ",
+        "desc": "ポジション、P&L、資産配分を追跡。マルチウォレット、マルチ通貨、税務対応。"
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "市場概況",
+    "subtitle": "暗号資産、FX、コモディティ市場の状態を一目で",
+    "tabs": {
+      "all": "すべて",
+      "crypto": "暗号資産",
+      "forex": "FX",
+      "commodities": "コモディティ"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "暗号資産ディープダイブ",
+    "subtitle": "オンチェーンデータ、ソーシャルメトリクス、ドミナンス、清算",
+    "metrics": {
+      "marketCap": "時価総額",
+      "volume24h": "24時間取引量",
+      "dominance": "BTCドミナンス",
+      "fearGreed": "恐怖と貪欲"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "クイックツール",
+    "subtitle": "コンバーター、計算機、スクリーナー — ワンクリックで",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "レベルアップする準備はできましたか？",
+    "subtitle": "Zenithを使って市場を追跡、分析、予測する何千ものトレーダーに参加しましょう。",
+    "primary": "無料アカウントを作成",
+    "secondary": "デモを見る",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "あなたの頂点、あなたの市場、あなたの明快さ。マルチアセット暗号インテリジェンスプラットフォーム、ネイティブダークモード、欧州で設計。",
+    "dataAttribution": "ベルギーで設計。リアルタイム市場データはBinance & CoinGecko提供。",
+    "copyright": "© 2026 Zenith. 全著作権所有。",
+    "sections": {
+      "product": "プロダクト",
+      "community": "コミュニティ",
+      "resources": "リソース",
+      "legal": "法的情報"
+    },
+    "product": {
+      "markets": "マーケット",
+      "screener": "スクリーナー",
+      "portfolio": "ポートフォリオ"
+    },
+    "community": {
+      "forum": "フォーラム",
+      "ideas": "トレードアイデア",
+      "indicators": "インジケーター & 戦略",
+      "education": "教育",
+      "contact": "お問い合わせ"
+    },
+    "resources": {
+      "api": "API",
+      "status": "ステータス"
+    },
+    "legal": {
+      "terms": "利用規約",
+      "privacy": "プライバシー",
+      "cookies": "クッキー",
+      "accessibility": "アクセシビリティ"
+    },
+    "language": "言語",
+    "currency": "通貨"
+  },
+  "markets": {
+    "title": "マーケット",
+    "subtitle": "すべての資産をリアルタイムで",
+    "rank": "ランク",
+    "name": "名前",
+    "price": "価格",
+    "h1": "1時間",
+    "h24": "24時間",
+    "d7": "7日",
+    "marketCap": "時価総額",
+    "volume": "取引量",
+    "category": "カテゴリー"
+  },
+  "portfolio": {
+    "title": "ポートフォリオ",
+    "subtitle": "ポジションとパフォーマンスを追跡"
+  },
+  "news": {
+    "crypto": "暗号資産ニュース",
+    "forex": "FXニュース",
+    "markets": "マーケットニュース",
+    "economicCalendar": "経済カレンダー",
+    "technicalAnalysis": "テクニカル分析"
+  },
+  "tools": {
+    "watchlist": "ウォッチリスト",
+    "alerts": "アラート",
+    "heatmaps": "ヒートマップ"
+  },
+  "help": {
+    "why": "なぜZenith",
+    "contact": "お問い合わせ",
+    "faq": "FAQ",
+    "support": "サポート",
+    "subscription": "購読と料金"
+  },
+  "legal": {
+    "terms": "利用規約",
+    "privacy": "プライバシー",
+    "cookies": "クッキー",
+    "accessibility": "アクセシビリティ"
+  },
+  "resources": {
+    "api": "API",
+    "status": "ステータス"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@variant dark (&:is(.dark *));
+
+@theme {
+  /* Dark mode colors (always) */
+  --color-dark-bg: #0b0e14;
+  --color-dark-card: #131722;
+  --color-dark-elevated: #0d1017;
+  --color-dark-deep: #07090c;
+  --color-dark-border: #1f2937;
+
+  /* Brand */
+  --color-brand-cyan: #00e5ff;
+  --color-brand-purple: #7b3fe4;
+  --color-brand-purple-light: #b087ff;
+
+  /* Semantic colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #6b7280;
+  --color-text-subtle: #374151;
+
+  /* Status */
+  --color-up: #22c55e;
+  --color-down: #ef4444;
+  --color-warn: #f59e0b;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow-purple: 0 0 10px rgba(123, 63, 228, 0.3);
+  --shadow-glow-cyan: 0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0b0e14;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-gradient-cyan {
+    background: linear-gradient(to right, #00e5ff, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gauge-path {
+    stroke-dasharray: 72 100;
+    animation: gauge-fill 1.5s ease-out forwards;
+  }
+
+  @keyframes gauge-fill {
+    from { stroke-dasharray: 0 100; }
+    to { stroke-dasharray: 72 100; }
+  }
+}
+
+/* Reduced animations mode (toggled by user) */
+.reduce-animations *,
+.reduce-animations *::before,
+.reduce-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

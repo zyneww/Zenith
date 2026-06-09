@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "당신의 정점, 당신의 시장, 당신의 명료함",
+    "description": "멀티 자산 금융 인텔리전스 플랫폼. 암호화폐, 외환, 원자재. 실시간, 프로 차트, 스마트 알림.",
+    "ogLocale": "ko"
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "retry": "재시도",
+    "cancel": "취소",
+    "confirm": "확인",
+    "save": "저장",
+    "close": "닫기",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "search": "검색",
+    "comingSoon": "곧 출시",
+    "comingSoonDesc": "이 페이지는 제작 중입니다. 곧 다시 방문해 주세요."
+  },
+  "a11y": {
+    "skipToContent": "본문으로 건너뛰기",
+    "changeLanguage": "언어 변경",
+    "changeCurrency": "통화 변경",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
+  },
+  "header": {
+    "nav": {
+      "markets": "시장",
+      "news": "뉴스",
+      "tools": "도구",
+      "help": "도움말"
+    },
+    "cta": "시작하기",
+    "search": "검색",
+    "openCommandPalette": "명령 팔레트 열기",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "베타",
+    "badgeText": "실시간 알림 사용 가능",
+    "title": "당신의 정점,",
+    "titleLine2": "당신의 시장,",
+    "titleLine3": "당신의 {clarity}.",
+    "clarity": "명료함",
+    "subtitle": "모든 재정을 한 곳에서, 실시간, 잡음 없이. 프로 차트, 스마트 알림, 매우 빠름. 초보자와 파워 유저를 위해.",
+    "ctaPrimary": "무료로 시작",
+    "ctaSecondary": "시장 둘러보기",
+    "ctaSecondarySub": "무료 — 신용카드 불필요",
+    "poweredBy": "데이터 제공",
+    "scroll": "스크롤",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "하나의 플랫폼, 전체 생태계",
+    "subtitle": "시장을 분석하고, 정보에 입각한 결정을 내리고, 포트폴리오를 실시간으로 추적하는 데 필요한 모든 것.",
+    "items": {
+      "realtime": {
+        "title": "실시간 데이터",
+        "desc": "Binance, CoinGecko에서 직접 WebSocket 스트림. 1초 미만의 지연 시간, 오래된 캐시 없음."
+      },
+      "alerts": {
+        "title": "스마트 알림",
+        "desc": "푸시, 이메일, Discord 알림. 임계값, 조건, 복잡한 트리거. FOMO는 그만."
+      },
+      "charts": {
+        "title": "프로 차트",
+        "desc": "Lightweight Charts, 커스텀 인디케이터, 멀티 타임프레임. 프로를 위한, 복잡함 없이."
+      },
+      "portfolio": {
+        "title": "포트폴리오",
+        "desc": "포지션, P&L, 자산 배분 추적. 멀티 지갑, 멀티 통화, 세금 친화적."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "시장 개요",
+    "subtitle": "암호화폐, 외환, 원자재 시장의 상태를 한눈에",
+    "tabs": {
+      "all": "전체",
+      "crypto": "암호화폐",
+      "forex": "외환",
+      "commodities": "원자재"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "암호화폐 심층 분석",
+    "subtitle": "온체인 데이터, 소셜 메트릭, 도미넌스 및 청산",
+    "metrics": {
+      "marketCap": "시가총액",
+      "volume24h": "24시간 거래량",
+      "dominance": "BTC 도미넌스",
+      "fearGreed": "공포 & 탐욕"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "빠른 도구",
+    "subtitle": "변환기, 계산기, 스크리너 — 한 번의 클릭으로",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "다음 레벨로 올라갈 준비가 되셨나요?",
+    "subtitle": "시장을 추적, 분석, 예측하기 위해 Zenith를 사용하는 수천 명의 트레이더에 합류하세요.",
+    "primary": "무료 계정 만들기",
+    "secondary": "데모 보기",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "당신의 정점, 당신의 시장, 당신의 명료함. 멀티 자산 암호 인텔리전스 플랫폼, 네이티브 다크 모드, 유럽에서 설계.",
+    "dataAttribution": "벨기에에서 설계됨. 실시간 시장 데이터는 Binance & CoinGecko 제공.",
+    "copyright": "© 2026 Zenith. 모든 권리 보유.",
+    "sections": {
+      "product": "제품",
+      "community": "커뮤니티",
+      "resources": "리소스",
+      "legal": "법적"
+    },
+    "product": {
+      "markets": "시장",
+      "screener": "스크리너",
+      "portfolio": "포트폴리오"
+    },
+    "community": {
+      "forum": "포럼",
+      "ideas": "트레이딩 아이디어",
+      "indicators": "인디케이터 & 전략",
+      "education": "교육",
+      "contact": "문의하기"
+    },
+    "resources": {
+      "api": "API",
+      "status": "상태"
+    },
+    "legal": {
+      "terms": "이용약관",
+      "privacy": "개인정보처리방침",
+      "cookies": "쿠키",
+      "accessibility": "접근성"
+    },
+    "language": "언어",
+    "currency": "통화"
+  },
+  "markets": {
+    "title": "시장",
+    "subtitle": "모든 자산을 실시간으로",
+    "rank": "순위",
+    "name": "이름",
+    "price": "가격",
+    "h1": "1시간",
+    "h24": "24시간",
+    "d7": "7일",
+    "marketCap": "시가총액",
+    "volume": "거래량",
+    "category": "카테고리"
+  },
+  "portfolio": {
+    "title": "포트폴리오",
+    "subtitle": "포지션과 성과 추적"
+  },
+  "news": {
+    "crypto": "암호화폐 뉴스",
+    "forex": "외환 뉴스",
+    "markets": "시장 뉴스",
+    "economicCalendar": "경제 캘린더",
+    "technicalAnalysis": "기술적 분석"
+  },
+  "tools": {
+    "watchlist": "워치리스트",
+    "alerts": "알림",
+    "heatmaps": "히트맵"
+  },
+  "help": {
+    "why": "왜 Zenith인가",
+    "contact": "문의",
+    "faq": "FAQ",
+    "support": "지원",
+    "subscription": "구독 & 가격"
+  },
+  "legal": {
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "cookies": "쿠키",
+    "accessibility": "접근성"
+  },
+  "resources": {
+    "api": "API",
+    "status": "상태"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

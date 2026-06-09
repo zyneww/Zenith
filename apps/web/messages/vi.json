@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "Đỉnh cao của bạn, thị trường của bạn, sự rõ ràng của bạn",
+    "description": "Nền tảng tình báo tài chính đa tài sản. Crypto, forex, hàng hóa. Thời gian thực, biểu đồ chuyên nghiệp, cảnh báo thông minh.",
+    "ogLocale": "vi"
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "retry": "Thử lại",
+    "cancel": "Hủy",
+    "confirm": "Xác nhận",
+    "save": "Lưu",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "previous": "Trước",
+    "search": "Tìm kiếm",
+    "comingSoon": "Sắp ra mắt",
+    "comingSoonDesc": "Trang này đang được xây dựng. Hãy quay lại sớm."
+  },
+  "a11y": {
+    "skipToContent": "Bỏ qua đến nội dung chính",
+    "changeLanguage": "Đổi ngôn ngữ",
+    "changeCurrency": "Đổi tiền tệ",
+    "openMenu": "Mở menu",
+    "closeMenu": "Đóng menu"
+  },
+  "header": {
+    "nav": {
+      "markets": "Thị trường",
+      "news": "Tin tức",
+      "tools": "Công cụ",
+      "help": "Trợ giúp"
+    },
+    "cta": "Bắt đầu",
+    "search": "Tìm kiếm",
+    "openCommandPalette": "Mở bảng lệnh",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "BETA",
+    "badgeText": "Cảnh báo thời gian thực đã có sẵn",
+    "title": "Đỉnh cao của bạn,",
+    "titleLine2": "thị trường của bạn,",
+    "titleLine3": "{clarity} của bạn.",
+    "clarity": "sự rõ ràng",
+    "subtitle": "Tất cả tài chính của bạn ở một nơi, thời gian thực, không có tiếng ồn. Biểu đồ chuyên nghiệp, cảnh báo thông minh, cực nhanh. Cho người mới và người dùng cao cấp.",
+    "ctaPrimary": "Bắt đầu miễn phí",
+    "ctaSecondary": "Khám phá thị trường",
+    "ctaSecondarySub": "Miễn phí — không cần thẻ tín dụng",
+    "poweredBy": "Được hỗ trợ bởi",
+    "scroll": "Cuộn",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "Một nền tảng, toàn bộ hệ sinh thái",
+    "subtitle": "Mọi thứ bạn cần để phân tích thị trường, đưa ra quyết định sáng suốt và theo dõi danh mục theo thời gian thực.",
+    "items": {
+      "realtime": {
+        "title": "Dữ liệu thời gian thực",
+        "desc": "Luồng WebSocket trực tiếp từ Binance, CoinGecko. Độ trễ dưới một giây, không bao giờ có bộ nhớ cache cũ."
+      },
+      "alerts": {
+        "title": "Cảnh báo thông minh",
+        "desc": "Thông báo đẩy, email, Discord. Ngưỡng, điều kiện, kích hoạt phức tạp. Hết FOMO."
+      },
+      "charts": {
+        "title": "Biểu đồ chuyên nghiệp",
+        "desc": "Lightweight Charts, chỉ báo tùy chỉnh, đa khung thời gian. Cho chuyên gia, không phức tạp."
+      },
+      "portfolio": {
+        "title": "Danh mục",
+        "desc": "Theo dõi vị thế, P&L, phân bổ. Đa ví, đa tiền tệ, thân thiện với thuế."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "Tổng quan thị trường",
+    "subtitle": "Tình trạng của thị trường crypto, forex và hàng hóa trong nháy mắt",
+    "tabs": {
+      "all": "Tất cả",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Hàng hóa"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "Crypto chuyên sâu",
+    "subtitle": "Dữ liệu on-chain, số liệu xã hội, độ thống trị và thanh lý",
+    "metrics": {
+      "marketCap": "Vốn hóa",
+      "volume24h": "Khối lượng 24h",
+      "dominance": "Độ thống trị BTC",
+      "fearGreed": "Sợ hãi & Tham lam"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "Công cụ nhanh",
+    "subtitle": "Bộ chuyển đổi, máy tính, screener — trong một cú nhấp chuột",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "Sẵn sàng lên cấp độ tiếp theo?",
+    "subtitle": "Tham gia cùng hàng nghìn trader sử dụng Zenith để theo dõi, phân tích và dự đoán thị trường.",
+    "primary": "Tạo tài khoản miễn phí",
+    "secondary": "Xem demo",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "Đỉnh cao của bạn, thị trường của bạn, sự rõ ràng của bạn. Nền tảng tình báo crypto đa tài sản, chế độ tối gốc, được thiết kế tại châu Âu.",
+    "dataAttribution": "Được thiết kế tại Bỉ. Dữ liệu thị trường thời gian thực bởi Binance & CoinGecko.",
+    "copyright": "© 2026 Zenith. Đã đăng ký bản quyền.",
+    "sections": {
+      "product": "Sản phẩm",
+      "community": "Cộng đồng",
+      "resources": "Tài nguyên",
+      "legal": "Pháp lý"
+    },
+    "product": {
+      "markets": "Thị trường",
+      "screener": "Screener",
+      "portfolio": "Danh mục"
+    },
+    "community": {
+      "forum": "Diễn đàn",
+      "ideas": "Ý tưởng giao dịch",
+      "indicators": "Chỉ báo & chiến lược",
+      "education": "Giáo dục",
+      "contact": "Liên hệ chúng tôi"
+    },
+    "resources": {
+      "api": "API",
+      "status": "Trạng thái"
+    },
+    "legal": {
+      "terms": "Điều khoản sử dụng",
+      "privacy": "Quyền riêng tư",
+      "cookies": "Cookie",
+      "accessibility": "Khả năng truy cập"
+    },
+    "language": "Ngôn ngữ",
+    "currency": "Tiền tệ"
+  },
+  "markets": {
+    "title": "Thị trường",
+    "subtitle": "Tất cả tài sản theo thời gian thực",
+    "rank": "Hạng",
+    "name": "Tên",
+    "price": "Giá",
+    "h1": "1h",
+    "h24": "24h",
+    "d7": "7n",
+    "marketCap": "Vốn hóa",
+    "volume": "Khối lượng",
+    "category": "Danh mục"
+  },
+  "portfolio": {
+    "title": "Danh mục",
+    "subtitle": "Theo dõi vị thế và hiệu suất"
+  },
+  "news": {
+    "crypto": "Tin crypto",
+    "forex": "Tin forex",
+    "markets": "Tin thị trường",
+    "economicCalendar": "Lịch kinh tế",
+    "technicalAnalysis": "Phân tích kỹ thuật"
+  },
+  "tools": {
+    "watchlist": "Watchlist",
+    "alerts": "Cảnh báo",
+    "heatmaps": "Bản đồ nhiệt"
+  },
+  "help": {
+    "why": "Tại sao Zenith",
+    "contact": "Liên hệ",
+    "faq": "FAQ",
+    "support": "Hỗ trợ",
+    "subscription": "Đăng ký & giá"
+  },
+  "legal": {
+    "terms": "Điều khoản sử dụng",
+    "privacy": "Quyền riêng tư",
+    "cookies": "Cookie",
+    "accessibility": "Khả năng truy cập"
+  },
+  "resources": {
+    "api": "API",
+    "status": "Trạng thái"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "قمتك، أسواقك، وضوحك",
+    "description": "منصة استخبارات مالية متعددة الأصول. كريبتو، فوركس، سلع. في الوقت الفعلي، رسوم بيانية احترافية، تنبيهات ذكية.",
+    "ogLocale": "ar"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "retry": "إعادة المحاولة",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "save": "حفظ",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "comingSoon": "قريباً",
+    "comingSoonDesc": "هذه الصفحة قيد الإنشاء. عد قريباً."
+  },
+  "a11y": {
+    "skipToContent": "تخطي إلى المحتوى الرئيسي",
+    "changeLanguage": "تغيير اللغة",
+    "changeCurrency": "تغيير العملة",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
+  },
+  "header": {
+    "nav": {
+      "markets": "الأسواق",
+      "news": "الأخبار",
+      "tools": "الأدوات",
+      "help": "المساعدة"
+    },
+    "cta": "ابدأ",
+    "search": "بحث",
+    "openCommandPalette": "فتح لوحة الأوامر",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "تجريبي",
+    "badgeText": "التنبيهات في الوقت الفعلي متاحة الآن",
+    "title": "قمتك،",
+    "titleLine2": "أسواقك،",
+    "titleLine3": "{clarity} الخاص بك.",
+    "clarity": "وضوحك",
+    "subtitle": "كل أموالك في مكان واحد، في الوقت الفعلي، بدون ضوضاء. رسوم بيانية احترافية، تنبيهات ذكية، سريع جداً. للمبتدئين والمستخدمين المتقدمين.",
+    "ctaPrimary": "ابدأ مجاناً",
+    "ctaSecondary": "استكشف الأسواق",
+    "ctaSecondarySub": "مجاني — لا حاجة لبطاقة ائتمان",
+    "poweredBy": "مدعوم من",
+    "scroll": "مرر",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "منصة واحدة، النظام البيئي بأكمله",
+    "subtitle": "كل ما تحتاجه لتحليل الأسواق، واتخاذ قرارات مستنيرة، وتتبع محفظتك في الوقت الفعلي.",
+    "items": {
+      "realtime": {
+        "title": "بيانات في الوقت الفعلي",
+        "desc": "تدفقات WebSocket مباشرة من Binance و CoinGecko. زمن انتقال أقل من ثانية، بدون ذاكرة تخزين مؤقت قديمة."
+      },
+      "alerts": {
+        "title": "تنبيهات ذكية",
+        "desc": "إشعارات فورية وبريد إلكتروني و Discord. عتبات وشروط ومحفزات معقدة. وداعاً لـ FOMO."
+      },
+      "charts": {
+        "title": "رسوم بيانية احترافية",
+        "desc": "Lightweight Charts، مؤشرات مخصصة، أطر زمنية متعددة. للمحترفين، بدون تعقيد."
+      },
+      "portfolio": {
+        "title": "المحفظة",
+        "desc": "تتبع المراكز والأرباح والخسائر والتوزيع. محافظ متعددة، عملات متعددة، ملائم ضريبياً."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "نظرة عامة على السوق",
+    "subtitle": "حالة أسواق الكريبتو والفوركس والسلع في لمحة",
+    "tabs": {
+      "all": "الكل",
+      "crypto": "كريبتو",
+      "forex": "فوركس",
+      "commodities": "السلع"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "كريبتو بعمق",
+    "subtitle": "بيانات على السلسلة، مقاييس اجتماعية، هيمنة والتصفية",
+    "metrics": {
+      "marketCap": "القيمة السوقية",
+      "volume24h": "حجم 24 ساعة",
+      "dominance": "هيمنة BTC",
+      "fearGreed": "الخوف والطمع"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "أدوات سريعة",
+    "subtitle": "محولات وآلات حاسبة وفاحص — بنقرة واحدة",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "هل أنت مستعد للوصول إلى المستوى التالي؟",
+    "subtitle": "انضم إلى آلاف المتداولين الذين يستخدمون Zenith لتتبع الأسواق وتحليلها وتوقعها.",
+    "primary": "أنشئ حسابي المجاني",
+    "secondary": "شاهد العرض التوضيحي",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "قمتك، أسواقك، وضوحك. منصة استخبارات كريبتو متعددة الأصول، وضع داكن أصلي، مصممة في أوروبا.",
+    "dataAttribution": "صُممت في بلجيكا. بيانات السوق في الوقت الفعلي من Binance و CoinGecko.",
+    "copyright": "© 2026 Zenith. جميع الحقوق محفوظة.",
+    "sections": {
+      "product": "المنتج",
+      "community": "المجتمع",
+      "resources": "الموارد",
+      "legal": "قانوني"
+    },
+    "product": {
+      "markets": "الأسواق",
+      "screener": "فاحص",
+      "portfolio": "المحفظة"
+    },
+    "community": {
+      "forum": "المنتدى",
+      "ideas": "أفكار التداول",
+      "indicators": "المؤشرات والاستراتيجيات",
+      "education": "التعليم",
+      "contact": "اتصل بنا"
+    },
+    "resources": {
+      "api": "API",
+      "status": "الحالة"
+    },
+    "legal": {
+      "terms": "شروط الاستخدام",
+      "privacy": "الخصوصية",
+      "cookies": "ملفات تعريف الارتباط",
+      "accessibility": "إمكانية الوصول"
+    },
+    "language": "اللغة",
+    "currency": "العملة"
+  },
+  "markets": {
+    "title": "الأسواق",
+    "subtitle": "جميع الأصول في الوقت الفعلي",
+    "rank": "الترتيب",
+    "name": "الاسم",
+    "price": "السعر",
+    "h1": "1س",
+    "h24": "24س",
+    "d7": "7ي",
+    "marketCap": "القيمة السوقية",
+    "volume": "الحجم",
+    "category": "الفئة"
+  },
+  "portfolio": {
+    "title": "المحفظة",
+    "subtitle": "تتبع المراكز والأداء"
+  },
+  "news": {
+    "crypto": "أخبار الكريبتو",
+    "forex": "أخبار الفوركس",
+    "markets": "أخبار الأسواق",
+    "economicCalendar": "التقويم الاقتصادي",
+    "technicalAnalysis": "التحليل الفني"
+  },
+  "tools": {
+    "watchlist": "قائمة المراقبة",
+    "alerts": "التنبيهات",
+    "heatmaps": "الخرائط الحرارية"
+  },
+  "help": {
+    "why": "لماذا Zenith",
+    "contact": "اتصل بنا",
+    "faq": "الأسئلة الشائعة",
+    "support": "الدعم",
+    "subscription": "الاشتراك والأسعار"
+  },
+  "legal": {
+    "terms": "شروط الاستخدام",
+    "privacy": "الخصوصية",
+    "cookies": "ملفات تعريف الارتباط",
+    "accessibility": "إمكانية الوصول"
+  },
+  "resources": {
+    "api": "API",
+    "status": "الحالة"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

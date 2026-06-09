@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "您的巔峰,您的市場,您的清晰",
+    "description": "多資產金融情報平台。加密貨幣、外匯、大宗商品。即時、專業圖表、智慧提醒。",
+    "ogLocale": "zh-TW"
+  },
+  "common": {
+    "loading": "載入中...",
+    "error": "發生錯誤",
+    "retry": "重試",
+    "cancel": "取消",
+    "confirm": "確認",
+    "save": "儲存",
+    "close": "關閉",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "search": "搜尋",
+    "comingSoon": "即將推出",
+    "comingSoonDesc": "此頁面正在建置中。敬請期待。"
+  },
+  "a11y": {
+    "skipToContent": "跳至主要內容",
+    "changeLanguage": "變更語言",
+    "changeCurrency": "變更貨幣",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單"
+  },
+  "header": {
+    "nav": {
+      "markets": "市場",
+      "news": "新聞",
+      "tools": "工具",
+      "help": "說明"
+    },
+    "cta": "開始使用",
+    "search": "搜尋",
+    "openCommandPalette": "開啟命令面板",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "測試版",
+    "badgeText": "即時提醒現已可用",
+    "title": "您的巔峰,",
+    "titleLine2": "您的市場,",
+    "titleLine3": "您的{clarity}。",
+    "clarity": "清晰",
+    "subtitle": "所有金融資訊集中一處,即時呈現,無雜訊。專業圖表,智慧提醒,極速響應。為初學者和進階使用者設計。",
+    "ctaPrimary": "免費開始",
+    "ctaSecondary": "探索市場",
+    "ctaSecondarySub": "免費 — 無需信用卡",
+    "poweredBy": "資料來源",
+    "scroll": "捲動",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "一個平台,整個生態",
+    "subtitle": "分析市場、做出明智決策、即時追蹤投資組合所需的一切。",
+    "items": {
+      "realtime": {
+        "title": "即時資料",
+        "desc": "直接來自 Binance、CoinGecko 的 WebSocket 串流。亞秒級延遲,絕不使用過期快取。"
+      },
+      "alerts": {
+        "title": "智慧提醒",
+        "desc": "推播、郵件、Discord 通知。閾值、條件、複雜觸發器。告別 FOMO。"
+      },
+      "charts": {
+        "title": "專業圖表",
+        "desc": "Lightweight Charts,自訂指標,多時間框架。為專業人士設計,無複雜操作。"
+      },
+      "portfolio": {
+        "title": "投資組合",
+        "desc": "追蹤倉位、損益、配置。多錢包、多貨幣、稅務友善。"
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "市場概覽",
+    "subtitle": "一目了然地了解加密貨幣、外匯和大宗商品市場狀況",
+    "tabs": {
+      "all": "全部",
+      "crypto": "加密貨幣",
+      "forex": "外匯",
+      "commodities": "大宗商品"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "加密貨幣深度分析",
+    "subtitle": "鏈上資料、社群指標、主導地位和清算",
+    "metrics": {
+      "marketCap": "市值",
+      "volume24h": "24小時交易量",
+      "dominance": "BTC 主導地位",
+      "fearGreed": "恐懼與貪婪"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "快速工具",
+    "subtitle": "轉換器、計算機、篩選器 — 一鍵搞定",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "準備好更上一層樓了嗎?",
+    "subtitle": "加入數千名使用 Zenith 追蹤、分析和預測市場的交易者。",
+    "primary": "建立我的免費帳戶",
+    "secondary": "查看示範",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "您的巔峰,您的市場,您的清晰。多資產加密情報平台,原生深色模式,在歐洲設計。",
+    "dataAttribution": "在比利時設計。即時市場資料由 Binance 和 CoinGecko 提供。",
+    "copyright": "© 2026 Zenith. 保留所有權利。",
+    "sections": {
+      "product": "產品",
+      "community": "社群",
+      "resources": "資源",
+      "legal": "法律"
+    },
+    "product": {
+      "markets": "市場",
+      "screener": "篩選器",
+      "portfolio": "投資組合"
+    },
+    "community": {
+      "forum": "論壇",
+      "ideas": "交易構想",
+      "indicators": "指標與策略",
+      "education": "教育",
+      "contact": "聯絡我們"
+    },
+    "resources": {
+      "api": "API",
+      "status": "狀態"
+    },
+    "legal": {
+      "terms": "使用條款",
+      "privacy": "隱私權政策",
+      "cookies": "Cookie 政策",
+      "accessibility": "無障礙"
+    },
+    "language": "語言",
+    "currency": "貨幣"
+  },
+  "markets": {
+    "title": "市場",
+    "subtitle": "所有資產即時呈現",
+    "rank": "排名",
+    "name": "名稱",
+    "price": "價格",
+    "h1": "1小時",
+    "h24": "24小時",
+    "d7": "7天",
+    "marketCap": "市值",
+    "volume": "交易量",
+    "category": "類別"
+  },
+  "portfolio": {
+    "title": "投資組合",
+    "subtitle": "追蹤您的倉位和表現"
+  },
+  "news": {
+    "crypto": "加密新聞",
+    "forex": "外匯新聞",
+    "markets": "市場新聞",
+    "economicCalendar": "經濟日曆",
+    "technicalAnalysis": "技術分析"
+  },
+  "tools": {
+    "watchlist": "自選清單",
+    "alerts": "提醒",
+    "heatmaps": "熱力圖"
+  },
+  "help": {
+    "why": "為什麼選擇 Zenith",
+    "contact": "聯絡我們",
+    "faq": "常見問題",
+    "support": "支援",
+    "subscription": "訂閱與價格"
+  },
+  "legal": {
+    "terms": "使用條款",
+    "privacy": "隱私權政策",
+    "cookies": "Cookie 政策",
+    "accessibility": "無障礙"
+  },
+  "resources": {
+    "api": "API",
+    "status": "狀態"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}

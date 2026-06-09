@@ -1,0 +1,87 @@
+"use client";
+
+import { Check, X } from "lucide-react";
+
+interface Plan {
+  name: string;
+  features: string[];
+}
+
+interface ComparisonTableProps {
+  plans: Plan[];
+}
+
+const allFeatures = [
+  { label: "Charts basiques", free: true, pro: true },
+  { label: "Charts avancés (25+ indicateurs)", free: false, pro: true },
+  { label: "Studies techniques (SMA, EMA, RSI, MACD)", free: false, pro: true },
+  { label: "Actifs suivis", free: "3", pro: "Illimité" },
+  { label: "Alertes email", free: "1/jour", pro: "Illimité" },
+  { label: "Alertes SMS + Webhook", free: false, pro: true },
+  { label: "Données temps réel", free: "24h", pro: "Historique illimité" },
+  { label: "Dashboard", free: "Simple", pro: "Avancé" },
+  { label: "Portfolios", free: "1", pro: "Illimité" },
+  { label: "Export CSV", free: false, pro: true },
+  { label: "Command palette", free: true, pro: true },
+  { label: "Support", free: "Communautaire", pro: "Prioritaire" },
+];
+
+export default function ComparisonTable({ plans }: ComparisonTableProps) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-gray-700/50">
+            <th className="text-left py-4 px-4 font-medium text-gray-400">
+              Fonctionnalité
+            </th>
+            {plans.map((plan) => (
+              <th
+                key={plan.name}
+                className={`text-center py-4 px-4 font-bold ${
+                  plan.name === "Pro" ? "text-brand-purple-light" : "text-white"
+                }`}
+              >
+                {plan.name}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {allFeatures.map((feature, i) => (
+            <tr
+              key={feature.label}
+              className={`border-b border-gray-800/30 ${
+                i % 2 === 0 ? "bg-white/[0.02]" : ""
+              }`}
+            >
+              <td className="py-3 px-4 text-gray-300">{feature.label}</td>
+              <td className="py-3 px-4 text-center">
+                {typeof feature.free === "boolean" ? (
+                  feature.free ? (
+                    <Check className="w-4 h-4 text-green-500 mx-auto" />
+                  ) : (
+                    <X className="w-4 h-4 text-gray-600 mx-auto" />
+                  )
+                ) : (
+                  <span className="text-gray-400">{feature.free}</span>
+                )}
+              </td>
+              <td className="py-3 px-4 text-center">
+                {typeof feature.pro === "boolean" ? (
+                  feature.pro ? (
+                    <Check className="w-4 h-4 text-green-500 mx-auto" />
+                  ) : (
+                    <X className="w-4 h-4 text-gray-600 mx-auto" />
+                  )
+                ) : (
+                  <span className="text-gray-400">{feature.pro}</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}

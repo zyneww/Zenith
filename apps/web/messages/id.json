@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "title": "Puncak Anda, pasar Anda, kejelasan Anda",
+    "description": "Platform intelijen keuangan multi-aset. Kripto, forex, komoditas. Real-time, grafik pro, alert pintar.",
+    "ogLocale": "id"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi",
+    "cancel": "Batal",
+    "confirm": "Konfirmasi",
+    "save": "Simpan",
+    "close": "Tutup",
+    "back": "Kembali",
+    "next": "Berikutnya",
+    "previous": "Sebelumnya",
+    "search": "Cari",
+    "comingSoon": "Segera hadir",
+    "comingSoonDesc": "Halaman ini sedang dibangun. Kunjungi lagi segera."
+  },
+  "a11y": {
+    "skipToContent": "Lewati ke konten utama",
+    "changeLanguage": "Ubah bahasa",
+    "changeCurrency": "Ubah mata uang",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
+  },
+  "header": {
+    "nav": {
+      "markets": "Pasar",
+      "news": "Berita",
+      "tools": "Alat",
+      "help": "Bantuan"
+    },
+    "cta": "Mulai",
+    "search": "Cari",
+    "openCommandPalette": "Buka palet perintah",
+    "dropdown": {
+      "superchart": "Superchart",
+      "superchartDesc": "Real-time chart analysis",
+      "crypto": "Crypto",
+      "forex": "Forex",
+      "commodities": "Commodities",
+      "indices": "Indices",
+      "etfs": "ETFs",
+      "allMarkets": "All markets",
+      "cryptoNews": "Crypto News",
+      "forexNews": "Forex News",
+      "marketsNews": "Markets News",
+      "economicCalendar": "Economic Calendar",
+      "technicalAnalysis": "Technical Analysis",
+      "screener": "Screener",
+      "priceAlerts": "Price Alerts",
+      "converter": "Converter",
+      "dashboard": "Dashboard",
+      "portfolio": "Portfolio",
+      "subscription": "Subscription",
+      "support": "Support",
+      "faq": "FAQ",
+      "whyZenith": "Why Zenith",
+      "contact": "Contact us"
+    }
+  },
+  "hero": {
+    "badge": "BETA",
+    "badgeText": "Alert real-time sekarang tersedia",
+    "title": "Puncak Anda,",
+    "titleLine2": "pasar Anda,",
+    "titleLine3": "{clarity} Anda.",
+    "clarity": "kejelasan",
+    "subtitle": "Semua keuangan Anda di satu tempat, real-time, tanpa noise. Grafik pro, alert pintar, sangat cepat. Untuk pemula dan power user.",
+    "ctaPrimary": "Mulai gratis",
+    "ctaSecondary": "Jelajahi pasar",
+    "ctaSecondarySub": "Gratis — tanpa kartu kredit",
+    "poweredBy": "Didukung oleh",
+    "scroll": "Gulir",
+    "keyboardHint": "Press / or ⌘K to search for any asset"
+  },
+  "features": {
+    "title": "Satu platform, seluruh ekosistem",
+    "subtitle": "Semua yang Anda butuhkan untuk menganalisis pasar, mengambil keputusan, dan melacak portofolio secara real-time.",
+    "items": {
+      "realtime": {
+        "title": "Data real-time",
+        "desc": "Stream WebSocket langsung dari Binance, CoinGecko. Latensi sub-detik, tidak pernah cache usang."
+      },
+      "alerts": {
+        "title": "Alert pintar",
+        "desc": "Notifikasi push, email, Discord. Threshold, kondisi, trigger kompleks. Tinggalkan FOMO."
+      },
+      "charts": {
+        "title": "Grafik pro",
+        "desc": "Lightweight Charts, indikator kustom, multi-timeframe. Untuk pro, tanpa kompleksitas."
+      },
+      "portfolio": {
+        "title": "Portofolio",
+        "desc": "Lacak posisi, P&L, alokasi. Multi-wallet, multi-mata uang, ramah pajak."
+      }
+    },
+    "block1": {
+      "badge": "Fig 02",
+      "title": "Built for beginners,\nbuilt for pros.",
+      "desc": "Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.",
+      "items": [
+        "Command palette ⌘K — keyboard-speed navigation",
+        "Pro lightweight charts + technical indicators",
+        "Multi-condition alerts with configurable cooldown",
+        "Dark mode by default, light mode optional"
+      ],
+      "mockupLabel": "Command Palette",
+      "mockupItems": [
+        "Open palette",
+        "Go to markets",
+        "Go to dashboard",
+        "Navigate"
+      ]
+    },
+    "block2": {
+      "badge": "Fig 03",
+      "title": "Real-time data,\nreally real-time.",
+      "desc": "Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.",
+      "items": [
+        "Dragonfly pub/sub for sub-10ms propagation",
+        "QuestDB for native ultra-fast time-series",
+        "Socket.IO frontend with auto-reconnect",
+        "Incremental chart update on every tick"
+      ],
+      "mockupLabel": "Websocket Feed",
+      "mockupSummary": "2,875 msgs/10s"
+    }
+  },
+  "marketOverview": {
+    "title": "Ikhtisar pasar",
+    "subtitle": "Keadaan pasar kripto, forex, dan komoditas dalam sekilas",
+    "tabs": {
+      "all": "Semua",
+      "crypto": "Kripto",
+      "forex": "Forex",
+      "commodities": "Komoditas"
+    },
+    "badge": "Live Markets",
+    "cardIndices": "Major Indices",
+    "cardCrypto": "Crypto",
+    "cardCommodities": "Commodities",
+    "cardForex": "Forex",
+    "seeAll": "See all"
+  },
+  "crypto": {
+    "title": "Kripto mendalam",
+    "subtitle": "Data on-chain, metrik sosial, dominasi dan likuidasi",
+    "metrics": {
+      "marketCap": "Kapitalisasi pasar",
+      "volume24h": "Volume 24j",
+      "dominance": "Dominasi BTC",
+      "fearGreed": "Rasa Takut & Serakah"
+    },
+    "badge": "Fig 02 — Crypto Markets",
+    "titleLive": "live",
+    "live": "● LIVE",
+    "offline": "◌ OFFLINE",
+    "seeAll": "See full market",
+    "categories": {
+      "all": "All",
+      "layer1": "Layer 1",
+      "layer2": "Layer 2",
+      "defi": "DeFi",
+      "memes": "Memecoins"
+    },
+    "tableHeaders": {
+      "num": "#",
+      "name": "NAME",
+      "price": "PRICE",
+      "24h": "24H",
+      "7d": "7D",
+      "marketCap": "MARKET CAP",
+      "vol24h": "VOL 24H",
+      "7dVol": "7D"
+    },
+    "exploreAll": "Explore 500+ cryptos"
+  },
+  "quickTools": {
+    "title": "Alat cepat",
+    "subtitle": "Konverter, kalkulator, screener — dalam satu klik",
+    "badge": "Fig 04 — Quick Tools",
+    "tabs": {
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers"
+    },
+    "sectionTitle": "Daily Movers",
+    "sectionDesc": "24h — Top 5 per category",
+    "converterTitle": "Quick Converter",
+    "converterRatesLabel": "MID — MARKET RATES",
+    "converterFrom": "From",
+    "converterTo": "To",
+    "fearGreedTitle": "Fear & Greed",
+    "fearGreedSub": "DAILY — CNN",
+    "fearGreedLevel": "Greed",
+    "fearGreedDesc": "Market is in {sentiment}. Caution on entries.",
+    "fearGreedSentiment": "greed",
+    "gasTitle": "Gas Tracker",
+    "gasSub": "LIVE — CHAINS",
+    "screenerTitle": "Advanced Screener",
+    "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+    "screenerCta": "Open screener"
+  },
+  "cta": {
+    "title": "Siap naik ke level berikutnya?",
+    "subtitle": "Bergabung dengan ribuan trader yang menggunakan Zenith untuk melacak, menganalisis, dan mengantisipasi pasar.",
+    "primary": "Buat akun gratis saya",
+    "secondary": "Lihat demo",
+    "badge": "14 DAYS PREMIUM INCLUDED",
+    "offerBadge": "14 DAYS PREMIUM INCLUDED",
+    "features": [
+      "14-day free trial",
+      "No credit card",
+      "GDPR native",
+      "EU hosting"
+    ]
+  },
+  "footer": {
+    "tagline": "Puncak Anda, pasar Anda, kejelasan Anda. Platform intelijen kripto multi-aset, mode gelap native, dirancang di Eropa.",
+    "dataAttribution": "Dirancang di Belgia. Data pasar real-time oleh Binance & CoinGecko.",
+    "copyright": "© 2026 Zenith. Hak cipta dilindungi undang-undang.",
+    "sections": {
+      "product": "Produk",
+      "community": "Komunitas",
+      "resources": "Sumber daya",
+      "legal": "Hukum"
+    },
+    "product": {
+      "markets": "Pasar",
+      "screener": "Screener",
+      "portfolio": "Portofolio"
+    },
+    "community": {
+      "forum": "Forum",
+      "ideas": "Ide trading",
+      "indicators": "Indikator & strategi",
+      "education": "Edukasi",
+      "contact": "Hubungi kami"
+    },
+    "resources": {
+      "api": "API",
+      "status": "Status"
+    },
+    "legal": {
+      "terms": "Ketentuan penggunaan",
+      "privacy": "Privasi",
+      "cookies": "Cookie",
+      "accessibility": "Aksesibilitas"
+    },
+    "language": "Bahasa",
+    "currency": "Mata uang"
+  },
+  "markets": {
+    "title": "Pasar",
+    "subtitle": "Semua aset secara real-time",
+    "rank": "Peringkat",
+    "name": "Nama",
+    "price": "Harga",
+    "h1": "1j",
+    "h24": "24j",
+    "d7": "7h",
+    "marketCap": "Kapitalisasi pasar",
+    "volume": "Volume",
+    "category": "Kategori"
+  },
+  "portfolio": {
+    "title": "Portofolio",
+    "subtitle": "Lacak posisi dan kinerja"
+  },
+  "news": {
+    "crypto": "Berita kripto",
+    "forex": "Berita forex",
+    "markets": "Berita pasar",
+    "economicCalendar": "Kalender ekonomi",
+    "technicalAnalysis": "Analisis teknikal"
+  },
+  "tools": {
+    "watchlist": "Watchlist",
+    "alerts": "Alert",
+    "heatmaps": "Heatmap"
+  },
+  "help": {
+    "why": "Mengapa Zenith",
+    "contact": "Hubungi kami",
+    "faq": "FAQ",
+    "support": "Dukungan",
+    "subscription": "Langganan & harga"
+  },
+  "legal": {
+    "terms": "Ketentuan penggunaan",
+    "privacy": "Privasi",
+    "cookies": "Cookie",
+    "accessibility": "Aksesibilitas"
+  },
+  "resources": {
+    "api": "API",
+    "status": "Status"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  }
+}
