@@ -67,7 +67,7 @@
     "badgeText": "Echtzeit-Alerts jetzt verfügbar",
     "title": "Dein Gipfel,",
     "titleLine2": "deine Märkte,",
-    "titleLine3": "deine {clarity}.",
+    "titleLine3": "deine <clarity>{clarityValue}</clarity>.",
     "clarity": "Klarheit",
     "subtitle": "Alle deine Finanzen an einem Ort, in Echtzeit, ohne Rauschen. Profi-Charts, smarte Alerts, blitzschnell. Für Anfänger und Power-User.",
     "ctaPrimary": "Kostenlos starten",

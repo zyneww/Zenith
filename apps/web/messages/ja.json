@@ -67,7 +67,7 @@
     "badgeText": "リアルタイムアラートが利用可能に",
     "title": "あなたの頂点、",
     "titleLine2": "あなたの市場、",
-    "titleLine3": "あなたの{clarity}。",
+    "titleLine3": "あなたの<clarity>{clarityValue}</clarity>。",
     "clarity": "明快さ",
     "subtitle": "すべての金融情報を一か所で、リアルタイム、ノイズなし。プロ仕様のチャート、スマートアラート、超高速。初心者からパワーユーザーまで。",
     "ctaPrimary": "無料で始める",

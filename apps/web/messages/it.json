@@ -67,7 +67,7 @@
     "badgeText": "Alert in tempo reale ora disponibili",
     "title": "La tua vetta,",
     "titleLine2": "i tuoi mercati,",
-    "titleLine3": "la tua {clarity}.",
+    "titleLine3": "la tua <clarity>{clarityValue}</clarity>.",
     "clarity": "chiarezza",
     "subtitle": "Tutta la tua finanza in un posto, in tempo reale, senza rumore. Grafici pro, alert intelligenti, velocissimo. Pensato per principianti e power user.",
     "ctaPrimary": "Inizia gratis",

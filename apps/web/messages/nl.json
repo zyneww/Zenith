@@ -67,7 +67,7 @@
     "badgeText": "Realtime alerts nu beschikbaar",
     "title": "Jouw piek,",
     "titleLine2": "jouw markten,",
-    "titleLine3": "jouw {clarity}.",
+    "titleLine3": "jouw <clarity>{clarityValue}</clarity>.",
     "clarity": "duidelijkheid",
     "subtitle": "Al je financiën op één plek, realtime, zonder ruis. Pro-grafieken, slimme alerts, razendsnel. Voor beginners en power users.",
     "ctaPrimary": "Gratis starten",

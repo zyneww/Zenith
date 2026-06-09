@@ -67,7 +67,7 @@
     "badgeText": "实时提醒现已可用",
     "title": "您的巅峰,",
     "titleLine2": "您的市场,",
-    "titleLine3": "您的{clarity}。",
+    "titleLine3": "您的<clarity>{clarityValue}</clarity>。",
     "clarity": "清晰",
     "subtitle": "所有金融信息集中一处,实时呈现,无杂音。专业图表,智能提醒,极速响应。为初学者和高级用户设计。",
     "ctaPrimary": "免费开始",

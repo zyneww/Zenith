@@ -67,7 +67,7 @@
     "badgeText": "Cảnh báo thời gian thực đã có sẵn",
     "title": "Đỉnh cao của bạn,",
     "titleLine2": "thị trường của bạn,",
-    "titleLine3": "{clarity} của bạn.",
+    "titleLine3": "<clarity>{clarityValue}</clarity> của bạn.",
     "clarity": "sự rõ ràng",
     "subtitle": "Tất cả tài chính của bạn ở một nơi, thời gian thực, không có tiếng ồn. Biểu đồ chuyên nghiệp, cảnh báo thông minh, cực nhanh. Cho người mới và người dùng cao cấp.",
     "ctaPrimary": "Bắt đầu miễn phí",

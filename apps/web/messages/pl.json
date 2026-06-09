@@ -67,7 +67,7 @@
     "badgeText": "Alerty w czasie rzeczywistym dostępne",
     "title": "Twój szczyt,",
     "titleLine2": "Twoje rynki,",
-    "titleLine3": "Twoja {clarity}.",
+    "titleLine3": "Twoja <clarity>{clarityValue}</clarity>.",
     "clarity": "jasność",
     "subtitle": "Wszystkie Twoje finanse w jednym miejscu, w czasie rzeczywistym, bez szumu. Profesjonalne wykresy, inteligentne alerty, błyskawicznie. Dla początkujących i zaawansowanych.",
     "ctaPrimary": "Zacznij za darmo",

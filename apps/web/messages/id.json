@@ -67,7 +67,7 @@
     "badgeText": "Alert real-time sekarang tersedia",
     "title": "Puncak Anda,",
     "titleLine2": "pasar Anda,",
-    "titleLine3": "{clarity} Anda.",
+    "titleLine3": "<clarity>{clarityValue}</clarity> Anda.",
     "clarity": "kejelasan",
     "subtitle": "Semua keuangan Anda di satu tempat, real-time, tanpa noise. Grafik pro, alert pintar, sangat cepat. Untuk pemula dan power user.",
     "ctaPrimary": "Mulai gratis",

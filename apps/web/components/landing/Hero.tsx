@@ -149,18 +149,20 @@ export default function Hero() {
         </motion.a>
 
         {/* Headline */}
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-[0.95]"
         >
-          {t("title")}
-          <br />
-          {t("titleLine2")}
-          <br />
-          {t.rich("titleLine3", { clarity: (chunks) => <span className="text-[#F0B90B]">{chunks}</span>, clarityValue: t("clarity") })}
-        </motion.h1>
+          <h1>
+            {t("title")}
+            <br />
+            {t("titleLine2")}
+            <br />
+            {t.rich("titleLine3", { clarity: (chunks) => <span className="text-[#F0B90B]">{chunks}</span>, clarityValue: t("clarity") })}
+          </h1>
+        </motion.div>
 
         {/* Subheadline */}
         <motion.p

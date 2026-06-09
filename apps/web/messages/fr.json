@@ -67,7 +67,7 @@
     "badgeText": "Alertes temps réel maintenant disponibles",
     "title": "Votre sommet,",
     "titleLine2": "vos marchés,",
-    "titleLine3": "votre {clarity}.",
+    "titleLine3": "votre <clarity>{clarityValue}</clarity>.",
     "clarity": "clarté",
     "subtitle": "Toute la finance en un seul endroit, en temps réel, sans bruit. Charts pros, alertes intelligentes, ultra rapide. Pensé pour débutants et power users.",
     "ctaPrimary": "Commencer gratuitement",

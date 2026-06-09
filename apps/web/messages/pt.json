@@ -67,7 +67,7 @@
     "badgeText": "Alertas em tempo real disponíveis",
     "title": "Seu topo,",
     "titleLine2": "seus mercados,",
-    "titleLine3": "sua {clarity}.",
+    "titleLine3": "sua <clarity>{clarityValue}</clarity>.",
     "clarity": "clareza",
     "subtitle": "Todas as suas finanças em um só lugar, em tempo real, sem ruído. Gráficos pro, alertas inteligentes, muito rápido. Para iniciantes e power users.",
     "ctaPrimary": "Comece grátis",

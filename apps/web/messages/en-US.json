@@ -67,7 +67,7 @@
     "badgeText": "Real-time alerts now available",
     "title": "Your peak,",
     "titleLine2": "your markets,",
-    "titleLine3": "your {clarity}.",
+    "titleLine3": "your <clarity>{clarityValue}</clarity>.",
     "clarity": "clarity",
     "subtitle": "All your finance in one place, real-time, no noise. Pro charts, smart alerts, blazing fast. Built for beginners and power users.",
     "ctaPrimary": "Start for free",

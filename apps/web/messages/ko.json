@@ -67,7 +67,7 @@
     "badgeText": "실시간 알림 사용 가능",
     "title": "당신의 정점,",
     "titleLine2": "당신의 시장,",
-    "titleLine3": "당신의 {clarity}.",
+    "titleLine3": "당신의 <clarity>{clarityValue}</clarity>.",
     "clarity": "명료함",
     "subtitle": "모든 재정을 한 곳에서, 실시간, 잡음 없이. 프로 차트, 스마트 알림, 매우 빠름. 초보자와 파워 유저를 위해.",
     "ctaPrimary": "무료로 시작",

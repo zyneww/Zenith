@@ -67,7 +67,7 @@
     "badgeText": "Gerçek zamanlı uyarılar artık mevcut",
     "title": "Doruk noktanız,",
     "titleLine2": "piyasalarınız,",
-    "titleLine3": "sizin {clarity}.",
+    "titleLine3": "sizin <clarity>{clarityValue}</clarity>.",
     "clarity": "netliğiniz",
     "subtitle": "Tüm finansal bilgileriniz tek bir yerde, gerçek zamanlı, gürültüsüz. Profesyonel grafikler, akıllı uyarılar, çok hızlı. Yeni başlayanlar ve uzmanlar için.",
     "ctaPrimary": "Ücretsiz başla",

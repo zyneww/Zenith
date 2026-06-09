@@ -67,7 +67,7 @@
     "badgeText": "Amaran masa nyata kini tersedia",
     "title": "Puncak anda,",
     "titleLine2": "pasaran anda,",
-    "titleLine3": "{clarity} anda.",
+    "titleLine3": "<clarity>{clarityValue}</clarity> anda.",
     "clarity": "kejelasan",
     "subtitle": "Semua kewangan anda di satu tempat, masa nyata, tanpa bunyi. Carta pro, amaran pintar, sangat pantas. Untuk pemula dan pengguna kuasa.",
     "ctaPrimary": "Mula percuma",
