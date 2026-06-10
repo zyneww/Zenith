@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import {
   X, ChevronRight, BarChart3, LineChart, Newspaper, CalendarDays,
@@ -196,13 +197,15 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
 
             {/* Bottom actions */}
             <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#0b0e14] border-t border-[#1f2937]">
-              <Link
-                href="/pricing"
-                className="block w-full bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-4 py-3 rounded-full transition-colors shadow-glow-purple text-center"
-                onClick={onClose}
-              >
-                Commencer
-              </Link>
+              <SignUpButton mode="modal">
+                <button
+                  onClick={onClose}
+                  className="block w-full bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-4 py-3 rounded-full transition-colors shadow-glow-purple text-center cursor-pointer"
+                  type="button"
+                >
+                  Commencer
+                </button>
+              </SignUpButton>
             </div>
           </motion.div>
         </>

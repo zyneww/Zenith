@@ -42,6 +42,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import DropdownMenu from "@/components/ui/DropdownMenu";
 import MobileDrawer from "@/components/ui/MobileDrawer";
@@ -166,12 +167,14 @@ export default function Header() {
           </div>
 
           {/* Commencer button */}
-          <Link
-            href="/pricing"
-            className="hidden lg:block bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-5 py-2 rounded-full transition-colors shadow-glow-purple"
-          >
-            Commencer
-          </Link>
+          <SignUpButton mode="modal">
+            <button
+              className="hidden lg:block bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-5 py-2 rounded-full transition-colors shadow-glow-purple cursor-pointer"
+              type="button"
+            >
+              Commencer
+            </button>
+          </SignUpButton>
 
           {/* Mobile hamburger */}
           <button

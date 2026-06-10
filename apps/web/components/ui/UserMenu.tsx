@@ -12,7 +12,7 @@ import {
 import { useTheme } from "@/lib/theme/ThemeProvider";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
-import { useAuth, UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { useAuth, UserButton, SignInButton } from "@clerk/nextjs";
 
 export default function UserMenu() {
   const { animationsEnabled, toggleAnimations } = useTheme();
@@ -66,17 +66,6 @@ export default function UserMenu() {
                     Sign in
                   </button>
                 </SignInButton>
-
-                <SignUpButton mode="modal">
-                  <button
-                    onClick={() => setOpen(false)}
-                    className="w-full text-left px-4 py-2 text-sm transition-colors flex items-center gap-3 text-gray-300 hover:bg-white/5"
-                    type="button"
-                  >
-                    <User className="w-4 h-4 opacity-70" />
-                    Sign up
-                  </button>
-                </SignUpButton>
 
                 <div className="mx-4 my-1 h-px bg-gray-700/50" />
 
