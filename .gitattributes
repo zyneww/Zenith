@@ -1,0 +1,12 @@
+# GitHub Linguist overrides
+# Exclude generated files from language stats
+*.snap linguist-generated=true
+*.log linguist-generated=true
+.next/ linguist-generated=true
+.turbo/ linguist-generated=true
+
+# Test files
+e2e/** linguist-detectable=false
+
+# Vendored dependencies
+node_modules/** linguist-vendored=true
