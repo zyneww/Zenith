@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
@@ -6,23 +7,9 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
-  turbopack: {
-    root: "/home/we/Documents/CODE/ZENITH",
-  },
-  // Polyfill process for client-side code
+  outputFileTracingRoot: path.resolve(process.cwd(), "../.."),
   env: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-  },
-  // Workaround for Turbopack + Clerk process.js polyfill issue
-  webpack: (config) => {
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve?.fallback,
-        process: require.resolve("process/browser"),
-      },
-    };
-    return config;
   },
   images: {
     remotePatterns: [

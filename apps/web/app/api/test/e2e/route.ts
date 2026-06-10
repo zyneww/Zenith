@@ -4,11 +4,11 @@
 
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { users, watchlists, portfolioPositions, alerts } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
-import { addIndicatorJob, addAlertJob, addEmailJob } from '@/lib/queue';
+import { users } from '@/lib/db/schema';
+
+import { addIndicatorJob } from '@/lib/queue';
 import { sendEmail } from '@/lib/email';
-import { getOHLCV, getLatestTrades, questdbHealth } from '@/lib/db/questdb';
+import { getOHLCV, questdbHealth } from '@/lib/db/questdb';
 import { rateLimit } from '@/lib/rate-limit';
 
 export async function GET() {

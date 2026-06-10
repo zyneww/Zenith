@@ -70,6 +70,7 @@ export default function PortfolioChart() {
           {["1J", "1S", "1M", "3M", "1A", "Tout"].map((period) => (
             <button
               key={period}
+              aria-label={`Période ${period}`}
               className={`px-3 py-1 text-xs rounded-lg transition-colors ${
                 period === "1M"
                   ? "bg-brand-purple text-white"

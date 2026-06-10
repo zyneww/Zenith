@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Zap, Crown } from "lucide-react";
+import { Check } from "lucide-react";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import PricingCard from "@/components/subscription/PricingCard";
@@ -48,7 +48,7 @@ const plans = [
   },
 ];
 
-export default async function SubscriptionPage({ params }: { params: Promise<{ locale: string }> }) {
+export default function SubscriptionPage() {
 return (
     <div className="min-h-[100dvh] bg-[#0b0e14] text-white">
       <Header />

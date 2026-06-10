@@ -1,9 +1,8 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion } from "motion/react";
 import {
-  TrendingUp,
-  TrendingDown,
   ArrowUpRight,
   ArrowDownRight,
 } from "lucide-react";
@@ -26,7 +25,8 @@ const POSITIONS: Position[] = [
 ];
 
 function PositionRow({ position, index }: { position: Position; index: number }) {
-  const { getPrice } = useRealtimePrice([position.symbol + "USDT"]);
+  const symbols = useMemo(() => [position.symbol + "USDT"], [position.symbol]);
+  const { getPrice } = useRealtimePrice(symbols);
   const priceData = getPrice(position.symbol + "USDT");
   const currentPrice = priceData?.price || position.avgBuyPrice;
   const totalValue = currentPrice * position.quantity;

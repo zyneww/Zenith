@@ -168,7 +168,7 @@ export default function QuickTools() {
                   </select>
                 </div>
 
-                <button className="bg-gray-800 p-2 rounded-full border border-gray-700 hover:bg-gray-700">
+                <button className="bg-gray-800 p-2 rounded-full border border-gray-700 hover:bg-gray-700" aria-label="Inverser les devises">
                   <ArrowRightLeft className="w-4 h-4 text-gray-400" />
                 </button>
 

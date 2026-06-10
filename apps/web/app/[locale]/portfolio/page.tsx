@@ -193,7 +193,7 @@ function PerformanceMetrics() {
   );
 }
 
-export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
+export default function PortfolioPage() {
 return (
     <>
       <Header />

@@ -7,7 +7,7 @@ import PortfolioChart from "@/components/dashboard/PortfolioChart";
 import ActivePositions from "@/components/dashboard/ActivePositions";
 import RecentAlerts from "@/components/dashboard/RecentAlerts";
 
-export default async function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
+export default function DashboardPage() {
 return (
     <>
       <Header />

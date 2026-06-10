@@ -74,7 +74,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
               <h1 className="text-xl font-bold">{asset.name}</h1>
               <span className="text-sm text-gray-500">{asset.symbol}</span>
             </div>
-            <button className="ml-auto text-gray-500 hover:text-yellow-500 transition">
+            <button className="ml-auto text-gray-500 hover:text-yellow-500 transition" aria-label="Ajouter aux favoris">
               <Star className="w-5 h-5" />
             </button>
           </div>

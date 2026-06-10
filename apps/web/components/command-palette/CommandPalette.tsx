@@ -9,7 +9,6 @@ import {
   Home,
   BarChart3,
   Bell,
-  Wallet,
   Settings,
   Newspaper,
   HelpCircle,

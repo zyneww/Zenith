@@ -2,10 +2,23 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { X, ChevronRight } from "lucide-react";
+import {
+  X, ChevronRight, BarChart3, LineChart, Newspaper, CalendarDays,
+  TrendingUp, Search, Bell, Wallet, LayoutDashboard, Briefcase,
+  CreditCard, Headphones, HelpCircle, MessageSquare, Rocket,
+  ArrowRight, Bitcoin, Coins, DollarSign, Package, Landmark,
+  type LucideIcon,
+} from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Accordion from "./Accordion";
 import type { DropdownItem } from "./DropdownMenu";
+
+const iconMap: Record<string, LucideIcon> = {
+  BarChart3, LineChart, Newspaper, CalendarDays, TrendingUp,
+  Search, Bell, Wallet, LayoutDashboard, Briefcase,
+  CreditCard, Headphones, HelpCircle, MessageSquare, Rocket,
+  ArrowRight, Bitcoin, Coins, DollarSign, Package, Landmark,
+};
 
 interface MobileSection {
   title: string;
@@ -61,6 +74,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                 onClick={onClose}
                 className="p-2 text-gray-400 hover:text-white transition-colors"
                 type="button"
+                aria-label="Fermer le menu"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -167,8 +181,8 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
 
 // Helper to render icons by name in MobileDrawer
 function IconRenderer({ name, size }: { name: string; size: "sm" | "lg" }) {
-  // We'll import icons dynamically or use a simple approach
-  // Since this is a client component, we can import all needed icons
+  const Icon = iconMap[name as keyof typeof iconMap];
+  if (!Icon) return null;
   const className = size === "lg" ? "w-5 h-5 text-brand-cyan mt-0.5 flex-shrink-0" : "w-4 h-4 flex-shrink-0";
-  return <span className={className}>{/* Icon rendered by parent via iconName */}</span>;
+  return <Icon className={className} />;
 }
