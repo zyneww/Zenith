@@ -3,27 +3,23 @@
     <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/logo2.svg">
     <img alt="Zenith" src="apps/web/public/logo2.svg" width="100" height="auto">
   </picture>
-  <h1 style="font-size: 2.75rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.25rem 0;">
-    <span style="color: #00e5ff;">ZENITH</span>
+  <h1 style="font-size: 2.75rem; font-weight: 700; letter-spacing: -0.03em; margin: 0.25rem 0; color: #00e5ff;">
+    ZENITH
   </h1>
-  <p style="font-size: 1.2rem; color: #9ca3af; max-width: 600px; margin: 0 auto;">
-    ⚡ Intelligence financière temps réel — Crypto, Forex, Commodités
+  <p style="font-size: 1.125rem; color: #9ca3af; max-width: 560px; margin: 0 auto;">
+    Financial Intelligence Platform — Real-Time Data, Analytics, Portfolio Management
   </p>
 </div>
 
-<br>
-
 <p align="center">
-  <a href="#readme">🇬🇧 English</a> ·
-  <a href="README.fr.md">🇫🇷 Français</a> ·
-  <a href="README.de.md">🇩🇪 Deutsch</a> ·
-  <a href="README.es.md">🇪🇸 Español</a> ·
-  <a href="README.zh.md">🇨🇳 中文</a> ·
-  <a href="README.jp.md">🇯🇵 日本語</a> ·
-  <a href="README.ar.md">🇸🇦 العربية</a>
+  <a href="#readme">EN</a> ·
+  <a href="README.fr.md">FR</a> ·
+  <a href="README.de.md">DE</a> ·
+  <a href="README.es.md">ES</a> ·
+  <a href="README.zh.md">ZH</a> ·
+  <a href="README.jp.md">JP</a> ·
+  <a href="README.ar.md">AR</a>
 </p>
-
-<br>
 
 <p align="center">
   <a href="https://github.com/zyneww/Zenith/blob/master/LICENSE">
@@ -45,7 +41,7 @@
     <img src="https://img.shields.io/badge/QuestDB_TS-00e5ff?style=flat-square&logo=questdb&logoColor=white" alt="QuestDB">
   </a>
   <a href="https://www.dragonflydb.io/">
-    <img src="https://img.shields.io/badge/Dragonfly-redis-004359?style=flat-square&logo=dragonflydb&logoColor=white" alt="Dragonfly">
+    <img src="https://img.shields.io/badge/Dragonfly_Redis-004359?style=flat-square&logo=dragonflydb&logoColor=white" alt="Dragonfly">
   </a>
   <a href="https://tailwindcss.com/">
     <img src="https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind">
@@ -56,219 +52,173 @@
   <a href="https://sentry.io/">
     <img src="https://img.shields.io/badge/Sentry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry">
   </a>
+  <a href="https://www.docker.com/">
+    <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+  </a>
 </p>
 
 <br>
 
 <p align="center">
-  <strong>Zenith</strong> is a production-grade financial intelligence platform for <strong>crypto, forex, and commodities</strong> markets — featuring real-time data streaming, TradingView-quality charts, portfolio analytics, and a premium dark-themed UI.
+  <strong>Zenith</strong> is a production-grade financial intelligence platform serving <strong>cryptocurrency, forex, and commodities</strong> markets. It delivers real-time data streaming, TradingView-class charting, and comprehensive portfolio analytics through a unified, dark-themed interface.
 </p>
 
-<p align="center">
-  <em>Core focus: market analysis, technical/fundamental insights, and portfolio tracking — not trading execution.</em>
+<p align="center" style="color: #9ca3af; font-size: 0.9rem;">
+  <em>Core focus: market analysis, technical/fundamental insights, and portfolio tracking.</em>
 </p>
 
-<br>
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Design System](#design-system)
+- [API Endpoints](#api-endpoints)
+- [Development Status](#development-status)
+- [License](#license)
 
 ---
 
-## 📋 Table of Contents
+## Features
 
-- [✨ Features](#-features)
-- [🏗 Architecture](#-architecture)
-- [🛠 Tech Stack](#-tech-stack)
-- [🚀 Getting Started](#-getting-started)
-- [📁 Project Structure](#-project-structure)
-- [🎨 Design System](#-design-system)
-- [🌐 API Endpoints](#-api-endpoints)
-- [📈 Phases](#-phases)
-- [📄 License](#-license)
-
----
-
-## ✨ Features
-
-<table>
-  <tr>
-    <td width="50%">
-      <h3>📊 Real-Time Charts</h3>
-      <p>TradingView Lightweight Charts v5 — interactive, 60fps, multi-timeframe</p>
-    </td>
-    <td width="50%">
-      <h3>⚡ Live Prices</h3>
-      <p>WebSocket streaming via Bun + Dragonfly Pub/Sub (Binance data)</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>📈 Market Screening</h3>
-      <p>Crypto, Forex, Commodities, Indices, ETFs — sortable, filterable, searchable</p>
-    </td>
-    <td width="50%">
-      <h3>📰 Economic Calendar</h3>
-      <p>Macro events, earnings reports, and key market dates</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>📉 Portfolio Analytics</h3>
-      <p>KPIs, P&L tracking, Sharpe ratio, volatility metrics, asset allocation</p>
-    </td>
-    <td width="50%">
-      <h3>🔔 Smart Alerts</h3>
-      <p>Price thresholds, BullMQ queuing, Resend email delivery</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🔍 Deep Search</h3>
-      <p>⌘K command palette — instant route and asset discovery</p>
-    </td>
-    <td width="50%">
-      <h3>🔒 Enterprise Auth</h3>
-      <p>Clerk-powered — sign-in/sign-up, RBAC, session management</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🌐 Multi-Locale</h3>
-      <p>21 languages with full i18n and RTL support</p>
-    </td>
-    <td width="50%">
-      <h3>📱 Responsive</h3>
-      <p>Desktop-first with adaptive mobile layouts</p>
-    </td>
-  </tr>
-</table>
+| Area | Capability |
+|------|-----------|
+| **Real-Time Charts** | TradingView Lightweight Charts v5 — 60fps, multi-timeframe, interactive |
+| **Live Data** | WebSocket streaming via Bun + Dragonfly Pub/Sub (Binance feed) |
+| **Market Screening** | Crypto, Forex, Commodities, Indices, ETFs — sortable, filterable, searchable |
+| **Economic Calendar** | Macroeconomic events, earnings reports, key market dates |
+| **Portfolio Analytics** | KPIs, P&L tracking, Sharpe ratio, volatility metrics, asset allocation, drawdown analysis |
+| **Smart Alerts** | Price thresholds with BullMQ queuing and Resend email delivery |
+| **Command Palette** | ⌘K keyboard shortcut — instant route and asset discovery |
+| **Authentication** | Clerk-powered with RBAC, session management, sign-in/sign-up flows |
+| **Internationalization** | 21 locales with full i18n and RTL support |
+| **Responsive Design** | Desktop-first architecture with adaptive mobile layouts |
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ```
-┌───────────────────────────────────────────────────────────────┐
-│                         FRONTEND                               │
-│                     Next.js 16 · App Router                    │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐   │
-│  │  Markets  │  │ Dashboard│  │Portfolio │  │  Pricing/Auth │   │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └──────┬───────┘   │
-│       │             │             │               │           │
-│  ┌────┴─────────────┴─────────────┴───────────────┴───────┐    │
-│  │            SocketContext (WebSocket Client)              │    │
-│  └──────────────────────────┬──────────────────────────────┘    │
-└─────────────────────────────┼──────────────────────────────────┘
-                              │ ws://localhost:3001/ws
-┌─────────────────────────────┼──────────────────────────────────┐
-│                     WS SERVER (Bun · Port 3001)                  │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │  Binance WebSocket → Dragonfly Pub/Sub                   │   │
-│  │  ⤵ REST fallback polling (2s interval) on disconnection  │   │
-│  └──────────────────────────────────────────────────────────┘   │
+┌──────────────────────────────────────────────────────────────┐
+│                     FRONTEND LAYER                             │
+│                    Next.js 16 · App Router                     │
+│                                                                │
+│   Markets · Dashboard · Portfolio · Pricing · Auth · News     │
+│          └────────── SocketContext (WS client) ──────────┘     │
+└──────────────────────────────┬─────────────────────────────────┘
+                               │ ws://localhost:3001/ws
+┌──────────────────────────────┼─────────────────────────────────┐
+│                    WEBSOCKET SERVER (Bun · Port 3001)            │
+│                                                                │
+│   Binance WebSocket Streams → Dragonfly Pub/Sub                 │
+│   REST fallback polling (2s) on disconnection                   │
 └─────────────────────────────────────────────────────────────────┘
 
-┌───────────────────────────────────────────────────────────────┐
-│                        DATA LAYER                              │
-│                                                               │
-│   ┌─────────────────┐  ┌──────────────┐  ┌────────────────┐   │
-│   │     Turso       │  │   QuestDB    │  │   Dragonfly    │   │
-│   │   (Edge SQLite) │  │ (Time-series)│  │  (Redis Cache)  │   │
-│   │   Users, Watch  │  │   OHLCV ·    │  │  Pub/Sub ·      │   │
-│   │   lists, Alerts │  │   Trades     │  │  Rate Limiting  │   │
-│   └────────┬────────┘  └──────┬───────┘  └───────┬────────┘   │
-│            │                  │                   │            │
-│   ┌────────┴──────────────────┴───────────────────┴────────┐   │
-│   │              Background Jobs (BullMQ)                   │   │
-│   │   ┌────────────┐  ┌────────┐  ┌───────────┐            │   │
-│   │   │ Indicators │  │ Alerts │  │   Emails  │            │   │
-│   │   └────────────┘  └────────┘  └───────────┘            │   │
-│   └────────────────────────────────────────────────────────┘   │
-│                                                               │
-│   ┌──────────────┐  ┌──────────────┐  ┌────────────────┐      │
-│   │  Cloudflare  │  │    Resend    │  │    Sentry      │      │
-│   │    R2 (S3)   │  │  (Email)     │  │  (Monitoring)   │      │
-│   └──────────────┘  └──────────────┘  └────────────────┘      │
-│                                                               │
-└───────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                      DATA LAYER                               │
+│                                                                │
+│   ┌─────────────┐   ┌──────────────┐   ┌────────────────┐     │
+│   │   Turso     │   │   QuestDB    │   │   Dragonfly    │     │
+│   │ (Edge SQL)  │   │ (Time-series)│   │  (Redis cache)  │     │
+│   │ Identity,   │   │ OHLCV,       │   │  Pub/Sub,       │     │
+│   │ Portfolios, │   │ Trades       │   │  Rate Limiting  │     │
+│   │ Watchlists  │   │              │   │                 │     │
+│   └──────┬──────┘   └──────┬───────┘   └────────┬───────┘     │
+│          │                 │                    │              │
+│   ┌──────┴─────────────────┴────────────────────┴──────────┐  │
+│   │              BACKGROUND JOBS (BullMQ)                   │  │
+│   │   ┌──────────┐  ┌────────┐  ┌───────────────┐          │  │
+│   │   │Indicators│  │ Alerts │  │   Emails      │          │  │
+│   │   └──────────┘  └────────┘  └───────────────┘          │  │
+│   └────────────────────────────────────────────────────────┘  │
+│                                                                │
+│   ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐    │
+│   │Cloudflare R2 │  │   Resend     │  │    Sentry       │    │
+│   │  (S3 Object) │  │  (Email)     │  │  (Monitoring)   │    │
+│   └──────────────┘  └──────────────┘  └─────────────────┘    │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
-### 🎨 Frontend
+### Frontend
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
-| Framework | [Next.js 16](https://nextjs.org/) (App Router) | React framework with Turbopack HMR |
+| Framework | [Next.js 16](https://nextjs.org/) (App Router) | React framework, Turbopack HMR |
 | Styling | [Tailwind CSS 4](https://tailwindcss.com/) | Utility-first CSS framework |
 | Animation | [Motion](https://motion.dev/) | GPU-accelerated animations |
-| Charts | [TradingView LW](https://www.tradingview.com/lightweight-charts/) v5 | Interactive financial charts |
-| Auth | [Clerk](https://clerk.com/) | Authentication & user management |
-| i18n | [next-intl](https://next-intl.dev/) | Internationalization (21 locales) |
+| Charts | [TradingView Lightweight Charts](https://www.tradingview.com/lightweight-charts/) v5 | Interactive financial charting |
+| Auth | [Clerk](https://clerk.com/) | Authentication, RBAC, session management |
+| i18n | [next-intl](https://next-intl.dev/) | 21-locale internationalization |
 | Search | [cmdk](https://cmdk.paco.me/) | ⌘K command palette |
 
-### 🖥 Backend
+### Backend & Infrastructure
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
 | Runtime | [Bun](https://bun.sh/) 1.2 | JavaScript runtime & package manager |
-| WebSocket | Bun native (`Bun.serve`) | Real-time data streaming |
-| Cache/Pub-Sub | [Dragonfly](https://www.dragonflydb.io/) | Redis-compatible, multi-threaded |
-| Time-Series | [QuestDB](https://questdb.io/) | OHLCV & trades storage |
-| Database | [Turso](https://turso.tech/) / SQLite | Edge SQLite (users, portfolios) |
-| ORM | [Drizzle](https://orm.drizzle.team/) | Type-safe database queries |
-| Queues | [BullMQ](https://bullmq.io/) | Job queues (indicators, alerts, email) |
-| Email | [Resend](https://resend.com/) | Transactional email delivery |
-| Storage | [Cloudflare R2](https://r2.cloudflare.com/) | S3-compatible object storage |
-| Monitoring | [Sentry](https://sentry.io/) | Error tracking & performance |
+| WebSocket | Bun native (`Bun.serve`) | Real-time streaming |
+| Message Broker | [Dragonfly](https://www.dragonflydb.io/) | Redis-compatible Pub/Sub, cache, rate limiting |
+| Time-Series DB | [QuestDB](https://questdb.io/) | OHLCV, trade storage |
+| Primary DB | [Turso](https://turso.tech/) | Edge SQLite (identity, portfolios, watchlists) |
+| ORM | [Drizzle](https://orm.drizzle.team/) | Type-safe queries |
+| Job Queues | [BullMQ](https://bullmq.io/) | Indicators, alerts, email processing |
+| Email | [Resend](https://resend.com/) | Transactional email (welcome, alerts, digests) |
+| Object Storage | [Cloudflare R2](https://r2.cloudflare.com/) | S3-compatible asset storage |
+| Monitoring | [Sentry](https://sentry.io/) | Error tracking, performance monitoring |
 | Secrets | [Doppler](https://doppler.com/) | Secrets management |
 | Containers | [Docker](https://docker.com/) | Dragonfly + QuestDB orchestration |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - [Bun](https://bun.sh/) 1.2+
-- [Docker](https://docker.com/) (for Dragonfly + QuestDB)
+- [Docker](https://docker.com/)
 - [Git](https://git-scm.com/)
 
-### Quick Start
+### Installation
 
 ```bash
-# 1. Clone the repository
+# Clone repository
 git clone https://github.com/zyneww/Zenith.git
 cd Zenith
 
-# 2. Install dependencies
+# Install dependencies
 bun install
 
-# 3. Start infrastructure (Dragonfly + QuestDB)
+# Start infrastructure (Dragonfly + QuestDB via Docker)
 docker compose -f infra/docker-compose.dev.yml up -d
 
-# 4. Configure environment
+# Configure environment
 cp apps/web/.env.example apps/web/.env.local
 
-# 5. Init database
+# Initialize database schema
 cd apps/web && bun run db:push
 
-# 6. Start development servers
+# Start development servers
 bun run dev
 ```
 
-The app will be available at **http://localhost:3000** (WebSocket server on port 3001).
+The application will be available at **http://localhost:3000** (WebSocket server on port 3001).
 
 ### Environment Variables
-
-Create `.env.local` in `apps/web/`:
 
 ```env
 # Clerk (Authentication)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
 CLERK_SECRET_KEY=sk_...
 
-# Turso (Database)
+# Turso (Edge SQLite)
 TURSO_URL=file:./zenith.db
 TURSO_AUTH_TOKEN=
 
@@ -297,133 +247,110 @@ DOPPLER_TOKEN=...
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 zenith/
 ├── apps/
 │   ├── web/                         # Next.js 16 frontend
 │   │   ├── app/
-│   │   │   ├── [locale]/            # i18n routes (fr, en-US, de, es, ...)
-│   │   │   │   ├── page.tsx         # Landing page
-│   │   │   │   ├── layout.tsx       # Root layout (generateStaticParams)
-│   │   │   │   ├── markets/         # Market screening & asset detail
-│   │   │   │   ├── dashboard/       # Portfolio dashboard
-│   │   │   │   ├── portfolio/       # Portfolio management
-│   │   │   │   ├── pricing/         # Subscription plans
-│   │   │   │   ├── news/            # Market news & calendar
-│   │   │   │   ├── tools/           # Analysis tools
-│   │   │   │   ├── help/            # Help & support
-│   │   │   │   ├── sign-in/         # Clerk sign-in
-│   │   │   │   └── sign-up/         # Clerk sign-up
-│   │   │   └── api/                 # API routes
-│   │   │       ├── ohlcv/           # OHLCV chart data
-│   │   │       ├── questdb/health/  # QuestDB health check
-│   │   │       ├── webhooks/clerk/  # User sync webhook
-│   │   │       └── test/e2e/        # E2E integration tests
-│   │   ├── components/
+│   │   │   ├── [locale]/            # i18n routes (21 locales)
+│   │   │   ├── api/                 # API routes
+│   │   │   └── ...
+│   │   ├── components/              # React components
 │   │   │   ├── landing/             # Header, Hero, Features, Footer
-│   │   │   ├── charts/              # TradingView chart wrapper
-│   │   │   ├── dashboard/           # MetricsCards, PortfolioChart
-│   │   │   ├── portfolio/           # AssetAllocation, TransactionTable
-│   │   │   └── ui/                  # DropdownMenu, MobileDrawer, Accordion
-│   │   ├── lib/
+│   │   │   ├── charts/              # TradingView chart wrappers
+│   │   │   ├── dashboard/           # KPI cards, portfolio chart
+│   │   │   ├── portfolio/           # Asset allocation, transaction table
+│   │   │   └── ui/                  # Shared UI primitives
+│   │   ├── lib/                     # Core utilities
 │   │   │   ├── db/                  # Drizzle ORM + QuestDB client
-│   │   │   ├── hooks/               # useRealtimePrice, etc.
 │   │   │   ├── realtime/            # WebSocket context
 │   │   │   ├── queue/               # BullMQ jobs & workers
 │   │   │   ├── email/               # Resend templates
-│   │   │   ├── storage/             # R2 S3 client
+│   │   │   ├── storage/             # R2 client
 │   │   │   ├── sentry/              # Error tracking
 │   │   │   ├── doppler/             # Secrets management
-│   │   │   └── rate-limit.ts        # Sliding window rate limiter
+│   │   │   └── hooks/               # React hooks
 │   │   ├── messages/                # 21 locale JSON files
-│   │   └── public/                  # Static assets (logos, favicon)
+│   │   └── public/                  # Static assets
 │   ├── ws-server/                   # Bun WebSocket server
 │   │   └── src/
-│   │       ├── index.ts             # Bun.serve entry point
-│   │       ├── binance.ts           # Binance WS + REST fallback
+│   │       ├── index.ts             # WebSocket entry point
+│   │       ├── binance.ts           # Binance consumer
 │   │       └── dragonfly.ts         # Dragonfly client
-│   └── config/                      # Shared TypeScript config
+│   └── config/                      # Shared TypeScript configuration
 ├── infra/
 │   ├── docker-compose.dev.yml       # Dragonfly + QuestDB
-│   └── questdb/                     # Time-series schema (init.sql)
+│   └── questdb/                     # Time-series schema
 ├── turbo.json                       # Turborepo pipeline
-├── package.json                     # Workspace root
-└── .gitignore
+└── package.json                     # Workspace root
 ```
 
 ---
 
-## 🎨 Design System
+## Design System
 
-Zenith follows a deliberate dark design language:
+### Core Palette
 
-```css
-/* Core Palette */
---bg-primary:    #0b0e14;   /* Deep space black */
---bg-secondary:  #131722;   /* Card backgrounds */
---accent-cyan:   #00e5ff;   /* Primary accent */
---accent-purple: #7b3fe4;   /* CTAs & premium elements */
---text-primary:  #ffffff;   /* Headings */
---text-secondary:#9ca3af;   /* Body text */
-
-/* Typography */
-font-family: 'Inter', system-ui, -apple-system, sans-serif;
-
-/* Effects */
-.glow-cyan {   box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); }
-.glow-purple { box-shadow: 0 0 20px rgba(123, 63, 228, 0.3);  }
-```
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--bg-primary` | `#0b0e14` | Application background |
+| `--bg-secondary` | `#131722` | Card surfaces, dropdowns |
+| `--accent-cyan` | `#00e5ff` | Primary accent, interactive elements |
+| `--accent-purple` | `#7b3fe4` | CTAs, premium indicators |
+| `--text-primary` | `#ffffff` | Headings, primary content |
+| `--text-secondary` | `#9ca3af` | Body text, metadata |
 
 ### Principles
 
-| Principle | Description |
-|-----------|-------------|
-| 🌙 **Dark-first** | Dark mode native — no light mode toggle |
-| 🖥 **Desktop-first** | Responsive, but optimized for large screens |
-| 💵 **USD native** | All prices displayed in USD |
-| 🎬 **Motion-first** | Hardware-accelerated animations via Motion.dev |
-| ♿ **Accessible** | WCAG-compliant contrast, ARIA labels |
-| 📐 **Consistent** | Single source of truth for spacing, color, typography |
+- **Dark-first** — Native dark mode, no light mode toggle
+- **Desktop-first** — Optimized for large screens with adaptive mobile views
+- **USD native** — All pricing displayed in USD
+- **Motion-first** — Hardware-accelerated animations via Motion.dev
+- **WCAG-compliant** — Accessible contrast ratios and ARIA labeling
 
 ---
 
-## 🌐 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/api/ohlcv` | OHLCV chart data (QuestDB → mock fallback) |
-| `GET` | `/api/questdb/health` | QuestDB connection status |
+| `GET` | `/api/questdb/health` | QuestDB connection health |
 | `POST` | `/api/webhooks/clerk` | User sync (Svix-verified) |
-| `GET` | `/api/test/e2e` | Full-stack integration tests |
+| `GET` | `/api/test/e2e` | Integration test suite |
 
 ---
 
-## 📈 Phases
+## Development Status
 
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 1 | Landing Page & Design System | ✅ Complete |
-| 2 | Real-Time Data Infrastructure | ✅ Complete |
-| 3 | Markets & Asset Detail (TradingView charts) | ✅ Complete |
-| 4 | Dashboard, Portfolio & Pricing | ✅ Complete |
-| 5 | Auth, Payments & Production Infrastructure | ✅ Complete |
-| 6 | Stripe Subscription Integration | 📅 Planned |
-| 7 | Deployment (Vercel + Railway/Fly.io) | 📅 Planned |
-| 8 | Mobile Responsiveness Optimization | 📅 Planned |
+| Phase | Scope | Status |
+|-------|-------|--------|
+| 1 | Landing Page & Design System | Complete |
+| 2 | Real-Time Data Infrastructure | Complete |
+| 3 | Markets & Asset Detail | Complete |
+| 4 | Dashboard, Portfolio & Pricing | Complete |
+| 5 | Auth, Payments & Production Infrastructure | Complete |
+| 6 | Stripe Subscription Integration | Planned |
+| 7 | Deployment (Vercel + Railway/Fly.io) | Planned |
+| 8 | Mobile Responsiveness Optimization | Planned |
 
 ---
 
-<p align="center">
-  <sub>Built with <strong>Next.js</strong>, <strong>Bun</strong>, and <strong>Dragonfly</strong></sub>
-  <br>
-  <sub>© 2025 <strong style="color:#00e5ff;">Zenith</strong> — Financial Intelligence Platform</sub>
-  <br>
-  <sub>
-    <a href="https://github.com/zyneww/Zenith">GitHub</a> ·
-    <a href="https://zenith.xyz">Website</a> ·
-    <a href="https://github.com/zyneww/Zenith/issues">Issues</a> ·
-    <a href="https://github.com/zyneww/Zenith/discussions">Discussions</a>
-  </sub>
+<div align="center">
+
+[![Star History](https://api.star-history.com/svg?repos=zyneww/Zenith&type=Date)](https://star-history.com/#zyneww/Zenith&Date)
+
+</div>
+
+---
+
+<p align="center" style="color: #9ca3af; font-size: 0.875rem;">
+  Built with Next.js, Bun, and Dragonfly<br>
+  © 2025 <span style="color: #00e5ff;">Zenith</span> — Financial Intelligence Platform<br>
+  <a href="https://github.com/zyneww/Zenith">GitHub</a> ·
+  <a href="https://zenith.xyz">Website</a> ·
+  <a href="https://github.com/zyneww/Zenith/issues">Issues</a> ·
+  <a href="https://github.com/zyneww/Zenith/discussions">Discussions</a>
 </p>
