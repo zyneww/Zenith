@@ -1,21 +1,20 @@
 {
-  "name": "Zenith",
+  "name": "Zenith — Votre sommet, vos marchés, votre clarté",
   "short_name": "Zenith",
-  "description": "Plateforme d'intelligence financière multi-actifs",
+  "description": "Plateforme d'intelligence financière multi-actifs. Crypto, forex, commodities. Temps réel, charts pros, alertes intelligentes.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "natural",
   "background_color": "#0b0e14",
   "theme_color": "#0b0e14",
+  "categories": ["finance", "cryptocurrency", "business"],
+  "lang": "fr",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
-    {
-      "src": "/logo1.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/logo1.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }

@@ -80,7 +80,7 @@ export default function CommandPalette() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[20vh] bg-black/50 backdrop-blur-sm" onClick={close}>
+    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] md:pt-[20vh] bg-black/50 backdrop-blur-sm" onClick={close}>
       <div className="w-full max-w-2xl bg-dark-card border border-dark-border rounded-xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
         <Command className="[&_[cmdk-root]]:flex [&_[cmdk-root]]:flex-col [&_[cmdk-root]]:h-full">
           <div className="flex items-center border-b border-dark-border px-4 py-3">
@@ -95,7 +95,7 @@ export default function CommandPalette() {
             </kbd>
           </div>
           
-          <Command.List className="max-h-[400px] overflow-y-auto p-2">
+          <Command.List className="max-h-[60vh] md:max-h-[400px] overflow-y-auto p-2">
             <Command.Empty className="py-8 text-center text-gray-500 text-sm">
               Aucun résultat trouvé.
             </Command.Empty>
@@ -137,7 +137,7 @@ export default function CommandPalette() {
                     {item.icon}
                     <span>{item.name}</span>
                   </div>
-                  <ArrowRight className="w-3 h-3 text-gray-600" />
+                  <ArrowRight className="w-3 h-3 text-gray-400" />
                 </Command.Item>
               ))}
             </Command.Group>

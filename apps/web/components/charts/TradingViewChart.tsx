@@ -75,16 +75,17 @@ export default function TradingViewChart({ data, volumeData, height = 400 }: Cha
       volumeSeriesRef.current = volumeSeries;
     }
 
-    const handleResize = () => {
-      if (chartContainerRef.current) {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        chart.applyOptions({ width: entry.contentRect.width });
       }
-    };
-
-    window.addEventListener("resize", handleResize);
+    });
+    if (chartContainerRef.current) {
+      resizeObserver.observe(chartContainerRef.current);
+    }
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       chart.remove();
     };
   }, [data, volumeData, height]);

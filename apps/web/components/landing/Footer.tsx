@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import LocaleCurrencySwitcher from "@/components/ui/LocaleCurrencySwitcher";
@@ -65,7 +66,7 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="relative border-t border-white/5 bg-[#0a0d13] pt-20 pb-8">
+    <footer className="relative border-t border-white/5 bg-[#0a0d13] pt-20 pb-8 overflow-hidden">
       {/* Subtle top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-cyan/40 to-transparent" />
 
@@ -78,11 +79,12 @@ export default function Footer() {
           {/* Brand column */}
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="inline-block mb-5 group">
-              <img
+              <Image
                 src="/logo2.svg"
                 alt="Zenith"
                 width={140}
                 height={40}
+                loading="lazy"
                 className="h-28 w-auto max-w-full transition-transform group-hover:scale-105"
               />
             </Link>
@@ -91,11 +93,11 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-3 mb-6">
               <div className="flex items-center gap-3 text-xs text-gray-500">
-                <span className="text-gray-600 uppercase tracking-wider text-[10px]">{t("language")}</span>
+                <span className="text-gray-400 uppercase tracking-wider text-[10px]">{t("language")}</span>
                 <LocaleCurrencySwitcher mode="language" position="up" />
               </div>
               <div className="flex items-center gap-3 text-xs text-gray-500">
-                <span className="text-gray-600 uppercase tracking-wider text-[10px]">{t("currency")}</span>
+                <span className="text-gray-400 uppercase tracking-wider text-[10px]">{t("currency")}</span>
                 <LocaleCurrencySwitcher mode="currency" position="up" />
               </div>
             </div>
@@ -161,7 +163,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/5 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
             <p>{t("copyright")}</p>
             <p className="text-gray-500 italic">{t("dataAttribution")}</p>
           </div>

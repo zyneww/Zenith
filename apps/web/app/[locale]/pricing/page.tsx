@@ -94,7 +94,7 @@ return (
           <p className="text-sm text-gray-500 mb-4">
             Paiement sécurisé par Stripe. Annulez à tout moment.
           </p>
-          <div className="flex justify-center items-center gap-6 text-gray-600">
+          <div className="flex justify-center items-center gap-6 text-gray-400">
             <span className="flex items-center gap-2 text-sm">
               <Check className="w-4 h-4 text-green-500" />
               SSL 256-bit

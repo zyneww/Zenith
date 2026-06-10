@@ -61,7 +61,7 @@ export default function ComparisonTable({ plans }: ComparisonTableProps) {
                   feature.free ? (
                     <Check className="w-4 h-4 text-green-500 mx-auto" />
                   ) : (
-                    <X className="w-4 h-4 text-gray-600 mx-auto" />
+                    <X className="w-4 h-4 text-gray-400 mx-auto" />
                   )
                 ) : (
                   <span className="text-gray-400">{feature.free}</span>
@@ -72,7 +72,7 @@ export default function ComparisonTable({ plans }: ComparisonTableProps) {
                   feature.pro ? (
                     <Check className="w-4 h-4 text-green-500 mx-auto" />
                   ) : (
-                    <X className="w-4 h-4 text-gray-600 mx-auto" />
+                    <X className="w-4 h-4 text-gray-400 mx-auto" />
                   )
                 ) : (
                   <span className="text-gray-400">{feature.pro}</span>

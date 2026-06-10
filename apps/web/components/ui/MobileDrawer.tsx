@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import {
@@ -41,16 +41,44 @@ interface MobileDrawerProps {
 export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawerProps) {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      onClose();
+      return;
+    }
+    if (e.key === "Tab" && drawerRef.current) {
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, [onClose]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.addEventListener("keydown", handleKeyDown);
+      setTimeout(() => drawerRef.current?.querySelector<HTMLElement>("button")?.focus(), 100);
     } else {
       document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, handleKeyDown]);
 
   return (
     <AnimatePresence>
@@ -64,15 +92,20 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             transition={{ duration: 0.2 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
             onClick={onClose}
+            aria-hidden="true"
           />
 
           {/* Drawer */}
           <motion.div
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full w-[320px] max-w-[85vw] bg-[#0b0e14] border-l border-[#1f2937] z-50 overflow-y-auto"
+            className="fixed top-0 right-0 h-full w-[320px] max-w-[85vw] bg-[#0b0e14] border-l border-[#1f2937] z-50 overflow-y-auto overscroll-contain"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-[#1f2937]">
@@ -177,7 +210,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                                 >
                                   {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
                                   <span>{item.label}</span>
-                                  <ChevronRight className="w-3 h-3 ml-auto text-gray-600" />
+                                  <ChevronRight className="w-3 h-3 ml-auto text-gray-400" />
                                 </Link>
                               )}
                             </div>
@@ -196,7 +229,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             </div>
 
             {/* Bottom actions */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#0b0e14] border-t border-[#1f2937]">
+            <div className="sticky bottom-0 left-0 right-0 p-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-[#0b0e14] border-t border-[#1f2937]">
               <SignUpButton mode="modal" forceRedirectUrl="/pricing">
                 <button
                   onClick={onClose}

@@ -19,3 +19,7 @@ ZENITH_ULTIMATE_PROMPT.md
 test.html
 playwright-report/
 .turbo/cache/
+
+# Serwist / PWA
+public/sw*
+public/serwist*

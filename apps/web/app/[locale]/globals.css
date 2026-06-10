@@ -26,7 +26,7 @@
   --color-down: #ef4444;
   --color-warn: #f59e0b;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   --shadow-glow-purple: 0 0 10px rgba(123, 63, 228, 0.3);
   --shadow-glow-cyan: 0 0 15px rgba(0, 229, 255, 0.2);
@@ -35,6 +35,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -43,12 +44,15 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
   }
 
   @supports (padding: max(0px)) {
     body {
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
   }
 
@@ -68,6 +72,7 @@
   }
 
   .text-gradient-cyan {
+    color: #00e5ff;
     background: linear-gradient(to right, #00e5ff, #3b82f6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

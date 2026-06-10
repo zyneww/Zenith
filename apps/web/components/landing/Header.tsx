@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Menu,
   BarChart3,
@@ -126,15 +127,16 @@ export default function Header() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="sticky top-4 z-50 bg-transparent border-b border-transparent"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[80px] px-28">
+      <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[80px] px-4 sm:px-8 lg:px-16 xl:px-28">
         {/* ─── Logo ─── */}
         <Link href="/" className="flex items-center self-center group flex-shrink-0 justify-self-center">
-          <img
+          <Image
             src="/logo2.svg"
             alt="Zenith"
             width={72}
             height={72}
-            className="h-[72px] w-auto transition-transform duration-300 group-hover:scale-110"
+            priority
+            className="transition-all duration-300 motion-safe:group-hover:scale-110 w-auto h-10 sm:h-12"
           />
         </Link>
 

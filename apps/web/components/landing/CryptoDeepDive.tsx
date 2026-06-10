@@ -235,7 +235,7 @@ export default function CryptoDeepDive() {
                         <path d={asset.sparklinePath} fill="none" stroke={isPositive ? "#22c55e" : "#ef4444"} strokeWidth="1.5" />
                       </svg>
                     </td>
-                    <td className="py-4 px-2 text-right text-gray-600 hover:text-yellow-500">
+                    <td className="py-4 px-2 text-right text-gray-400 hover:text-yellow-500">
                       <Star className="w-4 h-4 ml-auto" />
                     </td>
                   </motion.tr>

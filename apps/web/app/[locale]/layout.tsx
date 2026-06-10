@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,14 +10,19 @@ import { CommandPaletteProvider } from "@/lib/context/CommandPaletteContext";
 import CommandPalette from "@/components/command-palette/CommandPalette";
 import { CurrencyProvider } from "@/lib/context/CurrencyContext";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SerwistProvider } from "@serwist/turbopack/react";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0b0e14",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,6 +42,15 @@ export async function generateMetadata({
     },
     description: t("description"),
     metadataBase: new URL("https://zenith.xyz"),
+    applicationName: "Zenith",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "Zenith",
+    },
+    formatDetection: {
+      telephone: false,
+    },
     openGraph: {
       type: "website",
       locale: t("ogLocale"),
@@ -96,8 +110,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} className={inter.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-[100dvh] bg-[#0b0e14] text-white">
+      <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-[#0b0e14] text-white">
         <ClerkProvider>
+        <SerwistProvider swUrl="/serwist/sw.js">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-purple focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
@@ -116,6 +131,7 @@ export default async function LocaleLayout({
             </CurrencyProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        </SerwistProvider>
         </ClerkProvider>
       </body>
     </html>

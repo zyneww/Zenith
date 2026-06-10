@@ -93,7 +93,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
       
       {/* Stats bar */}
       <div className="border-b border-[#1f2937] bg-[#0d1017]">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex gap-8 text-sm">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <div>
             <span className="text-gray-500 block text-xs">Market Cap</span>
             <span className="font-medium">{asset.marketCap}</span>
@@ -115,20 +115,20 @@ export default async function AssetPage({ params }: AssetPageProps) {
       
       {/* Main content */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6">
           {/* Chart */}
-          <div className="lg:col-span-3">
+          <div className="md:col-span-3">
             <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-bold flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-brand-cyan" />
                   Chart
                 </h2>
-                <div className="flex gap-2">
+                <div className="flex gap-1.5 flex-wrap justify-end">
                   {["1m", "5m", "15m", "1h", "4h", "1d", "1w"].map((tf) => (
                     <button
                       key={tf}
-                      className={`px-3 py-1 rounded text-xs font-medium transition ${
+                      className={`px-2.5 py-1 rounded text-xs font-medium transition ${
                         tf === "1h"
                           ? "bg-brand-cyan/20 text-brand-cyan border border-brand-cyan"
                           : "border border-gray-700 text-gray-400 hover:bg-gray-800"

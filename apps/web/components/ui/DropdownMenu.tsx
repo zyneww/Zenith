@@ -107,6 +107,33 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  const getFocusableItems = (): HTMLElement[] => {
+    if (!dropdownRef.current) return [];
+    return Array.from(
+      dropdownRef.current.querySelectorAll<HTMLElement>(
+        'a:not([tabindex="-1"]), button:not([tabindex="-1"])'
+      )
+    );
+  };
+
+  const open = () => {
+    setIsOpen(true);
+    setActiveIndex(0);
+    requestAnimationFrame(() => {
+      const items = getFocusableItems();
+      items[0]?.focus();
+    });
+  };
+
+  const close = () => {
+    setIsOpen(false);
+    setActiveIndex(-1);
+    triggerRef.current?.focus();
+  };
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -118,6 +145,56 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
       setIsOpen(false);
     }, 150);
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+      if (e.key === "Enter" || e.key === " ") {
+        if (isOpen) {
+          e.preventDefault();
+          const items = getFocusableItems();
+          items[0]?.click();
+          return;
+        }
+      }
+      e.preventDefault();
+      if (!isOpen) open();
+      else {
+        const items = getFocusableItems();
+        const next = (activeIndex + 1) % items.length;
+        setActiveIndex(next);
+        items[next]?.focus();
+      }
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const items = getFocusableItems();
+      const prev = (activeIndex - 1 + items.length) % items.length;
+      setActiveIndex(prev);
+      items[prev]?.focus();
+    }
+    if (e.key === "Escape") {
+      close();
+    }
+    if (e.key === "Tab") {
+      if (isOpen) {
+        close();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        close();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     return () => {
@@ -140,22 +217,36 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
   // Order groups deterministically
   const groupKeys = Object.keys(groups);
 
+  const focusableItems: DropdownItem[] = [];
+  if (featuredItem && featuredItem.href && !featuredItem.disabled) {
+    focusableItems.push(featuredItem);
+  }
+  normalItems.forEach((item) => {
+    if (item.href && !item.disabled) {
+      focusableItems.push(item);
+    }
+  });
+
   return (
     <div
       ref={containerRef}
       className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onKeyDown={handleKeyDown}
     >
       {/* Trigger */}
       <button
+        ref={triggerRef}
         className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
           isOpen
             ? "text-white bg-white/5"
             : "text-gray-400 hover:text-white hover:bg-white/5"
         }`}
         aria-expanded={isOpen}
+        aria-haspopup="true"
         type="button"
+        onClick={() => (isOpen ? close() : open())}
       >
         {trigger}
         <ChevronDown
@@ -169,6 +260,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={dropdownRef}
             initial={{ opacity: 0, y: 8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
@@ -176,6 +268,8 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
             className="absolute top-full left-0 mt-2 w-[340px] bg-[#131722] border border-[#1f2937]/60 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            role="menu"
+            aria-label={`${trigger} menu`}
           >
             {/* Featured Item */}
             {featuredItem && (
@@ -245,7 +339,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
                               <NormalIcon name={item.iconName} />
                             )}
                             <span>{item.label}</span>
-                            <span className="ml-auto text-[10px] text-gray-600 bg-gray-800/50 px-1.5 py-0.5 rounded">
+                            <span className="ml-auto text-[10px] text-gray-400 bg-gray-800/50 px-1.5 py-0.5 rounded">
                               bientôt
                             </span>
                           </div>

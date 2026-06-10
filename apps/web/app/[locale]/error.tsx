@@ -28,7 +28,7 @@ export default function GlobalError({
           Nous avons rencontré un problème inattendu. Veuillez réessayer ou recharger la page.
         </p>
         {error.digest && (
-          <p className="text-xs text-gray-600 mb-6 font-mono">
+          <p className="text-xs text-gray-400 mb-6 font-mono">
             Error ID: {error.digest}
           </p>
         )}

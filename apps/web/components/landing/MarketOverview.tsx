@@ -151,7 +151,7 @@ function MarketCard({ title, slug, items }: { title: string; slug: string; items
 export default function MarketOverview() {
   const t = useTranslations("marketOverview");
   return (
-    <section className="py-16 px-4 relative">
+    <section className="py-16 px-4 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-cyan/5 blur-[120px] rounded-full pointer-events-none" />
 

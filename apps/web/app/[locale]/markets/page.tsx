@@ -150,6 +150,7 @@ const [activeCategory, setActiveCategory] = useState("All");
               <input
                 type="text"
                 placeholder="Rechercher un actif..."
+                aria-label="Rechercher un actif"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#131722] border border-[#1f2937] rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan transition"
@@ -257,7 +258,7 @@ const [activeCategory, setActiveCategory] = useState("All");
                         <path d={asset.sparklinePath} fill="none" stroke={isPositive ? "#22c55e" : "#ef4444"} strokeWidth="1.5" />
                       </svg>
                     </td>
-                    <td className="py-4 px-2 text-right text-gray-600 hover:text-yellow-500">
+                    <td className="py-4 px-2 text-right text-gray-400 hover:text-yellow-500">
                       <Star className="w-4 h-4 ml-auto" />
                     </td>
                   </motion.tr>

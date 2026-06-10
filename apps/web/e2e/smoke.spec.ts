@@ -17,6 +17,6 @@ test.describe("smoke", () => {
   test("sign-in page renders", async ({ page }) => {
     const response = await page.goto("/fr/sign-in")
     expect(response?.ok()).toBeTruthy()
-    await expect(page.locator("html")).toContainText("Zenith")
+    await expect(page).toHaveTitle(/Zenith/)
   })
 })

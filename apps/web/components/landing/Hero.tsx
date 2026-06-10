@@ -81,6 +81,7 @@ export default function Hero() {
         muted
         loop
         playsInline
+        poster="/logo2.svg"
         className={`absolute -top-[80px] left-0 right-0 bottom-0 w-full h-[calc(100%+80px)] object-cover transition-opacity duration-1000 ${
           videoLoaded ? "opacity-100" : "opacity-0"
         }`}
@@ -92,6 +93,14 @@ export default function Hero() {
           type="video/mp4"
         />
       </video>
+
+      {/* Static fallback when video fails */}
+      {videoError && (
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#07090c] via-[#0b0e14] to-[#0b0e14]"
+          aria-hidden="true"
+        />
+      )}
 
       {/* Subtle vignette — keeps edges dark for text readability */}
       <div

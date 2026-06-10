@@ -112,7 +112,7 @@ export default function QuickTools() {
                     className="flex items-center justify-between"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-gray-600 text-sm w-4">
+                      <span className="text-gray-400 text-sm w-4">
                         {item.rank}
                       </span>
                       <div
@@ -159,10 +159,12 @@ export default function QuickTools() {
                   </div>
                   <input
                     type="text"
+                    inputMode="decimal"
                     defaultValue="1"
+                    aria-label={t("converterFrom")}
                     className="bg-transparent text-white font-medium w-full focus:outline-none px-2"
                   />
-                  <select className="bg-transparent text-sm text-gray-300 focus:outline-none border-l border-gray-700 pl-2">
+                  <select aria-label={t("converterFrom") + " devise"} className="bg-transparent text-sm text-gray-300 focus:outline-none border-l border-gray-700 pl-2">
                     <option>BTC</option>
                     <option>ETH</option>
                   </select>
@@ -178,11 +180,13 @@ export default function QuickTools() {
                   </div>
                   <input
                     type="text"
+                    inputMode="decimal"
                     defaultValue="77,834.5"
                     readOnly
+                    aria-label={t("converterTo")}
                     className="bg-transparent text-white font-medium w-full focus:outline-none px-2"
                   />
-                  <select className="bg-transparent text-sm text-gray-300 focus:outline-none border-l border-gray-700 pl-2">
+                  <select aria-label={t("converterTo") + " devise"} className="bg-transparent text-sm text-gray-300 focus:outline-none border-l border-gray-700 pl-2">
                     <option>USD</option>
                     <option>EUR</option>
                   </select>

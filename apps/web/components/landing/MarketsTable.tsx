@@ -253,7 +253,7 @@ export default function MarketsTable() {
                       />
                     </svg>
                   </td>
-                  <td className="py-4 px-1 text-right text-gray-600 hover:text-yellow-500">
+                  <td className="py-4 px-1 text-right text-gray-400 hover:text-yellow-500">
                     <Star className="w-4 h-4 ml-auto" />
                   </td>
                 </motion.tr>
