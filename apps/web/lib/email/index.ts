@@ -1,4 +1,5 @@
 // apps/web/lib/email/index.ts
+import { logger } from "@/lib/logger";
 import { Resend } from 'resend';
 
 // Lazy initialization to avoid build-time errors when API key is missing
@@ -529,7 +530,7 @@ export async function sendEmail({
 
   // If RESEND_API_KEY is missing, log and return mock success
   if (!process.env.RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY not configured, email not sent:', { to, subject });
+    logger.warn('RESEND_API_KEY not configured, email not sent:', { to, subject });
     return { success: true, id: 'mock-email-id' };
   }
 
@@ -544,7 +545,7 @@ export async function sendEmail({
 
     return { success: true, id: result.data?.id };
   } catch (error) {
-    console.error('Failed to send email:', error);
+    logger.error('Failed to send email:', error);
     throw error;
   }
 }

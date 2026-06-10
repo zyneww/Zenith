@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 import { getOHLCV } from "@/lib/db/questdb";
 import { createRateLimitMiddleware, rateLimits } from "@/lib/rate-limit";
 
@@ -71,7 +72,7 @@ export async function GET(request: Request) {
       source: "questdb",
     });
   } catch (error) {
-    console.error("QuestDB error:", error);
+    logger.error("QuestDB error:", error);
     // Fallback to mock data on error
     const mockData = generateOHLCV(symbol, timeframe, limit);
     return NextResponse.json({

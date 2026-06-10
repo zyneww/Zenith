@@ -1,4 +1,5 @@
 // apps/web/app/api/test/e2e/route.ts
+import { logger } from "@/lib/logger";
 // End-to-end test endpoint for validating the full flow
 // This is only available in development mode
 
@@ -23,7 +24,7 @@ export async function GET() {
 
   try {
     // Test 1: Turso database connection
-    console.log('🧪 Test 1: Turso database');
+    logger.log('🧪 Test 1: Turso database');
     const allUsers = await db.select().from(users);
     results.tests.turso = {
       status: 'passed',
@@ -36,7 +37,7 @@ export async function GET() {
 
   try {
     // Test 2: QuestDB connection
-    console.log('🧪 Test 2: QuestDB');
+    logger.log('🧪 Test 2: QuestDB');
     const health = await questdbHealth();
     const ohlcv = await getOHLCV('BTCUSDT', '5m');
     results.tests.questdb = {
@@ -51,7 +52,7 @@ export async function GET() {
 
   try {
     // Test 3: Dragonfly / Redis connection
-    console.log('🧪 Test 3: Dragonfly (Redis)');
+    logger.log('🧪 Test 3: Dragonfly (Redis)');
     const Redis = require('ioredis');
     const redis = new Redis(process.env.DRAGONFLY_URL || 'redis://:dragonfly_dev@localhost:6379');
     const pong = await redis.ping();
@@ -68,7 +69,7 @@ export async function GET() {
 
   try {
     // Test 4: BullMQ queues
-    console.log('🧪 Test 4: BullMQ queues');
+    logger.log('🧪 Test 4: BullMQ queues');
     const testJob = await addIndicatorJob({
       symbol: 'BTCUSDT',
       timeframe: '1m',
@@ -85,7 +86,7 @@ export async function GET() {
 
   try {
     // Test 5: Email template rendering
-    console.log('🧪 Test 5: Email templates');
+    logger.log('🧪 Test 5: Email templates');
     const emailResult = await sendEmail({
       to: 'test@example.com',
       template: 'alert-triggered',
@@ -107,7 +108,7 @@ export async function GET() {
 
   try {
     // Test 6: Rate limiting
-    console.log('🧪 Test 6: Rate limiting');
+    logger.log('🧪 Test 6: Rate limiting');
     const ip = '127.0.0.1';
     const limitConfig = { maxRequests: 5, windowMs: 60_000, keyPrefix: 'test' };
     const limit1 = await rateLimit(ip, limitConfig);

@@ -1,4 +1,5 @@
 // apps/web/lib/doppler/index.ts
+import { logger } from "@/lib/logger";
 // Doppler Secrets Management - REST API wrapper
 // Centralized API key management for production deployments
 
@@ -116,15 +117,15 @@ export const doppler = new DopplerClient({
 // Helper to load secrets into environment
 export async function loadSecrets(): Promise<void> {
   if (!process.env.DOPPLER_TOKEN) {
-    console.warn('DOPPLER_TOKEN not set, skipping secrets sync');
+    logger.warn('DOPPLER_TOKEN not set, skipping secrets sync');
     return;
   }
 
   try {
     await doppler.syncToEnvironment();
-    console.log('✅ Doppler secrets synced to environment');
+    logger.log('✅ Doppler secrets synced to environment');
   } catch (error) {
-    console.error('❌ Failed to sync Doppler secrets:', error);
+    logger.error('❌ Failed to sync Doppler secrets:', error);
     throw error;
   }
 }
@@ -138,7 +139,7 @@ export async function getSecret(name: string): Promise<string | null> {
   try {
     return await doppler.getSecret(name);
   } catch (error) {
-    console.error(`Failed to get secret ${name}:`, error);
+    logger.error(`Failed to get secret ${name}:`, error);
     return process.env[name] || null;
   }
 }

@@ -1,4 +1,5 @@
 import { Webhook } from "svix"
+import { logger } from "@/lib/logger";
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 import { db } from "@/lib/db"
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
   }
 
   if (!WEBHOOK_SECRET) {
-    console.error("CLERK_WEBHOOK_SECRET not configured")
+    logger.error("CLERK_WEBHOOK_SECRET not configured")
     return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 })
   }
 
@@ -41,14 +42,14 @@ export async function POST(req: Request) {
       "svix-signature": svix_signature,
     })
   } catch (err) {
-    console.error("Webhook verification failed:", err)
+    logger.error("Webhook verification failed:", err)
     return NextResponse.json({ error: "Invalid webhook signature" }, { status: 400 })
   }
 
   const eventType = evt.type
   const userData = evt.data
 
-  console.log(`Webhook received: ${eventType} for user ${userData.id}`)
+  logger.log(`Webhook received: ${eventType} for user ${userData.id}`)
 
   try {
     switch (eventType) {
@@ -58,28 +59,28 @@ export async function POST(req: Request) {
           plan: "free",
           locale: "fr",
         }).onConflictDoNothing()
-        console.log(`✅ User created: ${userData.id}`)
+        logger.log(`✅ User created: ${userData.id}`)
         break
       }
       case "user.updated": {
         await db.update(users)
           .set({ updatedAt: new Date() })
           .where(eq(users.clerkId, userData.id))
-        console.log(`✅ User updated: ${userData.id}`)
+        logger.log(`✅ User updated: ${userData.id}`)
         break
       }
       case "user.deleted": {
         await db.delete(users).where(eq(users.clerkId, userData.id))
-        console.log(`✅ User deleted: ${userData.id}`)
+        logger.log(`✅ User deleted: ${userData.id}`)
         break
       }
       default:
-        console.log(`ℹ️ Unhandled event: ${eventType}`)
+        logger.log(`ℹ️ Unhandled event: ${eventType}`)
     }
 
     return NextResponse.json({ success: true, event: eventType }, { status: 200 })
   } catch (error) {
-    console.error("Webhook processing error:", error)
+    logger.error("Webhook processing error:", error)
     return NextResponse.json({ error: "Processing failed" }, { status: 500 })
   }
 }

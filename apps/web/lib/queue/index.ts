@@ -2,6 +2,7 @@
 import { Queue, Worker, Job } from 'bullmq';
 import Redis from 'ioredis';
 import { sendEmail } from '../email';
+import { logger } from '../logger';
 
 const redisConnection = new Redis(process.env.DRAGONFLY_URL || 'redis://:dragonfly_dev@localhost:6379', {
   maxRetriesPerRequest: null,
@@ -96,7 +97,7 @@ export const indicatorWorker = new Worker<IndicatorJobData>(
   'indicators',
   async (job: Job<IndicatorJobData>) => {
     const { symbol, timeframe, indicators } = job.data;
-    console.log(`📊 Calculating indicators for ${symbol} (${timeframe})`);
+    logger.log(`📊 Calculating indicators for ${symbol} (${timeframe})`);
     
     // TODO: Implement actual indicator calculations
     // For now, return mock results
@@ -115,7 +116,7 @@ export const alertWorker = new Worker<AlertJobData>(
   'alerts',
   async (job: Job<AlertJobData>) => {
     const { alertId, symbol, condition, targetPrice, currentPrice } = job.data;
-    console.log(`🚨 Checking alert ${alertId} for ${symbol}`);
+    logger.log(`🚨 Checking alert ${alertId} for ${symbol}`);
     
     let triggered = false;
     switch (condition) {
@@ -155,7 +156,7 @@ export const emailWorker = new Worker<EmailJobData>(
   'emails',
   async (job: Job<EmailJobData>) => {
     const { to, template, data } = job.data;
-    console.log(`📧 Sending email to ${to} (template: ${template})`);
+    logger.log(`📧 Sending email to ${to} (template: ${template})`);
     
     try {
       const result = await sendEmail({
@@ -164,10 +165,10 @@ export const emailWorker = new Worker<EmailJobData>(
         data,
       });
       
-      console.log(`✅ Email sent to ${to}: ${result.id}`);
+      logger.log(`✅ Email sent to ${to}: ${result.id}`);
       return { sent: true, to, template, id: result.id };
     } catch (error) {
-      console.error(`❌ Failed to send email to ${to}:`, error);
+      logger.error(`❌ Failed to send email to ${to}:`, error);
       throw error;
     }
   },
@@ -176,32 +177,32 @@ export const emailWorker = new Worker<EmailJobData>(
 
 // Event listeners for workers
 indicatorWorker.on('completed', (job) => {
-  console.log(`✅ Indicator job ${job.id} completed`);
+  logger.log(`✅ Indicator job ${job.id} completed`);
 });
 
 indicatorWorker.on('failed', (job, err) => {
-  console.error(`❌ Indicator job ${job?.id} failed:`, err);
+  logger.error(`❌ Indicator job ${job?.id} failed:`, err);
 });
 
 alertWorker.on('completed', (job) => {
-  console.log(`✅ Alert job ${job.id} completed`);
+  logger.log(`✅ Alert job ${job.id} completed`);
 });
 
 alertWorker.on('failed', (job, err) => {
-  console.error(`❌ Alert job ${job?.id} failed:`, err);
+  logger.error(`❌ Alert job ${job?.id} failed:`, err);
 });
 
 emailWorker.on('completed', (job) => {
-  console.log(`✅ Email job ${job.id} completed`);
+  logger.log(`✅ Email job ${job.id} completed`);
 });
 
 emailWorker.on('failed', (job, err) => {
-  console.error(`❌ Email job ${job?.id} failed:`, err);
+  logger.error(`❌ Email job ${job?.id} failed:`, err);
 });
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
-  console.log('Shutting down BullMQ workers...');
+  logger.log('Shutting down BullMQ workers...');
   await indicatorWorker.close();
   await alertWorker.close();
   await emailWorker.close();

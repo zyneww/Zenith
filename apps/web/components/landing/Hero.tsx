@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useTranslations } from 'next-intl';
@@ -38,7 +39,7 @@ export default function Hero() {
       video.play().catch(() => {});
     };
     const onError = () => {
-      console.warn("Hero video failed to load");
+      logger.warn("Hero video failed to load");
       setVideoError(true);
     };
 

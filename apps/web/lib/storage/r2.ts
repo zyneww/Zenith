@@ -1,4 +1,5 @@
 // apps/web/lib/storage/r2.ts
+import { logger } from "@/lib/logger";
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 
 // R2 uses S3-compatible API
@@ -40,7 +41,7 @@ export async function uploadFile(
       url: `https://${R2_BUCKET}.${R2_ACCOUNT_ID}.r2.cloudflarestorage.com/${key}`,
     };
   } catch (error) {
-    console.error('Failed to upload to R2:', error);
+    logger.error('Failed to upload to R2:', error);
     throw error;
   }
 }
@@ -56,7 +57,7 @@ export async function getFile(key: string) {
     const response = await r2Client.send(command);
     return response.Body;
   } catch (error) {
-    console.error('Failed to get from R2:', error);
+    logger.error('Failed to get from R2:', error);
     throw error;
   }
 }
@@ -72,7 +73,7 @@ export async function deleteFile(key: string) {
     await r2Client.send(command);
     return { success: true, key };
   } catch (error) {
-    console.error('Failed to delete from R2:', error);
+    logger.error('Failed to delete from R2:', error);
     throw error;
   }
 }
@@ -88,7 +89,7 @@ export async function listFiles(prefix?: string) {
     const response = await r2Client.send(command);
     return response.Contents || [];
   } catch (error) {
-    console.error('Failed to list from R2:', error);
+    logger.error('Failed to list from R2:', error);
     throw error;
   }
 }

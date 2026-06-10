@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
+import { logger } from "@/lib/logger";
 
 interface PriceUpdate {
   symbol: string;
@@ -41,7 +42,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
       socketRef.current = ws;
 
       ws.onopen = () => {
-        console.log("🟢 WebSocket connected");
+        logger.log("🟢 WebSocket connected");
         setIsConnected(true);
         reconnectAttemptsRef.current = 0;
 
@@ -64,7 +65,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
             setPricesVersion((v) => v + 1);
           }
         } catch (err) {
-          console.error("Error parsing WebSocket message:", err);
+          logger.error("Error parsing WebSocket message:", err);
         }
       };
 
@@ -72,9 +73,9 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
         const wasClean = event.wasClean;
         const code = event.code;
         if (!wasClean) {
-          console.warn(`🔴 WebSocket disconnected (code: ${code}, server may be unreachable)`);
+          logger.warn(`🔴 WebSocket disconnected (code: ${code}, server may be unreachable)`);
         } else {
-          console.log("🔴 WebSocket disconnected cleanly");
+          logger.log("🔴 WebSocket disconnected cleanly");
         }
         setIsConnected(false);
         socketRef.current = null;
@@ -85,22 +86,22 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
             RECONNECT_DELAY_MS * Math.pow(2, reconnectAttemptsRef.current),
             RECONNECT_DELAY_MAX_MS
           );
-          console.log(`⏳ Reconnecting in ${delay}ms... (attempt ${reconnectAttemptsRef.current + 1}/${MAX_RECONNECT_ATTEMPTS})`);
+          logger.log(`⏳ Reconnecting in ${delay}ms... (attempt ${reconnectAttemptsRef.current + 1}/${MAX_RECONNECT_ATTEMPTS})`);
           
           reconnectTimerRef.current = setTimeout(() => {
             reconnectAttemptsRef.current++;
             connect();
           }, delay);
         } else {
-          console.error("❌ Max reconnection attempts reached");
+          logger.error("❌ Max reconnection attempts reached");
         }
       };
 
       ws.onerror = (error) => {
-        console.warn("WebSocket connection error (server may be down):", WS_URL);
+        logger.warn("WebSocket connection error (server may be down):", WS_URL);
       };
     } catch (err) {
-      console.error("Failed to create WebSocket:", err);
+      logger.error("Failed to create WebSocket:", err);
     }
   }, []);
 
