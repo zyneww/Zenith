@@ -339,20 +339,20 @@ zenith/
 ---
 
 <div align="center">
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://star-history.com/#zyneww/Zenith&Date">
-        <img src="https://api.star-history.com/svg?repos=zyneww/Zenith&type=Date" alt="Star History" width="100%">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <img src="https://repobeats.axiom.co/api/embed/8068f284e12efd4d192aa9620068768732a9d753.svg" alt="Repobeats" width="100%">
-    </td>
-  </tr>
-</table>
-
+  <h3>Repository Analytics</h3>
+  <br>
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <a href="https://star-history.com/#zyneww/Zenith&Date">
+          <img src="https://api.star-history.com/svg?repos=zyneww/Zenith&type=Date" alt="Star History" width="95%">
+        </a>
+      </td>
+      <td align="center" width="50%">
+        <img src="https://repobeats.axiom.co/api/embed/8068f284e12efd4d192aa9620068768732a9d753.svg" alt="Repobeats analytics" width="95%">
+      </td>
+    </tr>
+  </table>
 </div>
 
 ---
