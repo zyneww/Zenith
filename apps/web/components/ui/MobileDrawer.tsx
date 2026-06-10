@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   X, ChevronRight, BarChart3, LineChart, Newspaper, CalendarDays,
-  TrendingUp, Search, Bell, Wallet, LayoutDashboard, Briefcase,
+  TrendingUp, TrendingDown, Search, Bell, Wallet, LayoutDashboard, Briefcase,
   CreditCard, Headphones, HelpCircle, MessageSquare, Rocket,
   ArrowRight, Bitcoin, Coins, DollarSign, Package, Landmark,
+  Zap, Flame, BarChart2, Activity, Scale, Clock, Globe,
+  Eye, PieChart, Calculator, Target, BookOpen, LifeBuoy,
+  Map, Users, CandlestickChart,
   type LucideIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -14,10 +17,13 @@ import Accordion from "./Accordion";
 import type { DropdownItem } from "./DropdownMenu";
 
 const iconMap: Record<string, LucideIcon> = {
-  BarChart3, LineChart, Newspaper, CalendarDays, TrendingUp,
+  BarChart3, LineChart, Newspaper, CalendarDays, TrendingUp, TrendingDown,
   Search, Bell, Wallet, LayoutDashboard, Briefcase,
   CreditCard, Headphones, HelpCircle, MessageSquare, Rocket,
   ArrowRight, Bitcoin, Coins, DollarSign, Package, Landmark,
+  Zap, Flame, BarChart2, Activity, Scale, Clock, Globe,
+  Eye, PieChart, Calculator, Target, BookOpen, LifeBuoy,
+  Map, Users, CandlestickChart,
 };
 
 interface MobileSection {
@@ -86,6 +92,15 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                 const featuredItem = section.items.find((item) => item.featured);
                 const normalItems = section.items.filter((item) => !item.featured);
 
+                // Group normal items by group
+                const groups: Record<string, DropdownItem[]> = {};
+                normalItems.forEach((item) => {
+                  const group = item.group || "default";
+                  if (!groups[group]) groups[group] = [];
+                  groups[group].push(item);
+                });
+                const groupKeys = Object.keys(groups);
+
                 return (
                   <Accordion key={section.title} title={section.title}>
                     {/* Featured item */}
@@ -131,32 +146,49 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                       </div>
                     )}
 
-                    {/* Normal items */}
-                    <div className="space-y-1">
-                      {normalItems.map((item, idx) => (
-                        <div key={idx}>
-                          {item.separator ? (
-                            <div className="border-t border-[#1f2937] my-2" />
-                          ) : item.disabled || !item.href ? (
-                            <div className="flex items-center gap-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60">
-                              {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
-                              <span>{item.label}</span>
-                              <span className="ml-auto text-[10px]">bientôt</span>
+                    {/* Groups */}
+                    {groupKeys.map((groupKey, groupIndex) => (
+                      <div key={groupKey}>
+                        {/* Group title */}
+                        {groupKey !== "default" && (
+                          <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold px-1 py-1.5 mt-1">
+                            {groupKey}
+                          </div>
+                        )}
+
+                        {/* Group items */}
+                        <div className="space-y-0.5">
+                          {groups[groupKey].map((item, idx) => (
+                            <div key={idx}>
+                              {item.separator ? (
+                                <div className="border-t border-[#1f2937] my-2" />
+                              ) : item.disabled || !item.href ? (
+                                <div className="flex items-center gap-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60">
+                                  {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
+                                  <span>{item.label}</span>
+                                  <span className="ml-auto text-[10px]">bientôt</span>
+                                </div>
+                              ) : (
+                                <Link
+                                  href={item.href}
+                                  className="flex items-center gap-3 py-2 text-sm text-gray-300 hover:text-white transition-colors"
+                                  onClick={onClose}
+                                >
+                                  {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
+                                  <span>{item.label}</span>
+                                  <ChevronRight className="w-3 h-3 ml-auto text-gray-600" />
+                                </Link>
+                              )}
                             </div>
-                          ) : (
-                            <Link
-                              href={item.href}
-                              className="flex items-center gap-3 py-2 text-sm text-gray-300 hover:text-white transition-colors"
-                              onClick={onClose}
-                            >
-                              {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
-                              <span>{item.label}</span>
-                              <ChevronRight className="w-3 h-3 ml-auto text-gray-600" />
-                            </Link>
-                          )}
+                          ))}
                         </div>
-                      ))}
-                    </div>
+
+                        {/* Separator between groups */}
+                        {groupIndex < groupKeys.length - 1 && (
+                          <div className="border-b border-[#1f2937] mx-1 my-2" />
+                        )}
+                      </div>
+                    ))}
                   </Accordion>
                 );
               })}

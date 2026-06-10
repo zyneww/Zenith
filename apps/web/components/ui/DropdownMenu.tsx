@@ -9,6 +9,7 @@ import {
   Newspaper,
   CalendarDays,
   TrendingUp,
+  TrendingDown,
   Search,
   Bell,
   Wallet,
@@ -25,6 +26,22 @@ import {
   DollarSign,
   Package,
   Landmark,
+  Zap,
+  Flame,
+  BarChart2,
+  Activity,
+  Scale,
+  Clock,
+  Globe,
+  Eye,
+  PieChart,
+  Calculator,
+  Target,
+  BookOpen,
+  LifeBuoy,
+  Map,
+  Users,
+  CandlestickChart,
   type LucideIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -35,6 +52,7 @@ const iconMap: Record<string, LucideIcon> = {
   Newspaper,
   CalendarDays,
   TrendingUp,
+  TrendingDown,
   Search,
   Bell,
   Wallet,
@@ -51,6 +69,22 @@ const iconMap: Record<string, LucideIcon> = {
   DollarSign,
   Package,
   Landmark,
+  Zap,
+  Flame,
+  BarChart2,
+  Activity,
+  Scale,
+  Clock,
+  Globe,
+  Eye,
+  PieChart,
+  Calculator,
+  Target,
+  BookOpen,
+  LifeBuoy,
+  Map,
+  Users,
+  CandlestickChart,
 };
 
 export interface DropdownItem {
@@ -61,6 +95,7 @@ export interface DropdownItem {
   disabled?: boolean;
   featured?: boolean;
   separator?: boolean;
+  group?: string;
 }
 
 interface DropdownMenuProps {
@@ -90,8 +125,20 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
     };
   }, []);
 
+  // Featured item (rendered at top, outside groups)
   const featuredItem = items.find((item) => item.featured);
+
+  // Group normal items by group field
   const normalItems = items.filter((item) => !item.featured);
+  const groups: Record<string, DropdownItem[]> = {};
+  normalItems.forEach((item) => {
+    const group = item.group || "default";
+    if (!groups[group]) groups[group] = [];
+    groups[group].push(item);
+  });
+
+  // Order groups deterministically
+  const groupKeys = Object.keys(groups);
 
   return (
     <div
@@ -126,13 +173,13 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full left-0 mt-2 w-[280px] bg-[#131722] border border-[#1f2937]/60 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50"
+            className="absolute top-full left-0 mt-2 w-[340px] bg-[#131722] border border-[#1f2937]/60 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
             {/* Featured Item */}
             {featuredItem && (
-              <div className="m-2 mb-0">
+              <div className="m-2 mb-1">
                 {featuredItem.disabled || !featuredItem.href ? (
                   <div className="flex items-start gap-3 p-3 rounded-lg opacity-50 cursor-not-allowed bg-[#1a1f2e]/50">
                     {featuredItem.iconName && (
@@ -177,28 +224,49 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
               <div className="border-b border-[#1f2937]/40 mx-3 my-2" />
             )}
 
-            {/* Normal Items */}
-            <div className="p-1.5">
-              {normalItems.map((item, index) => (
-                <div key={index}>
-                  {item.separator ? (
-                    <div className="border-t border-[#1f2937]/40 my-1.5 mx-2" />
-                  ) : item.disabled || !item.href ? (
-                    <div className="flex items-center gap-3 px-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60 rounded-lg">
-                      {item.iconName && <NormalIcon name={item.iconName} />}
-                      <span>{item.label}</span>
-                      <span className="ml-auto text-[10px] text-gray-600 bg-gray-800/50 px-1.5 py-0.5 rounded">
-                        bientôt
-                      </span>
-                    </div>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:bg-[#1f2937] hover:text-white transition-colors rounded-lg"
-                    >
-                      {item.iconName && <NormalIcon name={item.iconName} />}
-                      <span>{item.label}</span>
-                    </Link>
+            {/* Groups */}
+            <div className="p-2 pb-3">
+              {groupKeys.map((groupKey, groupIndex) => (
+                <div key={groupKey}>
+                  {/* Group title */}
+                  <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold px-3 py-1.5 mt-1">
+                    {groupKey === "default" ? "" : groupKey}
+                  </div>
+
+                  {/* Group items */}
+                  <div className="space-y-0.5">
+                    {groups[groupKey].map((item, index) => (
+                      <div key={index}>
+                        {item.separator ? (
+                          <div className="border-t border-[#1f2937]/40 my-1.5 mx-2" />
+                        ) : item.disabled || !item.href ? (
+                          <div className="flex items-center gap-3 px-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60 rounded-lg">
+                            {item.iconName && (
+                              <NormalIcon name={item.iconName} />
+                            )}
+                            <span>{item.label}</span>
+                            <span className="ml-auto text-[10px] text-gray-600 bg-gray-800/50 px-1.5 py-0.5 rounded">
+                              bientôt
+                            </span>
+                          </div>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:bg-[#1f2937] hover:text-white transition-colors rounded-lg"
+                          >
+                            {item.iconName && (
+                              <NormalIcon name={item.iconName} />
+                            )}
+                            <span>{item.label}</span>
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Separator between groups */}
+                  {groupIndex < groupKeys.length - 1 && (
+                    <div className="border-b border-[#1f2937]/40 mx-2 my-2" />
                   )}
                 </div>
               ))}
