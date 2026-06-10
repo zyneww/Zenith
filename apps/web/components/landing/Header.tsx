@@ -167,7 +167,7 @@ export default function Header() {
           </div>
 
           {/* Commencer button */}
-          <SignUpButton mode="modal">
+          <SignUpButton mode="modal" forceRedirectUrl="/pricing">
             <button
               className="hidden lg:block bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-5 py-2 rounded-full transition-colors shadow-glow-purple cursor-pointer"
               type="button"
