@@ -340,9 +340,18 @@ zenith/
 
 <div align="center">
 
-[![Star History](https://api.star-history.com/svg?repos=zyneww/Zenith&type=Date)](https://star-history.com/#zyneww/Zenith&Date)
-
-![Repobeats](https://repobeats.axiom.co/api/embed/8068f284e12efd4d192aa9620068768732a9d753.svg)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="https://star-history.com/#zyneww/Zenith&Date">
+        <img src="https://api.star-history.com/svg?repos=zyneww/Zenith&type=Date" alt="Star History" width="100%">
+      </a>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://repobeats.axiom.co/api/embed/8068f284e12efd4d192aa9620068768732a9d753.svg" alt="Repobeats" width="100%">
+    </td>
+  </tr>
+</table>
 
 </div>
 
