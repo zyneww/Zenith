@@ -2,7 +2,7 @@
 
 <img src="apps/web/public/logo2.svg" alt="Zenith" width="72" height="72">
 
-<h1>ZENITH</h1>
+<h1>Zenith</h1>
 
 **Financial Intelligence Platform** — Real-time markets, analytics & portfolio management
 
