@@ -325,5 +325,162 @@
     "ARS": "Argentine Peso",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "markets": {
+    "title": "Markets",
+    "subtitle": "Real-time prices, indices, forex and cryptocurrencies",
+    "searchPlaceholder": "Search an asset (e.g. BTC, EUR/USD, S&P 500)...",
+    "filters": "Filters",
+    "overview": "Market Overview",
+    "overviewSubtitle": "Indices, crypto and forex in real-time",
+    "crypto": "Cryptocurrencies",
+    "cryptoTop": "Top 100",
+    "forex": "Forex",
+    "forexAll": "All pairs",
+    "indices": "Indices",
+    "indicesAll": "All indices",
+    "commodities": "Commodities",
+    "commoditiesAll": "All products",
+    "futures": "Futures",
+    "futuresAll": "All futures",
+    "stocks": "Stocks",
+    "stocksAll": "All stocks",
+    "community": "Community Ideas",
+    "communitySubtitle": "Community analysis and signals",
+    "brokers": "Recommended Brokers",
+    "brokersSubtitle": "Partner trading platforms",
+    "live": "LIVE",
+    "offline": "OFFLINE",
+    "viewAll": "View all",
+    "ticker": {
+      "sp500": "S&P 500",
+      "nasdaq": "Nasdaq",
+      "dow": "Dow Jones",
+      "cac40": "CAC 40",
+      "dax": "DAX",
+      "ftse": "FTSE 100",
+      "nikkei": "Nikkei",
+      "bitcoin": "Bitcoin",
+      "ethereum": "Ethereum",
+      "solana": "Solana",
+      "wti": "WTI",
+      "gold": "Gold"
+    },
+    "calendar": {
+      "title": "Economic Calendar",
+      "description": "Major economic events, indicators and central bank announcements",
+      "filter": {
+        "all": "All",
+        "allCurrencies": "All currencies"
+      },
+      "importance": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "table": {
+        "date": "Date",
+        "time": "Time",
+        "currency": "Currency",
+        "event": "Event",
+        "importance": "Importance",
+        "actual": "Actual",
+        "forecast": "Forecast",
+        "previous": "Previous"
+      },
+      "noEvents": "No events for the selected criteria",
+      "stats": {
+        "total": "Total",
+        "high": "High impact",
+        "medium": "Medium impact",
+        "low": "Low impact"
+      }
+    },
+    "indices": {
+      "title": "Stock Indices",
+      "description": "Major global indices in real-time",
+      "filter": {
+        "all": "All",
+        "americas": "Americas",
+        "europe": "Europe",
+        "asia": "Asia"
+      },
+      "noData": "No indices available",
+      "overview": "Overview",
+      "rising": "Rising",
+      "falling": "Falling",
+      "avgChange": "Avg change",
+      "bestPerf": "Best perf"
+    },
+    "crypto": {
+      "title": "Cryptocurrencies",
+      "description": "Real-time cryptocurrency prices and data",
+      "stats": {
+        "totalCoins": "Cryptos",
+        "rising": "Rising",
+        "volume24h": "Volume 24h",
+        "bestPerf": "Best perf"
+      },
+      "table": {
+        "rank": "Rank",
+        "name": "Name",
+        "price": "Price",
+        "change24h": "Change 24h",
+        "high24h": "High 24h",
+        "low24h": "Low 24h",
+        "volume": "Volume"
+      },
+      "noData": "No cryptocurrencies available"
+    },
+    "forex": {
+      "title": "Forex",
+      "description": "Real-time currency pairs and exchange rates",
+      "stats": {
+        "totalPairs": "Pairs",
+        "rising": "Rising",
+        "falling": "Falling",
+        "mostActive": "Most active"
+      },
+      "table": {
+        "pair": "Pair",
+        "price": "Price",
+        "change": "Change",
+        "high": "High",
+        "low": "Low",
+        "spread": "Spread"
+      },
+      "noData": "No pairs available"
+    },
+    "futures": {
+      "title": "Futures",
+      "description": "Futures contracts on indices, commodities and currencies",
+      "stats": {
+        "total": "Contracts",
+        "rising": "Rising",
+        "falling": "Falling",
+        "bestPerf": "Best perf"
+      },
+      "table": {
+        "contract": "Contract",
+        "price": "Price",
+        "change": "Change",
+        "high": "High",
+        "low": "Low"
+      },
+      "noData": "No contracts available"
+    },
+    "ideas": {
+      "title": "Community Ideas",
+      "description": "Trading analyses and signals from the community",
+      "filter": {
+        "all": "All",
+        "long": "Long",
+        "short": "Short"
+      },
+      "direction": {
+        "long": "Long",
+        "short": "Short"
+      }
+    }
   }
 }

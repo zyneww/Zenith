@@ -87,6 +87,19 @@
     from { stroke-dasharray: 0 100; }
     to { stroke-dasharray: 72 100; }
   }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .animate-scroll {
+    animation: scroll-left 40s linear infinite;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
 }
 
 /* Reduced animations mode (toggled by user) */

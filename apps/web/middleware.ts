@@ -36,8 +36,9 @@ export default clerkMiddleware(async (auth, request) => {
     await auth.protect();
   }
 
-  // Skip i18n middleware for API routes
-  if (request.nextUrl.pathname.startsWith("/api")) {
+  // Skip i18n middleware for API routes and manifest
+  if (request.nextUrl.pathname.startsWith("/api") || 
+      request.nextUrl.pathname === "/manifest.json") {
     return NextResponse.next();
   }
 
