@@ -21,20 +21,20 @@ export default function GlobalError({
         <div className="w-16 h-16 mx-auto mb-6 bg-red-500/10 rounded-full flex items-center justify-center">
           <AlertTriangle className="w-8 h-8 text-red-500" />
         </div>
-        <h1 className="text-2xl font-bold text-white mb-3">
+        <h1 className="text-2xl font-bold text-primary mb-3">
           Une erreur est survenue
         </h1>
-        <p className="text-gray-400 mb-8">
+        <p className="text-secondary mb-8">
           Nous avons rencontré un problème inattendu. Veuillez réessayer ou recharger la page.
         </p>
         {error.digest && (
-          <p className="text-xs text-gray-400 mb-6 font-mono">
+          <p className="text-xs text-secondary mb-6 font-mono">
             Error ID: {error.digest}
           </p>
         )}
         <button
           onClick={reset}
-          className="inline-flex items-center gap-2 bg-brand-purple text-white font-semibold px-6 py-3 rounded-lg hover:bg-brand-purple/90 transition-colors"
+          className="inline-flex items-center gap-2 bg-brand-purple text-primary font-semibold px-6 py-3 rounded-lg hover:bg-brand-purple/90 transition-colors"
         >
           <RefreshCw className="w-4 h-4" />
           Réessayer

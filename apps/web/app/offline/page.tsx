@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function OfflinePage() {
   return (
-    <div className="min-h-[100dvh] bg-[#0b0e14] flex flex-col items-center justify-center px-4 text-center">
+    <div className="min-h-[100dvh] bg-[#010120] flex flex-col items-center justify-center px-4 text-center">
       <div className="mb-8">
         {/* Logo Zenith inline SVG — simple peak/boussole symbol */}
         <svg
@@ -23,18 +23,18 @@ export default function OfflinePage() {
           xmlns="http://www.w3.org/2000/svg"
           className="mx-auto"
         >
-          <circle cx="50" cy="50" r="46" stroke="#00e5ff" strokeWidth="2" fill="none" opacity="0.2" />
-          <circle cx="50" cy="50" r="36" stroke="#00e5ff" strokeWidth="1.5" fill="none" opacity="0.1" />
+          <circle cx="50" cy="50" r="46" stroke="#c8f6f9" strokeWidth="2" fill="none" opacity="0.2" />
+          <circle cx="50" cy="50" r="36" stroke="#c8f6f9" strokeWidth="1.5" fill="none" opacity="0.1" />
           <path
             d="M50 14 L62 46 L62 46 L86 46 L66 62 L74 90 L50 74 L26 90 L34 62 L14 46 L38 46 L50 14 Z"
             fill="none"
-            stroke="#00e5ff"
+            stroke="#c8f6f9"
             strokeWidth="2.5"
             strokeLinejoin="round"
             strokeLinecap="round"
           />
-          <circle cx="50" cy="50" r="8" fill="#00e5ff" opacity="0.8" />
-          <circle cx="50" cy="50" r="4" fill="#0b0e14" />
+          <circle cx="50" cy="50" r="8" fill="#c8f6f9" opacity="0.8" />
+          <circle cx="50" cy="50" r="4" fill="#010120" />
         </svg>
       </div>
 

@@ -102,13 +102,13 @@ function MarketCard({ title, slug, items }: { title: string; slug: string; items
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-dark-card/50 backdrop-blur-sm border border-dark-border rounded-xl p-5 hover:border-gray-700 transition-all group"
+      className="bg-card border border-surface rounded-sm p-5 hover:border-surface/80 transition-all group"
     >
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-sm font-bold text-white">{title}</h3>
+        <h3 className="text-sm font-bold text-primary">{title}</h3>
         <Link
           href={`/markets?category=${slug}`}
-          className="text-xs text-gray-500 hover:text-brand-cyan transition-colors flex items-center gap-1"
+          className="text-xs text-secondary hover:text-accent transition-colors flex items-center gap-1"
         >
           {t("seeAll")}
           <ArrowRight className="w-3 h-3" />
@@ -118,11 +118,11 @@ function MarketCard({ title, slug, items }: { title: string; slug: string; items
         {items.map((item) => (
           <div
             key={item.symbol}
-            className="flex items-center justify-between py-2 border-b border-gray-800/50 last:border-0"
+            className="flex items-center justify-between py-2 border-b border-surface/50 last:border-0"
           >
             <div className="flex items-center gap-3">
-              <span className="text-xs font-bold text-gray-500 w-8">{item.symbol}</span>
-              <span className="text-sm text-gray-300">{item.name}</span>
+              <span className="text-xs font-bold text-secondary w-8">{item.symbol}</span>
+              <span className="text-sm text-primary">{item.name}</span>
             </div>
             <div className="flex items-center gap-3">
               <svg className="w-14 h-5" viewBox="0 0 100 30" preserveAspectRatio="none">
@@ -134,7 +134,7 @@ function MarketCard({ title, slug, items }: { title: string; slug: string; items
                 />
               </svg>
               <div className="text-right w-24">
-                <div className="text-sm font-medium text-white">{item.price}</div>
+                <div className="text-sm font-medium text-primary">{item.price}</div>
                 <div className={`text-xs flex items-center gap-0.5 justify-end ${item.isPositive ? "text-up" : "text-down"}`}>
                   {item.isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                   {item.change}
@@ -151,9 +151,9 @@ function MarketCard({ title, slug, items }: { title: string; slug: string; items
 export default function MarketOverview() {
   const t = useTranslations("marketOverview");
   return (
-    <section className="py-16 px-4 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-cyan/5 blur-[120px] rounded-full pointer-events-none" />
+    <section id="market-overview" className="py-16 px-4 relative overflow-hidden bg-canvas">
+      {/* Background glow — subtle gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-brand opacity-5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -163,13 +163,13 @@ export default function MarketOverview() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <p className="text-brand-cyan text-xs font-bold tracking-wider mb-2 uppercase">
+          <p className="font-mono-caps text-secondary mb-2">
             {t("badge")}
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-3xl md:text-4xl font-medium text-primary mb-2">
             {t("title")}
           </h2>
-          <p className="text-gray-400 text-sm max-w-xl mx-auto">
+          <p className="text-secondary text-sm max-w-xl mx-auto">
             {t("subtitle")}
           </p>
         </motion.div>

@@ -10,7 +10,7 @@ export default function ReloadButton() {
   return (
     <button
       onClick={handleReload}
-      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-[#0b0e14] bg-[#00e5ff] hover:bg-[#00b8e6] transition-colors duration-200 cursor-pointer"
+      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-[#010120] bg-[#c8f6f9] hover:bg-[#c8f6f9]/80 transition-colors duration-200 cursor-pointer"
       type="button"
     >
       <svg

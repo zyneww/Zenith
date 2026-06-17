@@ -37,12 +37,12 @@ export default function TickerStrip() {
 
   if (isLoading) {
     return (
-      <div className="w-full bg-[#0b0e14] border-b border-[#1a1f2e] overflow-hidden">
+      <div className="w-full bg-canvas border-b border-surface overflow-hidden">
         <div className="flex items-center h-10 animate-pulse">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="flex items-center gap-2 px-4 text-sm">
-              <span className="w-16 h-3 bg-[#1a1f2e] rounded" />
-              <span className="w-12 h-3 bg-[#1a1f2e] rounded" />
+              <span className="w-16 h-3 bg-raised rounded" />
+              <span className="w-12 h-3 bg-raised rounded" />
             </div>
           ))}
         </div>
@@ -51,12 +51,12 @@ export default function TickerStrip() {
   }
 
   return (
-    <div className="w-full bg-[#0b0e14] border-b border-[#1a1f2e] overflow-hidden">
+    <div className="w-full bg-canvas border-b border-surface overflow-hidden">
       <div className="flex items-center h-10 animate-scroll whitespace-nowrap">
         {tickerItems.map((item, i) => (
           <div key={`${item.symbol}-${i}`} className="flex items-center gap-2 px-4 text-sm">
-            <span className="text-[#7a8498] font-medium">{item.name}</span>
-            <span className="text-white font-mono">
+            <span className="text-secondary font-medium">{item.name}</span>
+            <span className="text-primary font-mono">
               {formatPrice(item.price)}
             </span>
             <span className={`${getChangeColor(item.change)} text-xs font-medium`}>
@@ -67,8 +67,8 @@ export default function TickerStrip() {
         {/* Duplicate for seamless loop */}
         {tickerItems.map((item, i) => (
           <div key={`${item.symbol}-dup-${i}`} className="flex items-center gap-2 px-4 text-sm">
-            <span className="text-[#7a8498] font-medium">{item.name}</span>
-            <span className="text-white font-mono">
+            <span className="text-secondary font-medium">{item.name}</span>
+            <span className="text-primary font-mono">
               {formatPrice(item.price)}
             </span>
             <span className={`${getChangeColor(item.change)} text-xs font-medium`}>

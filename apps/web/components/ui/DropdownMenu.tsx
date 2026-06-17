@@ -238,10 +238,10 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
       {/* Trigger */}
       <button
         ref={triggerRef}
-        className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+        className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-sm ${
           isOpen
-            ? "text-white bg-white/5"
-            : "text-gray-400 hover:text-white hover:bg-white/5"
+            ? "text-primary bg-raised/50"
+            : "text-secondary hover:text-primary hover:bg-raised/50"
         }`}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -265,7 +265,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full left-0 mt-2 w-[340px] bg-[#131722] border border-[#1f2937]/60 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50"
+            className="absolute top-full left-0 mt-2 w-[340px] bg-card border border-surface rounded-sm overflow-hidden z-50"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             role="menu"
@@ -275,16 +275,16 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
             {featuredItem && (
               <div className="m-2 mb-1">
                 {featuredItem.disabled || !featuredItem.href ? (
-                  <div className="flex items-start gap-3 p-3 rounded-lg opacity-50 cursor-not-allowed bg-[#1a1f2e]/50">
+                  <div className="flex items-start gap-3 p-3 rounded-sm opacity-50 cursor-not-allowed bg-raised/50">
                     {featuredItem.iconName && (
                       <FeaturedIcon name={featuredItem.iconName} />
                     )}
                     <div>
-                      <div className="text-white font-semibold text-sm">
+                      <div className="text-primary font-semibold text-sm">
                         {featuredItem.label}
                       </div>
                       {featuredItem.description && (
-                        <div className="text-xs text-gray-400 mt-0.5">
+                        <div className="text-xs text-secondary mt-0.5">
                           {featuredItem.description}
                         </div>
                       )}
@@ -293,17 +293,17 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
                 ) : (
                   <Link
                     href={featuredItem.href}
-                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#1f2937] transition-colors group bg-[#00e5ff]/5 border border-[#00e5ff]/10"
+                    className="flex items-start gap-3 p-3 rounded-sm hover:bg-raised transition-colors group bg-accent-subtle border border-accent/20"
                   >
                     {featuredItem.iconName && (
                       <FeaturedIcon name={featuredItem.iconName} />
                     )}
                     <div>
-                      <div className="text-white font-semibold text-sm group-hover:text-brand-cyan transition-colors">
+                      <div className="text-primary font-semibold text-sm group-hover:text-accent transition-colors">
                         {featuredItem.label}
                       </div>
                       {featuredItem.description && (
-                        <div className="text-xs text-gray-400 mt-0.5">
+                        <div className="text-xs text-secondary mt-0.5">
                           {featuredItem.description}
                         </div>
                       )}
@@ -315,7 +315,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
 
             {/* Separator after featured */}
             {featuredItem && (
-              <div className="border-b border-[#1f2937]/40 mx-3 my-2" />
+              <div className="border-b border-surface/40 mx-3 my-2" />
             )}
 
             {/* Groups */}
@@ -323,7 +323,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
               {groupKeys.map((groupKey, groupIndex) => (
                 <div key={groupKey}>
                   {/* Group title */}
-                  <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold px-3 py-1.5 mt-1">
+                  <div className="font-mono-caps text-secondary px-3 py-1.5 mt-1">
                     {groupKey === "default" ? "" : groupKey}
                   </div>
 
@@ -332,21 +332,21 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
                     {groups[groupKey].map((item, index) => (
                       <div key={index}>
                         {item.separator ? (
-                          <div className="border-t border-[#1f2937]/40 my-1.5 mx-2" />
+                          <div className="border-t border-surface/40 my-1.5 mx-2" />
                         ) : item.disabled || !item.href ? (
-                          <div className="flex items-center gap-3 px-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60 rounded-lg">
+                          <div className="flex items-center gap-3 px-3 py-2 text-sm text-secondary cursor-not-allowed opacity-60 rounded-sm">
                             {item.iconName && (
                               <NormalIcon name={item.iconName} />
                             )}
                             <span>{item.label}</span>
-                            <span className="ml-auto text-[10px] text-gray-400 bg-gray-800/50 px-1.5 py-0.5 rounded">
+                            <span className="ml-auto text-[10px] text-secondary bg-raised/50 px-1.5 py-0.5 rounded-sm">
                               bientôt
                             </span>
                           </div>
                         ) : (
                           <Link
                             href={item.href}
-                            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:bg-[#1f2937] hover:text-white transition-colors rounded-lg"
+                            className="flex items-center gap-3 px-3 py-2 text-sm text-secondary hover:bg-raised hover:text-primary transition-colors rounded-sm"
                           >
                             {item.iconName && (
                               <NormalIcon name={item.iconName} />
@@ -360,7 +360,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
 
                   {/* Separator between groups */}
                   {groupIndex < groupKeys.length - 1 && (
-                    <div className="border-b border-[#1f2937]/40 mx-2 my-2" />
+                    <div className="border-b border-surface/40 mx-2 my-2" />
                   )}
                 </div>
               ))}
@@ -376,8 +376,8 @@ function FeaturedIcon({ name }: { name: string }) {
   const Icon = iconMap[name];
   if (!Icon) return null;
   return (
-    <div className="w-9 h-9 rounded-lg bg-[#00e5ff]/10 flex items-center justify-center flex-shrink-0">
-      <Icon className="w-5 h-5 text-brand-cyan" />
+    <div className="w-9 h-9 rounded-sm bg-accent-subtle flex items-center justify-center flex-shrink-0">
+      <Icon className="w-5 h-5 text-accent" />
     </div>
   );
 }
@@ -385,5 +385,5 @@ function FeaturedIcon({ name }: { name: string }) {
 function NormalIcon({ name }: { name: string }) {
   const Icon = iconMap[name];
   if (!Icon) return null;
-  return <Icon className="w-4 h-4 flex-shrink-0 text-gray-400" />;
+  return <Icon className="w-4 h-4 flex-shrink-0 text-secondary" />;
 }

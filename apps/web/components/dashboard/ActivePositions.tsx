@@ -39,20 +39,20 @@ function PositionRow({ position, index }: { position: Position; index: number })
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="flex items-center justify-between py-4 border-b border-[#1f2937] last:border-0"
+      className="flex items-center justify-between py-4 border-b border-surface last:border-0"
     >
       <div className="flex items-center gap-3">
-        <div className={`w-8 h-8 rounded-full ${position.iconBg} flex items-center justify-center text-white text-xs font-bold`}>
+        <div className={`w-8 h-8 rounded-full ${position.iconBg} flex items-center justify-center text-primary text-xs font-medium`}>
           {position.iconText}
         </div>
         <div>
-          <p className="text-white font-medium">{position.name}</p>
-          <p className="text-gray-500 text-sm">{position.quantity} {position.symbol}</p>
+          <p className="text-primary font-medium">{position.name}</p>
+          <p className="text-secondary text-sm">{position.quantity} {position.symbol}</p>
         </div>
       </div>
 
       <div className="text-right">
-        <p className="text-white font-medium">${totalValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+        <p className="text-primary font-medium">${totalValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
         <div className={`flex items-center gap-1 ${pnl >= 0 ? "text-green-500" : "text-red-500"}`}>
           {pnl >= 0 ? (
             <ArrowUpRight className="w-3 h-3" />
@@ -70,9 +70,9 @@ function PositionRow({ position, index }: { position: Position; index: number })
 
 export default function ActivePositions() {
   return (
-    <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-5">
+    <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-white font-semibold text-lg">Positions Actives</h3>
+        <h3 className="text-primary font-semibold text-lg">Positions Actives</h3>
         <button className="text-brand-cyan text-sm hover:underline">Voir tout</button>
       </div>
       <div>

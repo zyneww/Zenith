@@ -104,12 +104,12 @@ export default function CommunityCarousel() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-white">Idées communautaires</h2>
-          <p className="text-xs text-[#7a8498]">Analyses et signaux de la communauté</p>
+          <h2 className="text-lg font-semibold text-primary">Idées communautaires</h2>
+          <p className="text-xs text-secondary">Analyses et signaux de la communauté</p>
         </div>
         <Link
           href="/markets/ideas"
-          className="flex items-center gap-1 text-xs text-[#00e5ff] hover:text-[#00e5ff]/80 transition-colors"
+          className="flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
         >
           Voir tout
           <ArrowRight className="w-3 h-3" />
@@ -129,44 +129,44 @@ function IdeaCard({ idea }: { idea: CommunityIdea }) {
   const isLong = idea.direction === "long";
 
   return (
-    <div className="bg-[#131722] border border-[#1a1f2e] rounded-xl p-4 hover:border-[#2a2f3e] transition-colors cursor-pointer group">
+    <div className="bg-card border border-surface rounded-sm p-4 hover:border-surface transition-colors cursor-pointer group">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#1a1f2e] flex items-center justify-center text-xs font-bold text-[#00e5ff]">
+          <div className="w-8 h-8 rounded-full bg-raised flex items-center justify-center text-xs font-medium text-accent">
             {idea.avatar}
           </div>
           <div>
-            <p className="text-xs font-medium text-white">{idea.author}</p>
-            <p className="text-[10px] text-[#7a8498]">{idea.publishedAt}</p>
+            <p className="text-xs font-medium text-primary">{idea.author}</p>
+            <p className="text-[10px] text-secondary">{idea.publishedAt}</p>
           </div>
         </div>
-        <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${isLong ? "text-[#00d26a] bg-[#00d26a]/10" : "text-[#ff6b6b] bg-[#ff6b6b]/10"}`}>
+        <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${isLong ? "text-accent bg-accent-subtle" : "text-[#ef4444] bg-[#ef4444]/10"}`}>
           {isLong ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {isLong ? "Long" : "Short"}
         </div>
       </div>
 
-      <h3 className="text-sm font-medium text-white mb-2 group-hover:text-[#00e5ff] transition-colors">
+      <h3 className="text-sm font-medium text-primary mb-2 group-hover:text-accent transition-colors">
         {idea.title}
       </h3>
 
       <div className="flex items-center gap-1 mb-3">
-        <span className="text-xs font-medium text-[#00e5ff] bg-[#00e5ff]/10 px-2 py-0.5 rounded">
+        <span className="text-xs font-medium text-accent bg-accent-subtle px-2 py-0.5 rounded">
           {idea.asset}
         </span>
         {idea.tags.slice(0, 2).map((tag) => (
-          <span key={tag} className="text-[10px] text-[#7a8498] bg-[#1a1f2e] px-2 py-0.5 rounded">
+          <span key={tag} className="text-[10px] text-secondary bg-raised px-2 py-0.5 rounded">
             #{tag}
           </span>
         ))}
       </div>
 
       {/* Chart placeholder */}
-      <div className="bg-[#0b0e14] rounded-lg h-32 mb-3 flex items-center justify-center">
-        <div className="text-[#7a8498] text-xs">Graphique</div>
+      <div className="bg-canvas rounded-sm h-32 mb-3 flex items-center justify-center">
+        <div className="text-secondary text-xs">Graphique</div>
       </div>
 
-      <div className="flex items-center gap-4 text-xs text-[#7a8498]">
+      <div className="flex items-center gap-4 text-xs text-secondary">
         <div className="flex items-center gap-1">
           <ThumbsUp className="w-3 h-3" />
           <span>{idea.likes}</span>

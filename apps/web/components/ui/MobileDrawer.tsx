@@ -90,7 +90,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-inverse/50 backdrop-blur-sm z-50"
             onClick={onClose}
             aria-hidden="true"
           />
@@ -105,14 +105,14 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full w-[320px] max-w-[85vw] bg-[#0b0e14] border-l border-[#1f2937] z-50 overflow-y-auto overscroll-contain"
+            className="fixed top-0 right-0 h-full w-[320px] max-w-[85vw] bg-canvas border-l border-surface z-50 overflow-y-auto overscroll-contain"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#1f2937]">
-              <span className="text-white font-bold text-lg">Menu</span>
+            <div className="flex items-center justify-between p-4 border-b border-surface">
+              <span className="text-primary font-bold text-lg">Menu</span>
               <button
                 onClick={onClose}
-                className="p-2 text-gray-400 hover:text-white transition-colors"
+                className="p-2 text-secondary hover:text-primary transition-colors"
                 type="button"
                 aria-label="Fermer le menu"
               >
@@ -139,18 +139,18 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                   <Accordion key={section.title} title={section.title}>
                     {/* Featured item */}
                     {featuredItem && (
-                      <div className="mb-3 pb-3 border-b border-[#1f2937]">
+                      <div className="mb-3 pb-3 border-b border-surface">
                         {featuredItem.disabled || !featuredItem.href ? (
                           <div className="flex items-start gap-3 opacity-50 cursor-not-allowed">
                             {featuredItem.iconName && (
                               <IconRenderer name={featuredItem.iconName} size="lg" />
                             )}
                             <div>
-                              <div className="text-white font-semibold text-sm">
+                              <div className="text-primary font-semibold text-sm">
                                 {featuredItem.label}
                               </div>
                               {featuredItem.description && (
-                                <div className="text-xs text-gray-400 mt-0.5">
+                                <div className="text-xs text-secondary mt-0.5">
                                   {featuredItem.description}
                                 </div>
                               )}
@@ -166,11 +166,11 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                               <IconRenderer name={featuredItem.iconName} size="lg" />
                             )}
                             <div>
-                              <div className="text-white font-semibold text-sm">
+                              <div className="text-primary font-semibold text-sm">
                                 {featuredItem.label}
                               </div>
                               {featuredItem.description && (
-                                <div className="text-xs text-gray-400 mt-0.5">
+                                <div className="text-xs text-secondary mt-0.5">
                                   {featuredItem.description}
                                 </div>
                               )}
@@ -185,7 +185,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                       <div key={groupKey}>
                         {/* Group title */}
                         {groupKey !== "default" && (
-                          <div className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold px-1 py-1.5 mt-1">
+                          <div className="text-[11px] uppercase tracking-wider text-secondary font-semibold px-1 py-1.5 mt-1">
                             {groupKey}
                           </div>
                         )}
@@ -195,9 +195,9 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                           {groups[groupKey].map((item, idx) => (
                             <div key={idx}>
                               {item.separator ? (
-                                <div className="border-t border-[#1f2937] my-2" />
+                                <div className="border-t border-surface my-2" />
                               ) : item.disabled || !item.href ? (
-                                <div className="flex items-center gap-3 py-2 text-sm text-gray-500 cursor-not-allowed opacity-60">
+                                <div className="flex items-center gap-3 py-2 text-sm text-secondary cursor-not-allowed opacity-60">
                                   {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
                                   <span>{item.label}</span>
                                   <span className="ml-auto text-[10px]">bientôt</span>
@@ -205,12 +205,12 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
                               ) : (
                                 <Link
                                   href={item.href}
-                                  className="flex items-center gap-3 py-2 text-sm text-gray-300 hover:text-white transition-colors"
+                                  className="flex items-center gap-3 py-2 text-sm text-primary hover:text-primary transition-colors"
                                   onClick={onClose}
                                 >
                                   {item.iconName && <IconRenderer name={item.iconName} size="sm" />}
                                   <span>{item.label}</span>
-                                  <ChevronRight className="w-3 h-3 ml-auto text-gray-400" />
+                                  <ChevronRight className="w-3 h-3 ml-auto text-secondary" />
                                 </Link>
                               )}
                             </div>
@@ -219,7 +219,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
 
                         {/* Separator between groups */}
                         {groupIndex < groupKeys.length - 1 && (
-                          <div className="border-b border-[#1f2937] mx-1 my-2" />
+                          <div className="border-b border-surface mx-1 my-2" />
                         )}
                       </div>
                     ))}
@@ -229,11 +229,11 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             </div>
 
             {/* Bottom actions */}
-            <div className="sticky bottom-0 left-0 right-0 p-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-[#0b0e14] border-t border-[#1f2937]">
+            <div className="sticky bottom-0 left-0 right-0 p-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-canvas border-t border-surface">
               <SignUpButton mode="modal" forceRedirectUrl="/pricing">
                 <button
                   onClick={onClose}
-                  className="block w-full bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-4 py-3 rounded-full transition-colors shadow-glow-purple text-center cursor-pointer"
+                  className="block w-full bg-accent-dark text-inverse hover:bg-accent-dark/80 text-sm font-semibold px-4 py-3 rounded-full transition-colors shadow-glow-purple text-center cursor-pointer"
                   type="button"
                 >
                   Commencer

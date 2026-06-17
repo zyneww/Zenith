@@ -99,7 +99,7 @@ const MOCK_IDEAS: Idea[] = [
 ];
 
 function getDirectionColor(direction: string): string {
-  return direction === "long" ? "text-green-400 bg-green-400/10" : "text-red-400 bg-red-400/10";
+  return direction === "long" ? "text-accent bg-green-400/10" : "text-[#ef4444] bg-red-400/10";
 }
 
 function formatDate(dateStr: string): string {
@@ -129,10 +129,10 @@ export default function IdeasClient() {
           <button
             key={dir}
             onClick={() => setFilter(dir)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-sm text-sm font-medium transition-colors ${
               filter === dir
-                ? "bg-[#00e5ff] text-[#0b0e14]"
-                : "bg-[#131722] text-gray-400 hover:text-white"
+                ? "bg-accent text-inverse"
+                : "bg-card text-secondary hover:text-primary"
             }`}
           >
             {dir === "all" ? t("ideas.filter.all") : dir === "long" ? t("ideas.filter.long") : t("ideas.filter.short")}
@@ -145,25 +145,25 @@ export default function IdeasClient() {
         {filteredIdeas.map((idea) => (
           <div
             key={idea.id}
-            className="bg-[#131722] rounded-xl border border-gray-800 p-4 hover:border-[#00e5ff]/30 transition-colors"
+            className="bg-card rounded-sm border border-surface p-4 hover:border-accent/30 transition-colors"
           >
             {/* Author */}
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-[#00e5ff] flex items-center justify-center text-sm font-bold text-[#0b0e14]">
+              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-sm font-medium text-inverse">
                 {idea.avatar}
               </div>
               <div>
-                <div className="text-white text-sm font-medium">{idea.author}</div>
-                <div className="text-gray-500 text-xs">{formatDate(idea.publishedAt)}</div>
+                <div className="text-primary text-sm font-medium">{idea.author}</div>
+                <div className="text-secondary text-xs">{formatDate(idea.publishedAt)}</div>
               </div>
             </div>
 
             {/* Title */}
-            <h3 className="text-white font-semibold text-sm mb-2">{idea.title}</h3>
+            <h3 className="text-primary font-semibold text-sm mb-2">{idea.title}</h3>
 
             {/* Asset & Direction */}
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs text-gray-400 px-2 py-1 rounded bg-[#1a1f2e]">
+              <span className="text-xs text-secondary px-2 py-1 rounded bg-raised">
                 {idea.asset}
               </span>
               <span className={`text-xs font-medium px-2 py-1 rounded ${getDirectionColor(idea.direction)}`}>
@@ -174,14 +174,14 @@ export default function IdeasClient() {
             {/* Tags */}
             <div className="flex flex-wrap gap-1 mb-3">
               {idea.tags.map((tag) => (
-                <span key={tag} className="text-xs text-gray-500 px-2 py-1 rounded bg-[#1a1f2e]">
+                <span key={tag} className="text-xs text-secondary px-2 py-1 rounded bg-raised">
                   {tag}
                 </span>
               ))}
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-4 text-gray-400 text-sm">
+            <div className="flex items-center gap-4 text-secondary text-sm">
               <span className="flex items-center gap-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />

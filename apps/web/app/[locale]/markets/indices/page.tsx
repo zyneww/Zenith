@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import Header from "@/components/landing/Header";
+import Footer from "@/components/landing/Footer";
 import IndicesClient from "./IndicesClient";
 
 export async function generateMetadata({
@@ -24,14 +26,16 @@ export default async function IndicesPage({
   const t = await getTranslations({ locale, namespace: "markets" });
 
   return (
-    <main className="min-h-screen bg-[#0b0e14]">
-      <div className="px-4 sm:px-8 lg:px-16 xl:px-28 py-8">
+    <>
+      <Header />
+      <main className="min-h-screen bg-canvas">
+        <div className="px-4 sm:px-8 lg:px-16 xl:px-28 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-3xl font-bold text-primary mb-2">
             {t("indices.title")}
           </h1>
-          <p className="text-gray-400">
+          <p className="text-secondary">
             {t("indices.description")}
           </p>
         </div>
@@ -39,6 +43,8 @@ export default async function IndicesPage({
         {/* Indices Component */}
         <IndicesClient />
       </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

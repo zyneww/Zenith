@@ -24,7 +24,7 @@ export default async function IdeasPage({
   const t = await getTranslations({ locale, namespace: "markets" });
 
   return (
-    <main className="min-h-screen bg-[#0b0e14]">
+    <main className="min-h-screen bg-[#010120]">
       <div className="px-4 sm:px-8 lg:px-16 xl:px-28 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">{t("ideas.title")}</h1>

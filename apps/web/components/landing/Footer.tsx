@@ -40,7 +40,7 @@ const SOCIAL_LINKS = [
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="text-white font-semibold text-[11px] uppercase tracking-[0.12em] mb-5">
+    <h4 className="text-primary font-semibold text-[11px] uppercase tracking-[0.12em] mb-5">
       {children}
     </h4>
   );
@@ -51,11 +51,11 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
     <li>
       <Link
         href={href}
-        className="text-sm text-gray-500 hover:text-white transition-colors relative inline-block group"
+        className="text-sm text-secondary hover:text-primary transition-colors relative inline-block group"
       >
         <span className="relative">
           {children}
-          <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-brand-cyan to-brand-purple group-hover:w-full transition-all duration-300" />
+          <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-black group-hover:w-full transition-all duration-300" />
         </span>
       </Link>
     </li>
@@ -66,109 +66,120 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="relative border-t border-white/5 bg-[#0a0d13] pt-20 pb-8 overflow-hidden">
-      {/* Subtle top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-cyan/40 to-transparent" />
-
-      {/* Subtle background glow */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-cyan/5 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 relative">
-        {/* Top: Brand + columns */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-12 mb-16">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-2">
-            <Link href="/" className="inline-block mb-5 group">
-              <Image
-                src="/logo2.svg"
-                alt="Zenith"
-                width={140}
-                height={40}
-                loading="lazy"
-                className="h-28 w-auto max-w-full transition-transform group-hover:scale-105"
-              />
-            </Link>
-            <p className="text-sm text-gray-500 leading-relaxed mb-8 max-w-xs">
-              {t("tagline")}
-            </p>
-            <div className="flex flex-col gap-3 mb-6">
-              <div className="flex items-center gap-3 text-xs text-gray-500">
-                <span className="text-gray-400 uppercase tracking-wider text-[10px]">{t("language")}</span>
-                <LocaleCurrencySwitcher mode="language" position="up" />
-              </div>
-              <div className="flex items-center gap-3 text-xs text-gray-500">
-                <span className="text-gray-400 uppercase tracking-wider text-[10px]">{t("currency")}</span>
-                <LocaleCurrencySwitcher mode="currency" position="up" />
-              </div>
-            </div>
-            <div className="flex gap-2">
-              {SOCIAL_LINKS.map((link) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -2 }}
-                  className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-gray-500 hover:text-white hover:border-white/20 transition-colors"
-                  aria-label={link.name}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d={link.icon} />
-                  </svg>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Product */}
-          <div className="col-span-1">
-            <SectionTitle>{t("sections.product")}</SectionTitle>
-            <ul className="space-y-3">
-              {PRODUCT_LINKS.map((l) => (
-                <FooterLink key={l.key} href={l.href}>{t(`product.${l.key}`)}</FooterLink>
-              ))}
-            </ul>
-          </div>
-
-          {/* Community */}
-          <div className="col-span-1">
-            <SectionTitle>{t("sections.community")}</SectionTitle>
-            <ul className="space-y-3">
-              {COMMUNITY_LINKS.map((l) => (
-                <FooterLink key={l.key} href={l.href}>{t(`community.${l.key}`)}</FooterLink>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div className="col-span-1">
-            <SectionTitle>{t("sections.resources")}</SectionTitle>
-            <ul className="space-y-3">
-              {RESOURCES_LINKS.map((l) => (
-                <FooterLink key={l.key} href={l.href}>{t(`resources.${l.key}`)}</FooterLink>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div className="col-span-1">
-            <SectionTitle>{t("sections.legal")}</SectionTitle>
-            <ul className="space-y-3">
-              {LEGAL_LINKS.map((l) => (
-                <FooterLink key={l.key} href={l.href}>{t(`legal.${l.key}`)}</FooterLink>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-white/5 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-            <p>{t("copyright")}</p>
-            <p className="text-gray-500 italic">{t("dataAttribution")}</p>
-          </div>
+    <>
+      {/* Wordmark banner */}
+      <div className="bg-canvas py-16 overflow-hidden">
+        <div className="text-center">
+          <span 
+            className="text-[clamp(3rem,15vw,8rem)] font-medium text-secondary leading-none tracking-tight select-none"
+            aria-hidden="true"
+          >
+            zenith.xyz
+          </span>
         </div>
       </div>
-    </footer>
+
+      <footer className="relative border-t border-surface bg-canvas pt-20 pb-8 overflow-hidden">
+        {/* Top hairline */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-surface" />
+
+        <div className="max-w-7xl mx-auto px-6 relative">
+          {/* Top: Brand + columns */}
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-12 mb-16">
+            {/* Brand column */}
+            <div className="col-span-2 md:col-span-2">
+              <Link href="/" className="inline-block mb-5 group">
+                <Image
+                  src="/logo2.svg"
+                  alt="Zenith"
+                  width={140}
+                  height={40}
+                  loading="lazy"
+                  className="h-28 w-auto max-w-full transition-transform group-hover:scale-105"
+                />
+              </Link>
+              <p className="text-sm text-secondary leading-relaxed mb-8 max-w-xs">
+                {t("tagline")}
+              </p>
+              <div className="flex flex-col gap-3 mb-6">
+                <div className="flex items-center gap-3 text-xs text-secondary">
+                  <span className="font-mono-caps">{t("language")}</span>
+                  <LocaleCurrencySwitcher mode="language" position="up" />
+                </div>
+                <div className="flex items-center gap-3 text-xs text-secondary">
+                  <span className="font-mono-caps">{t("currency")}</span>
+                  <LocaleCurrencySwitcher mode="currency" position="up" />
+                </div>
+              </div>
+              <div className="flex gap-2">
+                {SOCIAL_LINKS.map((link) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -2 }}
+                    className="w-9 h-9 rounded-sm bg-raised border border-surface flex items-center justify-center text-secondary hover:text-primary hover:border-primary transition-colors"
+                    aria-label={link.name}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d={link.icon} />
+                    </svg>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Product */}
+            <div className="col-span-1">
+              <SectionTitle>{t("sections.product")}</SectionTitle>
+              <ul className="space-y-3">
+                {PRODUCT_LINKS.map((l) => (
+                  <FooterLink key={l.key} href={l.href}>{t(`product.${l.key}`)}</FooterLink>
+                ))}
+              </ul>
+            </div>
+
+            {/* Community */}
+            <div className="col-span-1">
+              <SectionTitle>{t("sections.community")}</SectionTitle>
+              <ul className="space-y-3">
+                {COMMUNITY_LINKS.map((l) => (
+                  <FooterLink key={l.key} href={l.href}>{t(`community.${l.key}`)}</FooterLink>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div className="col-span-1">
+              <SectionTitle>{t("sections.resources")}</SectionTitle>
+              <ul className="space-y-3">
+                {RESOURCES_LINKS.map((l) => (
+                  <FooterLink key={l.key} href={l.href}>{t(`resources.${l.key}`)}</FooterLink>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="col-span-1">
+              <SectionTitle>{t("sections.legal")}</SectionTitle>
+              <ul className="space-y-3">
+                {LEGAL_LINKS.map((l) => (
+                  <FooterLink key={l.key} href={l.href}>{t(`legal.${l.key}`)}</FooterLink>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="border-t border-surface pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-secondary">
+              <p>{t("copyright")}</p>
+              <p className="italic">{t("dataAttribution")}</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }

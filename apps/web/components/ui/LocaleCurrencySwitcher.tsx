@@ -63,7 +63,7 @@ export default function LocaleCurrencySwitcher({
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+        className="flex items-center gap-1.5 text-sm text-secondary hover:text-primary transition-colors"
         type="button"
         aria-label={mode === "language" ? "Change language" : "Change currency"}
       >
@@ -91,20 +91,20 @@ export default function LocaleCurrencySwitcher({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: position === "up" ? 8 : -8, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className={`absolute ${dropdownPositionClass} w-56 bg-[#131722] border border-[#1f2937] rounded-xl shadow-2xl z-50 overflow-hidden`}
+              className={`absolute ${dropdownPositionClass} w-56 bg-card border border-surface rounded-sm shadow-2xl z-50 overflow-hidden`}
             >
               {/* Mode tabs (if both modes allowed) */}
               {initialMode === "language" && false && (
-                <div className="flex border-b border-[#1f2937]">
+                <div className="flex border-b border-surface">
                   <button
                     onClick={() => setMode("language")}
-                    className={`flex-1 px-3 py-2 text-xs ${mode === "language" ? "text-white bg-[#1f2937]" : "text-gray-500"}`}
+                    className={`flex-1 px-3 py-2 text-xs ${mode === "language" ? "text-primary bg-raised" : "text-secondary"}`}
                   >
                     Langue
                   </button>
                   <button
                     onClick={() => setMode("currency")}
-                    className={`flex-1 px-3 py-2 text-xs ${mode === "currency" ? "text-white bg-[#1f2937]" : "text-gray-500"}`}
+                    className={`flex-1 px-3 py-2 text-xs ${mode === "currency" ? "text-primary bg-raised" : "text-secondary"}`}
                   >
                     Devise
                   </button>
@@ -119,8 +119,8 @@ export default function LocaleCurrencySwitcher({
                         onClick={() => selectLocale(locale as Locale)}
                         className={`w-full flex items-center justify-between px-4 py-2 text-sm transition-colors ${
                           currentLocale === locale
-                            ? "text-white bg-[#1f2937]"
-                            : "text-gray-300 hover:bg-[#1f2937] hover:text-white"
+                            ? "text-primary bg-raised"
+                            : "text-primary hover:bg-raised hover:text-primary"
                         }`}
                         type="button"
                       >
@@ -134,13 +134,13 @@ export default function LocaleCurrencySwitcher({
                         onClick={() => selectCurrency(c as Currency)}
                         className={`w-full flex items-center justify-between px-4 py-2 text-sm transition-colors ${
                           currency === c
-                            ? "text-white bg-[#1f2937]"
-                            : "text-gray-300 hover:bg-[#1f2937] hover:text-white"
+                            ? "text-primary bg-raised"
+                            : "text-primary hover:bg-raised hover:text-primary"
                         }`}
                         type="button"
                       >
                         <span className="flex items-center gap-2">
-                          <span className="text-gray-500 w-5 text-xs">{CURRENCY_SYMBOLS[c]}</span>
+                          <span className="text-secondary w-5 text-xs">{CURRENCY_SYMBOLS[c]}</span>
                           <span className="font-mono text-xs">{c}</span>
                         </span>
                         {currency === c && <Check className="w-4 h-4 text-brand-cyan" />}

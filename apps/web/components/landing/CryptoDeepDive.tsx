@@ -87,8 +87,8 @@ const ALL_ASSETS: AssetData[] = [
 function PercentBadge({ value }: { value: string }) {
   const isPositive = value.startsWith("+");
   return (
-    <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs border ${
-      isPositive ? "bg-up/10 text-up border-up/20" : "bg-down/10 text-down border-down/20"
+    <span className={`inline-flex items-center px-1.5 py-0.5 rounded-sm text-xs border ${
+      isPositive ? "bg-accent-subtle text-accent border-[#c8f6f9]/20" : "bg-[#ef4444]/10 text-[#ef4444] border-[#ef4444]/20"
     }`}>
       {value}
     </span>
@@ -115,9 +115,9 @@ export default function CryptoDeepDive() {
   ], [t]);
 
   return (
-    <section className="py-16 px-4 relative overflow-hidden">
+    <section className="py-16 px-4 relative overflow-hidden bg-canvas">
       {/* Background accents */}
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-brand-purple/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-gradient-brand opacity-5 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -130,25 +130,25 @@ export default function CryptoDeepDive() {
         >
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <p className="text-brand-cyan text-xs font-bold tracking-wider uppercase">
+              <p className="font-mono-caps text-secondary">
                 {t("badge")}
               </p>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
-                isConnected ? "bg-up/20 text-up" : "bg-warn/20 text-warn"
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-wider font-mono ${
+                isConnected ? "bg-accent/20 text-accent" : "bg-[#f59e0b]/20 text-[#f59e0b]"
               }`}>
                 {isConnected ? t("live") : t("offline")}
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              {t.rich("title", { live: (chunks) => <span className="text-brand-cyan">{chunks}</span> })}
+            <h2 className="text-3xl md:text-4xl font-medium text-primary mb-2">
+              {t.rich("title", { live: (chunks) => <span className="text-accent">{chunks}</span> })}
             </h2>
-            <p className="text-gray-400 text-sm">
+            <p className="text-secondary text-sm">
               {t("subtitle")}
             </p>
           </div>
           <Link
             href="/markets"
-            className="text-sm border border-gray-700 px-4 py-2 rounded-lg hover:bg-gray-800 transition flex items-center gap-2 w-fit text-gray-300 hover:text-white"
+            className="text-sm border border-surface px-4 py-2 rounded-sm hover:bg-raised transition flex items-center gap-2 w-fit text-secondary hover:text-primary"
           >
             {t("seeAll")}
             <ArrowRight className="w-4 h-4" />
@@ -166,10 +166,10 @@ export default function CryptoDeepDive() {
           {CATEGORIES.map((cat, i) => (
             <button
               key={cat.value}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition whitespace-nowrap ${
+              className={`px-4 py-1.5 rounded-sm text-sm font-medium transition whitespace-nowrap ${
                 i === 0
-                  ? "bg-brand-cyan/20 border border-brand-cyan text-brand-cyan"
-                   : "border border-gray-700 text-gray-400 hover:bg-gray-800"
+                  ? "bg-accent/10 border border-[#c8f6f9] text-accent"
+                  : "border border-surface text-secondary hover:bg-raised"
               }`}
             >
               {cat.label}
@@ -181,19 +181,19 @@ export default function CryptoDeepDive() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs md:text-sm whitespace-nowrap">
             <thead>
-              <tr className="text-gray-500 border-b border-gray-800">
-                <th className="py-3 px-2 font-medium w-8">{t("tableHeaders.num")}</th>
-                <th className="py-3 px-2 font-medium">{t("tableHeaders.name")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.price")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.24h")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.7d")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.marketCap")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.vol24h")}</th>
-                <th className="py-3 px-2 font-medium text-right">{t("tableHeaders.7dVol")}</th>
-                <th className="py-3 px-2 font-medium w-8"></th>
+              <tr className="font-mono-caps text-secondary border-b border-surface">
+                <th className="py-3 px-2 w-8">{t("tableHeaders.num")}</th>
+                <th className="py-3 px-2">{t("tableHeaders.name")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.price")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.24h")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.7d")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.marketCap")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.vol24h")}</th>
+                <th className="py-3 px-2 text-right">{t("tableHeaders.7dVol")}</th>
+                <th className="py-3 px-2 w-8"></th>
               </tr>
             </thead>
-            <tbody className="text-gray-200">
+            <tbody className="text-primary">
               {ALL_ASSETS.map((asset, idx) => {
                 const livePrice = prices[asset.symbol];
                 const displayPrice = livePrice ? formatPrice(livePrice.price) : formatPrice(asset.basePrice);
@@ -207,35 +207,35 @@ export default function CryptoDeepDive() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05, duration: 0.3 }}
-                    className="border-b border-gray-800/50 hover:bg-dark-card/50 transition cursor-pointer group"
+                    className="border-b border-surface/50 hover:bg-card/50 transition cursor-pointer group"
                   >
-                    <td className="py-4 px-2 text-gray-500">{asset.rank}</td>
+                    <td className="py-4 px-2 text-secondary">{asset.rank}</td>
                     <td className="py-4 px-2">
                       <Link href={`/markets/${slug}`} className="flex items-center gap-2 md:gap-3">
-                        <div className={`w-6 h-6 rounded-full ${asset.iconBg} flex items-center justify-center text-[10px] font-bold text-white shrink-0`}>
+                        <div className={`w-6 h-6 rounded-full ${asset.iconBg} flex items-center justify-center text-[10px] font-bold text-primary shrink-0`}>
                           {asset.iconText}
                         </div>
                         <div>
-                          <div className="font-bold group-hover:text-brand-cyan transition">{asset.name}</div>
-                          <div className="text-[10px] md:text-xs text-gray-500">{asset.symbol}</div>
+                          <div className="font-medium group-hover:text-accent transition">{asset.name}</div>
+                          <div className="text-[10px] md:text-xs text-secondary">{asset.symbol}</div>
                         </div>
                       </Link>
                     </td>
                     <td className="py-4 px-2 text-right font-medium">
-                      <span className={`transition-colors duration-200 ${livePrice ? (livePrice.side === "BUY" ? "text-up" : "text-down") : ""}`}>
+                      <span className={`transition-colors duration-200 ${livePrice ? (livePrice.side === "BUY" ? "text-accent" : "text-[#ef4444]") : ""}`}>
                         {displayPrice}
                       </span>
                     </td>
                     <td className="py-4 px-2 text-right"><PercentBadge value={asset.h24} /></td>
                     <td className="py-4 px-2 text-right"><PercentBadge value={asset.d7} /></td>
-                    <td className="py-4 px-2 text-right text-gray-400">{asset.marketCap}</td>
-                    <td className="py-4 px-2 text-right text-gray-400">{asset.volume}</td>
+                    <td className="py-4 px-2 text-right text-secondary">{asset.marketCap}</td>
+                    <td className="py-4 px-2 text-right text-secondary">{asset.volume}</td>
                     <td className="py-4 px-2 text-right">
                       <svg className="w-12 md:w-16 h-6 inline-block" viewBox="0 0 100 30" preserveAspectRatio="none">
-                        <path d={asset.sparklinePath} fill="none" stroke={isPositive ? "#22c55e" : "#ef4444"} strokeWidth="1.5" />
+                        <path d={asset.sparklinePath} fill="none" stroke={isPositive ? "#c8f6f9" : "#ef4444"} strokeWidth="1.5" />
                       </svg>
                     </td>
-                    <td className="py-4 px-2 text-right text-gray-400 hover:text-yellow-500">
+                    <td className="py-4 px-2 text-right text-secondary hover:text-[#fc4c02]">
                       <Star className="w-4 h-4 ml-auto" />
                     </td>
                   </motion.tr>
@@ -255,7 +255,7 @@ export default function CryptoDeepDive() {
         >
           <Link
             href="/markets"
-            className="inline-flex items-center gap-2 text-brand-cyan hover:text-white transition-colors text-sm font-medium"
+            className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors text-sm font-medium"
           >
             {t("exploreAll")}
             <ArrowRight className="w-4 h-4" />

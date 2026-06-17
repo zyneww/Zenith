@@ -10,7 +10,7 @@ const INDICES_SYMBOLS = [
 ];
 
 function getChangeColor(change: number): string {
-  return change >= 0 ? "text-green-400" : "text-red-400";
+  return change >= 0 ? "text-accent" : "text-[#ef4444]";
 }
 
 function formatPrice(price: number): string {
@@ -82,7 +82,7 @@ export default function IndicesClient() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#00e5ff]" />
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-accent" />
       </div>
     );
   }
@@ -95,10 +95,10 @@ export default function IndicesClient() {
           <button
             key={region}
             onClick={() => setFilter(region)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-sm text-sm font-medium transition-colors ${
               filter === region
-                ? "bg-[#00e5ff] text-[#0b0e14]"
-                : "bg-[#131722] text-gray-400 hover:text-white"
+                ? "bg-accent text-inverse"
+                : "bg-card text-secondary hover:text-primary"
             }`}
           >
             {t(`indices.filter.${region}`)}
@@ -109,28 +109,28 @@ export default function IndicesClient() {
       {/* Indices Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredIndices.length === 0 ? (
-          <div className="col-span-full text-center text-gray-500 py-12">
+          <div className="col-span-full text-center text-secondary py-12">
             {t("indices.noData")}
           </div>
         ) : (
           filteredIndices.map((index) => (
             <div
               key={index.symbol}
-              className="bg-[#131722] rounded-xl border border-gray-800 p-4 hover:border-[#00e5ff]/30 transition-colors"
+              className="bg-card rounded-sm border border-surface p-4 hover:border-accent/30 transition-colors"
             >
               <div className="flex items-center justify-between mb-3">
                 <div>
-                  <h3 className="text-white font-semibold text-sm">
+                  <h3 className="text-primary font-semibold text-sm">
                     {getIndexName(index.symbol)}
                   </h3>
-                  <p className="text-gray-500 text-xs">{index.symbol}</p>
+                  <p className="text-secondary text-xs">{index.symbol}</p>
                 </div>
-                <span className="text-xs text-gray-500 px-2 py-1 rounded bg-[#1a1f2e]">
+                <span className="text-xs text-secondary px-2 py-1 rounded-sm bg-raised">
                   {getRegion(index.symbol)}
                 </span>
               </div>
               <div className="space-y-2">
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-medium text-primary">
                   {formatPrice(index.price)}
                 </div>
                 <div className="flex items-center gap-2">
@@ -145,12 +145,12 @@ export default function IndicesClient() {
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
-                    <span className="text-gray-500">High</span>
-                    <p className="text-gray-300">{formatPrice(index.high)}</p>
+                    <span className="text-secondary">High</span>
+                    <p className="text-primary">{formatPrice(index.high)}</p>
                   </div>
                   <div>
-                    <span className="text-gray-500">Low</span>
-                    <p className="text-gray-300">{formatPrice(index.low)}</p>
+                    <span className="text-secondary">Low</span>
+                    <p className="text-primary">{formatPrice(index.low)}</p>
                   </div>
                 </div>
               </div>
@@ -160,38 +160,38 @@ export default function IndicesClient() {
       </div>
 
       {/* Market Overview */}
-      <div className="bg-[#131722] rounded-xl border border-gray-800 p-6">
-        <h3 className="text-lg font-semibold text-white mb-4">
+      <div className="bg-card rounded-sm border border-surface p-6">
+        <h3 className="text-lg font-semibold text-primary mb-4">
           {t("indices.overview")}
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">
+            <div className="text-3xl font-medium text-primary mb-1">
               {indices.filter((i) => i.changePercent >= 0).length}
             </div>
-            <div className="text-sm text-green-400">{t("indices.rising")}</div>
+            <div className="text-sm text-accent">{t("indices.rising")}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">
+            <div className="text-3xl font-medium text-primary mb-1">
               {indices.filter((i) => i.changePercent < 0).length}
             </div>
-            <div className="text-sm text-red-400">{t("indices.falling")}</div>
+            <div className="text-sm text-[#ef4444]">{t("indices.falling")}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">
+            <div className="text-3xl font-medium text-primary mb-1">
               {indices.length > 0
                 ? (indices.reduce((sum, i) => sum + i.changePercent, 0) / indices.length).toFixed(2) + "%"
                 : "—"}
             </div>
-            <div className="text-sm text-gray-400">{t("indices.avgChange")}</div>
+            <div className="text-sm text-secondary">{t("indices.avgChange")}</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">
+            <div className="text-3xl font-medium text-primary mb-1">
               {indices.length > 0
                 ? Math.max(...indices.map((i) => i.changePercent)).toFixed(2) + "%"
                 : "—"}
             </div>
-            <div className="text-sm text-green-400">{t("indices.bestPerf")}</div>
+            <div className="text-sm text-accent">{t("indices.bestPerf")}</div>
           </div>
         </div>
       </div>

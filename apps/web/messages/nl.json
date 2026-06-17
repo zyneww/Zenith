@@ -147,7 +147,7 @@
     "seeAll": "See all"
   },
   "crypto": {
-    "title": "Crypto deep dive",
+    "title": "Crypto deep dive, <live>live</live>",
     "subtitle": "On-chain data, sociale statistieken, dominantie en liquidaties",
     "metrics": {
       "marketCap": "Marktkapitalisatie",

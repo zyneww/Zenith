@@ -15,16 +15,16 @@ export default function Accordion({ title, defaultOpen = false, children }: Acco
   const panelId = `accordion-panel-${id}`;
 
   return (
-    <div className="border-b border-[#1f2937]">
+    <div className="border-b border-surface">
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={panelId}
         className="flex items-center justify-between w-full py-4 text-left"
       >
-        <span className="text-white font-semibold text-base">{title}</span>
+        <span className="text-primary font-semibold text-base">{title}</span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
+          className={`w-5 h-5 text-secondary transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />

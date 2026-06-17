@@ -31,15 +31,15 @@ export default function ComparisonTable({ plans }: ComparisonTableProps) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-700/50">
-            <th className="text-left py-4 px-4 font-medium text-gray-400">
+          <tr className="border-b border-[#ebebeb]">
+            <th className="text-left py-4 px-4 font-mono-caps text-[#959494]">
               Fonctionnalité
             </th>
             {plans.map((plan) => (
               <th
                 key={plan.name}
-                className={`text-center py-4 px-4 font-bold ${
-                  plan.name === "Pro" ? "text-brand-purple-light" : "text-white"
+                className={`text-center py-4 px-4 font-medium ${
+                  plan.name === "Pro" ? "text-black" : "text-black"
                 }`}
               >
                 {plan.name}
@@ -51,31 +51,31 @@ export default function ComparisonTable({ plans }: ComparisonTableProps) {
           {allFeatures.map((feature, i) => (
             <tr
               key={feature.label}
-              className={`border-b border-gray-800/30 ${
-                i % 2 === 0 ? "bg-white/[0.02]" : ""
+              className={`border-b border-[#ebebeb]/50 ${
+                i % 2 === 0 ? "bg-[#f5f5f7]/50" : ""
               }`}
             >
-              <td className="py-3 px-4 text-gray-300">{feature.label}</td>
+              <td className="py-3 px-4 text-[#959494]">{feature.label}</td>
               <td className="py-3 px-4 text-center">
                 {typeof feature.free === "boolean" ? (
                   feature.free ? (
-                    <Check className="w-4 h-4 text-green-500 mx-auto" />
+                    <Check className="w-4 h-4 text-[#c8f6f9] mx-auto" />
                   ) : (
-                    <X className="w-4 h-4 text-gray-400 mx-auto" />
+                    <X className="w-4 h-4 text-[#959494] mx-auto" />
                   )
                 ) : (
-                  <span className="text-gray-400">{feature.free}</span>
+                  <span className="text-[#959494]">{feature.free}</span>
                 )}
               </td>
               <td className="py-3 px-4 text-center">
                 {typeof feature.pro === "boolean" ? (
                   feature.pro ? (
-                    <Check className="w-4 h-4 text-green-500 mx-auto" />
+                    <Check className="w-4 h-4 text-[#c8f6f9] mx-auto" />
                   ) : (
-                    <X className="w-4 h-4 text-gray-400 mx-auto" />
+                    <X className="w-4 h-4 text-[#959494] mx-auto" />
                   )
                 ) : (
-                  <span className="text-gray-400">{feature.pro}</span>
+                  <span className="text-[#959494]">{feature.pro}</span>
                 )}
               </td>
             </tr>

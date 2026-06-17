@@ -46,18 +46,18 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="w-full max-w-md bg-[#131722] border border-[#1f2937] rounded-2xl shadow-2xl overflow-hidden"
+            className="w-full max-w-md bg-card border border-surface rounded-sm shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-2">
-              <div className="flex gap-1 bg-[#1a1f2e] rounded-lg p-1">
+              <div className="flex gap-1 bg-raised rounded-sm p-1">
                 <button
                   onClick={() => setTab("login")}
                   className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
                     tab === "login"
-                      ? "bg-brand-purple text-white"
-                      : "text-gray-400 hover:text-white"
+                      ? "bg-brand-purple text-primary"
+                      : "text-secondary hover:text-primary"
                   }`}
                   type="button"
                 >
@@ -67,8 +67,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   onClick={() => setTab("register")}
                   className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
                     tab === "register"
-                      ? "bg-brand-purple text-white"
-                      : "text-gray-400 hover:text-white"
+                      ? "bg-brand-purple text-primary"
+                      : "text-secondary hover:text-primary"
                   }`}
                   type="button"
                 >
@@ -77,7 +77,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-white transition-colors p-1 rounded-full hover:bg-white/5"
+                className="text-secondary hover:text-primary transition-colors p-1 rounded-full hover:bg-[var(--text-primary)]/5"
                 type="button"
                 aria-label="Fermer"
               >
@@ -98,15 +98,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 >
                   {tab === "register" && (
                     <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">Full name</label>
+                      <label className="block text-sm text-secondary mb-1.5">Full name</label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary" />
                         <input
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="John Doe"
-                          className="w-full bg-[#1a1f2e] border border-[#1f2937] rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan/20 transition-all"
+                          className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
                           required
                         />
                       </div>
@@ -114,30 +114,30 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   )}
 
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1.5">Email</label>
+                    <label className="block text-sm text-secondary mb-1.5">Email</label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary" />
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="w-full bg-[#1a1f2e] border border-[#1f2937] rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan/20 transition-all"
+                        className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1.5">Password</label>
+                    <label className="block text-sm text-secondary mb-1.5">Password</label>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary" />
                       <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full bg-[#1a1f2e] border border-[#1f2937] rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan/20 transition-all"
+                        className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
                         required
                       />
                     </div>
@@ -146,7 +146,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-brand-purple hover:bg-[#6833c9] text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-brand-purple hover:bg-[#6833c9] text-white font-semibold py-2.5 rounded-sm transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -160,7 +160,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </motion.div>
               </AnimatePresence>
 
-              <p className="text-xs text-gray-500 text-center mt-4">
+              <p className="text-xs text-secondary text-center mt-4">
                 By continuing, you agree to our{" "}
                 <Link href="/legal/terms" className="text-brand-cyan hover:underline" onClick={onClose}>
                   Terms

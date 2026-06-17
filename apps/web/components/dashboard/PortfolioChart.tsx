@@ -12,7 +12,7 @@ export default function PortfolioChart() {
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { color: "#131722" },
+        background: { color: "#313641" },
         textColor: "#d1d5db",
       },
       grid: {
@@ -32,7 +32,7 @@ export default function PortfolioChart() {
     chartRef.current = chart;
 
     const lineSeries = chart.addSeries(LineSeries, {
-      color: "#00e5ff",
+      color: "#c8f6f9",
       lineWidth: 2,
       title: "Valeur du Portfolio",
     });
@@ -63,18 +63,18 @@ export default function PortfolioChart() {
   }, []);
 
   return (
-    <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-5">
+    <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-white font-semibold text-lg">Évolution du Portfolio</h3>
+        <h3 className="text-primary font-semibold text-lg">Évolution du Portfolio</h3>
         <div className="flex gap-2">
           {["1J", "1S", "1M", "3M", "1A", "Tout"].map((period) => (
             <button
               key={period}
               aria-label={`Période ${period}`}
-              className={`px-3 py-1 text-xs rounded-lg transition-colors ${
+              className={`px-3 py-1 text-xs rounded-sm transition-colors ${
                 period === "1M"
-                  ? "bg-brand-purple text-white"
-                  : "bg-[#1f2937] text-gray-400 hover:text-white"
+                  ? "bg-brand-purple text-primary"
+                  : "bg-[#1f2937] text-secondary hover:text-primary"
               }`}
             >
               {period}

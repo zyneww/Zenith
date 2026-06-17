@@ -16,7 +16,7 @@ const ASSETS: Asset[] = [
   { name: "Bitcoin", symbol: "BTC", allocation: 45, value: 56166.58, color: "#f7931a" },
   { name: "Ethereum", symbol: "ETH", allocation: 30, value: 37444.39, color: "#627eea" },
   { name: "Solana", symbol: "SOL", allocation: 15, value: 18722.19, color: "#14f195" },
-  { name: "Autres", symbol: "OTH", allocation: 10, value: 12481.46, color: "#7b3fe4" },
+  { name: "Autres", symbol: "OTH", allocation: 10, value: 12481.46, color: "#ef2cc1" },
 ];
 
 interface Transaction {
@@ -42,13 +42,13 @@ function AssetAllocation() {
   const totalValue = ASSETS.reduce((sum, a) => sum + a.value, 0);
 
   return (
-    <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-5">
+    <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+        <h3 className="text-primary font-semibold text-lg flex items-center gap-2">
           <PieChart className="w-5 h-5 text-brand-purple-light" />
           Répartition des Actifs
         </h3>
-        <span className="text-gray-400 text-sm">{ASSETS.length} actifs</span>
+        <span className="text-secondary text-sm">{ASSETS.length} actifs</span>
       </div>
 
       {/* Simple bar chart representation */}
@@ -81,22 +81,22 @@ function AssetAllocation() {
                 style={{ backgroundColor: asset.color }}
               />
               <div>
-                <p className="text-white font-medium">{asset.name}</p>
-                <p className="text-gray-500 text-sm">{asset.symbol}</p>
+                <p className="text-primary font-medium">{asset.name}</p>
+                <p className="text-secondary text-sm">{asset.symbol}</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-white font-medium">${asset.value.toLocaleString()}</p>
-              <p className="text-gray-400 text-sm">{asset.allocation}%</p>
+              <p className="text-primary font-medium">${asset.value.toLocaleString()}</p>
+              <p className="text-secondary text-sm">{asset.allocation}%</p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="mt-4 pt-4 border-t border-[#1f2937]">
+      <div className="mt-4 pt-4 border-t border-surface">
         <div className="flex justify-between text-sm">
-          <span className="text-gray-400">Valeur Totale</span>
-          <span className="text-white font-bold">${totalValue.toLocaleString()}</span>
+          <span className="text-secondary">Valeur Totale</span>
+          <span className="text-primary font-medium">${totalValue.toLocaleString()}</span>
         </div>
       </div>
     </div>
@@ -105,9 +105,9 @@ function AssetAllocation() {
 
 function TransactionTable() {
   return (
-    <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-5">
+    <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+        <h3 className="text-primary font-semibold text-lg flex items-center gap-2">
           <Clock className="w-5 h-5 text-brand-cyan" />
           Historique des Transactions
         </h3>
@@ -119,13 +119,13 @@ function TransactionTable() {
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-[#1f2937]">
-              <th className="text-left text-gray-400 text-sm font-medium pb-3">Type</th>
-              <th className="text-left text-gray-400 text-sm font-medium pb-3">Actif</th>
-              <th className="text-right text-gray-400 text-sm font-medium pb-3">Montant</th>
-              <th className="text-right text-gray-400 text-sm font-medium pb-3">Prix</th>
-              <th className="text-right text-gray-400 text-sm font-medium pb-3">Total</th>
-              <th className="text-right text-gray-400 text-sm font-medium pb-3">Date</th>
+            <tr className="border-b border-surface">
+              <th className="text-left text-secondary text-sm font-medium pb-3">Type</th>
+              <th className="text-left text-secondary text-sm font-medium pb-3">Actif</th>
+              <th className="text-right text-secondary text-sm font-medium pb-3">Montant</th>
+              <th className="text-right text-secondary text-sm font-medium pb-3">Prix</th>
+              <th className="text-right text-secondary text-sm font-medium pb-3">Total</th>
+              <th className="text-right text-secondary text-sm font-medium pb-3">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -135,7 +135,7 @@ function TransactionTable() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="border-b border-[#1f2937]/50 last:border-0 hover:bg-[#1a1f2e] transition-colors"
+                className="border-b border-surface/50 last:border-0 hover:bg-raised transition-colors"
               >
                 <td className="py-3">
                   <span
@@ -148,13 +148,13 @@ function TransactionTable() {
                     {tx.type === "buy" ? "Achat" : "Vente"}
                   </span>
                 </td>
-                <td className="py-3 text-white font-medium">{tx.asset}</td>
-                <td className="py-3 text-right text-gray-300">{tx.amount}</td>
-                <td className="py-3 text-right text-gray-300">${tx.price.toLocaleString()}</td>
-                <td className="py-3 text-right text-white font-medium">
+                <td className="py-3 text-primary font-medium">{tx.asset}</td>
+                <td className="py-3 text-right text-primary">{tx.amount}</td>
+                <td className="py-3 text-right text-primary">${tx.price.toLocaleString()}</td>
+                <td className="py-3 text-right text-primary font-medium">
                   ${tx.total.toLocaleString()}
                 </td>
-                <td className="py-3 text-right text-gray-500 text-sm">{tx.date}</td>
+                <td className="py-3 text-right text-secondary text-sm">{tx.date}</td>
               </motion.tr>
             ))}
           </tbody>
@@ -180,12 +180,12 @@ function PerformanceMetrics() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: index * 0.1 }}
-          className="bg-[#131722] border border-[#1f2937] rounded-xl p-4"
+          className="bg-card border border-surface rounded-sm p-4"
         >
-          <p className="text-gray-400 text-sm mb-1">{metric.label}</p>
+          <p className="text-secondary text-sm mb-1">{metric.label}</p>
           <div className="flex items-center gap-2">
             <metric.icon className={`w-4 h-4 ${metric.color}`} />
-            <span className="text-xl font-bold text-white">{metric.value}</span>
+            <span className="text-xl font-medium text-primary">{metric.value}</span>
           </div>
         </motion.div>
       ))}
@@ -197,7 +197,7 @@ export default function PortfolioPage() {
 return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#0b0e14] text-white">
+      <main className="min-h-screen bg-canvas text-primary">
         <div className="max-w-7xl mx-auto px-6 py-8">
           {/* Header */}
           <motion.div
@@ -206,8 +206,8 @@ return (
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-white mb-2">Portfolio</h1>
-            <p className="text-gray-400">
+            <h1 className="text-3xl font-bold text-primary mb-2">Portfolio</h1>
+            <p className="text-secondary">
               Analyse détaillée de vos actifs et performances historiques.
             </p>
           </motion.div>

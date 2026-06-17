@@ -20,7 +20,7 @@ export default function TradingViewChart({ data, volumeData, height = 400 }: Cha
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { color: "#131722" },
+        background: { color: "#313641" },
         textColor: "#d1d5db",
       },
       grid: {
@@ -101,7 +101,7 @@ export default function TradingViewChart({ data, volumeData, height = 400 }: Cha
     <div 
       ref={chartContainerRef} 
       style={{ width: "100%", height }}
-      className="rounded-lg overflow-hidden border border-[#1f2937]"
+      className="rounded-lg overflow-hidden border border-surface"
     />
   );
 }

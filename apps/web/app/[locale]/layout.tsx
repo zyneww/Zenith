@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -20,8 +20,15 @@ const inter = Inter({
   display: "swap",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#0b0e14",
+  themeColor: "#010120",
 };
 
 export function generateStaticParams() {
@@ -109,13 +116,13 @@ export default async function LocaleLayout({
   const dir = isRTL(locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={inter.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-[#0b0e14] text-white">
+    <html lang={locale} dir={dir} className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-canvas text-primary">
         <ClerkProvider>
         <SerwistProvider swUrl="/serwist/sw.js">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-brand-purple focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent-dark focus:text-primary focus:px-4 focus:py-2 focus:rounded-sm font-mono-caps"
         >
           Skip to main content
         </a>

@@ -88,7 +88,7 @@ const newsItems: DropdownItem[] = [
 ];
 
 const toolsItems: DropdownItem[] = [
-  { iconName: "BarChart3", label: "Superchart", href: "/markets", group: "Analyse" },
+  { iconName: "BarChart3", label: "SuperChart", href: "/markets", group: "Analyse" },
   { iconName: "Search", label: "Screener", href: "/tools/screener", group: "Analyse" },
   { iconName: "Scale", label: "Comparer", href: "/tools/compare", group: "Analyse" },
   { iconName: "Activity", label: "Corrélation", href: "/tools/correlation", group: "Analyse" },
@@ -156,7 +156,7 @@ export default function Header() {
           {/* Search icon */}
           <button
             onClick={openPalette}
-            className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5 hidden lg:flex"
+            className="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-raised/50 hidden lg:flex"
             aria-label="Rechercher"
             type="button"
           >
@@ -168,10 +168,10 @@ export default function Header() {
             <UserMenu />
           </div>
 
-          {/* Commencer button */}
+          {/* Commencer button — black mono-caps */}
           <SignUpButton mode="modal" forceRedirectUrl="/pricing">
             <button
-              className="hidden lg:block bg-brand-purple text-white hover:bg-[#6833c9] text-sm font-semibold px-5 py-2 rounded-full transition-colors shadow-glow-purple cursor-pointer"
+              className="hidden lg:block bg-inverse text-primary font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-sm transition-colors hover:bg-raised cursor-pointer"
               type="button"
             >
               Commencer
@@ -180,7 +180,7 @@ export default function Header() {
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden text-gray-400 hover:text-white transition-colors p-2"
+            className="lg:hidden text-secondary hover:text-primary transition-colors p-2"
             onClick={() => setDrawerOpen(true)}
             aria-label="Ouvrir le menu"
             type="button"

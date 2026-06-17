@@ -50,19 +50,19 @@ const plans = [
 
 export default function SubscriptionPage() {
 return (
-    <div className="min-h-[100dvh] bg-[#0b0e14] text-white">
+    <div className="min-h-[100dvh] bg-canvas text-primary">
       <Header />
 
       {/* Hero Pricing */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium mb-6 text-primary">
             Choisissez votre{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-brand-purple">
+            <span className="text-gradient-brand">
               plan
             </span>
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             Des outils puissants pour chaque niveau. Commencez gratuit et
             évoluez vers le Pro quand vous êtes prêt.
           </p>
@@ -81,7 +81,7 @@ return (
       {/* Comparison Table */}
       <section className="pb-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-12 text-white">
+          <h2 className="text-2xl font-medium text-center mb-12 text-primary">
             Comparaison des fonctionnalités
           </h2>
           <ComparisonTable plans={plans} />
@@ -89,22 +89,22 @@ return (
       </section>
 
       {/* Trust badges */}
-      <section className="pb-20 px-4 sm:px-6 lg:px-8 border-t border-gray-800/50">
+      <section className="pb-20 px-4 sm:px-6 lg:px-8 border-t border-surface">
         <div className="max-w-4xl mx-auto text-center pt-12">
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-secondary mb-4">
             Paiement sécurisé par Stripe. Annulez à tout moment.
           </p>
-          <div className="flex justify-center items-center gap-6 text-gray-400">
+          <div className="flex justify-center items-center gap-6 text-secondary">
             <span className="flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4 text-green-500" />
+              <Check className="w-4 h-4 text-accent" />
               SSL 256-bit
             </span>
             <span className="flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4 text-green-500" />
+              <Check className="w-4 h-4 text-accent" />
               PCI Compliant
             </span>
             <span className="flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4 text-green-500" />
+              <Check className="w-4 h-4 text-accent" />
               Sans engagement
             </span>
           </div>

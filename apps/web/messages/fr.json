@@ -74,6 +74,7 @@
     "ctaSecondary": "Explorer les marchés",
     "ctaSecondarySub": "Gratuit — aucune carte de crédit requise",
     "poweredBy": "Alimenté par",
+    "eyebrow": "Intelligence financière",
     "scroll": "Scroll",
     "keyboardHint": "Press / or ⌘K to search for any asset"
   },
@@ -147,7 +148,7 @@
     "seeAll": "See all"
   },
   "crypto": {
-    "title": "Crypto en profondeur",
+    "title": "Crypto en profondeur, <live>en direct</live>",
     "subtitle": "Données on-chain, métriques sociales, dominance et liquidations",
     "metrics": {
       "marketCap": "Market cap",

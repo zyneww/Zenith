@@ -125,15 +125,15 @@ export default function MarketsTable() {
               {isConnected ? "● LIVE" : "◌ OFFLINE"}
             </span>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2">
+          <h2 className="text-3xl font-bold text-primary mb-2">
             Top 15 cryptos, <span className="text-brand-cyan">en direct</span>
           </h2>
-          <p className="text-gray-400 text-sm">
+          <p className="text-secondary text-sm">
             Prix, variations et volumes mis à jour en continu. Filtrez par
             catégorie pour focus.
           </p>
         </div>
-        <button className="text-sm border border-gray-700 px-4 py-2 rounded-lg hover:bg-gray-800 transition flex items-center gap-2 w-fit text-white">
+        <button className="text-sm border border-gray-700 px-4 py-2 rounded-lg hover:bg-gray-800 transition flex items-center gap-2 w-fit text-primary">
           Voir tout le marché
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -154,7 +154,7 @@ export default function MarketsTable() {
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition whitespace-nowrap ${
               i === 0
                 ? "bg-brand-cyan/20 border border-brand-cyan text-brand-cyan"
-                : "border border-gray-700 text-gray-400 hover:bg-gray-800"
+                : "border border-gray-700 text-secondary hover:bg-gray-800"
             }`}
           >
             {cat}
@@ -166,7 +166,7 @@ export default function MarketsTable() {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs md:text-sm whitespace-nowrap">
           <thead>
-            <tr className="text-gray-500 border-b border-gray-800">
+            <tr className="text-gray-500 border-b border-surface">
               <th className="py-3 px-1 font-medium w-6">#</th>
               <th className="py-3 px-1 font-medium">NOM</th>
               <th className="py-3 px-1 font-medium text-right">PRIX</th>
@@ -193,13 +193,13 @@ export default function MarketsTable() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.4 }}
-                  className="border-b border-gray-800/50 hover:bg-[#131722]/50 transition cursor-pointer"
+                  className="border-b border-surface/50 hover:bg-card/50 transition cursor-pointer"
                 >
                   <td className="py-4 px-1 text-gray-500">{asset.rank}</td>
                   <td className="py-4 px-1">
                     <div className="flex items-center gap-2 md:gap-3">
                       <div
-                        className={`w-6 h-6 rounded-full ${asset.iconBg} flex items-center justify-center text-[10px] font-bold text-white shrink-0`}
+                        className={`w-6 h-6 rounded-full ${asset.iconBg} flex items-center justify-center text-[10px] font-bold text-primary shrink-0`}
                       >
                         {asset.iconText}
                       </div>
@@ -233,10 +233,10 @@ export default function MarketsTable() {
                   <td className="py-4 px-1 text-right">
                     <PercentBadge value={asset.d7} />
                   </td>
-                  <td className="py-4 px-1 text-right text-gray-400">
+                  <td className="py-4 px-1 text-right text-secondary">
                     {asset.marketCap}
                   </td>
-                  <td className="py-4 px-1 text-right text-gray-400">
+                  <td className="py-4 px-1 text-right text-secondary">
                     {asset.volume}
                   </td>
                   <td className="py-4 px-1 text-right">
@@ -253,7 +253,7 @@ export default function MarketsTable() {
                       />
                     </svg>
                   </td>
-                  <td className="py-4 px-1 text-right text-gray-400 hover:text-yellow-500">
+                  <td className="py-4 px-1 text-right text-secondary hover:text-yellow-500">
                     <Star className="w-4 h-4 ml-auto" />
                   </td>
                 </motion.tr>

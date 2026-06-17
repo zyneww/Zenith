@@ -40,15 +40,15 @@ export default function PricingCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={`relative rounded-2xl p-8 border ${
+      className={`relative rounded-sm p-8 border ${
         featured
-          ? "border-brand-purple/50 bg-gradient-to-b from-brand-purple/10 to-transparent"
-          : "border-gray-700/50 bg-[#131722]/50"
+          ? "border-[#ebebeb] bg-black text-white"
+          : "border-[#ebebeb] bg-white"
       }`}
     >
       {featured && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="bg-brand-purple text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wide">
+          <span className="bg-[#c8f6f9] text-black text-[10px] font-bold px-4 py-1 rounded-sm uppercase tracking-wider font-mono">
             Recommandé
           </span>
         </div>
@@ -56,38 +56,38 @@ export default function PricingCard({
 
       <div className="flex items-center gap-3 mb-4">
         <div
-          className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-            featured ? "bg-brand-purple/20" : "bg-gray-700/30"
+          className={`w-10 h-10 rounded-sm flex items-center justify-center ${
+            featured ? "bg-[#c8f6f9]/20" : "bg-[#f5f5f7]"
           }`}
         >
-          <Icon className={`w-5 h-5 ${featured ? "text-brand-purple-light" : "text-gray-400"}`} />
+          <Icon className={`w-5 h-5 ${featured ? "text-[#c8f6f9]" : "text-[#959494]"}`} />
         </div>
         <div>
-          <h3 className="text-xl font-bold">{name}</h3>
-          <p className="text-sm text-gray-500">{description}</p>
+          <h3 className={`text-xl font-medium ${featured ? "text-white" : "text-black"}`}>{name}</h3>
+          <p className={`text-sm ${featured ? "text-[#959494]" : "text-[#959494]"}`}>{description}</p>
         </div>
       </div>
 
       <div className="mb-6">
-        <span className="text-4xl font-bold">{price}</span>
-        <span className="text-gray-500 ml-1">{period}</span>
+        <span className={`text-4xl font-medium ${featured ? "text-white" : "text-black"}`}>{price}</span>
+        <span className={`${featured ? "text-[#959494]" : "text-[#959494]"} ml-1`}>{period}</span>
       </div>
 
       <ul className="space-y-3 mb-8">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-3 text-sm">
-            <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-            <span className="text-gray-300">{feature}</span>
+            <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${featured ? "text-[#c8f6f9]" : "text-[#c8f6f9]"}`} />
+            <span className={featured ? "text-[#959494]" : "text-[#959494]"}>{feature}</span>
           </li>
         ))}
       </ul>
 
       <Link
         href={href}
-        className={`block w-full text-center font-semibold py-3 rounded-lg transition-colors ${
+        className={`block w-full text-center font-mono text-sm uppercase tracking-wider py-2.5 rounded-sm transition-colors ${
           featured
-            ? "bg-brand-purple text-white hover:bg-[#6833c9] shadow-glow-purple"
-            : "bg-white/5 border border-gray-600 text-white hover:bg-white/10"
+            ? "bg-white text-black hover:bg-[#f5f5f7]"
+            : "bg-black text-white hover:bg-[#1a1a2e]"
         }`}
       >
         {cta}

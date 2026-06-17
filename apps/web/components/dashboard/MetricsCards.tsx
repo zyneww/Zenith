@@ -25,14 +25,14 @@ function MetricCard({ title, value, change, changeType, icon, delay }: MetricCar
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className="bg-[#131722] border border-[#1f2937] rounded-xl p-5 hover:border-[#2d3747] transition-colors"
+      className="bg-card border border-surface rounded-sm p-5 hover:border-[#26263a] transition-colors"
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-gray-400 text-sm mb-1">{title}</p>
-          <p className="text-2xl font-bold text-white">{value}</p>
+          <p className="text-secondary text-sm mb-1">{title}</p>
+          <p className="text-2xl font-medium text-primary">{value}</p>
         </div>
-        <div className="p-2 bg-[#1f2937] rounded-lg">{icon}</div>
+        <div className="p-2 bg-[#1f2937] rounded-sm">{icon}</div>
       </div>
       <div className="mt-3 flex items-center gap-1">
         {changeType === "positive" && (
@@ -47,12 +47,12 @@ function MetricCard({ title, value, change, changeType, icon, delay }: MetricCar
               ? "text-green-500"
               : changeType === "negative"
               ? "text-red-500"
-              : "text-gray-400"
+              : "text-secondary"
           }`}
         >
           {change}
         </span>
-        <span className="text-gray-500 text-sm ml-1">vs hier</span>
+        <span className="text-secondary text-sm ml-1">vs hier</span>
       </div>
     </motion.div>
   );

@@ -147,7 +147,7 @@
     "seeAll": "See all"
   },
   "crypto": {
-    "title": "Crypto in profondità",
+    "title": "Crypto in profondità, <live>live</live>",
     "subtitle": "Dati on-chain, metriche social, dominanza e liquidazioni",
     "metrics": {
       "marketCap": "Capitalizzazione",

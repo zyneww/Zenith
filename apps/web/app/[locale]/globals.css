@@ -3,33 +3,112 @@
 @variant dark (&:is(.dark *));
 
 @theme {
-  /* Dark mode colors (always) */
-  --color-dark-bg: #0b0e14;
-  --color-dark-card: #131722;
-  --color-dark-elevated: #0d1017;
-  --color-dark-deep: #07090c;
-  --color-dark-border: #1f2937;
+  /* ============================================
+     DESIGN.md Tokens — Together AI-inspired
+     ============================================ */
 
-  /* Brand */
-  --color-brand-cyan: #00e5ff;
-  --color-brand-purple: #7b3fe4;
-  --color-brand-purple-light: #b087ff;
+  /* Surfaces */
+  --color-canvas-dark: #010120;
+  --color-canvas: #ffffff;
+  --color-surface-dark-soft: #313641;
+  --color-surface-dark-medium: #2d2d46;
+  --color-surface-dark-strong: #26263a;
+  --color-surface-dark-subtle: #1a1a2e;
 
-  /* Semantic colors */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #d1d5db;
-  --color-text-muted: #6b7280;
-  --color-text-subtle: #374151;
+  /* Content colors */
+  --color-ink: #000000;
+  --color-body: #959494;
+  --color-ink-secondary: #f5f5f7;
+  --color-ink-secondary-inverse: #959494;
+  --color-ink-inverse: #ffffff;
 
-  /* Status */
+  /* Accent colors */
+  --color-accent-orange: #fc4c02;
+  --color-accent-magenta: #ef2cc1;
+  --color-accent-periwinkle: #bdbbff;
+  --color-accent-mint: #c8f6f9;
+
+  /* Hairlines */
+  --color-hairline: #ebebeb;
+  --color-hairline-on-dark: #26263a;
+
+  /* Status (preserved for compatibility) */
   --color-up: #22c55e;
   --color-down: #ef4444;
   --color-warn: #f59e0b;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /* Legacy tokens (removed — transition complete) */
 
+  /* Fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Radii */
+  --radius-xs: 3.25px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Shadows (kept minimal, only for focus states) */
   --shadow-glow-purple: 0 0 10px rgba(123, 63, 228, 0.3);
   --shadow-glow-cyan: 0 0 15px rgba(0, 229, 255, 0.2);
+  --shadow-focus-ring: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   DARK/LIGHT MODE — CSS Custom Properties
+   ============================================ */
+:root {
+  --bg-canvas: #f5f5f7;
+  --bg-card: #ffffff;
+  --bg-raised: #f0f0f2;
+  --bg-input: #ffffff;
+  --bg-inset: #ebebeb;
+  --bg-accent: #c8f6f9;
+  --bg-accent-subtle: rgba(200, 246, 249, 0.1);
+  --bg-accent-dark: #010120;
+  --text-primary: #000000;
+  --text-secondary: #959494;
+  --text-tertiary: #6b7280;
+  --text-accent: #c8f6f9;
+  --text-inverse: #010120;
+  --border-default: #ebebeb;
+  --border-hover: #d0d0d0;
+  --border-accent: #c8f6f9;
+  --icon-default: #959494;
+  --icon-hover: #c8f6f9;
+  --gradient-start: #fc4c02;
+  --gradient-mid: #ef2cc1;
+  --gradient-end: #bdbbff;
+  --grid-line: rgba(0, 0, 0, 0.03);
+  --code-bg: #f5f5f7;
+  --code-border: #ebebeb;
+}
+
+.dark {
+  --bg-canvas: #010120;
+  --bg-card: #313641;
+  --bg-raised: #26263a;
+  --bg-input: #313641;
+  --bg-inset: #1a1a2e;
+  --bg-accent: #c8f6f9;
+  --bg-accent-subtle: rgba(200, 246, 249, 0.1);
+  --bg-accent-dark: #010120;
+  --text-primary: #ffffff;
+  --text-secondary: #959494;
+  --text-tertiary: #6b7280;
+  --text-accent: #c8f6f9;
+  --text-inverse: #010120;
+  --border-default: #26263a;
+  --border-hover: #c8f6f9;
+  --border-accent: #c8f6f9;
+  --icon-default: #959494;
+  --icon-hover: #c8f6f9;
+  --gradient-start: #fc4c02;
+  --gradient-mid: #ef2cc1;
+  --gradient-end: #bdbbff;
+  --grid-line: rgba(255, 255, 255, 0.03);
+  --code-bg: #0d0d1a;
+  --code-border: #26263a;
 }
 
 @layer base {
@@ -39,8 +118,8 @@
   }
 
   body {
-    background-color: #0b0e14;
-    color: #ffffff;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -56,13 +135,58 @@
     }
   }
 
+  ::selection {
+    color: var(--text-inverse);
+    background: var(--bg-accent);
+  }
+
+  /* ============================================
+     Semantic Color Utility Classes
+     ============================================ */
+  .bg-canvas { background-color: var(--bg-canvas); }
+  .bg-card { background-color: var(--bg-card); }
+  .bg-raised { background-color: var(--bg-raised); }
+  .bg-input { background-color: var(--bg-input); }
+  .bg-inset { background-color: var(--bg-inset); }
+  .bg-accent { background-color: var(--bg-accent); }
+  .bg-accent-subtle { background-color: var(--bg-accent-subtle); }
+  .bg-accent-dark { background-color: var(--bg-accent-dark); }
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-tertiary { color: var(--text-tertiary); }
+  .text-accent { color: var(--text-accent); }
+  .text-inverse { color: var(--text-inverse); }
+  .border-surface { border-color: var(--border-default); }
+  .border-hover { border-color: var(--border-hover); }
+  .border-accent { border-color: var(--border-accent); }
+  .icon-default { color: var(--icon-default); }
+  .icon-hover { color: var(--icon-hover); }
+
+  .hover\:bg-raised:hover { background-color: var(--bg-raised); }
+  .hover\:text-primary:hover { color: var(--text-primary); }
+  .hover\:text-accent:hover { color: var(--text-accent); }
+  .hover\:border-accent:hover { border-color: var(--border-accent); }
+  .hover\:border-hover:hover { border-color: var(--border-hover); }
+  .focus\:border-accent:focus { border-color: var(--border-accent); }
+  .focus\:border-hover:focus { border-color: var(--border-hover); }
+  .placeholder-secondary::placeholder { color: var(--text-secondary); }
+  .placeholder-tertiary::placeholder { color: var(--text-tertiary); }
   .bg-grid-pattern {
     background-size: 40px 40px;
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   }
-
+  .bg-grid-pattern-light {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  }
+  .bg-code-block {
+    background-color: var(--code-bg);
+    border: 1px solid var(--code-border);
+  }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -71,9 +195,55 @@
     scrollbar-width: none;
   }
 
+  /* Gradient brand — signature 3-stop */
+  .bg-gradient-brand {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  }
+  .text-gradient-brand {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hero ribbon — decorative gradient stripe */
+  .bg-gradient-ribbon {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 40%, var(--gradient-end) 100%);
+  }
+
+  /* Mono-caps label */
+  .font-mono-caps {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.55px;
+    text-transform: uppercase;
+  }
+
+  /* Display sizes */
+  .display-xxl {
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: -1.92px;
+    line-height: 1.1;
+  }
+  .display-xl {
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: -1.44px;
+    line-height: 1.15;
+  }
+  .display-lg {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -1.08px;
+    line-height: 1.2;
+  }
+
+  /* Legacy gradients (updated for consistency) */
   .text-gradient-cyan {
-    color: #00e5ff;
-    background: linear-gradient(to right, #00e5ff, #3b82f6);
+    color: var(--gradient-start);
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-mid));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

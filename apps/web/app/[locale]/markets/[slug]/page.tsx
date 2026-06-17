@@ -59,12 +59,12 @@ export default async function AssetPage({ params }: AssetPageProps) {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#0b0e14] text-white">
+      <main className="min-h-screen bg-canvas text-primary">
       {/* Header */}
-      <div className="border-b border-[#1f2937]">
+      <div className="border-b border-surface">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-4 mb-4">
-            <Link href="/markets" className="text-gray-400 hover:text-white transition">
+            <Link href="/markets" className="text-secondary hover:text-primary transition">
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-cyan to-brand-purple flex items-center justify-center text-sm font-bold">
@@ -72,9 +72,9 @@ export default async function AssetPage({ params }: AssetPageProps) {
             </div>
             <div>
               <h1 className="text-xl font-bold">{asset.name}</h1>
-              <span className="text-sm text-gray-500">{asset.symbol}</span>
+              <span className="text-sm text-secondary">{asset.symbol}</span>
             </div>
-            <button className="ml-auto text-gray-500 hover:text-yellow-500 transition" aria-label="Ajouter aux favoris">
+            <button className="ml-auto text-secondary hover:text-yellow-500 transition" aria-label="Ajouter aux favoris">
               <Star className="w-5 h-5" />
             </button>
           </div>
@@ -86,28 +86,28 @@ export default async function AssetPage({ params }: AssetPageProps) {
               {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
               {isPositive ? "+" : ""}{asset.change24h}%
             </span>
-            <span className="text-sm text-gray-500">24h</span>
+            <span className="text-sm text-secondary">24h</span>
           </div>
         </div>
       </div>
       
       {/* Stats bar */}
-      <div className="border-b border-[#1f2937] bg-[#0d1017]">
+      <div className="border-b border-surface bg-inset">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <div>
-            <span className="text-gray-500 block text-xs">Market Cap</span>
+            <span className="text-secondary block text-xs">Market Cap</span>
             <span className="font-medium">{asset.marketCap}</span>
           </div>
           <div>
-            <span className="text-gray-500 block text-xs">Volume 24h</span>
+            <span className="text-secondary block text-xs">Volume 24h</span>
             <span className="font-medium">{asset.volume}</span>
           </div>
           <div>
-            <span className="text-gray-500 block text-xs">High 24h</span>
+            <span className="text-secondary block text-xs">High 24h</span>
             <span className="font-medium">${asset.high24h.toLocaleString()}</span>
           </div>
           <div>
-            <span className="text-gray-500 block text-xs">Low 24h</span>
+            <span className="text-secondary block text-xs">Low 24h</span>
             <span className="font-medium">${asset.low24h.toLocaleString()}</span>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6">
           {/* Chart */}
           <div className="md:col-span-3">
-            <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-4">
+            <div className="bg-card border border-surface rounded-sm p-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-bold flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-brand-cyan" />
@@ -131,7 +131,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
                       className={`px-2.5 py-1 rounded text-xs font-medium transition ${
                         tf === "1h"
                           ? "bg-brand-cyan/20 text-brand-cyan border border-brand-cyan"
-                          : "border border-gray-700 text-gray-400 hover:bg-gray-800"
+                          : "border border-gray-700 text-secondary hover:bg-gray-800"
                       }`}
                     >
                       {tf}
@@ -143,7 +143,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
             </div>
             
             {/* Order Book mock */}
-            <div className="mt-6 bg-[#131722] border border-[#1f2937] rounded-xl p-4">
+            <div className="mt-6 bg-card border border-surface rounded-sm p-4">
               <h3 className="text-sm font-bold mb-4 flex items-center gap-2">
                 <Activity className="w-4 h-4 text-brand-cyan" />
                 Order Book
@@ -155,7 +155,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <div key={i} className="flex justify-between text-sm">
                         <span className="text-up">${(asset.price - (i + 1) * 10).toFixed(2)}</span>
-                        <span className="text-gray-400">{(Math.random() * 2).toFixed(4)}</span>
+                        <span className="text-secondary">{(Math.random() * 2).toFixed(4)}</span>
                       </div>
                     ))}
                   </div>
@@ -166,7 +166,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <div key={i} className="flex justify-between text-sm">
                         <span className="text-down">${(asset.price + (i + 1) * 10).toFixed(2)}</span>
-                        <span className="text-gray-400">{(Math.random() * 2).toFixed(4)}</span>
+                        <span className="text-secondary">{(Math.random() * 2).toFixed(4)}</span>
                       </div>
                     ))}
                   </div>
@@ -177,34 +177,34 @@ export default async function AssetPage({ params }: AssetPageProps) {
           
           {/* Sidebar */}
           <div className="space-y-4">
-            <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-4">
+            <div className="bg-card border border-surface rounded-sm p-4">
               <h3 className="text-sm font-bold mb-3">About {asset.name}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-sm text-secondary leading-relaxed">
                 {asset.name} is a decentralized digital currency that can be transferred between users on a peer-to-peer network without intermediaries.
               </p>
             </div>
             
-            <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-4">
+            <div className="bg-card border border-surface rounded-sm p-4">
               <h3 className="text-sm font-bold mb-3">Key Metrics</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Circulating Supply</span>
+                  <span className="text-secondary">Circulating Supply</span>
                   <span>19.5M {asset.symbol}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Total Supply</span>
+                  <span className="text-secondary">Total Supply</span>
                   <span>21M {asset.symbol}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Max Supply</span>
+                  <span className="text-secondary">Max Supply</span>
                   <span>21M {asset.symbol}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">All Time High</span>
+                  <span className="text-secondary">All Time High</span>
                   <span className="text-up">$73,750</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">All Time Low</span>
+                  <span className="text-secondary">All Time Low</span>
                   <span className="text-down">$67.81</span>
                 </div>
               </div>

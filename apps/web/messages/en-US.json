@@ -74,6 +74,7 @@
     "ctaSecondary": "Explore markets",
     "ctaSecondarySub": "Free — no credit card required",
     "poweredBy": "Powered by",
+    "eyebrow": "Financial intelligence",
     "scroll": "Scroll",
     "keyboardHint": "Press / or ⌘K to search for any asset"
   },
@@ -148,7 +149,7 @@
   },
   "crypto": {
     "badge": "Fig 02 — Crypto Markets",
-    "title": "Top cryptos, {live}",
+    "title": "Top cryptos, <live>live</live>",
     "titleLive": "live",
     "subtitle": "Prices, changes and volumes updated continuously. 10 major assets.",
     "metrics": {

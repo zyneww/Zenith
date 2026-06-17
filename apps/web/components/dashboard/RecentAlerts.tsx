@@ -48,9 +48,9 @@ function AlertIcon({ severity }: { severity: Alert["severity"] }) {
 
 export default function RecentAlerts() {
   return (
-    <div className="bg-[#131722] border border-[#1f2937] rounded-xl p-5">
+    <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-white font-semibold text-lg">Alertes Récentes</h3>
+        <h3 className="text-primary font-semibold text-lg">Alertes Récentes</h3>
         <span className="bg-brand-purple/20 text-brand-purple-light text-xs px-2 py-1 rounded-full">
           {RECENT_ALERTS.length} nouvelles
         </span>
@@ -62,12 +62,12 @@ export default function RecentAlerts() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className="flex items-start gap-3 p-3 bg-[#0b0e14] rounded-lg hover:bg-[#1a1f2e] transition-colors cursor-pointer"
+            className="flex items-start gap-3 p-3 bg-canvas rounded-sm hover:bg-raised transition-colors cursor-pointer"
           >
             <div className="mt-0.5"><AlertIcon severity={alert.severity} /></div>
             <div className="flex-1">
-              <p className="text-gray-300 text-sm">{alert.message}</p>
-              <p className="text-gray-500 text-xs mt-1">{alert.time}</p>
+              <p className="text-primary text-sm">{alert.message}</p>
+              <p className="text-secondary text-xs mt-1">{alert.time}</p>
             </div>
           </motion.div>
         ))}

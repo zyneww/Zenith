@@ -11,7 +11,7 @@ export default function DashboardPage() {
 return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#0b0e14] text-white">
+      <main className="min-h-screen bg-canvas text-primary">
         <div className="max-w-7xl mx-auto px-6 py-8">
           {/* Header */}
           <motion.div
@@ -20,8 +20,8 @@ return (
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-            <p className="text-gray-400">
+            <h1 className="text-3xl font-medium text-primary mb-2">Dashboard</h1>
+            <p className="text-secondary">
               Vue d'ensemble de votre portfolio et performances du marché.
             </p>
           </motion.div>
