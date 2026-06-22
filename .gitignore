@@ -24,3 +24,10 @@ playwright-report/
 public/sw*
 public/serwist*
 .playwright-mcp/
+
+# Directory metadata (KDE/GNOME)
+.directory
+
+# Caches
+node_modules/.cache/
+.turbo/cache/
