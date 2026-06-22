@@ -60,7 +60,7 @@ function MoversPanel({
                 </span>
                 <span
                   className={`flex items-center gap-1 font-medium tabular-nums w-20 justify-end ${
-                    isGainers ? "text-accent" : "text-[#ef4444]"
+                    isGainers ? "text-accent" : "text-down"
                   }`}
                 >
                   {isGainers ? (
@@ -113,7 +113,7 @@ export default function TopMovers() {
       />
       <MoversPanel
         title="Perdants"
-        icon={<TrendingDown className="w-4 h-4 text-[#ef4444]" />}
+        icon={<TrendingDown className="w-4 h-4 text-down" />}
         items={data?.losers ?? []}
         isGainers={false}
         isLoading={isLoading}

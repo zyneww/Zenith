@@ -22,7 +22,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulation d'auth (Phase 5 : brancher sur Better Auth / Clerk)
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
     onClose();
@@ -38,7 +37,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-canvas/60 backdrop-blur-sm p-4"
           onClick={onClose}
         >
           <motion.div
@@ -46,17 +45,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="w-full max-w-md bg-card border border-surface rounded-sm shadow-2xl overflow-hidden"
+            className="w-full max-w-md bg-card border border-surface rounded-lg overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-2">
-              <div className="flex gap-1 bg-raised rounded-sm p-1">
+              <div className="flex gap-1 bg-raised rounded-full p-1">
                 <button
                   onClick={() => setTab("login")}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
                     tab === "login"
-                      ? "bg-brand-purple text-primary"
+                      ? "bg-accent text-on-accent"
                       : "text-secondary hover:text-primary"
                   }`}
                   type="button"
@@ -65,9 +63,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </button>
                 <button
                   onClick={() => setTab("register")}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-4 py-1.5 text-sm font-medium rounded-full transition-colors ${
                     tab === "register"
-                      ? "bg-brand-purple text-primary"
+                      ? "bg-accent text-on-accent"
                       : "text-secondary hover:text-primary"
                   }`}
                   type="button"
@@ -77,7 +75,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
               <button
                 onClick={onClose}
-                className="text-secondary hover:text-primary transition-colors p-1 rounded-full hover:bg-[var(--text-primary)]/5"
+                className="text-secondary hover:text-primary transition-colors p-1 rounded-full hover:bg-raised"
                 type="button"
                 aria-label="Fermer"
               >
@@ -85,7 +83,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </button>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="px-6 pb-6 pt-4">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -106,7 +103,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="John Doe"
-                          className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
+                          className="w-full bg-raised border border-surface rounded-xs pl-10 pr-4 py-2.5 text-sm text-primary placeholder-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
                           required
                         />
                       </div>
@@ -122,7 +119,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
+                        className="w-full bg-raised border border-surface rounded-xs pl-10 pr-4 py-2.5 text-sm text-primary placeholder-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
                         required
                       />
                     </div>
@@ -137,7 +134,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full bg-raised border border-surface rounded-sm pl-10 pr-4 py-2.5 text-sm text-primary placeholder-[#959494] focus:outline-none focus:border-accent focus:ring-1 focus:ring-[#c8f6f9]/20 transition-all"
+                        className="w-full bg-raised border border-surface rounded-xs pl-10 pr-4 py-2.5 text-sm text-primary placeholder-tertiary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
                         required
                       />
                     </div>
@@ -146,10 +143,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-brand-purple hover:bg-[#6833c9] text-white font-semibold py-2.5 rounded-sm transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-accent hover:bg-accent/80 text-on-accent font-semibold py-2.5 rounded-full transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {loading ? (
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span className="w-5 h-5 border-2 border-on-accent/30 border-t-on-accent rounded-full animate-spin" />
                     ) : (
                       <>
                         {tab === "login" ? "Sign in" : "Create account"}
@@ -162,11 +159,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
               <p className="text-xs text-secondary text-center mt-4">
                 By continuing, you agree to our{" "}
-                <Link href="/legal/terms" className="text-brand-cyan hover:underline" onClick={onClose}>
+                <Link href="/legal/terms" className="text-accent hover:underline" onClick={onClose}>
                   Terms
                 </Link>{" "}
                 and{" "}
-                <Link href="/legal/privacy" className="text-brand-cyan hover:underline" onClick={onClose}>
+                <Link href="/legal/privacy" className="text-accent hover:underline" onClick={onClose}>
                   Privacy Policy
                 </Link>
                 .

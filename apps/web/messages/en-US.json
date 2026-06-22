@@ -63,8 +63,6 @@
     }
   },
   "hero": {
-    "badge": "BETA",
-    "badgeText": "Real-time alerts now available",
     "title": "Your peak,",
     "titleLine2": "your markets,",
     "titleLine3": "your <clarity>{clarityValue}</clarity>.",
@@ -74,7 +72,6 @@
     "ctaSecondary": "Explore markets",
     "ctaSecondarySub": "Free — no credit card required",
     "poweredBy": "Powered by",
-    "eyebrow": "Financial intelligence",
     "scroll": "Scroll",
     "keyboardHint": "Press / or ⌘K to search for any asset"
   },
@@ -145,7 +142,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Offline",
+    "loading": "Loading..."
   },
   "crypto": {
     "badge": "Fig 02 — Crypto Markets",
@@ -204,7 +203,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Loading...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Crypto market sentiment indicator"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Unavailable"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24h — Top 5 by category",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "See all",
+      "loading": "Loading...",
+      "error": "Loading error",
+      "retry": "Retry"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "From",
+      "to": "To",
+      "amount": "Amount"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
+      "open": "Open screener →"
+    }
   },
   "cta": {
     "badge": "14 DAYS PREMIUM INCLUDED",
@@ -257,92 +302,89 @@
   },
   "markets": {
     "title": "Markets",
-    "subtitle": "All assets in real time",
-    "rank": "Rank",
-    "name": "Name",
-    "price": "Price",
-    "h1": "1h",
-    "h24": "24h",
-    "d7": "7d",
-    "marketCap": "Market cap",
-    "volume": "Volume",
-    "category": "Category"
-  },
-  "portfolio": {
-    "title": "Portfolio",
-    "subtitle": "Track your positions and performance"
-  },
-  "news": {
-    "crypto": "Crypto news",
-    "forex": "Forex news",
-    "markets": "Markets news",
-    "economicCalendar": "Economic calendar",
-    "technicalAnalysis": "Technical analysis"
-  },
-  "tools": {
-    "watchlist": "Watchlist",
-    "alerts": "Alerts",
-    "heatmaps": "Heatmaps"
-  },
-  "help": {
-    "why": "Why Zenith",
-    "contact": "Contact us",
-    "faq": "FAQ",
-    "support": "Support",
-    "subscription": "Subscription & Pricing"
-  },
-  "legal": {
-    "terms": "Terms of use",
-    "privacy": "Privacy policy",
-    "cookies": "Cookie policy",
-    "accessibility": "Accessibility"
-  },
-  "resources": {
-    "api": "API documentation",
-    "status": "System status"
-  },
-  "currency": {
-    "USD": "US Dollar",
-    "EUR": "Euro",
-    "GBP": "British Pound",
-    "CHF": "Swiss Franc",
-    "JPY": "Japanese Yen",
-    "RUB": "Russian Ruble",
-    "PLN": "Polish Zloty",
-    "TRY": "Turkish Lira",
-    "BRL": "Brazilian Real",
-    "IDR": "Indonesian Rupiah",
-    "MYR": "Malaysian Ringgit",
-    "THB": "Thai Baht",
-    "VND": "Vietnamese Dong",
-    "KRW": "South Korean Won",
-    "CNY": "Chinese Yuan (CN)",
-    "TWD": "Taiwan Dollar",
-    "AED": "UAE Dirham",
-    "SAR": "Saudi Riyal",
-    "EGP": "Egyptian Pound",
-    "ILS": "Israeli Shekel",
-    "MXN": "Mexican Peso",
-    "ARS": "Argentine Peso",
-    "BTC": "Bitcoin",
-    "ETH": "Ethereum"
-  },
-  "markets": {
-    "title": "Markets",
     "subtitle": "Real-time prices, indices, forex and cryptocurrencies",
     "searchPlaceholder": "Search an asset (e.g. BTC, EUR/USD, S&P 500)...",
     "filters": "Filters",
     "overview": "Market Overview",
     "overviewSubtitle": "Indices, crypto and forex in real-time",
-    "crypto": "Cryptocurrencies",
+    "crypto": {
+      "title": "Cryptocurrencies",
+      "description": "Real-time cryptocurrency prices and data",
+      "stats": {
+        "totalCoins": "Cryptos",
+        "rising": "Rising",
+        "volume24h": "Volume 24h",
+        "bestPerf": "Best perf"
+      },
+      "table": {
+        "rank": "Rank",
+        "name": "Name",
+        "price": "Price",
+        "change24h": "Change 24h",
+        "high24h": "High 24h",
+        "low24h": "Low 24h",
+        "volume": "Volume"
+      },
+      "noData": "No cryptocurrencies available"
+    },
     "cryptoTop": "Top 100",
-    "forex": "Forex",
+    "forex": {
+      "title": "Forex",
+      "description": "Real-time currency pairs and exchange rates",
+      "stats": {
+        "totalPairs": "Pairs",
+        "rising": "Rising",
+        "falling": "Falling",
+        "mostActive": "Most active"
+      },
+      "table": {
+        "pair": "Pair",
+        "price": "Price",
+        "change": "Change",
+        "high": "High",
+        "low": "Low",
+        "spread": "Spread"
+      },
+      "noData": "No pairs available"
+    },
     "forexAll": "All pairs",
-    "indices": "Indices",
+    "indices": {
+      "title": "Stock Indices",
+      "description": "Major global indices in real-time",
+      "filter": {
+        "all": "All",
+        "americas": "Americas",
+        "europe": "Europe",
+        "asia": "Asia"
+      },
+      "noData": "No indices available",
+      "overview": "Overview",
+      "rising": "Rising",
+      "falling": "Falling",
+      "avgChange": "Avg change",
+      "bestPerf": "Best perf"
+    },
     "indicesAll": "All indices",
     "commodities": "Commodities",
     "commoditiesAll": "All products",
-    "futures": "Futures",
+    "futures": {
+      "title": "Futures",
+      "description": "Futures contracts on indices, commodities and currencies",
+      "stats": {
+        "total": "Contracts",
+        "rising": "Rising",
+        "falling": "Falling",
+        "bestPerf": "Best perf"
+      },
+      "table": {
+        "contract": "Contract",
+        "price": "Price",
+        "change": "Change",
+        "high": "High",
+        "low": "Low"
+      },
+      "noData": "No contracts available"
+    },
     "futuresAll": "All futures",
     "stocks": "Stocks",
     "stocksAll": "All stocks",
@@ -397,79 +439,6 @@
         "low": "Low impact"
       }
     },
-    "indices": {
-      "title": "Stock Indices",
-      "description": "Major global indices in real-time",
-      "filter": {
-        "all": "All",
-        "americas": "Americas",
-        "europe": "Europe",
-        "asia": "Asia"
-      },
-      "noData": "No indices available",
-      "overview": "Overview",
-      "rising": "Rising",
-      "falling": "Falling",
-      "avgChange": "Avg change",
-      "bestPerf": "Best perf"
-    },
-    "crypto": {
-      "title": "Cryptocurrencies",
-      "description": "Real-time cryptocurrency prices and data",
-      "stats": {
-        "totalCoins": "Cryptos",
-        "rising": "Rising",
-        "volume24h": "Volume 24h",
-        "bestPerf": "Best perf"
-      },
-      "table": {
-        "rank": "Rank",
-        "name": "Name",
-        "price": "Price",
-        "change24h": "Change 24h",
-        "high24h": "High 24h",
-        "low24h": "Low 24h",
-        "volume": "Volume"
-      },
-      "noData": "No cryptocurrencies available"
-    },
-    "forex": {
-      "title": "Forex",
-      "description": "Real-time currency pairs and exchange rates",
-      "stats": {
-        "totalPairs": "Pairs",
-        "rising": "Rising",
-        "falling": "Falling",
-        "mostActive": "Most active"
-      },
-      "table": {
-        "pair": "Pair",
-        "price": "Price",
-        "change": "Change",
-        "high": "High",
-        "low": "Low",
-        "spread": "Spread"
-      },
-      "noData": "No pairs available"
-    },
-    "futures": {
-      "title": "Futures",
-      "description": "Futures contracts on indices, commodities and currencies",
-      "stats": {
-        "total": "Contracts",
-        "rising": "Rising",
-        "falling": "Falling",
-        "bestPerf": "Best perf"
-      },
-      "table": {
-        "contract": "Contract",
-        "price": "Price",
-        "change": "Change",
-        "high": "High",
-        "low": "Low"
-      },
-      "noData": "No contracts available"
-    },
     "ideas": {
       "title": "Community Ideas",
       "description": "Trading analyses and signals from the community",
@@ -483,5 +452,174 @@
         "short": "Short"
       }
     }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Track your positions and performance"
+  },
+  "news": {
+    "crypto": "Crypto news",
+    "forex": "Forex news",
+    "markets": "Markets news",
+    "economicCalendar": "Economic calendar",
+    "technicalAnalysis": "Technical analysis"
+  },
+  "tools": {
+    "watchlist": "Watchlist",
+    "alerts": "Alerts",
+    "heatmaps": "Heatmaps"
+  },
+  "help": {
+    "why": "Why Zenith",
+    "contact": "Contact us",
+    "faq": "FAQ",
+    "support": "Support",
+    "subscription": "Subscription & Pricing"
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "June 1, 2026",
+      "intro": "These terms govern your use of Zenith. By using our services, you agree to these terms in their entirety.",
+      "sections": [
+        {
+          "title": "Purpose and acceptance",
+          "content": "Zenith is a multi-asset financial intelligence platform. These Terms of Service define the rights and obligations between Zenith and any user of the service. Accessing the platform constitutes full and complete acceptance of these terms."
+        },
+        {
+          "title": "Service description",
+          "content": "Zenith provides real-time market data (crypto, forex, commodities, indices), analysis tools, an economic calendar, alerts, and a watchlist system. The service is provided as-is, without guarantee of continuous availability or absolute accuracy of data."
+        },
+        {
+          "title": "User obligations",
+          "content": "You agree to use Zenith for lawful purposes only, not to attempt to disrupt the service, not to mass-extract data through automated means, and to respect the intellectual property rights of Zenith and its partners."
+        },
+        {
+          "title": "Intellectual property",
+          "content": "All content on Zenith (text, graphics, code, design) is protected by applicable intellectual property laws. Any unauthorized reproduction is prohibited."
+        },
+        {
+          "title": "Limitation of liability",
+          "content": "Zenith shall not be held liable for financial losses resulting from investment decisions made based on information provided by the platform. Market data is provided for informational purposes only and does not constitute investment advice."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "June 1, 2026",
+      "intro": "Zenith is committed to protecting your privacy. This policy explains what data we collect, how we use it, and what your rights are.",
+      "sections": [
+        {
+          "title": "Data collected",
+          "content": "We collect: (1) account data (email, name) provided during sign-up via Clerk; (2) browsing data (cookies, IP); (3) your preferences (watchlist, alerts, language, currency); (4) anonymized usage data to improve the service."
+        },
+        {
+          "title": "Legal basis and purposes",
+          "content": "The processing of your data is based on the performance of the service contract (account data, preferences) and on our legitimate interest in improving the service (anonymized analytics). We never sell your data to third parties."
+        },
+        {
+          "title": "Retention period",
+          "content": "Your account data is kept as long as your account is active, then deleted within 30 days of account deletion. Analytics data is kept for a maximum of 13 months."
+        },
+        {
+          "title": "Your rights (GDPR)",
+          "content": "You have the right to access, rectify, delete, port, and object to the processing of your data. To exercise these rights, contact privacy@zenith.xyz."
+        },
+        {
+          "title": "DPO contact",
+          "content": "Our Data Protection Officer can be reached at dpo@zenith.xyz. You also have the right to lodge a complaint with the relevant supervisory authority."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "lastUpdated": "June 1, 2026",
+      "intro": "This page explains how Zenith uses cookies and similar technologies.",
+      "sections": [
+        {
+          "title": "What is a cookie",
+          "content": "A cookie is a small text file stored on your device when you visit a website. It allows the site to remember your actions and preferences over a given period."
+        },
+        {
+          "title": "Essential cookies",
+          "content": "These cookies are necessary for the service to function: Clerk authentication session, language preferences, alerts cart. They cannot be disabled."
+        },
+        {
+          "title": "Analytics cookies",
+          "content": "Zenith uses anonymized analytics tools (PostHog optional) to understand how users interact with the platform. This data is aggregated and does not allow you to be identified."
+        },
+        {
+          "title": "Marketing cookies",
+          "content": "Zenith does not use marketing or advertising cookies. No third-party cookies are placed for retargeting or targeted advertising."
+        },
+        {
+          "title": "Managing your preferences",
+          "content": "You can manage your cookie preferences from your browser settings. Disabling certain cookies may limit some platform features."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "lastUpdated": "June 1, 2026",
+      "intro": "Zenith is committed to making its platform accessible to everyone, in accordance with international standards.",
+      "sections": [
+        {
+          "title": "Our commitment",
+          "content": "Zenith aims to provide a service usable by everyone, including people with disabilities. We follow WCAG 2.1 Level AA recommendations."
+        },
+        {
+          "title": "WCAG 2.1 AA standards",
+          "content": "Our interface respects accessibility principles: sufficient color contrast, keyboard navigation, alternative text on images, semantic HTML structure, ARIA labels on interactive elements."
+        },
+        {
+          "title": "Accessibility features",
+          "content": "Full keyboard navigation (Tab, Enter, Escape), ⌘K shortcuts (command palette), native dark mode, screen reader support (NVDA, JAWS, VoiceOver), text resizable up to 200% without loss of readability."
+        },
+        {
+          "title": "Known limitations",
+          "content": "Some price charts (sparklines, heatmaps) may be difficult to interpret for screen reader users. A textual version of the data is available via the command palette."
+        },
+        {
+          "title": "Contact to report an issue",
+          "content": "If you encounter an accessibility issue, contact accessibilite@zenith.xyz. We commit to responding within 5 business days and fixing issues within 30 days."
+        }
+      ]
+    }
+  },
+  "resources": {
+    "api": "API documentation",
+    "status": "System status"
+  },
+  "currency": {
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "GBP": "British Pound",
+    "CHF": "Swiss Franc",
+    "JPY": "Japanese Yen",
+    "RUB": "Russian Ruble",
+    "PLN": "Polish Zloty",
+    "TRY": "Turkish Lira",
+    "BRL": "Brazilian Real",
+    "IDR": "Indonesian Rupiah",
+    "MYR": "Malaysian Ringgit",
+    "THB": "Thai Baht",
+    "VND": "Vietnamese Dong",
+    "KRW": "South Korean Won",
+    "CNY": "Chinese Yuan (CN)",
+    "TWD": "Taiwan Dollar",
+    "AED": "UAE Dirham",
+    "SAR": "Saudi Riyal",
+    "EGP": "Egyptian Pound",
+    "ILS": "Israeli Shekel",
+    "MXN": "Mexican Peso",
+    "ARS": "Argentine Peso",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Added to watchlist",
+    "removed": "Removed from watchlist",
+    "empty": "Your watchlist is empty",
+    "title": "My watchlist"
   }
 }

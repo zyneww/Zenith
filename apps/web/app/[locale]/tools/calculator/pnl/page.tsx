@@ -1,27 +1,24 @@
-import { Construction } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
-import Header from "@/components/landing/Header";
-import Footer from "@/components/landing/Footer";
+import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import { Calculator, TrendingUp, TrendingDown, Percent, Layers } from "lucide-react";
 
-export const metadata = {
-  title: "Calculateur P&L — Zenith",
-  description: "Calculez vos profits et pertes facilement.",
-};
-
-export default async function CalculatorPnLPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function PnlPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <>
-      <Header />
-      <main className="min-h-[60vh] flex flex-col items-center justify-center px-4">
-        <Construction className="w-16 h-16 text-brand-cyan mb-6" />
-        <h1 className="text-3xl font-bold text-white mb-4">Calculateur P&L</h1>
-        <p className="text-gray-400 text-center max-w-md">
-          Cette page est en cours de construction. Revenez bientôt pour calculer vos profits et pertes.
-        </p>
-      </main>
-      <Footer />
-    </>
+    <PagePlaceholder
+      icon={<Calculator className="w-8 h-8 text-accent" />}
+      eyebrow="OUTILS"
+      title="Calculateur P&L"
+      subtitle="Calculez vos profits et pertes avant de passer un ordre."
+      features={[
+        { title: "Long/Short", description: "Support complet des deux positions, marge, levier.", icon: <TrendingUp className="w-5 h-5 text-accent" /> },
+        { title: "Frais", description: "Maker, taker, funding, retrait. Tous les frais inclus.", icon: <Percent className="w-5 h-5 text-accent" /> },
+        { title: "Levier", description: "Jusqu'à 125x, liquidation price, marge requise.", icon: <TrendingDown className="w-5 h-5 text-accent" /> },
+        { title: "Multi-positions", description: "Calculez un portfolio entier, FIFO/LIFO.", icon: <Layers className="w-5 h-5 text-accent" /> },
+      ]}
+      primaryCta={{ label: "Être notifié", href: "/help/contact" }}
+      secondaryCta={{ label: "Voir la roadmap", href: "/help/roadmap" }}
+    />
   );
 }

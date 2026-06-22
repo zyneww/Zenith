@@ -1,76 +1,41 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useSocket } from "@/lib/realtime/SocketContext";
 
-interface PriceUpdate {
+export interface PriceUpdate {
   symbol: string;
   price: number;
   side?: "BUY" | "SELL";
   timestamp: number;
 }
 
-interface PriceMap {
-  [symbol: string]: PriceUpdate;
-}
+export type PriceMap = Record<string, PriceUpdate>;
 
 export function useRealtimePrice(symbols: string[]) {
-  const { subscribe, isConnected, getLatestPrice } = useSocket();
-  const [prices, setPrices] = useState<PriceMap>({});
-  const pendingUpdatesRef = useRef<PriceMap>({});
+  const { subscribe, isConnected, getLatestPrice, pricesVersion } = useSocket();
 
-  // Subscribe to symbols
+  const symbolsKey = symbols.join(",");
+
+  // Subscribe to symbols on mount + when symbols change
   useEffect(() => {
     subscribe(symbols);
-  }, [symbols.join(","), subscribe]);
+  }, [symbolsKey, subscribe]);
 
-  // Throttled price updates: batch every 200ms
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (Object.keys(pendingUpdatesRef.current).length > 0) {
-        setPrices((prev) => ({
-          ...prev,
-          ...pendingUpdatesRef.current,
-        }));
-        pendingUpdatesRef.current = {};
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Poll for price changes from shared SocketContext
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let hasUpdate = false;
-      const updates: PriceMap = {};
-
-      for (const symbol of symbols) {
-        const update = getLatestPrice(symbol);
-        if (update) {
-          const current = prices[symbol.toUpperCase()];
-          if (!current || current.timestamp !== update.timestamp) {
-            updates[symbol.toUpperCase()] = update;
-            hasUpdate = true;
-          }
-        }
-      }
-
-      if (hasUpdate) {
-        pendingUpdatesRef.current = {
-          ...pendingUpdatesRef.current,
-          ...updates,
-        };
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, [symbols.join(","), getLatestPrice, prices]);
+  // Read prices from the shared ref each time pricesVersion bumps.
+  // This is the only way the hook can see updates from the WebSocket.
+  const prices = useMemo<PriceMap>(() => {
+    const out: PriceMap = {};
+    for (const symbol of symbols) {
+      const u = getLatestPrice(symbol);
+      if (u) out[symbol.toUpperCase()] = u;
+    }
+    return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pricesVersion, symbolsKey]);
 
   const getPrice = useCallback(
-    (symbol: string) => {
-      return prices[symbol.toUpperCase()];
-    },
+    (symbol: string) => prices[symbol.toUpperCase()],
     [prices]
   );
 

@@ -3,6 +3,13 @@
 import { useEffect, useRef } from "react";
 import { createChart, type IChartApi, LineSeries } from "lightweight-charts";
 
+const CHART_COLORS = {
+  bg: "#ffffff",
+  text: "#615d59",
+  grid: "rgba(0,0,0,0.06)",
+  line: "#0075de",
+};
+
 export default function PortfolioChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
@@ -12,18 +19,18 @@ export default function PortfolioChart() {
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { color: "#313641" },
-        textColor: "#d1d5db",
+        background: { color: CHART_COLORS.bg },
+        textColor: CHART_COLORS.text,
       },
       grid: {
-        vertLines: { color: "#1f2937" },
-        horzLines: { color: "#1f2937" },
+        vertLines: { color: CHART_COLORS.grid },
+        horzLines: { color: CHART_COLORS.grid },
       },
       rightPriceScale: {
-        borderColor: "#1f2937",
+        borderColor: CHART_COLORS.grid,
       },
       timeScale: {
-        borderColor: "#1f2937",
+        borderColor: CHART_COLORS.grid,
         timeVisible: true,
       },
       autoSize: true,
@@ -32,12 +39,11 @@ export default function PortfolioChart() {
     chartRef.current = chart;
 
     const lineSeries = chart.addSeries(LineSeries, {
-      color: "#c8f6f9",
+      color: CHART_COLORS.line,
       lineWidth: 2,
       title: "Valeur du Portfolio",
     });
 
-    // Generate mock portfolio value data
     const data = [];
     const now = new Date();
     let value = 100000;
@@ -46,11 +52,10 @@ export default function PortfolioChart() {
       const date = new Date(now);
       date.setDate(date.getDate() - i);
       const time = date.toISOString().split("T")[0];
-      
-      // Random walk with slight upward trend
+
       const change = (Math.random() - 0.45) * 2000;
       value += change;
-      
+
       data.push({ time: time, value: Math.round(value * 100) / 100 });
     }
 
@@ -63,7 +68,7 @@ export default function PortfolioChart() {
   }, []);
 
   return (
-    <div className="bg-card border border-surface rounded-sm p-5">
+    <div className="bg-card border border-surface rounded-lg p-5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-primary font-semibold text-lg">Évolution du Portfolio</h3>
         <div className="flex gap-2">
@@ -71,10 +76,10 @@ export default function PortfolioChart() {
             <button
               key={period}
               aria-label={`Période ${period}`}
-              className={`px-3 py-1 text-xs rounded-sm transition-colors ${
+              className={`px-3 py-1 text-xs rounded-full transition-colors ${
                 period === "1M"
-                  ? "bg-brand-purple text-primary"
-                  : "bg-[#1f2937] text-secondary hover:text-primary"
+                  ? "bg-accent text-on-accent"
+                  : "bg-canvas text-secondary hover:text-primary"
               }`}
             >
               {period}

@@ -2,7 +2,6 @@
 
 import { Check, Zap, Crown, type LucideIcon } from "lucide-react";
 import Link from "next/link";
-import { motion } from "motion/react";
 
 const iconMap: Record<string, LucideIcon> = {
   Zap,
@@ -35,15 +34,11 @@ export default function PricingCard({
   const Icon = iconMap[iconName] || Zap;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+    <div
       className={`relative rounded-sm p-8 border ${
         featured
-          ? "border-[#ebebeb] bg-black text-white"
-          : "border-[#ebebeb] bg-white"
+          ? "border-surface bg-inverse text-on-inverse"
+          : "border-surface bg-card"
       }`}
     >
       {featured && (
@@ -92,6 +87,6 @@ export default function PricingCard({
       >
         {cta}
       </Link>
-    </motion.div>
+    </div>
   );
 }

@@ -99,7 +99,7 @@ const MOCK_IDEAS: Idea[] = [
 ];
 
 function getDirectionColor(direction: string): string {
-  return direction === "long" ? "text-accent bg-green-400/10" : "text-[#ef4444] bg-red-400/10";
+  return direction === "long" ? "text-accent bg-up-subtle" : "text-down bg-down-subtle";
 }
 
 function formatDate(dateStr: string): string {

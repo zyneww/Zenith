@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import Header from "@/components/landing/Header";
 import MetricsCards from "@/components/dashboard/MetricsCards";
 import PortfolioChart from "@/components/dashboard/PortfolioChart";
@@ -14,17 +13,14 @@ return (
       <main className="min-h-screen bg-canvas text-primary">
         <div className="max-w-7xl mx-auto px-6 py-8">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+          <div
             className="mb-8"
           >
             <h1 className="text-3xl font-medium text-primary mb-2">Dashboard</h1>
             <p className="text-secondary">
               Vue d'ensemble de votre portfolio et performances du marché.
             </p>
-          </motion.div>
+          </div>
 
           {/* Metrics */}
           <div className="mb-8">

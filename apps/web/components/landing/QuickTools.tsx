@@ -1,7 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Flame,
   Trophy,
@@ -10,88 +11,227 @@ import {
   Droplets,
   Fuel,
   ArrowRight,
+  Zap,
+  RefreshCw,
+  AlertCircle,
 } from "lucide-react";
-import { motion } from "motion/react";
 
-const trendingItems = [
-  {
-    rank: 1,
-    name: "Solana",
-    symbol: "SOL",
-    price: "$172.34",
-    change: "+5.23%",
-    icon: "S",
-    iconBg: "bg-gradient-to-tr from-green-400 to-purple-500",
-  },
-  {
-    rank: 2,
-    name: "Shiba Inu",
-    symbol: "SHIB",
-    price: "$0.000021",
-    change: "+3.45%",
-    icon: "🐕",
-    iconBg: "bg-orange-600",
-  },
-  {
-    rank: 3,
-    name: "Dogecoin",
-    symbol: "DOGE",
-    price: "$0.234000",
-    change: "+4.12%",
-    icon: "D",
-    iconBg: "bg-yellow-500",
-  },
-];
+type Mover = {
+  id: string;
+  symbol: string;
+  name: string;
+  image: string;
+  price: number;
+  change24h: number;
+};
+
+type FearGreed = { value: number; label: string; timestamp: number };
+
+type GasLevels = { slow: number; average: number; fast: number };
+type GasData = {
+  chain: string;
+  levels: GasLevels;
+  unit: string;
+  lastBlock: number;
+  fetchedAt: number;
+  fallback?: boolean;
+};
+
+type Crypto = {
+  id: string;
+  symbol: string;
+  name: string;
+  current_price: number;
+  image: string;
+};
+
+const CHAINS = ["ethereum", "polygon", "arbitrum"] as const;
+const CHAIN_LABEL: Record<string, string> = {
+  ethereum: "Ethereum",
+  polygon: "Polygon",
+  arbitrum: "Arbitrum",
+};
+
+const FIAT_RATES: Record<string, number> = { USD: 1, EUR: 0.92 };
+
+const CRYPTO_OPTIONS = ["BTC", "ETH", "SOL", "BNB", "XRP"];
+const ALL_OPTIONS = [...CRYPTO_OPTIONS, "USD", "EUR"];
+
+function formatPrice(p: number): string {
+  if (!isFinite(p)) return "—";
+  if (p >= 1) return p.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  if (p >= 0.01) return p.toLocaleString("en-US", { maximumFractionDigits: 4 });
+  return p.toLocaleString("en-US", { maximumFractionDigits: 8 });
+}
+
+function gasDotColor(level: number): string {
+  if (level < 30) return "bg-up";
+  if (level < 80) return "bg-warning";
+  return "bg-down";
+}
 
 export default function QuickTools() {
   const t = useTranslations("quickTools");
-  const [activeTab, setActiveTab] = useState<"trending" | "gainers" | "losers">(
-    "trending"
-  );
+
+  // --- Daily Movers ---
+  const [activeTab, setActiveTab] = useState<"trending" | "gainers" | "losers">("trending");
+  const [movers, setMovers] = useState<Mover[]>([]);
+  const [moversLoading, setMoversLoading] = useState(true);
+  const [moversError, setMoversError] = useState(false);
+
+  const fetchMovers = useCallback(async (tab: string, signal?: AbortSignal) => {
+    setMoversLoading(true);
+    setMoversError(false);
+    try {
+      const res = await fetch(`/api/market/movers/${tab}`, { signal, cache: "no-store" });
+      if (!res.ok) throw new Error("movers");
+      const data = (await res.json()) as Mover[];
+      setMovers(Array.isArray(data) ? data.slice(0, 3) : []);
+    } catch (e) {
+      if ((e as { name?: string })?.name !== "AbortError") setMoversError(true);
+    } finally {
+      setMoversLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetchMovers(activeTab, ctrl.signal);
+    const id = setInterval(() => fetchMovers(activeTab, ctrl.signal), 60_000);
+    return () => {
+      ctrl.abort();
+      clearInterval(id);
+    };
+  }, [activeTab, fetchMovers]);
+
+  // --- Quick Converter ---
+  const [cryptos, setCryptos] = useState<Crypto[]>([]);
+  const [fromAmount, setFromAmount] = useState("1");
+  const [fromSymbol, setFromSymbol] = useState("BTC");
+  const [toSymbol, setToSymbol] = useState("USD");
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetch("/api/market/top-cryptos?limit=10", { signal: ctrl.signal, cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data: Crypto[]) => setCryptos(Array.isArray(data) ? data : []))
+      .catch(() => {});
+    return () => ctrl.abort();
+  }, []);
+
+  const priceMap = useMemo(() => {
+    const m: Record<string, number> = { USD: 1, EUR: FIAT_RATES.EUR };
+    for (const c of cryptos) {
+      const sym = c.symbol?.toUpperCase();
+      if (sym && c.current_price > 0) m[sym] = c.current_price;
+    }
+    return m;
+  }, [cryptos]);
+
+  const toAmount = useMemo(() => {
+    const n = parseFloat(fromAmount);
+    if (!isFinite(n)) return 0;
+    const fromUsd = FIAT_RATES[fromSymbol] !== undefined
+      ? FIAT_RATES[fromSymbol]
+      : priceMap[fromSymbol] ?? 0;
+    const toUsd = FIAT_RATES[toSymbol] !== undefined
+      ? FIAT_RATES[toSymbol]
+      : priceMap[toSymbol] ?? 0;
+    if (!toUsd) return 0;
+    return (n * fromUsd) / toUsd;
+  }, [fromAmount, fromSymbol, toSymbol, priceMap]);
+
+  const swap = () => {
+    setFromSymbol(toSymbol);
+    setToSymbol(fromSymbol);
+  };
+
+  // --- Fear & Greed ---
+  const [fearGreed, setFearGreed] = useState<FearGreed>({ value: 50, label: "Neutral", timestamp: 0 });
+  const [fgLoading, setFgLoading] = useState(true);
+  const [fgError, setFgError] = useState(false);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetch("/api/sentiment/fear-greed", { signal: ctrl.signal, cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: FearGreed | null) => {
+        if (d && typeof d.value === "number") setFearGreed(d);
+        else setFgError(true);
+      })
+      .catch(() => setFgError(true))
+      .finally(() => setFgLoading(false));
+    return () => ctrl.abort();
+  }, []);
+
+  // --- Gas Tracker ---
+  const [gas, setGas] = useState<Record<string, GasData | null>>({});
+  const [gasLoading, setGasLoading] = useState(true);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    const load = () => {
+      setGasLoading(true);
+      Promise.all(
+        CHAINS.map((c) =>
+          fetch(`/api/gas/${c}`, { signal: ctrl.signal, cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : null))
+            .then((d: GasData | null) => [c, d] as const)
+            .catch(() => [c, null] as const)
+        )
+      ).then((entries) => {
+        setGas(Object.fromEntries(entries));
+        setGasLoading(false);
+      });
+    };
+    load();
+    const id = setInterval(load, 30_000);
+    return () => {
+      ctrl.abort();
+      clearInterval(id);
+    };
+  }, []);
+
+  const fgColor = (() => {
+    const v = fearGreed.value;
+    if (v < 25) return "text-down";
+    if (v < 50) return "text-warning";
+    if (v < 75) return "text-up";
+    return "text-accent";
+  })();
+
+  const tabs = [
+    { key: "trending", label: t("tabs.trending"), icon: Flame },
+    { key: "gainers", label: t("tabs.gainers"), icon: Trophy },
+    { key: "losers", label: t("tabs.losers"), icon: TrendingDown },
+  ] as const;
 
   return (
     <section className="py-12 px-4 bg-canvas">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
-          <p className="font-mono-caps text-secondary mb-2">
-            {t("badge")}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-primary mb-2">
+          <p className="font-mono-caps text-secondary mb-2">FIG 02 — OUTILS</p>
+          <h2 className="heading-2 text-3xl md:text-4xl font-medium text-primary mb-2">
             {t("title")}
           </h2>
-          <p className="text-secondary text-sm">
-            {t("subtitle")}
-          </p>
+          <p className="text-secondary text-sm">{t("subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Left Column */}
           <div className="md:col-span-8 flex flex-col gap-6">
-            {/* Mouvements du jour */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card border border-surface rounded-sm p-6"
-            >
-              <div className="flex justify-between items-center mb-6">
+            {/* Daily Movers */}
+            <div className="bg-card border border-surface rounded-sm p-6">
+              <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
                 <div>
                   <h3 className="text-lg font-medium text-primary">{t("sectionTitle")}</h3>
-                  <p className="text-secondary text-xs">
-                    {t("sectionDesc")}
-                  </p>
+                  <p className="text-secondary text-xs">{t("sectionDesc")}</p>
                 </div>
                 <div className="flex bg-raised rounded-sm p-1 border border-surface">
-                  {[
-                    { key: "trending", label: t("tabs.trending"), icon: Flame },
-                    { key: "gainers", label: t("tabs.gainers"), icon: Trophy },
-                    { key: "losers", label: t("tabs.losers"), icon: TrendingDown },
-                  ].map((tab) => (
+                  {tabs.map((tab) => (
                     <button
                       key={tab.key}
-                      onClick={() =>
-                        setActiveTab(tab.key as "trending" | "gainers" | "losers")
-                      }
+                      onClick={() => setActiveTab(tab.key)}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition ${
                         activeTab === tab.key
                           ? "bg-accent-subtle text-accent"
@@ -105,114 +245,159 @@ export default function QuickTools() {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                {trendingItems.map((item) => (
-                  <div
-                    key={item.symbol}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-secondary text-sm w-4">
-                        {item.rank}
-                      </span>
-                      <div
-                        className={`w-6 h-6 rounded-full ${item.iconBg} flex items-center justify-center text-[10px] font-bold text-primary`}
-                      >
-                        {item.icon}
-                      </div>
-                      <div>
-                        <div className="font-medium text-sm text-primary">{item.name}</div>
-                        <div className="text-xs text-secondary">
-                          {item.symbol}
+              <div className="space-y-3">
+                {moversLoading && movers.length === 0 ? (
+                  Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-3 bg-raised rounded animate-pulse" />
+                        <div className="w-6 h-6 rounded-full bg-raised animate-pulse" />
+                        <div className="space-y-1.5">
+                          <div className="w-20 h-3 bg-raised rounded animate-pulse" />
+                          <div className="w-10 h-2 bg-raised rounded animate-pulse" />
                         </div>
                       </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-3 bg-raised rounded animate-pulse" />
+                        <div className="w-14 h-5 bg-raised rounded animate-pulse" />
+                      </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <span className="font-medium text-sm text-primary">{item.price}</span>
-                      <span className="bg-accent-subtle text-accent border border-accent/20 px-1.5 py-0.5 rounded-sm text-xs">
-                        {item.change}
-                      </span>
-                    </div>
+                  ))
+                ) : moversError ? (
+                  <div className="flex flex-col items-center justify-center py-6 gap-3">
+                    <AlertCircle className="w-5 h-5 text-down" />
+                    <p className="text-sm text-secondary">Erreur de chargement</p>
+                    <button
+                      onClick={() => fetchMovers(activeTab)}
+                      className="flex items-center gap-1.5 text-xs text-accent hover:underline"
+                    >
+                      <RefreshCw className="w-3 h-3" /> Réessayer
+                    </button>
                   </div>
-                ))}
+                ) : (
+                  movers.map((item, idx) => (
+                    <Link
+                      key={item.id}
+                      href={`/markets/${item.id}`}
+                      className="flex items-center justify-between hover:bg-raised -mx-2 px-2 py-1.5 rounded transition"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-secondary text-sm w-4">{idx + 1}</span>
+                        <img
+                          src={item.image}
+                          alt={item.symbol}
+                          width={24}
+                          height={24}
+                          className="w-6 h-6 rounded-full"
+                        />
+                        <div>
+                          <div className="font-medium text-sm text-primary">{item.name}</div>
+                          <div className="text-xs text-secondary">{item.symbol}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="font-medium text-sm text-primary">
+                          ${formatPrice(item.price)}
+                        </span>
+                        <span
+                          className={`px-1.5 py-0.5 rounded-sm text-xs font-medium ${
+                            item.change24h >= 0 ? "text-up" : "text-down"
+                          }`}
+                        >
+                          {item.change24h >= 0 ? "+" : ""}
+                          {item.change24h.toFixed(2)}%
+                        </span>
+                      </div>
+                    </Link>
+                  ))
+                )}
               </div>
-            </motion.div>
+            </div>
 
-            {/* Convertisseur rapide */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card border border-surface rounded-sm p-6"
-            >
+            {/* Quick Converter */}
+            <div className="bg-card border border-surface rounded-sm p-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-sm font-medium text-primary">{t("converterTitle")}</h3>
-                <span className="font-mono-caps text-secondary">
-                  {t("converterRatesLabel")}
-                </span>
+                <h3 className="text-sm font-medium text-primary flex items-center gap-2">
+                  <ArrowRightLeft className="w-4 h-4 text-accent" />
+                  {t("converterTitle")}
+                </h3>
+                <span className="font-mono-caps text-secondary">LIVE — RATES</span>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center gap-4">
-                <div className="flex-1 w-full bg-canvas border border-surface rounded-sm p-2 flex items-center">
-                  <div className="font-mono-caps text-secondary mr-2 uppercase w-12 text-center">
-                    {t("converterFrom")}
-                  </div>
+              <div className="flex flex-col md:flex-row items-center gap-3">
+                <div className="flex-1 w-full bg-canvas border border-surface rounded-md p-2 flex items-center">
                   <input
                     type="text"
                     inputMode="decimal"
-                    defaultValue="1"
-                    aria-label={t("converterFrom")}
+                    value={fromAmount}
+                    onChange={(e) => setFromAmount(e.target.value)}
+                    aria-label="Montant source"
                     className="bg-transparent text-primary font-medium w-full focus:outline-none px-2"
                   />
-                  <select aria-label={t("converterFrom") + " devise"} className="bg-transparent text-sm text-primary focus:outline-none border-l border-surface pl-2">
-                    <option>BTC</option>
-                    <option>ETH</option>
+                  <select
+                    value={fromSymbol}
+                    onChange={(e) => setFromSymbol(e.target.value)}
+                    aria-label="Devise source"
+                    className="bg-canvas text-sm text-primary focus:outline-none border-l border-surface pl-2 py-1 uppercase"
+                  >
+                    {ALL_OPTIONS.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
-                <button className="bg-raised p-2 rounded-sm border border-surface hover:bg-card" aria-label="Inverser les devises">
+                <button
+                  onClick={swap}
+                  aria-label="Inverser"
+                  className="bg-raised p-2 rounded-sm border border-surface hover:bg-card transition shrink-0"
+                >
                   <ArrowRightLeft className="w-4 h-4 text-secondary" />
                 </button>
 
-                <div className="flex-1 w-full bg-canvas border border-surface rounded-sm p-2 flex items-center">
-                  <div className="font-mono-caps text-secondary mr-2 uppercase w-12 text-center">
-                    {t("converterTo")}
-                  </div>
+                <div className="flex-1 w-full bg-canvas border border-surface rounded-md p-2 flex items-center">
                   <input
                     type="text"
-                    inputMode="decimal"
-                    defaultValue="77,834.5"
                     readOnly
-                    aria-label={t("converterTo")}
+                    value={toAmount ? formatPrice(toAmount) : "—"}
+                    aria-label="Montant converti"
                     className="bg-transparent text-primary font-medium w-full focus:outline-none px-2"
                   />
-                  <select aria-label={t("converterTo") + " devise"} className="bg-transparent text-sm text-primary focus:outline-none border-l border-surface pl-2">
-                    <option>USD</option>
-                    <option>EUR</option>
+                  <select
+                    value={toSymbol}
+                    onChange={(e) => setToSymbol(e.target.value)}
+                    aria-label="Devise cible"
+                    className="bg-canvas text-sm text-primary focus:outline-none border-l border-surface pl-2 py-1 uppercase"
+                  >
+                    {ALL_OPTIONS.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
-              <div className="text-[10px] text-secondary mt-3">
-                1 BTC = <span className="font-medium text-primary">77,834.5</span>{" "}
-                USD
+
+              <div className="text-[10px] text-tertiary mt-3 font-mono-caps">
+                {fromAmount || "0"} {fromSymbol} ={" "}
+                <span className="text-primary font-medium">{formatPrice(toAmount)}</span> {toSymbol}
+                {priceMap[fromSymbol] ? (
+                  <span className="ml-2">
+                    · 1 {fromSymbol} = ${formatPrice(priceMap[fromSymbol])}
+                  </span>
+                ) : null}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Column */}
           <div className="md:col-span-4 flex flex-col gap-6">
             {/* Fear & Greed */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card border border-surface rounded-sm p-6 relative flex flex-col items-center"
-            >
+            <div className="bg-card border border-surface rounded-sm p-6 flex flex-col items-center">
               <div className="w-full flex justify-between items-center mb-2">
                 <h3 className="text-sm font-medium text-primary">{t("fearGreedTitle")}</h3>
-                <span className="font-mono-caps text-secondary">
-                  {t("fearGreedSub")}
-                </span>
+                <span className="font-mono-caps text-secondary">{t("fearGreedSub")}</span>
               </div>
 
               <div className="relative w-40 h-24 mt-4 overflow-hidden">
@@ -220,7 +405,7 @@ export default function QuickTools() {
                   <path
                     d="M 10 50 A 40 40 0 0 1 90 50"
                     fill="none"
-                    stroke="#26263a"
+                    stroke="var(--border-default)"
                     strokeWidth="8"
                     strokeLinecap="round"
                   />
@@ -231,7 +416,8 @@ export default function QuickTools() {
                     strokeWidth="8"
                     strokeLinecap="round"
                     pathLength="100"
-                    className="gauge-path"
+                    strokeDasharray={`${fgLoading ? 50 : fearGreed.value} 100`}
+                    style={{ transition: "stroke-dasharray 0.6s ease" }}
                   />
                   <defs>
                     <linearGradient
@@ -241,94 +427,103 @@ export default function QuickTools() {
                       x2="100%"
                       y2="0%"
                     >
-                      <stop offset="0%" stopColor="#ef4444" />
-                      <stop offset="50%" stopColor="#f59e0b" />
-                      <stop offset="100%" stopColor="#c8f6f9" />
+                      <stop offset="0%" stopColor="var(--text-down)" />
+                      <stop offset="25%" stopColor="var(--text-down)" />
+                      <stop offset="50%" stopColor="var(--text-warning)" />
+                      <stop offset="75%" stopColor="var(--text-up)" />
+                      <stop offset="100%" stopColor="var(--text-accent)" />
                     </linearGradient>
                   </defs>
                 </svg>
                 <div className="absolute bottom-0 left-0 w-full text-center">
-                  <div className="text-3xl font-medium text-primary">72</div>
-                  <div className="font-mono-caps text-accent">
-                    {t("fearGreedLevel")}
+                  <div
+                    className={`heading-1 text-3xl font-medium ${fgLoading ? "animate-pulse text-tertiary" : fgColor}`}
+                  >
+                    {fgError ? "—" : fearGreed.value}
+                  </div>
+                  <div className={`font-mono-caps ${fgError ? "text-tertiary" : "text-accent"}`}>
+                    {fgError ? "INDISPONIBLE" : fearGreed.label.toUpperCase()}
                   </div>
                 </div>
               </div>
               <p className="text-xs text-secondary text-center mt-4">
                 {t.rich("fearGreedDesc", { sentiment: t("fearGreedSentiment") })}
               </p>
-            </motion.div>
+            </div>
 
             {/* Gas Tracker */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card border border-surface rounded-sm p-6"
-            >
+            <div className="bg-card border border-surface rounded-sm p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-sm font-medium flex items-center gap-2 text-primary">
-                  <Fuel className="w-4 h-4 text-[#f59e0b]" />
+                  <Fuel className="w-4 h-4 text-warning" />
                   {t("gasTitle")}
                 </h3>
-                <span className="font-mono-caps text-secondary">
-                  {t("gasSub")}
+                <span className="font-mono-caps text-secondary flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-up animate-pulse" />
+                  LIVE — CHAINS
                 </span>
               </div>
               <div className="space-y-3">
-                <div className="flex justify-between items-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#bdbbff]" />
-                    Ethereum
-                  </div>
-                  <div className="text-secondary flex gap-2">
-                    <span>12</span>
-                    <span>18</span>
-                    <span className="text-[#f59e0b] font-medium flex items-center">
-                      ⚡ 24
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#ef2cc1]" />
-                    Polygon
-                  </div>
-                  <div className="text-secondary flex gap-2">
-                    <span>35</span>
-                    <span>50</span>
-                    <span className="text-[#f59e0b] font-medium flex items-center">
-                      ⚡ 70
-                    </span>
-                  </div>
-                </div>
+                {CHAINS.map((c) => {
+                  const g = gas[c];
+                  const loading = gasLoading && !g;
+                  return (
+                    <div
+                      key={c}
+                      className="flex justify-between items-center text-sm"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            loading
+                              ? "bg-tertiary animate-pulse"
+                              : g
+                                ? gasDotColor(g.levels.average)
+                                : "bg-down"
+                          }`}
+                        />
+                        <span className="text-primary">{CHAIN_LABEL[c]}</span>
+                      </div>
+                      <div className="text-secondary flex gap-3 font-mono text-xs">
+                        {loading ? (
+                          <span className="text-tertiary">…</span>
+                        ) : g ? (
+                          <>
+                            <span>{g.levels.slow}</span>
+                            <span>{g.levels.average}</span>
+                            <span className="text-warning font-medium flex items-center gap-0.5">
+                              <Zap className="w-3 h-3" /> {g.levels.fast}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-down">—</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </motion.div>
+            </div>
 
             {/* Screener Callout */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card border border-[#c8f6f9]/30 rounded-sm p-6 relative overflow-hidden group hover:border-accent/60 transition"
+            <Link
+              href="/tools/screener"
+              className="bg-card border border-accent/30 rounded-xl p-6 relative overflow-hidden group hover:border-accent/60 transition block"
             >
               <div className="w-10 h-10 bg-accent/20 rounded-sm flex items-center justify-center mb-4 text-accent">
                 <Droplets className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-medium text-primary mb-2">
-                {t("screenerTitle")}
+              <h3 className="heading-3 text-lg font-medium text-primary mb-2">
+                Advanced Screener
               </h3>
               <p className="text-sm text-secondary mb-4 line-clamp-2">
-                {t("screenerDesc")}
+                Filtrez 500+ cryptos par volume, volatilité, RSI, market cap. Construisez votre watchlist en 30s.
               </p>
-              <a
-                href="#"
-                className="text-accent text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-              >
-                {t("screenerCta")}
+              <span className="text-accent text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                Open screener
                 <ArrowRight className="w-4 h-4" />
-              </a>
-            </motion.div>
+              </span>
+            </Link>
           </div>
         </div>
       </div>

@@ -114,7 +114,7 @@ export default function MarketHeatmap({
             <a
               key={item.symbol}
               href={`/markets/${encodeURIComponent(item.symbol)}`}
-              className={`${color.bg} ${color.text} border ${color.border} rounded-sm p-2 flex flex-col justify-between transition-transform hover:scale-[1.02] hover:z-10 hover:shadow-lg cursor-pointer overflow-hidden`}
+              className={`${color.bg} ${color.text} border ${color.border} rounded-sm p-2 flex flex-col justify-between hover:z-10 cursor-pointer overflow-hidden`}
               style={{
                 flexBasis: `${Math.max(8, weight * 22)}%`,
                 flexGrow: weight,

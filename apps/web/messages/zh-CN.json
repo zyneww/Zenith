@@ -63,8 +63,6 @@
     }
   },
   "hero": {
-    "badge": "测试版",
-    "badgeText": "实时提醒现已可用",
     "title": "您的巅峰,",
     "titleLine2": "您的市场,",
     "titleLine3": "您的<clarity>{clarityValue}</clarity>。",
@@ -144,7 +142,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● 离线",
+    "loading": "加载中..."
   },
   "crypto": {
     "title": "加密货币深度分析",
@@ -203,7 +203,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "加载中...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "加密货币市场情绪指标"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "不可用"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24小时 — 各类别前 5",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "查看全部",
+      "loading": "加载中...",
+      "error": "加载错误",
+      "retry": "重试"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "从",
+      "to": "到",
+      "amount": "金额"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "按交易量、波动率、RSI、市值筛选 500+ 加密货币。30 秒构建您的自选列表。",
+      "open": "打开筛选器 →"
+    }
   },
   "cta": {
     "title": "准备好更上一层楼了吗?",
@@ -407,10 +453,114 @@
     "subscription": "订阅与价格"
   },
   "legal": {
-    "terms": "使用条款",
-    "privacy": "隐私政策",
-    "cookies": "Cookie 政策",
-    "accessibility": "无障碍"
+    "terms": {
+      "title": "服务条款",
+      "lastUpdated": "2026年6月1日",
+      "intro": "本条款规范您对 Zenith 的使用。使用我们的服务即表示您完全接受这些条款。",
+      "sections": [
+        {
+          "title": "目的与接受",
+          "content": "Zenith 是一个多资产金融情报平台。本服务条款规定了 Zenith 与服务用户之间的权利和义务。访问本平台即视为完全接受这些条款。"
+        },
+        {
+          "title": "服务说明",
+          "content": "Zenith 提供实时市场数据（加密货币、外汇、大宗商品、指数）、分析工具、经济日历、价格提醒和自选列表系统。服务按原样提供，不保证持续可用性或数据的绝对准确性。"
+        },
+        {
+          "title": "用户义务",
+          "content": "您同意仅为合法目的使用 Zenith，不试图干扰服务，不通过自动化手段大规模提取数据，并尊重 Zenith 及其合作伙伴的知识产权。"
+        },
+        {
+          "title": "知识产权",
+          "content": "Zenith 的所有内容（文字、图形、代码、设计）均受现行知识产权法律保护。未经授权的复制行为是被禁止的。"
+        },
+        {
+          "title": "责任限制",
+          "content": "Zenith 不对基于平台所提供信息做出的投资决策所造成的财务损失承担责任。市场数据仅供参考，不构成投资建议。"
+        }
+      ]
+    },
+    "privacy": {
+      "title": "隐私政策",
+      "lastUpdated": "2026年6月1日",
+      "intro": "Zenith 致力于保护您的隐私。本政策说明我们收集哪些数据、如何使用以及您拥有哪些权利。",
+      "sections": [
+        {
+          "title": "收集的数据",
+          "content": "我们收集：(1) 通过 Clerk 注册时提供的账户数据（电子邮箱、姓名）；(2) 浏览数据（Cookie、IP）；(3) 您的偏好（自选列表、提醒、语言、货币）；(4) 用于改进服务的匿名化使用数据。"
+        },
+        {
+          "title": "法律依据与目的",
+          "content": "我们处理您的数据基于服务合同的履行（账户数据、偏好）以及我们改进服务的合法利益（匿名化分析）。我们绝不会将您的数据出售给第三方。"
+        },
+        {
+          "title": "保留期限",
+          "content": "您的账户数据在账户有效期内保留，账户删除后 30 天内删除。分析数据最多保留 13 个月。"
+        },
+        {
+          "title": "您的权利（GDPR）",
+          "content": "您拥有访问、更正、删除、携带以及反对处理您数据的权利。如需行使这些权利，请联系 privacy@zenith.xyz。"
+        },
+        {
+          "title": "DPO 联系方式",
+          "content": "我们的数据保护官可通过 dpo@zenith.xyz 联系。您也有权向主管监管机构提出投诉。"
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie 政策",
+      "lastUpdated": "2026年6月1日",
+      "intro": "本页说明 Zenith 如何使用 Cookie 和类似技术。",
+      "sections": [
+        {
+          "title": "什么是 Cookie",
+          "content": "Cookie 是您访问网站时存储在设备上的小型文本文件。它允许网站在一定时间内记住您的操作和偏好。"
+        },
+        {
+          "title": "必要 Cookie",
+          "content": "这些 Cookie 是服务运行所必需的：Clerk 身份验证会话、语言偏好、提醒购物车。它们无法被禁用。"
+        },
+        {
+          "title": "分析 Cookie",
+          "content": "Zenith 使用匿名化的分析工具（可选 PostHog）来了解用户如何与平台互动。这些数据经过聚合处理，无法识别您的身份。"
+        },
+        {
+          "title": "营销 Cookie",
+          "content": "Zenith 不使用营销或广告 Cookie。不会为再营销或定向广告放置任何第三方 Cookie。"
+        },
+        {
+          "title": "管理您的偏好",
+          "content": "您可以通过浏览器设置管理 Cookie 偏好。禁用某些 Cookie 可能会限制平台的某些功能。"
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "无障碍",
+      "lastUpdated": "2026年6月1日",
+      "intro": "Zenith 致力于根据国际标准使平台对所有人开放。",
+      "sections": [
+        {
+          "title": "我们的承诺",
+          "content": "Zenith 致力于为所有人（包括残障人士）提供可用的服务。我们遵循 WCAG 2.1 AA 级建议。"
+        },
+        {
+          "title": "WCAG 2.1 AA 标准",
+          "content": "我们的界面遵循无障碍原则：足够的颜色对比、键盘导航、图片替代文本、语义化 HTML 结构、交互元素的 ARIA 标签。"
+        },
+        {
+          "title": "无障碍功能",
+          "content": "完整的键盘导航（Tab、Enter、Esc）、⌘K 快捷键（命令面板）、原生深色模式、屏幕阅读器支持（NVDA、JAWS、VoiceOver）、文字可放大至 200% 而不影响可读性。"
+        },
+        {
+          "title": "已知局限",
+          "content": "某些价格图表（迷你图、热力图）可能对屏幕阅读器用户难以解读。数据的文本版本可通过命令面板获取。"
+        },
+        {
+          "title": "问题反馈联系方式",
+          "content": "如果您遇到无障碍问题，请联系 accessibilite@zenith.xyz。我们承诺在 5 个工作日内回复，并在 30 天内解决问题。"
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +591,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "已添加到自选列表",
+    "removed": "已从自选列表移除",
+    "empty": "您的自选列表为空",
+    "title": "我的自选列表"
   }
 }

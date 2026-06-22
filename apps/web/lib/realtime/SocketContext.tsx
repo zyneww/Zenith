@@ -13,6 +13,7 @@ interface PriceUpdate {
 interface SocketContextType {
   socket: WebSocket | null;
   isConnected: boolean;
+  pricesVersion: number;
   subscribe: (symbols: string[]) => void;
   unsubscribe: (symbols: string[]) => void;
   getLatestPrice: (symbol: string) => PriceUpdate | undefined;
@@ -146,6 +147,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
   const value: SocketContextType = {
     socket: socketRef.current,
     isConnected,
+    pricesVersion,
     subscribe,
     unsubscribe,
     getLatestPrice,

@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Offline",
+    "loading": "Memuat..."
   },
   "crypto": {
     "title": "Kripto mendalam",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Memuat...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Indikator sentimen pasar crypto"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Tidak tersedia"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24 jam — Top 5 per kategori",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Lihat semua",
+      "loading": "Memuat...",
+      "error": "Kesalahan memuat",
+      "retry": "Coba lagi"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "Dari",
+      "to": "Ke",
+      "amount": "Jumlah"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Filter 500+ crypto berdasarkan volume, volatilitas, RSI, kapitalisasi pasar. Bangun watchlist Anda dalam 30 detik.",
+      "open": "Buka screener →"
+    }
   },
   "cta": {
     "title": "Siap naik ke level berikutnya?",
@@ -407,10 +455,114 @@
     "subscription": "Langganan & harga"
   },
   "legal": {
-    "terms": "Ketentuan penggunaan",
-    "privacy": "Privasi",
-    "cookies": "Cookie",
-    "accessibility": "Aksesibilitas"
+    "terms": {
+      "title": "Ketentuan Layanan",
+      "lastUpdated": "1 Juni 2026",
+      "intro": "Ketentuan ini mengatur penggunaan Anda atas Zenith. Dengan menggunakan layanan kami, Anda menyetujui ketentuan ini secara keseluruhan.",
+      "sections": [
+        {
+          "title": "Tujuan dan penerimaan",
+          "content": "Zenith adalah platform intelijen keuangan multi-aset. Ketentuan Layanan ini mendefinisikan hak dan kewajiban antara Zenith dan setiap pengguna layanan. Mengakses platform merupakan penerimaan penuh dan lengkap atas ketentuan ini."
+        },
+        {
+          "title": "Deskripsi layanan",
+          "content": "Zenith menyediakan data pasar real-time (crypto, forex, komoditas, indeks), alat analisis, kalender ekonomi, peringatan, dan sistem watchlist. Layanan disediakan apa adanya, tanpa jaminan ketersediaan berkelanjutan atau akurasi absolut data."
+        },
+        {
+          "title": "Kewajiban pengguna",
+          "content": "Anda setuju untuk menggunakan Zenith hanya untuk tujuan yang sah, tidak berusaha mengganggu layanan, tidak mengekstrak data secara massal melalui cara otomatis, dan menghormati hak kekayaan intelektual Zenith dan mitranya."
+        },
+        {
+          "title": "Kekayaan intelektual",
+          "content": "Seluruh konten di Zenith (teks, grafis, kode, desain) dilindungi oleh hukum kekayaan intelektual yang berlaku. Reproduksi tidak sah dilarang."
+        },
+        {
+          "title": "Batasan tanggung jawab",
+          "content": "Zenith tidak bertanggung jawab atas kerugian keuangan yang timbul dari keputusan investasi yang dibuat berdasarkan informasi yang diberikan oleh platform. Data pasar disediakan hanya untuk tujuan informasi dan bukan merupakan nasihat investasi."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Kebijakan Privasi",
+      "lastUpdated": "1 Juni 2026",
+      "intro": "Zenith berkomitmen untuk melindungi privasi Anda. Kebijakan ini menjelaskan data apa yang kami kumpulkan, bagaimana kami menggunakannya, dan apa hak Anda.",
+      "sections": [
+        {
+          "title": "Data yang dikumpulkan",
+          "content": "Kami mengumpulkan: (1) data akun (email, nama) yang diberikan saat pendaftaran melalui Clerk; (2) data penjelajahan (cookies, IP); (3) preferensi Anda (watchlist, peringatan, bahasa, mata uang); (4) data penggunaan anonim untuk meningkatkan layanan."
+        },
+        {
+          "title": "Dasar hukum dan tujuan",
+          "content": "Pemrosesan data Anda didasarkan pada pelaksanaan kontrak layanan (data akun, preferensi) dan kepentingan sah kami untuk meningkatkan layanan (analitik anonim). Kami tidak pernah menjual data Anda kepada pihak ketiga."
+        },
+        {
+          "title": "Periode retensi",
+          "content": "Data akun Anda disimpan selama akun Anda aktif, kemudian dihapus dalam 30 hari setelah penghapusan akun. Data analitik disimpan maksimal 13 bulan."
+        },
+        {
+          "title": "Hak Anda (GDPR)",
+          "content": "Anda memiliki hak untuk mengakses, memperbaiki, menghapus, memindahkan, dan menolak pemrosesan data Anda. Untuk menggunakan hak-hak ini, hubungi privacy@zenith.xyz."
+        },
+        {
+          "title": "Kontak DPO",
+          "content": "Petugas Perlindungan Data kami dapat dihubungi di dpo@zenith.xyz. Anda juga berhak untuk mengajukan keluhan kepada otoritas pengawas yang berwenang."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Kebijakan Cookie",
+      "lastUpdated": "1 Juni 2026",
+      "intro": "Halaman ini menjelaskan bagaimana Zenith menggunakan cookie dan teknologi serupa.",
+      "sections": [
+        {
+          "title": "Apa itu cookie",
+          "content": "Cookie adalah file teks kecil yang disimpan di perangkat Anda saat Anda mengunjungi situs web. Ini memungkinkan situs untuk mengingat tindakan dan preferensi Anda selama periode tertentu."
+        },
+        {
+          "title": "Cookie penting",
+          "content": "Cookie ini diperlukan untuk fungsi layanan: sesi autentikasi Clerk, preferensi bahasa, keranjang peringatan. Mereka tidak dapat dinonaktifkan."
+        },
+        {
+          "title": "Cookie analitik",
+          "content": "Zenith menggunakan alat analitik anonim (PostHog opsional) untuk memahami bagaimana pengguna berinteraksi dengan platform. Data ini diagregasi dan tidak memungkinkan Anda diidentifikasi."
+        },
+        {
+          "title": "Cookie pemasaran",
+          "content": "Zenith tidak menggunakan cookie pemasaran atau iklan. Tidak ada cookie pihak ketiga yang ditempatkan untuk retargeting atau iklan tertarget."
+        },
+        {
+          "title": "Mengelola preferensi Anda",
+          "content": "Anda dapat mengelola preferensi cookie dari pengaturan browser Anda. Menonaktifkan cookie tertentu dapat membatasi beberapa fitur platform."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Aksesibilitas",
+      "lastUpdated": "1 Juni 2026",
+      "intro": "Zenith berkomitmen untuk membuat platformnya dapat diakses oleh semua orang, sesuai dengan standar internasional.",
+      "sections": [
+        {
+          "title": "Komitmen kami",
+          "content": "Zenith bertujuan untuk menyediakan layanan yang dapat digunakan oleh semua orang, termasuk penyandang disabilitas. Kami mengikuti rekomendasi WCAG 2.1 Level AA."
+        },
+        {
+          "title": "Standar WCAG 2.1 AA",
+          "content": "Antarmuka kami menghormati prinsip aksesibilitas: kontras warna yang cukup, navigasi keyboard, teks alternatif pada gambar, struktur HTML semantik, label ARIA pada elemen interaktif."
+        },
+        {
+          "title": "Fitur aksesibilitas",
+          "content": "Navigasi keyboard lengkap (Tab, Enter, Esc), pintasan ⌘K (command palette), mode gelap bawaan, dukungan pembaca layar (NVDA, JAWS, VoiceOver), teks dapat diubah ukurannya hingga 200% tanpa kehilangan keterbacaan."
+        },
+        {
+          "title": "Keterbatasan yang diketahui",
+          "content": "Beberapa grafik harga (sparklines, heatmaps) mungkin sulit ditafsirkan oleh pengguna pembaca layar. Versi tekstual dari data tersedia melalui command palette."
+        },
+        {
+          "title": "Kontak untuk melaporkan masalah",
+          "content": "Jika Anda mengalami masalah aksesibilitas, hubungi accessibilite@zenith.xyz. Kami berkomitmen untuk merespons dalam 5 hari kerja dan memperbaiki masalah dalam 30 hari."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Ditambahkan ke watchlist",
+    "removed": "Dihapus dari watchlist",
+    "empty": "Watchlist Anda kosong",
+    "title": "Watchlist saya"
   }
 }

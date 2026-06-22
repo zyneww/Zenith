@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Offline",
+    "loading": "Ładowanie..."
   },
   "crypto": {
     "title": "Krypto w głębi",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Ładowanie...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Wskaźnik nastrojów rynku kryptowalut"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Niedostępne"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24h — Top 5 w kategorii",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Zobacz wszystko",
+      "loading": "Ładowanie...",
+      "error": "Błąd ładowania",
+      "retry": "Ponów"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "Z",
+      "to": "Na",
+      "amount": "Kwota"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Filtruj ponad 500 kryptowalut po wolumenie, zmienności, RSI, kapitalizacji rynkowej. Zbuduj swoją watchlist w 30s.",
+      "open": "Otwórz screener →"
+    }
   },
   "cta": {
     "title": "Gotowy na wyższy poziom?",
@@ -407,10 +455,114 @@
     "subscription": "Subskrypcja i ceny"
   },
   "legal": {
-    "terms": "Regulamin",
-    "privacy": "Prywatność",
-    "cookies": "Cookies",
-    "accessibility": "Dostępność"
+    "terms": {
+      "title": "Regulamin",
+      "lastUpdated": "1 czerwca 2026",
+      "intro": "Niniejszy regulamin określa zasady korzystania z Zenith. Korzystając z naszych usług, akceptujesz niniejszy regulamin w całości.",
+      "sections": [
+        {
+          "title": "Przedmiot i akceptacja",
+          "content": "Zenith to platforma analizy finansowej wielu aktywów. Niniejszy regulamin określa prawa i obowiązki między Zenith a każdym użytkownikiem usługi. Dostęp do platformy oznacza pełną i całkowitą akceptację niniejszych warunków."
+        },
+        {
+          "title": "Opis usługi",
+          "content": "Zenith oferuje dane rynkowe w czasie rzeczywistym (kryptowaluty, forex, surowce, indeksy), narzędzia analityczne, kalendarz ekonomiczny, alerty i system watchlist. Usługa jest świadczona w stanie takim, w jakim jest, bez gwarancji ciągłej dostępności lub absolutnej dokładności danych."
+        },
+        {
+          "title": "Obowiązki użytkownika",
+          "content": "Zobowiązujesz się korzystać z Zenith wyłącznie do celów legalnych, nie zakłócać działania usługi, nie dokonywać masowego wydobycia danych za pomocą zautomatyzowanych środków oraz szanować prawa własności intelektualnej Zenith i jej partnerów."
+        },
+        {
+          "title": "Własność intelektualna",
+          "content": "Cała zawartość Zenith (teksty, grafika, kod, design) jest chroniona obowiązującymi przepisami o własności intelektualnej. Każde nieautoryzowane powielenie jest zabronione."
+        },
+        {
+          "title": "Ograniczenie odpowiedzialności",
+          "content": "Zenith nie ponosi odpowiedzialności za straty finansowe wynikające z decyzji inwestycyjnych podjętych na podstawie informacji dostarczonych przez platformę. Dane rynkowe są dostarczane wyłącznie w celach informacyjnych i nie stanowią porady inwestycyjnej."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Polityka Prywatności",
+      "lastUpdated": "1 czerwca 2026",
+      "intro": "Zenith zobowiązuje się do ochrony Twojej prywatności. Niniejsza polityka wyjaśnia, jakie dane zbieramy, jak je wykorzystujemy i jakie masz prawa.",
+      "sections": [
+        {
+          "title": "Zbierane dane",
+          "content": "Zbieramy: (1) dane konta (e-mail, imię) podane podczas rejestracji przez Clerk; (2) dane przeglądania (ciasteczka, IP); (3) Twoje preferencje (watchlist, alerty, język, waluta); (4) zanonimizowane dane użytkowania w celu ulepszania usługi."
+        },
+        {
+          "title": "Podstawa prawna i cele",
+          "content": "Przetwarzanie Twoich danych opiera się na wykonaniu umowy o świadczenie usług (dane konta, preferencje) oraz na naszym uzasadnionym interesie w ulepszaniu usługi (zanonimizowane analizy). Nigdy nie sprzedajemy Twoich danych stronom trzecim."
+        },
+        {
+          "title": "Okres przechowywania",
+          "content": "Dane Twojego konta są przechowywane tak długo, jak Twoje konto jest aktywne, a następnie usuwane w ciągu 30 dni od usunięcia konta. Dane analityczne są przechowywane maksymalnie przez 13 miesięcy."
+        },
+        {
+          "title": "Twoje prawa (RODO)",
+          "content": "Masz prawo dostępu, sprostowania, usunięcia, przenoszenia i sprzeciwu wobec przetwarzania swoich danych. Aby skorzystać z tych praw, skontaktuj się z privacy@zenith.xyz."
+        },
+        {
+          "title": "Kontakt z IOD",
+          "content": "Nasz Inspektor Ochrony Danych jest dostępny pod adresem dpo@zenith.xyz. Masz również prawo wnieść skargę do właściwego organu nadzorczego (UODO w Polsce)."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Polityka Cookies",
+      "lastUpdated": "1 czerwca 2026",
+      "intro": "Ta strona wyjaśnia, jak Zenith używa plików cookie i podobnych technologii.",
+      "sections": [
+        {
+          "title": "Czym jest plik cookie",
+          "content": "Plik cookie to mały plik tekstowy przechowywany na Twoim urządzeniu podczas odwiedzania strony internetowej. Pozwala stronie zapamiętać Twoje działania i preferencje przez określony czas."
+        },
+        {
+          "title": "Niezbędne pliki cookie",
+          "content": "Te pliki cookie są niezbędne do działania usługi: sesja uwierzytelniania Clerk, preferencje językowe, koszyk alertów. Nie można ich wyłączyć."
+        },
+        {
+          "title": "Analityczne pliki cookie",
+          "content": "Zenith używa zanonimizowanych narzędzi analitycznych (PostHog opcjonalnie), aby zrozumieć, jak użytkownicy wchodzą w interakcję z platformą. Dane te są agregowane i nie pozwalają na identyfikację."
+        },
+        {
+          "title": "Marketingowe pliki cookie",
+          "content": "Zenith nie używa marketingowych ani reklamowych plików cookie. Żadne pliki cookie stron trzecich nie są umieszczane w celu retargetingu lub reklamy ukierunkowanej."
+        },
+        {
+          "title": "Zarządzanie preferencjami",
+          "content": "Możesz zarządzać swoimi preferencjami dotyczącymi plików cookie w ustawieniach przeglądarki. Wyłączenie niektórych plików cookie może ograniczyć niektóre funkcje platformy."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Dostępność",
+      "lastUpdated": "1 czerwca 2026",
+      "intro": "Zenith zobowiązuje się do uczynienia swojej platformy dostępną dla wszystkich, zgodnie z międzynarodowymi standardami.",
+      "sections": [
+        {
+          "title": "Nasze zobowiązanie",
+          "content": "Zenith dąży do zapewnienia usługi użytecznej dla wszystkich, w tym osób z niepełnosprawnościami. Stosujemy się do zaleceń WCAG 2.1 poziom AA."
+        },
+        {
+          "title": "Standardy WCAG 2.1 AA",
+          "content": "Nasz interfejs respektuje zasady dostępności: wystarczające kontrasty kolorów, nawigacja klawiaturą, teksty alternatywne na obrazach, semantyczna struktura HTML, etykiety ARIA na elementach interaktywnych."
+        },
+        {
+          "title": "Funkcje dostępności",
+          "content": "Pełna nawigacja klawiaturą (Tab, Enter, Escape), skróty ⌘K (paleta poleceń), natywny tryb ciemny, obsługa czytników ekranowych (NVDA, JAWS, VoiceOver), tekst skalowalny do 200% bez utraty czytelności."
+        },
+        {
+          "title": "Znane ograniczenia",
+          "content": "Niektóre wykresy cenowe (sparklines, heatmapy) mogą być trudne do interpretacji dla użytkowników czytników ekranowych. Tekstowa wersja danych jest dostępna przez paletę poleceń."
+        },
+        {
+          "title": "Kontakt w sprawie problemu",
+          "content": "Jeśli napotkasz problem z dostępnością, skontaktuj się z accessibilite@zenith.xyz. Zobowiązujemy się odpowiedzieć w ciągu 5 dni roboczych i naprawić problemy w ciągu 30 dni."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Dodano do watchlist",
+    "removed": "Usunięto z watchlist",
+    "empty": "Twoja watchlist jest pusta",
+    "title": "Moja watchlist"
   }
 }

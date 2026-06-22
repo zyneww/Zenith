@@ -91,7 +91,7 @@ export default function LocaleCurrencySwitcher({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: position === "up" ? 8 : -8, scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className={`absolute ${dropdownPositionClass} w-56 bg-card border border-surface rounded-sm shadow-2xl z-50 overflow-hidden`}
+              className={`absolute ${dropdownPositionClass} w-56 bg-card border border-surface rounded-sm z-50 overflow-hidden`}
             >
               {/* Mode tabs (if both modes allowed) */}
               {initialMode === "language" && false && (
@@ -125,7 +125,7 @@ export default function LocaleCurrencySwitcher({
                         type="button"
                       >
                         <span>{LOCALE_LABELS[locale as Locale] ?? locale}</span>
-                        {currentLocale === locale && <Check className="w-4 h-4 text-brand-cyan" />}
+                        {currentLocale === locale && <Check className="w-4 h-4 text-accent" />}
                       </button>
                     ))
                   : ALL_CURRENCIES.map((c) => (
@@ -143,7 +143,7 @@ export default function LocaleCurrencySwitcher({
                           <span className="text-secondary w-5 text-xs">{CURRENCY_SYMBOLS[c]}</span>
                           <span className="font-mono text-xs">{c}</span>
                         </span>
-                        {currency === c && <Check className="w-4 h-4 text-brand-cyan" />}
+                        {currency === c && <Check className="w-4 h-4 text-accent" />}
                       </button>
                     ))}
               </div>

@@ -179,7 +179,7 @@ export default function MarketMiniTable({
                       isChange
                         ? isPositive
                           ? "text-accent"
-                          : "text-[#ef4444]"
+                          : "text-down"
                         : "text-primary"
                     }`}
                   >

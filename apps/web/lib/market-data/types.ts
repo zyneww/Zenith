@@ -4,11 +4,16 @@ export interface MarketDataPoint {
   price: number;
   change: number;
   changePercent: number;
+  changePercent1h?: number;
+  changePercent7d?: number;
   high: number;
   low: number;
   open: number;
   close: number;
   volume?: number;
+  marketCap?: number;
+  marketCapRank?: number;
+  sparkline7d?: number[];
   timestamp: number;
   assetClass: AssetClass;
 }

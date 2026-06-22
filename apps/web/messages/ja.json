@@ -63,8 +63,6 @@
     }
   },
   "hero": {
-    "badge": "ベータ",
-    "badgeText": "リアルタイムアラートが利用可能に",
     "title": "あなたの頂点、",
     "titleLine2": "あなたの市場、",
     "titleLine3": "あなたの<clarity>{clarityValue}</clarity>。",
@@ -144,7 +142,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● オフライン",
+    "loading": "読み込み中..."
   },
   "crypto": {
     "title": "暗号資産ディープダイブ",
@@ -203,7 +203,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "読み込み中...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "暗号資産市場センチメント指標"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "利用不可"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24時間 — カテゴリ別トップ5",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "すべて表示",
+      "loading": "読み込み中...",
+      "error": "読み込みエラー",
+      "retry": "再試行"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "から",
+      "to": "へ",
+      "amount": "金額"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "500以上の暗号資産を出来高、ボラティリティ、RSI、時価総額でフィルタリング。30秒でウォッチリストを作成。",
+      "open": "スクリーナーを開く →"
+    }
   },
   "cta": {
     "title": "レベルアップする準備はできましたか？",
@@ -407,10 +453,114 @@
     "subscription": "購読と料金"
   },
   "legal": {
-    "terms": "利用規約",
-    "privacy": "プライバシー",
-    "cookies": "クッキー",
-    "accessibility": "アクセシビリティ"
+    "terms": {
+      "title": "利用規約",
+      "lastUpdated": "2026年6月1日",
+      "intro": "本規約は、Zenithのご利用に適用されます。当社のサービスをご利用いただくことで、本規約のすべてに同意したものとみなされます。",
+      "sections": [
+        {
+          "title": "目的と承諾",
+          "content": "Zenithはマルチアセット金融情報プラットフォームです。本利用規約は、Zenithとサービス利用者との間の権利と義務を定めます。プラットフォームへのアクセスは、本規約の完全かつ全面的承諾とみなされます。"
+        },
+        {
+          "title": "サービスの説明",
+          "content": "Zenithはリアルタイム市場データ（暗号資産、forex、商品、指数）、分析ツール、経済カレンダー、アラート、ウォッチリストシステムを提供します。サービスは継続的な可用性やデータの絶対的正確性を保証せず、現状有姿で提供されます。"
+        },
+        {
+          "title": "利用者の義務",
+          "content": "利用者はZenithを合法的な目的のみに使用し、サービスの妨害を試みず、自動的手段による大量データ抽出を行わず、Zenithおよびパートナーの知的財産権を尊重することに同意します。"
+        },
+        {
+          "title": "知的財産",
+          "content": "Zenithのすべてのコンテンツ（テキスト、グラフィック、コード、デザイン）は適用される知的財産法によって保護されています。許可のない複製は禁止されています。"
+        },
+        {
+          "title": "責任の制限",
+          "content": "Zenithは、プラットフォームが提供する情報に基づいて行われた投資判断から生じる金銭的損失について責任を負いません。市場データは情報提供のみを目的としており、投資助言を構成するものではありません。"
+        }
+      ]
+    },
+    "privacy": {
+      "title": "プライバシーポリシー",
+      "lastUpdated": "2026年6月1日",
+      "intro": "Zenithはプライバシーの保護に取り組んでいます。本ポリシーは、当社が収集するデータ、その使用方法、お客様の権利について説明します。",
+      "sections": [
+        {
+          "title": "収集するデータ",
+          "content": "当社は以下を収集します：(1) Clerk経由の登録時に提供されたアカウントデータ（メール、氏名）；(2) 閲覧データ（Cookie、IP）；(3) お客様の設定（ウォッチリスト、アラート、言語、通貨）；(4) サービス改善のための匿名化された利用データ。"
+        },
+        {
+          "title": "法的根拠と目的",
+          "content": "お客様のデータの処理は、サービス契約の履行（アカウントデータ、設定）とサービス改善への正当な利益（匿名化された分析）に基づきます。当社はお客様のデータを第三者に販売することはありません。"
+        },
+        {
+          "title": "保存期間",
+          "content": "アカウントデータはアカウントが有効な間は保持され、アカウント削除後30日以内に削除されます。分析データは最大13か月保持されます。"
+        },
+        {
+          "title": "お客様の権利（GDPR）",
+          "content": "お客様には、データへのアクセス、訂正、削除、ポータビリティ、処理への異議申立ての権利があります。これらの権利を行使するには、privacy@zenith.xyz までご連絡ください。"
+        },
+        {
+          "title": "DPO連絡先",
+          "content": "当社のデータ保護オフィサーは dpo@zenith.xyz までご連絡ください。また、管轄監督機関に苦情を申し立てる権利もあります。"
+        }
+      ]
+    },
+    "cookies": {
+      "title": "クッキーポリシー",
+      "lastUpdated": "2026年6月1日",
+      "intro": "このページでは、ZenithによるCookieおよび類似技術の使用について説明します。",
+      "sections": [
+        {
+          "title": "Cookieとは",
+          "content": "Cookieとは、ウェブサイトを訪問した際にデバイスに保存される小さなテキストファイルです。サイトがある期間にわたってお客様の行動と設定を記憶できるようにします。"
+        },
+        {
+          "title": "必須Cookie",
+          "content": "これらのCookieはサービスの動作に必要です：Clerk認証セッション、言語設定、アラートカート。これらは無効化できません。"
+        },
+        {
+          "title": "分析Cookie",
+          "content": "Zenithは、ユーザーがプラットフォームとどのようにやり取りするかを理解するために、匿名化された分析ツール（PostHogはオプション）を使用します。これらのデータは集計されており、個人を特定することはできません。"
+        },
+        {
+          "title": "マーケティングCookie",
+          "content": "Zenithはマーケティングや広告のCookieを使用しません。リターゲティングやターゲティング広告のために第三者のCookieが設置されることはありません。"
+        },
+        {
+          "title": "設定の管理",
+          "content": "ブラウザの設定からCookieの選好を管理できます。一部のCookieを無効にすると、プラットフォームの機能が制限される場合があります。"
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "アクセシビリティ",
+      "lastUpdated": "2026年6月1日",
+      "intro": "Zenithは、国際規格に従って、すべての人にとってアクセス可能なプラットフォームを提供することに取り組んでいます。",
+      "sections": [
+        {
+          "title": "私たちの取り組み",
+          "content": "Zenithは、障害のある方を含むすべての方が利用できるサービスの提供を目指しています。WCAG 2.1レベルAAの推奨事項に従います。"
+        },
+        {
+          "title": "WCAG 2.1 AA規格",
+          "content": "当社のインターフェースはアクセシビリティの原則を尊重しています：十分な色コントラスト、キーボードナビゲーション、画像の代替テキスト、セマンティックHTML構造、インタラクティブ要素のARIAラベル。"
+        },
+        {
+          "title": "アクセシビリティ機能",
+          "content": "完全なキーボードナビゲーション（Tab、Enter、Esc）、⌘Kショートカット（コマンドパレット）、ネイティブダークモード、スクリーンリーダー対応（NVDA、JAWS、VoiceOver）、可読性を損なうことなく200%まで拡大可能なテキスト。"
+        },
+        {
+          "title": "既知の制限",
+          "content": "一部の価格チャート（スパークライン、ヒートマップ）はスクリーンリーダーの利用者にとって解釈しにくい場合があります。データのテキスト版はコマンドパレットから利用可能です。"
+        },
+        {
+          "title": "問題の報告先",
+          "content": "アクセシビリティの問題が発生した場合は、accessibilite@zenith.xyz までご連絡ください。5営業日以内に対応し、30日以内に問題を修正することをお約束します。"
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +591,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "ウォッチリストに追加しました",
+    "removed": "ウォッチリストから削除しました",
+    "empty": "ウォッチリストは空です",
+    "title": "マイウォッチリスト"
   }
 }

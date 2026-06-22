@@ -28,7 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#010120",
+  themeColor: "#1a1a1a",
 };
 
 export function generateStaticParams() {
@@ -116,7 +116,33 @@ export default async function LocaleLayout({
   const dir = isRTL(locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${jetbrainsMono.variable} dark`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (async function(){
+              if("serviceWorker" in navigator) {
+                try {
+                  const regs = await navigator.serviceWorker.getRegistrations();
+                  let needsReload = false;
+                  for(const r of regs) {
+                    await r.unregister();
+                    needsReload = true;
+                  }
+                  const keys = await caches.keys();
+                  await Promise.all(keys.filter(k => !k.includes("zenith-v2")).map(k => caches.delete(k)));
+                  if(needsReload && !sessionStorage.getItem("sw-reloaded")) {
+                    sessionStorage.setItem("sw-reloaded","1");
+                    location.reload();
+                  }
+                } catch(e) {
+                  console.warn("SW cleanup:", e);
+                }
+              }
+            })();
+          `,
+        }} />
+      </head>
       <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-canvas text-primary">
         <ClerkProvider>
         <SerwistProvider swUrl="/serwist/sw.js">

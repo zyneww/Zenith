@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import {
   TrendingUp,
   TrendingDown,
@@ -16,45 +15,39 @@ interface MetricCardProps {
   change: string;
   changeType: "positive" | "negative" | "neutral";
   icon: React.ReactNode;
-  delay: number;
 }
 
-function MetricCard({ title, value, change, changeType, icon, delay }: MetricCardProps) {
+function MetricCard({ title, value, change, changeType, icon }: MetricCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay }}
-      className="bg-card border border-surface rounded-sm p-5 hover:border-[#26263a] transition-colors"
-    >
+    <div className="bg-card border border-surface rounded-lg p-5 hover:border-hover transition-colors">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-secondary text-sm mb-1">{title}</p>
           <p className="text-2xl font-medium text-primary">{value}</p>
         </div>
-        <div className="p-2 bg-[#1f2937] rounded-sm">{icon}</div>
+        <div className="p-2 bg-canvas rounded-lg">{icon}</div>
       </div>
       <div className="mt-3 flex items-center gap-1">
         {changeType === "positive" && (
-          <TrendingUp className="w-4 h-4 text-green-500" />
+          <TrendingUp className="w-4 h-4 text-up" />
         )}
         {changeType === "negative" && (
-          <TrendingDown className="w-4 h-4 text-red-500" />
+          <TrendingDown className="w-4 h-4 text-down" />
         )}
         <span
           className={`text-sm font-medium ${
             changeType === "positive"
-              ? "text-green-500"
+              ? "text-up"
               : changeType === "negative"
-              ? "text-red-500"
+              ? "text-down"
               : "text-secondary"
           }`}
         >
           {change}
         </span>
-        <span className="text-secondary text-sm ml-1">vs hier</span>
+        <span className="text-tertiary text-sm ml-1">vs hier</span>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -64,36 +57,36 @@ const METRICS = [
     value: "$124,592.40",
     change: "+2.45%",
     changeType: "positive" as const,
-    icon: <Wallet className="w-5 h-5 text-brand-cyan" />,
+    icon: <Wallet className="w-5 h-5 text-accent" />,
   },
   {
     title: "P&L Total",
     value: "+$18,234.12",
     change: "+17.1%",
     changeType: "positive" as const,
-    icon: <DollarSign className="w-5 h-5 text-green-500" />,
+    icon: <DollarSign className="w-5 h-5 text-up" />,
   },
   {
     title: "Performance 24h",
     value: "+$1,245.80",
     change: "+1.02%",
     changeType: "positive" as const,
-    icon: <Activity className="w-5 h-5 text-brand-purple-light" />,
+    icon: <Activity className="w-5 h-5 text-accent" />,
   },
   {
     title: "Actifs Détenus",
     value: "12",
     change: "0",
     changeType: "neutral" as const,
-    icon: <PieChart className="w-5 h-5 text-yellow-500" />,
+    icon: <PieChart className="w-5 h-5 text-warning" />,
   },
 ];
 
 export default function MetricsCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {METRICS.map((metric, index) => (
-        <MetricCard key={metric.title} {...metric} delay={index * 0.1} />
+      {METRICS.map((metric) => (
+        <MetricCard key={metric.title} {...metric} />
       ))}
     </div>
   );

@@ -26,9 +26,39 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.tradingview.com",
       },
+      {
+        protocol: "https",
+        hostname: "logo.clearbit.com",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.coingecko.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
+  },
+  async redirects() {
+    return [
+      { source: "/:locale/news/economic-calendar", destination: "/:locale/calendrier", permanent: true },
+      { source: "/:locale/news/crypto", destination: "/:locale/apprendre/category/market-news", permanent: true },
+      { source: "/:locale/news/forex", destination: "/:locale/apprendre/category/market-news", permanent: true },
+      { source: "/:locale/news/markets", destination: "/:locale/apprendre/category/market-news", permanent: true },
+      { source: "/:locale/news/flow", destination: "/:locale/apprendre/category/market-news", permanent: true },
+      { source: "/:locale/news/technical-analysis", destination: "/:locale/apprendre/category/analysis", permanent: true },
+      { source: "/:locale/news/fundamental-analysis", destination: "/:locale/apprendre/category/analysis", permanent: true },
+      { source: "/:locale/news/sentiment", destination: "/:locale/apprendre/category/sentiment", permanent: true },
+      { source: "/:locale/news", destination: "/:locale/apprendre", permanent: true },
+      { source: "/news/economic-calendar", destination: "/calendrier", permanent: true },
+      { source: "/news/crypto", destination: "/apprendre/category/market-news", permanent: true },
+      { source: "/news/forex", destination: "/apprendre/category/market-news", permanent: true },
+      { source: "/news/markets", destination: "/apprendre/category/market-news", permanent: true },
+      { source: "/news/flow", destination: "/apprendre/category/market-news", permanent: true },
+      { source: "/news/technical-analysis", destination: "/apprendre/category/analysis", permanent: true },
+      { source: "/news/fundamental-analysis", destination: "/apprendre/category/analysis", permanent: true },
+      { source: "/news/sentiment", destination: "/apprendre/category/sentiment", permanent: true },
+      { source: "/news", destination: "/apprendre", permanent: true },
+    ];
   },
   async headers() {
     return [

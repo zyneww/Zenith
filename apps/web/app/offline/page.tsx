@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function OfflinePage() {
   return (
-    <div className="min-h-[100dvh] bg-[#010120] flex flex-col items-center justify-center px-4 text-center">
+    <div className="min-h-[100dvh] bg-canvas flex flex-col items-center justify-center px-4 text-center">
       <div className="mb-8">
         {/* Logo Zenith inline SVG — simple peak/boussole symbol */}
         <svg
@@ -38,11 +38,11 @@ export default function OfflinePage() {
         </svg>
       </div>
 
-      <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+      <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4 tracking-tight">
         Connexion perdue
       </h1>
 
-      <p className="text-base md:text-lg text-[#94a3b8] max-w-md mb-8 leading-relaxed">
+      <p className="text-base md:text-lg text-secondary max-w-md mb-8 leading-relaxed">
         Vous êtes actuellement hors ligne.
         <br />
         Vérifiez votre connexion et réessayez.
@@ -50,7 +50,7 @@ export default function OfflinePage() {
 
       <ReloadButton />
 
-      <footer className="mt-16 text-sm text-[#475569]">
+      <footer className="mt-16 text-sm text-tertiary">
         Zenith — Votre sommet, vos marchés, votre clarté
       </footer>
     </div>

@@ -24,14 +24,14 @@ export default async function EconomicCalendarPage({
   const t = await getTranslations({ locale, namespace: "markets" });
 
   return (
-    <main className="min-h-screen bg-[#010120]">
+    <main className="min-h-screen bg-canvas">
       <div className="px-4 sm:px-8 lg:px-16 xl:px-28 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+          <h1 className="text-3xl font-bold text-primary mb-2">
             {t("calendar.title")}
           </h1>
-          <p className="text-gray-400">
+          <p className="text-secondary">
             {t("calendar.description")}
           </p>
         </div>

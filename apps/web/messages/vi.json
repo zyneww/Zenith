@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Ngoại tuyến",
+    "loading": "Đang tải..."
   },
   "crypto": {
     "title": "Crypto chuyên sâu, <live>trực tiếp</live>",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Đang tải...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Chỉ báo tâm lý thị trường crypto"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Không khả dụng"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24h — Top 5 theo danh mục",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Xem tất cả",
+      "loading": "Đang tải...",
+      "error": "Lỗi tải",
+      "retry": "Thử lại"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "Từ",
+      "to": "Đến",
+      "amount": "Số tiền"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Lọc hơn 500 crypto theo khối lượng, biến động, RSI, vốn hóa thị trường. Xây dựng watchlist của bạn trong 30 giây.",
+      "open": "Mở screener →"
+    }
   },
   "cta": {
     "title": "Sẵn sàng lên cấp độ tiếp theo?",
@@ -407,10 +455,114 @@
     "subscription": "Đăng ký & giá"
   },
   "legal": {
-    "terms": "Điều khoản sử dụng",
-    "privacy": "Quyền riêng tư",
-    "cookies": "Cookie",
-    "accessibility": "Khả năng truy cập"
+    "terms": {
+      "title": "Điều khoản sử dụng",
+      "lastUpdated": "Ngày 1 tháng 6 năm 2026",
+      "intro": "Các điều khoản này điều chỉnh việc bạn sử dụng Zenith. Bằng việc sử dụng dịch vụ của chúng tôi, bạn đồng ý với các điều khoản này một cách toàn bộ.",
+      "sections": [
+        {
+          "title": "Mục đích và chấp nhận",
+          "content": "Zenith là nền tảng trí tuệ tài chính đa tài sản. Các Điều khoản Dịch vụ này xác định quyền và nghĩa vụ giữa Zenith và bất kỳ người dùng nào của dịch vụ. Việc truy cập nền tảng đồng nghĩa với việc chấp nhận đầy đủ và toàn diện các điều khoản này."
+        },
+        {
+          "title": "Mô tả dịch vụ",
+          "content": "Zenith cung cấp dữ liệu thị trường theo thời gian thực (crypto, forex, hàng hóa, chỉ số), các công cụ phân tích, lịch kinh tế, cảnh báo và hệ thống watchlist. Dịch vụ được cung cấp nguyên trạng, không đảm bảo tính khả dụng liên tục hoặc độ chính xác tuyệt đối của dữ liệu."
+        },
+        {
+          "title": "Nghĩa vụ của người dùng",
+          "content": "Bạn đồng ý chỉ sử dụng Zenith cho các mục đích hợp pháp, không cố ý gây gián đoạn dịch vụ, không trích xuất dữ liệu hàng loạt bằng các phương tiện tự động, và tôn trọng quyền sở hữu trí tuệ của Zenith và các đối tác."
+        },
+        {
+          "title": "Sở hữu trí tuệ",
+          "content": "Toàn bộ nội dung trên Zenith (văn bản, đồ họa, mã, thiết kế) được bảo vệ bởi luật sở hữu trí tuệ hiện hành. Mọi sao chép không được phép đều bị cấm."
+        },
+        {
+          "title": "Giới hạn trách nhiệm",
+          "content": "Zenith không chịu trách nhiệm về các tổn thất tài chính phát sinh từ các quyết định đầu tư được đưa ra dựa trên thông tin do nền tảng cung cấp. Dữ liệu thị trường chỉ được cung cấp cho mục đích thông tin và không cấu thành lời khuyên đầu tư."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Chính sách bảo mật",
+      "lastUpdated": "Ngày 1 tháng 6 năm 2026",
+      "intro": "Zenith cam kết bảo vệ quyền riêng tư của bạn. Chính sách này giải thích dữ liệu nào chúng tôi thu thập, cách chúng tôi sử dụng và quyền của bạn là gì.",
+      "sections": [
+        {
+          "title": "Dữ liệu được thu thập",
+          "content": "Chúng tôi thu thập: (1) dữ liệu tài khoản (email, tên) được cung cấp khi đăng ký qua Clerk; (2) dữ liệu duyệt web (cookies, IP); (3) tùy chọn của bạn (watchlist, cảnh báo, ngôn ngữ, tiền tệ); (4) dữ liệu sử dụng ẩn danh để cải thiện dịch vụ."
+        },
+        {
+          "title": "Cơ sở pháp lý và mục đích",
+          "content": "Việc xử lý dữ liệu của bạn dựa trên việc thực hiện hợp đồng dịch vụ (dữ liệu tài khoản, tùy chọn) và lợi ích hợp pháp của chúng tôi trong việc cải thiện dịch vụ (phân tích ẩn danh). Chúng tôi không bao giờ bán dữ liệu của bạn cho bên thứ ba."
+        },
+        {
+          "title": "Thời gian lưu trữ",
+          "content": "Dữ liệu tài khoản của bạn được lưu giữ miễn là tài khoản của bạn đang hoạt động, sau đó bị xóa trong vòng 30 ngày kể từ ngày xóa tài khoản. Dữ liệu phân tích được lưu giữ tối đa 13 tháng."
+        },
+        {
+          "title": "Quyền của bạn (GDPR)",
+          "content": "Bạn có quyền truy cập, chỉnh sửa, xóa, chuyển và phản đối việc xử lý dữ liệu của mình. Để thực hiện các quyền này, hãy liên hệ privacy@zenith.xyz."
+        },
+        {
+          "title": "Liên hệ DPO",
+          "content": "Nhân viên bảo vệ dữ liệu của chúng tôi có thể được liên hệ tại dpo@zenith.xyz. Bạn cũng có quyền khiếu nại với cơ quan giám sát có thẩm quyền."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Chính sách Cookies",
+      "lastUpdated": "Ngày 1 tháng 6 năm 2026",
+      "intro": "Trang này giải thích cách Zenith sử dụng cookies và các công nghệ tương tự.",
+      "sections": [
+        {
+          "title": "Cookie là gì",
+          "content": "Cookie là một tệp văn bản nhỏ được lưu trữ trên thiết bị của bạn khi bạn truy cập một trang web. Nó cho phép trang web ghi nhớ hành động và tùy chọn của bạn trong một khoảng thời gian nhất định."
+        },
+        {
+          "title": "Cookie cần thiết",
+          "content": "Các cookie này cần thiết cho hoạt động của dịch vụ: phiên xác thực Clerk, tùy chọn ngôn ngữ, giỏ cảnh báo. Chúng không thể bị vô hiệu hóa."
+        },
+        {
+          "title": "Cookie phân tích",
+          "content": "Zenith sử dụng các công cụ phân tích ẩn danh (PostHog tùy chọn) để hiểu cách người dùng tương tác với nền tảng. Dữ liệu này được tổng hợp và không cho phép nhận dạng bạn."
+        },
+        {
+          "title": "Cookie tiếp thị",
+          "content": "Zenith không sử dụng cookie tiếp thị hoặc quảng cáo. Không có cookie bên thứ ba nào được đặt cho mục đích nhắm mục tiêu lại hoặc quảng cáo có mục tiêu."
+        },
+        {
+          "title": "Quản lý tùy chọn của bạn",
+          "content": "Bạn có thể quản lý tùy chọn cookie của mình từ cài đặt trình duyệt. Việc vô hiệu hóa một số cookie có thể giới hạn một số tính năng của nền tảng."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Khả năng tiếp cận",
+      "lastUpdated": "Ngày 1 tháng 6 năm 2026",
+      "intro": "Zenith cam kết làm cho nền tảng của mình có thể truy cập được với mọi người, phù hợp với các tiêu chuẩn quốc tế.",
+      "sections": [
+        {
+          "title": "Cam kết của chúng tôi",
+          "content": "Zenith hướng đến mục tiêu cung cấp dịch vụ mà mọi người đều có thể sử dụng được, bao gồm cả người khuyết tật. Chúng tôi tuân theo các khuyến nghị WCAG 2.1 cấp AA."
+        },
+        {
+          "title": "Tiêu chuẩn WCAG 2.1 AA",
+          "content": "Giao diện của chúng tôi tôn trọng các nguyên tắc tiếp cận: độ tương phản màu sắc đầy đủ, điều hướng bằng bàn phím, văn bản thay thế trên hình ảnh, cấu trúc HTML ngữ nghĩa, nhãn ARIA trên các phần tử tương tác."
+        },
+        {
+          "title": "Tính năng tiếp cận",
+          "content": "Điều hướng đầy đủ bằng bàn phím (Tab, Enter, Escape), phím tắt ⌘K (bảng lệnh), chế độ tối gốc, hỗ trợ trình đọc màn hình (NVDA, JAWS, VoiceOver), văn bản có thể thay đổi kích thước lên đến 200% mà không mất khả năng đọc."
+        },
+        {
+          "title": "Hạn chế đã biết",
+          "content": "Một số biểu đồ giá (sparklines, heatmaps) có thể khó diễn giải cho người dùng trình đọc màn hình. Phiên bản văn bản của dữ liệu có sẵn thông qua bảng lệnh."
+        },
+        {
+          "title": "Liên hệ để báo cáo sự cố",
+          "content": "Nếu bạn gặp sự cố về khả năng tiếp cận, hãy liên hệ accessibilite@zenith.xyz. Chúng tôi cam kết phản hồi trong vòng 5 ngày làm việc và khắc phục sự cố trong vòng 30 ngày."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Đã thêm vào watchlist",
+    "removed": "Đã xóa khỏi watchlist",
+    "empty": "Watchlist của bạn trống",
+    "title": "Watchlist của tôi"
   }
 }

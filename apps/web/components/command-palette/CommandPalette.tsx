@@ -40,9 +40,9 @@ const NAV_ITEMS: CommandItem[] = [
 const ASSET_ITEMS: CommandItem[] = [
   { id: "bitcoin", name: "Bitcoin", icon: <span className="w-4 h-4 rounded-full bg-orange-500 flex items-center justify-center text-[8px]">₿</span>, href: "/markets/bitcoin" },
   { id: "ethereum", name: "Ethereum", icon: <span className="w-4 h-4 rounded-full bg-blue-500 flex items-center justify-center text-[8px]">Ξ</span>, href: "/markets/ethereum" },
-  { id: "solana", name: "Solana", icon: <span className="w-4 h-4 rounded-full bg-gradient-to-tr from-green-400 to-purple-500 flex items-center justify-center text-[8px]">S</span>, href: "/markets/solana" },
-  { id: "bnb", name: "BNB", icon: <span className="w-4 h-4 rounded-full bg-yellow-500 flex items-center justify-center text-[8px]">B</span>, href: "/markets/bnb" },
-  { id: "xrp", name: "XRP", icon: <span className="w-4 h-4 rounded-full bg-gray-800 flex items-center justify-center text-[8px]">X</span>, href: "/markets/xrp" },
+  { id: "solana", name: "Solana", icon: <span className="w-4 h-4 rounded-full bg-sticker-teal flex items-center justify-center text-[8px]">S</span>, href: "/markets/solana" },
+  { id: "bnb", name: "BNB", icon: <span className="w-4 h-4 rounded-full bg-sticker-orange flex items-center justify-center text-[8px]">B</span>, href: "/markets/bnb" },
+  { id: "xrp", name: "XRP", icon: <span className="w-4 h-4 rounded-full bg-sticker-purple flex items-center justify-center text-[8px]">X</span>, href: "/markets/xrp" },
 ];
 
 export default function CommandPalette() {
@@ -80,8 +80,8 @@ export default function CommandPalette() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] md:pt-[20vh] bg-inverse/50 backdrop-blur-sm" onClick={close}>
-      <div className="w-full max-w-2xl bg-card border border-surface rounded-xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] md:pt-[20vh] bg-canvas/50 backdrop-blur-sm" onClick={close}>
+      <div className="w-full max-w-2xl bg-card border border-surface rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
         <Command className="[&_[cmdk-root]]:flex [&_[cmdk-root]]:flex-col [&_[cmdk-root]]:h-full">
           <div className="flex items-center border-b border-surface px-4 py-3">
             <Search className="w-4 h-4 text-secondary mr-3" />
@@ -105,7 +105,7 @@ export default function CommandPalette() {
                 <Command.Item
                   key={item.id}
                   value={item.name}
-                  className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-raised/50 cursor-pointer transition text-sm text-primary"
+                  className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-raised cursor-pointer transition text-sm text-primary"
                   onSelect={() => handleSelect(item.href)}
                 >
                   <div className="flex items-center gap-3">
@@ -130,7 +130,7 @@ export default function CommandPalette() {
                 <Command.Item
                   key={item.id}
                   value={item.name}
-                  className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-raised/50 cursor-pointer transition text-sm text-primary"
+                  className="flex items-center justify-between px-2 py-2 rounded-lg hover:bg-raised cursor-pointer transition text-sm text-primary"
                   onSelect={() => handleSelect(item.href)}
                 >
                   <div className="flex items-center gap-3">

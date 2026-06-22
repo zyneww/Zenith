@@ -7,8 +7,8 @@ import { EconomicEvent } from "@/lib/market-data/types";
 
 function ImportanceBadge({ importance }: { importance: "low" | "medium" | "high" }) {
   const colors = {
-    high: "bg-[#ef4444]/10 text-[#ef4444]",
-    medium: "bg-[#f59e0b]/10 text-[#f59e0b]",
+    high: "bg-down-subtle text-down",
+    medium: "bg-warning-subtle text-warning",
     low: "bg-accent-subtle text-accent",
   };
   const labels = { high: "Élevée", medium: "Moyenne", low: "Faible" };

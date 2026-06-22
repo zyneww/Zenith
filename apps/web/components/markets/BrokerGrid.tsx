@@ -99,7 +99,7 @@ function BrokerCard({ broker }: { broker: Broker }) {
         <div>
           <h3 className="text-sm font-semibold text-primary">{broker.name}</h3>
           <div className="flex items-center gap-1">
-            <Star className="w-3 h-3 text-[#f59e0b] fill-[#f59e0b]" />
+            <Star className="w-3 h-3 text-warning fill-current" />
             <span className="text-xs text-secondary">{broker.rating}</span>
           </div>
         </div>

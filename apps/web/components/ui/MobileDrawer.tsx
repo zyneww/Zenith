@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignUpButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import {
   X, ChevronRight, BarChart3, LineChart, Newspaper, CalendarDays,
@@ -39,6 +39,7 @@ interface MobileDrawerProps {
 }
 
 export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawerProps) {
+  const { isSignedIn } = useAuth();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -90,7 +91,7 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-inverse/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
             onClick={onClose}
             aria-hidden="true"
           />
@@ -230,15 +231,17 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
 
             {/* Bottom actions */}
             <div className="sticky bottom-0 left-0 right-0 p-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] bg-canvas border-t border-surface">
-              <SignUpButton mode="modal" forceRedirectUrl="/pricing">
-                <button
-                  onClick={onClose}
-                  className="block w-full bg-accent-dark text-inverse hover:bg-accent-dark/80 text-sm font-semibold px-4 py-3 rounded-full transition-colors shadow-glow-purple text-center cursor-pointer"
-                  type="button"
-                >
-                  Commencer
-                </button>
-              </SignUpButton>
+              {!isSignedIn && (
+                <SignUpButton mode="modal" forceRedirectUrl="/pricing">
+                  <button
+                    onClick={onClose}
+                    className="block w-full bg-accent-dark text-primary hover:bg-accent-dark/80 text-sm font-semibold px-4 py-3 rounded-full transition-colors text-center cursor-pointer"
+                    type="button"
+                  >
+                    Commencer
+                  </button>
+                </SignUpButton>
+              )}
             </div>
           </motion.div>
         </>
@@ -251,6 +254,6 @@ export default function MobileDrawer({ isOpen, onClose, sections }: MobileDrawer
 function IconRenderer({ name, size }: { name: string; size: "sm" | "lg" }) {
   const Icon = iconMap[name as keyof typeof iconMap];
   if (!Icon) return null;
-  const className = size === "lg" ? "w-5 h-5 text-brand-cyan mt-0.5 flex-shrink-0" : "w-4 h-4 flex-shrink-0";
+  const className = size === "lg" ? "w-5 h-5 text-accent mt-0.5 flex-shrink-0" : "w-4 h-4 flex-shrink-0";
   return <Icon className={className} />;
 }

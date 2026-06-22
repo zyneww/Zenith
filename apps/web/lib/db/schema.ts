@@ -1,5 +1,5 @@
 // apps/web/lib/db/schema.ts
-import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core'
+import { sqliteTable, text, integer, real, unique, index } from 'drizzle-orm/sqlite-core'
 import { sql } from 'drizzle-orm'
 
 export const users = sqliteTable('users', {
@@ -19,6 +19,17 @@ export const watchlists = sqliteTable('watchlists', {
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
   updatedAt: integer('updated_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 })
+
+export const watchlist = sqliteTable('watchlist', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  userId: text('user_id').notNull(),
+  symbol: text('symbol').notNull(),
+  type: text('type').notNull(),
+  createdAt: integer('created_at').notNull(),
+}, (table) => ({
+  userIdSymbolTypeUnique: unique('watchlist_user_symbol_type_unique').on(table.userId, table.symbol, table.type),
+  userIdIndex: index('userIdIndex').on(table.userId),
+}))
 
 export const portfolioPositions = sqliteTable('portfolio_positions', {
   id: text('id').primaryKey().default(sql`(uuid())`),

@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● 오프라인",
+    "loading": "로딩 중..."
   },
   "crypto": {
     "title": "암호화폐 심층 분석",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "로딩 중...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "암호화폐 시장 심리 지표"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "사용 불가"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24시간 — 카테고리별 상위 5",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "모두 보기",
+      "loading": "로딩 중...",
+      "error": "로딩 오류",
+      "retry": "재시도"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "에서",
+      "to": "으로",
+      "amount": "금액"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "500개 이상의 암호화폐를 거래량, 변동성, RSI, 시가총액별로 필터링하세요. 30초 만에 워치리스트를 만드세요.",
+      "open": "스크리너 열기 →"
+    }
   },
   "cta": {
     "title": "다음 레벨로 올라갈 준비가 되셨나요?",
@@ -407,10 +455,114 @@
     "subscription": "구독 & 가격"
   },
   "legal": {
-    "terms": "이용약관",
-    "privacy": "개인정보처리방침",
-    "cookies": "쿠키",
-    "accessibility": "접근성"
+    "terms": {
+      "title": "이용약관",
+      "lastUpdated": "2026년 6월 1일",
+      "intro": "본 약관은 Zenith의 사용에 적용됩니다. 본 서비스를 이용함으로써 귀하는 본 약관의 모든 내용에 동의하는 것으로 간주됩니다.",
+      "sections": [
+        {
+          "title": "목적 및 동의",
+          "content": "Zenith는 멀티에셋 금융 인텔리전스 플랫폼입니다. 본 이용약관은 Zenith와 서비스 사용자 간의 권리와 의무를 정의합니다. 플랫폼에 접근하는 것은 본 약관의 완전한 동의를 구성합니다."
+        },
+        {
+          "title": "서비스 설명",
+          "content": "Zenith는 실시간 시장 데이터(암호화폐, 외환, 원자재, 지수), 분석 도구, 경제 캘린더, 알림 및 워치리스트 시스템을 제공합니다. 서비스는 지속적으로 가용성이나 데이터의 절대적 정확성을 보장하지 않으며 있는 그대로 제공됩니다."
+        },
+        {
+          "title": "사용자 의무",
+          "content": "귀하는 Zenith를 합법적인 목적으로만 사용하고, 서비스를 방해하려고 시도하지 않으며, 자동화된 방법으로 데이터를 대량 추출하지 않고, Zenith와 파트너의 지적 재산권을 존중할 것에 동의합니다."
+        },
+        {
+          "title": "지적 재산권",
+          "content": "Zenith의 모든 콘텐츠(텍스트, 그래픽, 코드, 디자인)는 관련 지적 재산권법에 의해 보호됩니다. 무단 복제는 금지됩니다."
+        },
+        {
+          "title": "책임의 제한",
+          "content": "Zenith는 플랫폼에서 제공하는 정보를 기반으로 한 투자 결정으로 인한 재정적 손실에 대해 책임을 지지 않습니다. 시장 데이터는 정보 제공 목적으로만 제공되며 투자 조언을 구성하지 않습니다."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "개인정보 처리방침",
+      "lastUpdated": "2026년 6월 1일",
+      "intro": "Zenith는 귀하의 개인정보를 보호하기 위해 노력합니다. 본 정책은 당사가 수집하는 데이터, 사용 방법, 귀하의 권리를 설명합니다.",
+      "sections": [
+        {
+          "title": "수집하는 데이터",
+          "content": "당사는 다음을 수집합니다: (1) Clerk를 통한 가입 시 제공된 계정 데이터(이메일, 이름); (2) 浏览 데이터(쿠키, IP); (3) 귀하의 환경설정(워치리스트, 알림, 언어, 통화); (4) 서비스 개선을 위한 익명화된 사용 데이터."
+        },
+        {
+          "title": "법적 근거 및 목적",
+          "content": "귀하의 데이터 처리는 서비스 계약의 이행(계정 데이터, 환경설정)과 서비스 개선을 위한 당사의 정당한 이익(익명화된 분석)에 기반합니다. 당사는 귀하의 데이터를 제3자에게 절대 판매하지 않습니다."
+        },
+        {
+          "title": "보관 기간",
+          "content": "계정 데이터는 계정이 활성화되어 있는 동안 보관되며, 계정 삭제 후 30일 이내에 삭제됩니다. 분석 데이터는 최대 13개월 보관됩니다."
+        },
+        {
+          "title": "귀하의 권리(GDPR)",
+          "content": "귀하는 데이터에 대한 접근권, 정정권, 삭제권, 이동권 및 처리 거부권을 가집니다. 이러한 권리를 행사하려면 privacy@zenith.xyz로 문의하세요."
+        },
+        {
+          "title": "DPO 연락처",
+          "content": "당사의 데이터 보호 책임자는 dpo@zenith.xyz로 연락할 수 있습니다. 또한 관할 감독 기관에 불만을 제기할 권리도 있습니다."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "쿠키 정책",
+      "lastUpdated": "2026년 6월 1일",
+      "intro": "이 페이지는 Zenith가 쿠키 및 유사 기술을 사용하는 방법을 설명합니다.",
+      "sections": [
+        {
+          "title": "쿠키란?",
+          "content": "쿠키는 웹사이트를 방문할 때 기기에 저장되는 작은 텍스트 파일입니다. 사이트가 일정 기간 동안 귀하의 행동과 환경설정을 기억할 수 있게 합니다."
+        },
+        {
+          "title": "필수 쿠키",
+          "content": "이 쿠키는 서비스 작동에 필수적입니다: Clerk 인증 세션, 언어 환경설정, 알림 장바구니. 비활성화할 수 없습니다."
+        },
+        {
+          "title": "분석 쿠키",
+          "content": "Zenith는 사용자가 플랫폼과 어떻게 상호작용하는지 이해하기 위해 익명화된 분석 도구(선택적 PostHog)를 사용합니다. 이 데이터는 집계되며 귀하를 식별할 수 없습니다."
+        },
+        {
+          "title": "마케팅 쿠키",
+          "content": "Zenith는 마케팅 또는 광고 쿠키를 사용하지 않습니다. 리타겟팅이나 타겟 광고를 위한 제3자 쿠키는 설치되지 않습니다."
+        },
+        {
+          "title": "환경설정 관리",
+          "content": "브라우저 설정에서 쿠키 환경설정을 관리할 수 있습니다. 특정 쿠키를 비활성화하면 일부 플랫폼 기능이 제한될 수 있습니다."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "접근성",
+      "lastUpdated": "2026년 6월 1일",
+      "intro": "Zenith는 국제 표준에 따라 모든 사람에게 접근 가능한 플랫폼을 만들기 위해 노력합니다.",
+      "sections": [
+        {
+          "title": "우리의 약속",
+          "content": "Zenith는 장애인을 포함하여 모든 사람이 사용할 수 있는 서비스를 제공하는 것을 목표로 합니다. WCAG 2.1 레벨 AA 권장 사항을 따릅니다."
+        },
+        {
+          "title": "WCAG 2.1 AA 표준",
+          "content": "당사 인터페이스는 접근성 원칙을 존중합니다: 충분한 색상 대비, 키보드 탐색, 이미지에 대한 대체 텍스트, 시맨틱 HTML 구조, 인터랙티브 요소의 ARIA 레이블."
+        },
+        {
+          "title": "접근성 기능",
+          "content": "전체 키보드 탐색(Tab, Enter, Esc), ⌘K 단축키(명령 팔레트), 네이티브 다크 모드, 스크린 리더 지원(NVDA, JAWS, VoiceOver), 가독성 손실 없이 200%까지 텍스트 크기 조정 가능."
+        },
+        {
+          "title": "알려진 제한 사항",
+          "content": "일부 가격 차트(스파크라인, 히트맵)는 스크린 리더 사용자가 해석하기 어려울 수 있습니다. 데이터의 텍스트 버전은 명령 팔레트를 통해 제공됩니다."
+        },
+        {
+          "title": "문제 신고 연락처",
+          "content": "접근성 문제가 발생하면 accessibilite@zenith.xyz로 문의하세요. 5 영업일 이내에 응답하고 30일 이내에 문제를 수정할 것을 약속합니다."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "워치리스트에 추가됨",
+    "removed": "워치리스트에서 제거됨",
+    "empty": "워치리스트가 비어 있습니다",
+    "title": "내 워치리스트"
   }
 }

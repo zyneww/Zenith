@@ -24,11 +24,11 @@ export default async function IdeasPage({
   const t = await getTranslations({ locale, namespace: "markets" });
 
   return (
-    <main className="min-h-screen bg-[#010120]">
+    <main className="min-h-screen bg-canvas">
       <div className="px-4 sm:px-8 lg:px-16 xl:px-28 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">{t("ideas.title")}</h1>
-          <p className="text-gray-400">{t("ideas.description")}</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">{t("ideas.title")}</h1>
+          <p className="text-secondary">{t("ideas.description")}</p>
         </div>
         <IdeasClient />
       </div>

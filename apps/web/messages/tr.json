@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Çevrimdışı",
+    "loading": "Yükleniyor..."
   },
   "crypto": {
     "title": "Kripto derinlemesine",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Yükleniyor...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Kripto piyasa duyarlılık göstergesi"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Kullanılamıyor"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24s — Kategoriye göre ilk 5",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Tümünü gör",
+      "loading": "Yükleniyor...",
+      "error": "Yükleme hatası",
+      "retry": "Yeniden dene"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "Kaynak",
+      "to": "Hedef",
+      "amount": "Tutar"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "500+ kriptoyu hacim, volatilite, RSI, piyasa değerine göre filtreleyin. Watchlist'inizi 30 saniyede oluşturun.",
+      "open": "Screener'ı aç →"
+    }
   },
   "cta": {
     "title": "Bir üst seviyeye geçmeye hazır mısınız?",
@@ -407,10 +455,114 @@
     "subscription": "Abonelik ve fiyatlar"
   },
   "legal": {
-    "terms": "Kullanım koşulları",
-    "privacy": "Gizlilik",
-    "cookies": "Çerezler",
-    "accessibility": "Erişilebilirlik"
+    "terms": {
+      "title": "Kullanım Koşulları",
+      "lastUpdated": "1 Haziran 2026",
+      "intro": "Bu koşullar Zenith kullanımınızı düzenler. Hizmetlerimizi kullanarak bu koşulları tümüyle kabul etmiş olursunuz.",
+      "sections": [
+        {
+          "title": "Amaç ve kabul",
+          "content": "Zenith, çoklu varlık finansal zekâ platformudur. İşbu Kullanım Koşulları, Zenith ile hizmetin herhangi bir kullanıcısı arasındaki hak ve yükümlülükleri tanımlar. Platforma erişim, bu koşulların tam ve eksiksiz kabulünü oluşturur."
+        },
+        {
+          "title": "Hizmetin tanımı",
+          "content": "Zenith, gerçek zamanlı piyasa verileri (kripto, forex, emtia, endeksler), analiz araçları, ekonomik takvim, uyarılar ve bir watchlist sistemi sunar. Hizmet, sürekli erişilebilirlik veya verilerin mutlak doğruluğu garantisi olmaksızın sunulur."
+        },
+        {
+          "title": "Kullanıcının yükümlülükleri",
+          "content": "Zenith'i yalnızca yasal amaçlarla kullanmayı, hizmeti aksatmaya teşebbüs etmemeyi, otomatik yollarla toplu veri çıkarmamayı ve Zenith ile ortaklarının fikrî mülkiyet haklarına saygı göstermeyi taahhüt edersiniz."
+        },
+        {
+          "title": "Fikrî mülkiyet",
+          "content": "Zenith'teki tüm içerik (metinler, grafikler, kod, tasarım) yürürlükteki fikrî mülkiyet yasalarıyla korunmaktadır. İzinsiz çoğaltma yasaktır."
+        },
+        {
+          "title": "Sorumluluk sınırı",
+          "content": "Zenith, platform tarafından sağlanan bilgilere dayanarak verilen yatırım kararlarından doğan finansal kayıplardan sorumlu tutulamaz. Piyasa verileri yalnızca bilgi amaçlıdır ve yatırım tavsiyesi niteliği taşımaz."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Gizlilik Politikası",
+      "lastUpdated": "1 Haziran 2026",
+      "intro": "Zenith, gizliliğinizi korumayı taahhüt eder. Bu politika, hangi verileri topladığımızı, nasıl kullandığımızı ve haklarınızın neler olduğunu açıklar.",
+      "sections": [
+        {
+          "title": "Toplanan veriler",
+          "content": "Topladıklarımız: (1) Clerk üzerinden kayıt sırasında sağlanan hesap verileri (e-posta, ad); (2) tarama verileri (çerezler, IP); (3) tercihleriniz (watchlist, uyarılar, dil, para birimi); (4) hizmeti iyileştirmek için anonimleştirilmiş kullanım verileri."
+        },
+        {
+          "title": "Hukuki dayanak ve amaçlar",
+          "content": "Verilerinizin işlenmesi, hizmet sözleşmesinin ifasına (hesap verileri, tercihler) ve hizmeti iyileştirme konusundaki meşru menfaatimize (anonimleştirilmiş analiz) dayanmaktadır. Verilerinizi üçüncü taraflara asla satmayız."
+        },
+        {
+          "title": "Saklama süresi",
+          "content": "Hesap verileriniz hesabınız aktif olduğu sürece saklanır ve hesap silindikten sonraki 30 gün içinde silinir. Analitik veriler en fazla 13 ay saklanır."
+        },
+        {
+          "title": "Haklarınız (KVKK/GDPR)",
+          "content": "Verilerinize erişme, düzeltme, silme, taşıma ve işlenmesine itiraz etme haklarına sahipsiniz. Bu hakları kullanmak için privacy@zenith.xyz adresine başvurun."
+        },
+        {
+          "title": "KVKK iletişim",
+          "content": "Veri Koruma Görevlimize dpo@zenith.xyz adresinden ulaşabilirsiniz. Ayrıca yetkili denetim makamına (Türkiye: KVKK) şikâyette bulunma hakkına da sahipsiniz."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Çerez Politikası",
+      "lastUpdated": "1 Haziran 2026",
+      "intro": "Bu sayfa, Zenith'in çerezleri ve benzer teknolojileri nasıl kullandığını açıklar.",
+      "sections": [
+        {
+          "title": "Çerez nedir",
+          "content": "Çerez, bir web sitesini ziyaret ettiğinizde cihazınızda saklanan küçük bir metin dosyasıdır. Sitenin eylemlerinizi ve tercihlerinizi belirli bir süre boyunca hatırlamasını sağlar."
+        },
+        {
+          "title": "Zorunlu çerezler",
+          "content": "Bu çerezler hizmetin çalışması için gereklidir: Clerk kimlik doğrulama oturumu, dil tercihleri, uyarı sepeti. Devre dışı bırakılamazlar."
+        },
+        {
+          "title": "Analitik çerezler",
+          "content": "Zenith, kullanıcıların platformla nasıl etkileşimde bulunduğunu anlamak için anonimleştirilmiş analiz araçları (PostHog isteğe bağlı) kullanır. Bu veriler toplu hâlde tutulur ve sizi tanımlamaya izin vermez."
+        },
+        {
+          "title": "Pazarlama çerezleri",
+          "content": "Zenith pazarlama veya reklam çerezi kullanmaz. Yeniden hedefleme veya hedefli reklamcılık için herhangi bir üçüncü taraf çerezi yerleştirilmez."
+        },
+        {
+          "title": "Tercihlerinizi yönetme",
+          "content": "Çerez tercihlerinizi tarayıcı ayarlarınızdan yönetebilirsiniz. Belirli çerezleri devre dışı bırakmak bazı platform özelliklerini sınırlayabilir."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Erişilebilirlik",
+      "lastUpdated": "1 Haziran 2026",
+      "intro": "Zenith, platformunu uluslararası standartlara uygun şekilde herkes için erişilebilir kılmayı taahhüt eder.",
+      "sections": [
+        {
+          "title": "Taahhüdümüz",
+          "content": "Zenith, engelli bireyler dâhil herkes tarafından kullanılabilen bir hizmet sunmayı hedefler. WCAG 2.1 seviye AA önerilerine uyarız."
+        },
+        {
+          "title": "WCAG 2.1 AA standartları",
+          "content": "Arayüzümüz erişilebilirlik ilkelerine saygı gösterir: yeterli renk kontrastı, klavye ile gezinme, görsellerde alternatif metin, anlamsal HTML yapısı, etkileşimli öğelerde ARIA etiketleri."
+        },
+        {
+          "title": "Erişilebilirlik özellikleri",
+          "content": "Tam klavye gezinmesi (Tab, Enter, Escape), ⌘K kısayolları (komut paleti), yerel karanlık mod, ekran okuyucu desteği (NVDA, JAWS, VoiceOver), metin okunabilirlik kaybı olmadan %200'e kadar ölçeklenebilir."
+        },
+        {
+          "title": "Bilinen sınırlamalar",
+          "content": "Bazı fiyat grafikleri (sparklines, heatmap) ekran okuyucu kullanıcıları için yorumlanması zor olabilir. Verilerin metin tabanlı bir sürümü komut paleti aracılığıyla kullanılabilir."
+        },
+        {
+          "title": "Sorun bildirimi için iletişim",
+          "content": "Bir erişilebilirlik sorunuyla karşılaşırsanız accessibilite@zenith.xyz adresine başvurun. 5 iş günü içinde yanıt vermeyi ve 30 gün içinde sorunları gidermeyi taahhüt ederiz."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Watchlist'e eklendi",
+    "removed": "Watchlist'ten çıkarıldı",
+    "empty": "Watchlist'iniz boş",
+    "title": "Watchlist'im"
   }
 }

@@ -20,6 +20,12 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/markets(.*)",
   "/news(.*)",
   "/:locale/news(.*)",
+  "/apprendre(.*)",
+  "/:locale/apprendre(.*)",
+  "/calendrier(.*)",
+  "/:locale/calendrier(.*)",
+  "/community(.*)",
+  "/:locale/community(.*)",
   "/tools(.*)",
   "/:locale/tools(.*)",
   "/resources(.*)",
@@ -36,9 +42,8 @@ export default clerkMiddleware(async (auth, request) => {
     await auth.protect();
   }
 
-  // Skip i18n middleware for API routes, static assets, manifest
   const pathname = request.nextUrl.pathname;
-  if (pathname.startsWith("/api") || 
+  if (pathname.startsWith("/api") ||
       pathname.endsWith("/manifest.json") || pathname === "/manifest.json" ||
       pathname.endsWith(".png") || pathname.endsWith(".ico") ||
       pathname === "/favicon-16x16.png") {

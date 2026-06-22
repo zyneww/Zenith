@@ -34,7 +34,7 @@ export default function GlobalError({
         )}
         <button
           onClick={reset}
-          className="inline-flex items-center gap-2 bg-brand-purple text-primary font-semibold px-6 py-3 rounded-lg hover:bg-brand-purple/90 transition-colors"
+          className="inline-flex items-center gap-2 bg-accent text-primary font-semibold px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
         >
           <RefreshCw className="w-4 h-4" />
           Réessayer

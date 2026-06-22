@@ -144,7 +144,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "● Offline",
+    "loading": "Laden..."
   },
   "crypto": {
     "title": "Crypto deep dive, <live>live</live>",
@@ -203,7 +205,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Laden...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Crypto marktsentimentindicator"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Niet beschikbaar"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24h — Top 5 per categorie",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Bekijk alles",
+      "loading": "Laden...",
+      "error": "Laadfout",
+      "retry": "Opnieuw proberen"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "Van",
+      "to": "Naar",
+      "amount": "Bedrag"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Filter 500+ crypto's op volume, volatiliteit, RSI, market cap. Bouw je watchlist in 30s.",
+      "open": "Screener openen →"
+    }
   },
   "cta": {
     "title": "Klaar om het volgende niveau te bereiken?",
@@ -407,10 +455,114 @@
     "subscription": "Abonnement & prijzen"
   },
   "legal": {
-    "terms": "Gebruiksvoorwaarden",
-    "privacy": "Privacy",
-    "cookies": "Cookies",
-    "accessibility": "Toegankelijkheid"
+    "terms": {
+      "title": "Algemene Voorwaarden",
+      "lastUpdated": "1 juni 2026",
+      "intro": "Deze voorwaarden zijn van toepassing op uw gebruik van Zenith. Door onze diensten te gebruiken, gaat u volledig akkoord met deze voorwaarden.",
+      "sections": [
+        {
+          "title": "Doel en aanvaarding",
+          "content": "Zenith is een multi-asset financiële intelligentieplatform. Deze Algemene Voorwaarden definiëren de rechten en verplichtingen tussen Zenith en elke gebruiker van de dienst. Toegang tot het platform houdt volledige aanvaarding van deze voorwaarden in."
+        },
+        {
+          "title": "Beschrijving van de dienst",
+          "content": "Zenith biedt realtime marktgegevens (crypto, forex, grondstoffen, indices), analysetools, een economische kalender, waarschuwingen en een watchlist-systeem. De dienst wordt geleverd zoals hij is, zonder garantie op continue beschikbaarheid of absolute nauwkeurigheid van gegevens."
+        },
+        {
+          "title": "Verplichtingen van de gebruiker",
+          "content": "U verbindt zich ertoe Zenith alleen voor wettelijke doeleinden te gebruiken, niet te proberen de dienst te verstoren, niet massaal gegevens te extraheren via geautomatiseerde middelen, en de intellectuele eigendomsrechten van Zenith en haar partners te respecteren."
+        },
+        {
+          "title": "Intellectueel eigendom",
+          "content": "Alle inhoud op Zenith (teksten, afbeeldingen, code, ontwerp) is beschermd door de toepasselijke wetgeving inzake intellectuele eigendom. Elke ongeautoriseerde reproductie is verboden."
+        },
+        {
+          "title": "Beperking van aansprakelijkheid",
+          "content": "Zenith kan niet aansprakelijk worden gesteld voor financiële verliezen die voortvloeien uit beleggingsbeslissingen op basis van de via het platform verstrekte informatie. Marktgegevens worden uitsluitend ter informatie verstrekt en vormen geen beleggingsadvies."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacybeleid",
+      "lastUpdated": "1 juni 2026",
+      "intro": "Zenith zet zich in voor de bescherming van uw privacy. Dit beleid legt uit welke gegevens we verzamelen, hoe we ze gebruiken en wat uw rechten zijn.",
+      "sections": [
+        {
+          "title": "Verzamelde gegevens",
+          "content": "Wij verzamelen: (1) accountgegevens (e-mail, naam) verstrekt bij registratie via Clerk; (2) browsegegevens (cookies, IP); (3) uw voorkeuren (watchlist, waarschuwingen, taal, valuta); (4) geanonimiseerde gebruiksgegevens om de dienst te verbeteren."
+        },
+        {
+          "title": "Rechtsgrondslag en doeleinden",
+          "content": "De verwerking van uw gegevens is gebaseerd op de uitvoering van de dienstovereenkomst (accountgegevens, voorkeuren) en op ons gerechtvaardigd belang om de dienst te verbeteren (geanonimiseerde analyses). We verkopen uw gegevens nooit aan derden."
+        },
+        {
+          "title": "Bewaartermijn",
+          "content": "Uw accountgegevens worden bewaard zolang uw account actief is, en binnen 30 dagen na verwijdering van het account verwijderd. Analytische gegevens worden maximaal 13 maanden bewaard."
+        },
+        {
+          "title": "Uw rechten (AVG)",
+          "content": "U heeft het recht op toegang, rectificatie, verwijdering, overdraagbaarheid en bezwaar tegen de verwerking van uw gegevens. Om deze rechten uit te oefenen, neem contact op met privacy@zenith.xyz."
+        },
+        {
+          "title": "FG-contact",
+          "content": "Onze Functionaris voor Gegevensbescherming is bereikbaar via dpo@zenith.xyz. U heeft ook het recht om een klacht in te dienen bij de bevoegde toezichthoudende autoriteit (AP in Nederland)."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookiebeleid",
+      "lastUpdated": "1 juni 2026",
+      "intro": "Deze pagina legt uit hoe Zenith cookies en vergelijkbare technologieën gebruikt.",
+      "sections": [
+        {
+          "title": "Wat is een cookie",
+          "content": "Een cookie is een klein tekstbestand dat op uw apparaat wordt opgeslagen wanneer u een website bezoekt. Het stelt de site in staat uw acties en voorkeuren gedurende een bepaalde periode te onthouden."
+        },
+        {
+          "title": "Essentiële cookies",
+          "content": "Deze cookies zijn noodzakelijk voor de werking van de dienst: Clerk authenticatiesessie, taalvoorkeuren, waarschuwingsmandje. Ze kunnen niet worden uitgeschakeld."
+        },
+        {
+          "title": "Analytische cookies",
+          "content": "Zenith gebruikt geanonimiseerde analytische tools (PostHog optioneel) om te begrijpen hoe gebruikers met het platform omgaan. Deze gegevens worden geaggregeerd en maken identificatie niet mogelijk."
+        },
+        {
+          "title": "Marketingcookies",
+          "content": "Zenith gebruikt geen marketing- of advertentiecookies. Er worden geen cookies van derden geplaatst voor retargeting of gerichte advertenties."
+        },
+        {
+          "title": "Uw voorkeuren beheren",
+          "content": "U kunt uw cookievoorkeuren beheren via de instellingen van uw browser. Het uitschakelen van bepaalde cookies kan sommige platformfuncties beperken."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Toegankelijkheid",
+      "lastUpdated": "1 juni 2026",
+      "intro": "Zenith zet zich in om zijn platform voor iedereen toegankelijk te maken, in overeenstemming met internationale normen.",
+      "sections": [
+        {
+          "title": "Onze inzet",
+          "content": "Zenith streeft ernaar een dienst te bieden die door iedereen kan worden gebruikt, inclusief personen met een beperking. We volgen de WCAG 2.1 niveau AA aanbevelingen."
+        },
+        {
+          "title": "WCAG 2.1 AA normen",
+          "content": "Onze interface respecteert toegankelijkheidsprincipes: voldoende kleurcontrasten, toetsenbordnavigatie, alternatieve teksten voor afbeeldingen, semantische HTML-structuur, ARIA-labels op interactieve elementen."
+        },
+        {
+          "title": "Toegankelijkheidsfuncties",
+          "content": "Volledige toetsenbordnavigatie (Tab, Enter, Escape), ⌘K-snelkoppelingen (commandopalet), native donkere modus, schermlezerondersteuning (NVDA, JAWS, VoiceOver), tekst schaalbaar tot 200% zonder verlies van leesbaarheid."
+        },
+        {
+          "title": "Bekende beperkingen",
+          "content": "Sommige prijsdiagrammen (sparklines, heatmaps) kunnen moeilijk te interpreteren zijn voor schermlezergebruikers. Een tekstversie van de gegevens is beschikbaar via de commandopalet."
+        },
+        {
+          "title": "Contact om een probleem te melden",
+          "content": "Als u een toegankelijkheidsprobleem ondervindt, neem dan contact op met accessibilite@zenith.xyz. We verbinden ons ertoe binnen 5 werkdagen te reageren en problemen binnen 30 dagen op te lossen."
+        }
+      ]
+    }
   },
   "resources": {
     "api": "API",
@@ -441,5 +593,11 @@
     "ARS": "Peso argentin",
     "BTC": "Bitcoin",
     "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Toegevoegd aan watchlist",
+    "removed": "Verwijderd uit watchlist",
+    "empty": "Je watchlist is leeg",
+    "title": "Mijn watchlist"
   }
 }

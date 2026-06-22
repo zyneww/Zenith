@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { PieChart, TrendingUp, Clock, ArrowRight } from "lucide-react";
 import Header from "@/components/landing/Header";
 
@@ -45,7 +44,7 @@ function AssetAllocation() {
     <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-primary font-semibold text-lg flex items-center gap-2">
-          <PieChart className="w-5 h-5 text-brand-purple-light" />
+          <PieChart className="w-5 h-5 text-accent" />
           Répartition des Actifs
         </h3>
         <span className="text-secondary text-sm">{ASSETS.length} actifs</span>
@@ -68,11 +67,8 @@ function AssetAllocation() {
       {/* Asset list */}
       <div className="space-y-3">
         {ASSETS.map((asset, index) => (
-          <motion.div
+          <div
             key={asset.symbol}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
             className="flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
@@ -89,7 +85,7 @@ function AssetAllocation() {
               <p className="text-primary font-medium">${asset.value.toLocaleString()}</p>
               <p className="text-secondary text-sm">{asset.allocation}%</p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -108,10 +104,10 @@ function TransactionTable() {
     <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-primary font-semibold text-lg flex items-center gap-2">
-          <Clock className="w-5 h-5 text-brand-cyan" />
+          <Clock className="w-5 h-5 text-accent" />
           Historique des Transactions
         </h3>
-        <button className="text-brand-cyan text-sm hover:underline flex items-center gap-1">
+        <button className="text-accent text-sm hover:underline flex items-center gap-1">
           Voir tout <ArrowRight className="w-3 h-3" />
         </button>
       </div>
@@ -130,19 +126,16 @@ function TransactionTable() {
           </thead>
           <tbody>
             {TRANSACTIONS.map((tx, index) => (
-              <motion.tr
+              <tr
                 key={tx.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
                 className="border-b border-surface/50 last:border-0 hover:bg-raised transition-colors"
               >
                 <td className="py-3">
                   <span
                     className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                       tx.type === "buy"
-                        ? "bg-green-500/20 text-green-500"
-                        : "bg-red-500/20 text-red-500"
+                        ? "bg-up-subtle text-up"
+                        : "bg-down-subtle text-down"
                     }`}
                   >
                     {tx.type === "buy" ? "Achat" : "Vente"}
@@ -155,7 +148,7 @@ function TransactionTable() {
                   ${tx.total.toLocaleString()}
                 </td>
                 <td className="py-3 text-right text-secondary text-sm">{tx.date}</td>
-              </motion.tr>
+              </tr>
             ))}
           </tbody>
         </table>
@@ -166,20 +159,17 @@ function TransactionTable() {
 
 function PerformanceMetrics() {
   const metrics = [
-    { label: "Sharpe Ratio", value: "1.85", icon: TrendingUp, color: "text-green-500" },
-    { label: "Drawdown Max", value: "-12.4%", icon: TrendingUp, color: "text-red-500" },
-    { label: "Volatilité", value: "24.8%", icon: TrendingUp, color: "text-yellow-500" },
-    { label: "Beta", value: "0.92", icon: TrendingUp, color: "text-brand-cyan" },
+    { label: "Sharpe Ratio", value: "1.85", icon: TrendingUp, color: "text-up" },
+    { label: "Drawdown Max", value: "-12.4%", icon: TrendingUp, color: "text-down" },
+    { label: "Volatilité", value: "24.8%", icon: TrendingUp, color: "text-warning" },
+    { label: "Beta", value: "0.92", icon: TrendingUp, color: "text-accent" },
   ];
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4">
       {metrics.map((metric, index) => (
-        <motion.div
+        <div
           key={metric.label}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.1 }}
           className="bg-card border border-surface rounded-sm p-4"
         >
           <p className="text-secondary text-sm mb-1">{metric.label}</p>
@@ -187,7 +177,7 @@ function PerformanceMetrics() {
             <metric.icon className={`w-4 h-4 ${metric.color}`} />
             <span className="text-xl font-medium text-primary">{metric.value}</span>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -200,17 +190,14 @@ return (
       <main className="min-h-screen bg-canvas text-primary">
         <div className="max-w-7xl mx-auto px-6 py-8">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+          <div
             className="mb-8"
           >
             <h1 className="text-3xl font-bold text-primary mb-2">Portfolio</h1>
             <p className="text-secondary">
               Analyse détaillée de vos actifs et performances historiques.
             </p>
-          </motion.div>
+          </div>
 
           {/* Performance Metrics */}
           <div className="mb-8">

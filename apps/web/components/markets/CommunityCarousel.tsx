@@ -140,7 +140,7 @@ function IdeaCard({ idea }: { idea: CommunityIdea }) {
             <p className="text-[10px] text-secondary">{idea.publishedAt}</p>
           </div>
         </div>
-        <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${isLong ? "text-accent bg-accent-subtle" : "text-[#ef4444] bg-[#ef4444]/10"}`}>
+        <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${isLong ? "text-accent bg-accent-subtle" : "text-down bg-down-subtle"}`}>
           {isLong ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {isLong ? "Long" : "Short"}
         </div>

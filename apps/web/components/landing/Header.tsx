@@ -42,8 +42,7 @@ import {
   Activity,
   Wallet,
 } from "lucide-react";
-import { motion } from "motion/react";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignUpButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import DropdownMenu from "@/components/ui/DropdownMenu";
 import MobileDrawer from "@/components/ui/MobileDrawer";
@@ -67,24 +66,25 @@ const marketsItems: DropdownItem[] = [
   { iconName: "Package", label: "Commodités", href: "/markets?category=commodities", group: "Par catégorie" },
   { iconName: "Landmark", label: "Indices", href: "/markets?category=indices", group: "Par catégorie" },
   { iconName: "Coins", label: "ETFs", href: "/markets?category=etfs", group: "Par catégorie" },
-  { iconName: "Zap", label: "Gainers & Losers", href: "/markets", group: "Populaire" },
-  { iconName: "Flame", label: "Tendances", href: "/markets", group: "Populaire" },
-  { iconName: "Clock", label: "Nouveaux actifs", href: "/markets", group: "Populaire" },
+  { iconName: "Zap", label: "Gainers & Losers", href: "/markets?view=gainers", group: "Populaire" },
+  { iconName: "Flame", label: "Tendances", href: "/markets?view=trending", group: "Populaire" },
+  { iconName: "Clock", label: "Nouveaux actifs", href: "/markets?view=new", group: "Populaire" },
 ];
 
 const newsItems: DropdownItem[] = [
   {
     iconName: "CalendarDays",
-    label: "Calendrier économique",
-    description: "Événements macroéconomiques clés",
-    href: "/news/economic-calendar",
+    label: "Calendrier",
+    description: "Événements macroéconomiques et résultats d'entreprises",
+    href: "/calendrier",
     featured: true,
   },
-  { iconName: "CandlestickChart", label: "Analyse technique", href: "/news/technical-analysis", group: "Analyses" },
-  { iconName: "BarChart3", label: "Analyse fondamentale", href: "/news/fundamental-analysis", group: "Analyses" },
-  { iconName: "Activity", label: "Sentiment", href: "/news/sentiment", group: "Analyses" },
-  { iconName: "Scale", label: "Heatmap", href: "/tools/heatmaps", group: "Outils" },
-  { iconName: "Globe", label: "Flux en direct", href: "/news/flow", group: "Outils" },
+  { iconName: "TrendingUp", label: "Tendances", href: "/apprendre/category/trends", group: "Apprendre" },
+  { iconName: "BookOpen", label: "Tutoriels débutants", href: "/apprendre/category/beginners-tutorial", group: "Apprendre" },
+  { iconName: "Target", label: "Stratégies", href: "/apprendre/category/strategies", group: "Apprendre" },
+  { iconName: "Activity", label: "Analyses", href: "/apprendre/category/analysis", group: "Apprendre" },
+  { iconName: "Newspaper", label: "Actualités marché", href: "/apprendre/category/market-news", group: "Apprendre" },
+  { iconName: "Globe", label: "Sentiment", href: "/apprendre/category/sentiment", group: "Apprendre" },
 ];
 
 const toolsItems: DropdownItem[] = [
@@ -111,23 +111,21 @@ const helpItems: DropdownItem[] = [
 
 const mobileSections = [
   { title: "Marchés", items: marketsItems },
-  { title: "Actualités", items: newsItems },
+  { title: "Apprendre", items: newsItems },
   { title: "Outils", items: toolsItems },
   { title: "Aide", items: helpItems },
 ];
 
 export default function Header() {
+  const { isSignedIn } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { open: openPalette } = useCommandPalette();
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <header
       className="sticky top-4 z-50 bg-transparent border-b border-transparent"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[80px] px-4 sm:px-8 lg:px-16 xl:px-28">
+      <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[96px] px-4 sm:px-8 lg:px-16 xl:px-28">
         {/* ─── Logo ─── */}
         <Link href="/" className="flex items-center self-center group flex-shrink-0 justify-self-center">
           <Image
@@ -136,14 +134,14 @@ export default function Header() {
             width={72}
             height={72}
             priority
-            className="transition-all duration-300 motion-safe:group-hover:scale-110 w-auto h-10 sm:h-12"
+            className="w-auto h-16 sm:h-20"
           />
         </Link>
 
         {/* ─── Desktop Nav (page center) ─── */}
         <nav className="hidden lg:flex items-center self-center gap-1">
           <DropdownMenu trigger="Marchés" items={marketsItems} />
-          <DropdownMenu trigger="Actualités" items={newsItems} />
+          <DropdownMenu trigger="Apprendre" items={newsItems} />
           <DropdownMenu trigger="Outils" items={toolsItems} />
           <DropdownMenu trigger="Aide" items={helpItems} />
         </nav>
@@ -168,15 +166,17 @@ export default function Header() {
             <UserMenu />
           </div>
 
-          {/* Commencer button — black mono-caps */}
-          <SignUpButton mode="modal" forceRedirectUrl="/pricing">
-            <button
-              className="hidden lg:block bg-inverse text-primary font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-sm transition-colors hover:bg-raised cursor-pointer"
-              type="button"
-            >
-              Commencer
-            </button>
-          </SignUpButton>
+          {/* Commencer button — hidden when signed in */}
+          {!isSignedIn && (
+            <SignUpButton mode="modal" forceRedirectUrl="/pricing">
+              <button
+                className="hidden lg:block bg-inverse text-on-inverse font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-sm transition-colors hover:bg-raised cursor-pointer"
+                type="button"
+              >
+                Commencer
+              </button>
+            </SignUpButton>
+          )}
 
           {/* Mobile hamburger */}
           <button
@@ -196,6 +196,6 @@ export default function Header() {
         onClose={() => setDrawerOpen(false)}
         sections={mobileSections}
       />
-    </motion.header>
+    </header>
   );
 }

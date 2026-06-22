@@ -1,27 +1,24 @@
-import { Construction } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
-import Header from "@/components/landing/Header";
-import Footer from "@/components/landing/Footer";
-
-export const metadata = {
-  title: "Corrélation — Zenith",
-  description: "Analysez la corrélation entre différents actifs.",
-};
+import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import { GitBranch, Grid3x3, Flame, History, Download } from "lucide-react";
 
 export default async function CorrelationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <>
-      <Header />
-      <main className="min-h-[60vh] flex flex-col items-center justify-center px-4">
-        <Construction className="w-16 h-16 text-brand-cyan mb-6" />
-        <h1 className="text-3xl font-bold text-white mb-4">Corrélation</h1>
-        <p className="text-gray-400 text-center max-w-md">
-          Cette page est en cours de construction. Revenez bientôt pour analyser les corrélations entre actifs.
-        </p>
-      </main>
-      <Footer />
-    </>
+    <PagePlaceholder
+      icon={<GitBranch className="w-8 h-8 text-accent" />}
+      eyebrow="OUTILS"
+      title="Corrélation"
+      subtitle="Analysez les corrélations entre actifs pour diversifier votre portfolio."
+      features={[
+        { title: "Matrix", description: "Matrice N×N, coefficients de Pearson, color-coded.", icon: <Grid3x3 className="w-5 h-5 text-accent" /> },
+        { title: "Heatmap", description: "Visualisation rapide, paires les plus corrélées.", icon: <Flame className="w-5 h-5 text-accent" /> },
+        { title: "Historique", description: "Évolution de la corrélation sur 30/90/365 jours.", icon: <History className="w-5 h-5 text-accent" /> },
+        { title: "Export", description: "CSV, PNG, intégration portfolio, API.", icon: <Download className="w-5 h-5 text-accent" /> },
+      ]}
+      primaryCta={{ label: "Être notifié", href: "/help/contact" }}
+      secondaryCta={{ label: "Voir la roadmap", href: "/help/roadmap" }}
+    />
   );
 }

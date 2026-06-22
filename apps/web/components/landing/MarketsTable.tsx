@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import { Star, ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
 import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
 
 interface AssetData {
@@ -66,7 +65,7 @@ const STATIC_ASSETS: AssetData[] = [
     volume: "$3.80B",
     sparklinePath:
       "M0,25 Q15,20 25,10 T50,15 T75,5 T100,0",
-    iconBg: "bg-gradient-to-tr from-green-400 to-purple-500",
+    iconBg: "bg-card",
     iconText: "S",
     positive: true,
   },
@@ -112,7 +111,7 @@ export default function MarketsTable() {
       <div className="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <p className="text-brand-cyan text-xs font-bold tracking-wider uppercase">
+            <p className="text-accent text-xs font-bold tracking-wider uppercase">
               Fig 02 — Marchés temps réel
             </p>
             <span
@@ -125,15 +124,15 @@ export default function MarketsTable() {
               {isConnected ? "● LIVE" : "◌ OFFLINE"}
             </span>
           </div>
-          <h2 className="text-3xl font-bold text-primary mb-2">
-            Top 15 cryptos, <span className="text-brand-cyan">en direct</span>
+          <h2 className="heading-2 text-3xl font-bold text-primary mb-2">
+            Top 15 cryptos, <span className="text-accent">en direct</span>
           </h2>
           <p className="text-secondary text-sm">
             Prix, variations et volumes mis à jour en continu. Filtrez par
             catégorie pour focus.
           </p>
         </div>
-        <button className="text-sm border border-gray-700 px-4 py-2 rounded-lg hover:bg-gray-800 transition flex items-center gap-2 w-fit text-primary">
+        <button className="text-sm border border-surface px-4 py-2 rounded-full hover:bg-raised transition flex items-center gap-2 w-fit text-primary">
           Voir tout le marché
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -153,8 +152,8 @@ export default function MarketsTable() {
             key={cat}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition whitespace-nowrap ${
               i === 0
-                ? "bg-brand-cyan/20 border border-brand-cyan text-brand-cyan"
-                : "border border-gray-700 text-secondary hover:bg-gray-800"
+                ? "bg-accent-subtle border border-accent text-accent"
+                : "border border-surface text-secondary hover:bg-raised"
             }`}
           >
             {cat}
@@ -166,7 +165,7 @@ export default function MarketsTable() {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs md:text-sm whitespace-nowrap">
           <thead>
-            <tr className="text-gray-500 border-b border-surface">
+            <tr className="text-secondary border-b border-surface">
               <th className="py-3 px-1 font-medium w-6">#</th>
               <th className="py-3 px-1 font-medium">NOM</th>
               <th className="py-3 px-1 font-medium text-right">PRIX</th>
@@ -179,7 +178,7 @@ export default function MarketsTable() {
               <th className="py-3 px-1 font-medium w-8"></th>
             </tr>
           </thead>
-          <tbody className="text-gray-200">
+          <tbody className="text-primary">
             {STATIC_ASSETS.map((asset, idx) => {
               const livePrice = prices[asset.symbol];
               const displayPrice = livePrice
@@ -187,15 +186,11 @@ export default function MarketsTable() {
                 : formatPrice(asset.basePrice);
 
               return (
-                <motion.tr
+                <tr
                   key={asset.symbol}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.4 }}
                   className="border-b border-surface/50 hover:bg-card/50 transition cursor-pointer"
                 >
-                  <td className="py-4 px-1 text-gray-500">{asset.rank}</td>
+                  <td className="py-4 px-1 text-secondary">{asset.rank}</td>
                   <td className="py-4 px-1">
                     <div className="flex items-center gap-2 md:gap-3">
                       <div
@@ -205,7 +200,7 @@ export default function MarketsTable() {
                       </div>
                       <div>
                         <div className="font-bold">{asset.name}</div>
-                        <div className="text-[10px] md:text-xs text-gray-500">
+                        <div className="text-[10px] md:text-xs text-secondary">
                           {asset.symbol}
                         </div>
                       </div>
@@ -248,15 +243,16 @@ export default function MarketsTable() {
                       <path
                         d={asset.sparklinePath}
                         fill="none"
-                        stroke={asset.positive ? "#22c55e" : "#ef4444"}
+                        stroke="currentColor"
                         strokeWidth="1.5"
+                        className={asset.positive ? "text-up" : "text-down"}
                       />
                     </svg>
                   </td>
-                  <td className="py-4 px-1 text-right text-secondary hover:text-yellow-500">
+                  <td className="py-4 px-1 text-right text-secondary hover:text-accent">
                     <Star className="w-4 h-4 ml-auto" />
                   </td>
-                </motion.tr>
+                </tr>
               );
             })}
           </tbody>

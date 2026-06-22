@@ -7,9 +7,9 @@ import { EconomicEvent } from "@/lib/market-data/types";
 function getImportanceColor(importance: string): string {
   switch (importance) {
     case "high":
-      return "text-[#ef4444] bg-[#ef4444]/10";
+      return "text-down bg-down-subtle";
     case "medium":
-      return "text-[#f59e0b] bg-[#f59e0b]/10";
+      return "text-warning bg-warning-subtle";
     default:
       return "text-accent bg-accent-subtle";
   }
@@ -215,13 +215,13 @@ export default function CalendarClient() {
         </div>
         <div className="bg-card rounded-sm border border-surface p-4">
           <div className="text-secondary text-sm mb-1">{t("calendar.stats.high")}</div>
-          <div className="text-2xl font-medium text-[#ef4444]">
+          <div className="text-2xl font-medium text-down">
             {events.filter((e) => e.importance === "high").length}
           </div>
         </div>
         <div className="bg-card rounded-sm border border-surface p-4">
           <div className="text-secondary text-sm mb-1">{t("calendar.stats.medium")}</div>
-          <div className="text-2xl font-medium text-[#f59e0b]">
+          <div className="text-2xl font-medium text-warning">
             {events.filter((e) => e.importance === "medium").length}
           </div>
         </div>

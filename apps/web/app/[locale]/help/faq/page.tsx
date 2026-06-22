@@ -1,7 +1,7 @@
-import { Construction } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
+import FAQAccordion from "./FAQAccordion";
 
 export const metadata = {
   title: "FAQ — Zenith",
@@ -12,16 +12,20 @@ export default async function FAQPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <>
+    <div className="bg-canvas text-primary min-h-screen flex flex-col">
       <Header />
-      <main className="min-h-[60vh] flex flex-col items-center justify-center px-4">
-        <Construction className="w-16 h-16 text-brand-cyan mb-6" />
-        <h1 className="text-3xl font-bold text-white mb-4">FAQ</h1>
-        <p className="text-gray-400 text-center max-w-md">
-          Cette page est en cours de construction. Revenez bientôt pour consulter notre foire aux questions.
-        </p>
+      <main className="flex-1 pt-32 pb-20 px-4">
+        <section className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="heading-1 mb-4">Questions fréquentes</h1>
+            <p className="text-secondary max-w-2xl mx-auto">
+              Tout ce que vous devez savoir sur Zenith : tarifs, marchés couverts, alertes, sécurité et plus encore.
+            </p>
+          </div>
+          <FAQAccordion />
+        </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

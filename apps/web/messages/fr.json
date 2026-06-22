@@ -63,8 +63,6 @@
     }
   },
   "hero": {
-    "badge": "BETA",
-    "badgeText": "Alertes temps réel maintenant disponibles",
     "title": "Votre sommet,",
     "titleLine2": "vos marchés,",
     "titleLine3": "votre <clarity>{clarityValue}</clarity>.",
@@ -74,7 +72,6 @@
     "ctaSecondary": "Explorer les marchés",
     "ctaSecondarySub": "Gratuit — aucune carte de crédit requise",
     "poweredBy": "Alimenté par",
-    "eyebrow": "Intelligence financière",
     "scroll": "Scroll",
     "keyboardHint": "Press / or ⌘K to search for any asset"
   },
@@ -145,7 +142,9 @@
     "cardCrypto": "Crypto",
     "cardCommodities": "Commodities",
     "cardForex": "Forex",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "offline": "Offline",
+    "loading": "Chargement…"
   },
   "crypto": {
     "title": "Crypto en profondeur, <live>en direct</live>",
@@ -204,7 +203,53 @@
     "gasSub": "LIVE — CHAINS",
     "screenerTitle": "Advanced Screener",
     "screenerDesc": "Filter 500+ cryptos by volume, volatility, RSI, market cap. Build your watchlist in 30s.",
-    "screenerCta": "Open screener"
+    "screenerCta": "Open screener",
+    "fearGreed": {
+      "title": "Fear & Greed",
+      "source": "DAILY — CNN",
+      "loading": "Chargement...",
+      "error": "—",
+      "labels": {
+        "extremeFear": "Extreme Fear",
+        "fear": "Fear",
+        "neutral": "Neutral",
+        "greed": "Greed",
+        "extremeGreed": "Extreme Greed"
+      },
+      "desc": "Indicateur de sentiment de marché crypto"
+    },
+    "gas": {
+      "title": "Gas Tracker",
+      "source": "LIVE — CHAINS",
+      "slow": "Slow",
+      "avg": "Avg",
+      "fast": "Fast",
+      "unit": "gwei",
+      "error": "Indisponible"
+    },
+    "movers": {
+      "title": "Daily Movers",
+      "subtitle": "24h — Top 5 par catégorie",
+      "trending": "Trending",
+      "gainers": "Gainers",
+      "losers": "Losers",
+      "seeAll": "Voir tout",
+      "loading": "Chargement...",
+      "error": "Erreur de chargement",
+      "retry": "Réessayer"
+    },
+    "converter": {
+      "title": "Quick Converter",
+      "subtitle": "MID — MARKET RATES",
+      "from": "De",
+      "to": "Vers",
+      "amount": "Montant"
+    },
+    "screener": {
+      "title": "Advanced Screener",
+      "desc": "Filtrez 500+ cryptos par volume, volatilité, RSI, market cap. Construisez votre watchlist en 30s.",
+      "open": "Open screener →"
+    }
   },
   "cta": {
     "title": "Prêt à prendre de la hauteur ?",
@@ -257,92 +302,89 @@
   },
   "markets": {
     "title": "Marchés",
-    "subtitle": "Tous les actifs en temps réel",
-    "rank": "Rang",
-    "name": "Nom",
-    "price": "Prix",
-    "h1": "1h",
-    "h24": "24h",
-    "d7": "7j",
-    "marketCap": "Market cap",
-    "volume": "Volume",
-    "category": "Catégorie"
-  },
-  "portfolio": {
-    "title": "Portfolio",
-    "subtitle": "Suivez vos positions et votre performance"
-  },
-  "news": {
-    "crypto": "Actualités Crypto",
-    "forex": "Actualités Forex",
-    "markets": "Actualités Marchés",
-    "economicCalendar": "Calendrier Économique",
-    "technicalAnalysis": "Analyses Techniques"
-  },
-  "tools": {
-    "watchlist": "Watchlist",
-    "alerts": "Alertes",
-    "heatmaps": "Heatmaps"
-  },
-  "help": {
-    "why": "Pourquoi Zenith",
-    "contact": "Nous contacter",
-    "faq": "FAQ",
-    "support": "Support",
-    "subscription": "Abonnement & Tarifs"
-  },
-  "legal": {
-    "terms": "Conditions générales d'utilisation",
-    "privacy": "Politique de confidentialité",
-    "cookies": "Politique de cookies",
-    "accessibility": "Accessibilité"
-  },
-  "resources": {
-    "api": "Documentation API",
-    "status": "État du système"
-  },
-  "currency": {
-    "USD": "Dollar américain",
-    "EUR": "Euro",
-    "GBP": "Livre sterling",
-    "CHF": "Franc suisse",
-    "JPY": "Yen japonais",
-    "RUB": "Rouble russe",
-    "PLN": "Zloty polonais",
-    "TRY": "Livre turque",
-    "BRL": "Réal brésilien",
-    "IDR": "Roupie indonésienne",
-    "MYR": "Ringgit malaisien",
-    "THB": "Baht thaïlandais",
-    "VND": "Dong vietnamien",
-    "KRW": "Won sud-coréen",
-    "CNY": "Yuan chinois (CN)",
-    "TWD": "Dollar taïwanais",
-    "AED": "Dirham des Émirats",
-    "SAR": "Riyal saoudien",
-    "EGP": "Livre égyptienne",
-    "ILS": "Shekel israélien",
-    "MXN": "Peso mexicain",
-    "ARS": "Peso argentin",
-    "BTC": "Bitcoin",
-    "ETH": "Ethereum"
-  },
-  "markets": {
-    "title": "Marchés",
     "subtitle": "Prix temps réel, indices, forex et cryptomonnaies",
     "searchPlaceholder": "Rechercher un actif (ex: BTC, EUR/USD, S&P 500)...",
     "filters": "Filtres",
     "overview": "Aperçu des marchés",
     "overviewSubtitle": "Indices, crypto et forex en temps réel",
-    "crypto": "Cryptomonnaies",
+    "crypto": {
+      "title": "Cryptomonnaies",
+      "description": "Prix et données des cryptomonnaies en temps réel",
+      "stats": {
+        "totalCoins": "Cryptos",
+        "rising": "En hausse",
+        "volume24h": "Volume 24h",
+        "bestPerf": "Meilleure perf"
+      },
+      "table": {
+        "rank": "Rang",
+        "name": "Nom",
+        "price": "Prix",
+        "change24h": "Variation 24h",
+        "high24h": "High 24h",
+        "low24h": "Low 24h",
+        "volume": "Volume"
+      },
+      "noData": "Aucune cryptomonnaie disponible"
+    },
     "cryptoTop": "Top 100",
-    "forex": "Forex",
+    "forex": {
+      "title": "Forex",
+      "description": "Paires de devises et taux de change en temps réel",
+      "stats": {
+        "totalPairs": "Paires",
+        "rising": "En hausse",
+        "falling": "En baisse",
+        "mostActive": "Plus active"
+      },
+      "table": {
+        "pair": "Paire",
+        "price": "Prix",
+        "change": "Variation",
+        "high": "High",
+        "low": "Low",
+        "spread": "Spread"
+      },
+      "noData": "Aucune paire disponible"
+    },
     "forexAll": "Toutes les paires",
-    "indices": "Indices",
+    "indices": {
+      "title": "Indices boursiers",
+      "description": "Indices majeurs mondiaux en temps réel",
+      "filter": {
+        "all": "Tous",
+        "americas": "Amériques",
+        "europe": "Europe",
+        "asia": "Asie"
+      },
+      "noData": "Aucun indice disponible",
+      "overview": "Vue d'ensemble",
+      "rising": "En hausse",
+      "falling": "En baisse",
+      "avgChange": "Variation moyenne",
+      "bestPerf": "Meilleure perf"
+    },
     "indicesAll": "Tous les indices",
     "commodities": "Matières premières",
     "commoditiesAll": "Tous les produits",
-    "futures": "Futures",
+    "futures": {
+      "title": "Futures",
+      "description": "Contrats à terme sur indices, matières premières et devises",
+      "stats": {
+        "total": "Contrats",
+        "rising": "En hausse",
+        "falling": "En baisse",
+        "bestPerf": "Meilleure perf"
+      },
+      "table": {
+        "contract": "Contrat",
+        "price": "Prix",
+        "change": "Variation",
+        "high": "High",
+        "low": "Low"
+      },
+      "noData": "Aucun contrat disponible"
+    },
     "futuresAll": "Tous les futures",
     "stocks": "Actions",
     "stocksAll": "Toutes les actions",
@@ -397,79 +439,6 @@
         "low": "Faible importance"
       }
     },
-    "indices": {
-      "title": "Indices boursiers",
-      "description": "Indices majeurs mondiaux en temps réel",
-      "filter": {
-        "all": "Tous",
-        "americas": "Amériques",
-        "europe": "Europe",
-        "asia": "Asie"
-      },
-      "noData": "Aucun indice disponible",
-      "overview": "Vue d'ensemble",
-      "rising": "En hausse",
-      "falling": "En baisse",
-      "avgChange": "Variation moyenne",
-      "bestPerf": "Meilleure perf"
-    },
-    "crypto": {
-      "title": "Cryptomonnaies",
-      "description": "Prix et données des cryptomonnaies en temps réel",
-      "stats": {
-        "totalCoins": "Cryptos",
-        "rising": "En hausse",
-        "volume24h": "Volume 24h",
-        "bestPerf": "Meilleure perf"
-      },
-      "table": {
-        "rank": "Rang",
-        "name": "Nom",
-        "price": "Prix",
-        "change24h": "Variation 24h",
-        "high24h": "High 24h",
-        "low24h": "Low 24h",
-        "volume": "Volume"
-      },
-      "noData": "Aucune cryptomonnaie disponible"
-    },
-    "forex": {
-      "title": "Forex",
-      "description": "Paires de devises et taux de change en temps réel",
-      "stats": {
-        "totalPairs": "Paires",
-        "rising": "En hausse",
-        "falling": "En baisse",
-        "mostActive": "Plus active"
-      },
-      "table": {
-        "pair": "Paire",
-        "price": "Prix",
-        "change": "Variation",
-        "high": "High",
-        "low": "Low",
-        "spread": "Spread"
-      },
-      "noData": "Aucune paire disponible"
-    },
-    "futures": {
-      "title": "Futures",
-      "description": "Contrats à terme sur indices, matières premières et devises",
-      "stats": {
-        "total": "Contrats",
-        "rising": "En hausse",
-        "falling": "En baisse",
-        "bestPerf": "Meilleure perf"
-      },
-      "table": {
-        "contract": "Contrat",
-        "price": "Prix",
-        "change": "Variation",
-        "high": "High",
-        "low": "Low"
-      },
-      "noData": "Aucun contrat disponible"
-    },
     "ideas": {
       "title": "Idées communautaires",
       "description": "Analyses et signaux de trading de la communauté",
@@ -483,5 +452,174 @@
         "short": "Short"
       }
     }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Suivez vos positions et votre performance"
+  },
+  "news": {
+    "crypto": "Actualités Crypto",
+    "forex": "Actualités Forex",
+    "markets": "Actualités Marchés",
+    "economicCalendar": "Calendrier Économique",
+    "technicalAnalysis": "Analyses Techniques"
+  },
+  "tools": {
+    "watchlist": "Watchlist",
+    "alerts": "Alertes",
+    "heatmaps": "Heatmaps"
+  },
+  "help": {
+    "why": "Pourquoi Zenith",
+    "contact": "Nous contacter",
+    "faq": "FAQ",
+    "support": "Support",
+    "subscription": "Abonnement & Tarifs"
+  },
+  "legal": {
+    "terms": {
+      "title": "Conditions Générales d'Utilisation",
+      "lastUpdated": "1er juin 2026",
+      "intro": "Ces conditions régissent votre utilisation de Zenith. En utilisant nos services, vous acceptez ces conditions dans leur intégralité.",
+      "sections": [
+        {
+          "title": "Objet et acceptation",
+          "content": "Zenith est une plateforme d'intelligence financière multi-actifs. Les présentes CGU définissent les droits et obligations entre Zenith et tout utilisateur du service. L'accès à la plateforme vaut acceptation pleine et entière des présentes conditions."
+        },
+        {
+          "title": "Description du service",
+          "content": "Zenith propose des données de marché en temps réel (crypto, forex, commodities, indices), des outils d'analyse, un calendrier économique, des alertes et un système de watchlist. Le service est fourni tel quel, sans garantie de disponibilité continue ni d'exactitude absolue des données."
+        },
+        {
+          "title": "Obligations de l'utilisateur",
+          "content": "Vous vous engagez à utiliser Zenith à des fins légales uniquement, à ne pas tenter de perturber le service, à ne pas extraire massivement les données par des moyens automatisés, et à respecter les droits de propriété intellectuelle de Zenith et de ses partenaires."
+        },
+        {
+          "title": "Propriété intellectuelle",
+          "content": "L'ensemble du contenu de Zenith (textes, graphiques, code, design) est protégé par les lois en vigueur sur la propriété intellectuelle. Toute reproduction non autorisée est interdite."
+        },
+        {
+          "title": "Limitation de responsabilité",
+          "content": "Zenith ne saurait être tenu responsable des pertes financières résultant de décisions d'investissement prises sur la base des informations fournies par la plateforme. Les données de marché sont fournies à titre informatif uniquement et ne constituent pas un conseil en investissement."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "lastUpdated": "1er juin 2026",
+      "intro": "Zenith s'engage à protéger votre vie privée. Cette politique explique quelles données nous collectons, comment nous les utilisons et quels sont vos droits.",
+      "sections": [
+        {
+          "title": "Données collectées",
+          "content": "Nous collectons : (1) les données de compte (email, nom) fournies lors de l'inscription via Clerk ; (2) les données de navigation (cookies, IP) ; (3) vos préférences (watchlist, alertes, langue, devise) ; (4) les données d'usage anonymisées pour améliorer le service."
+        },
+        {
+          "title": "Base légale et finalités",
+          "content": "Le traitement de vos données repose sur l'exécution du contrat de service (données de compte, préférences) et sur notre intérêt légitime à améliorer le service (analytics anonymisés). Nous ne vendons jamais vos données à des tiers."
+        },
+        {
+          "title": "Durée de conservation",
+          "content": "Vos données de compte sont conservées tant que votre compte est actif, puis supprimées dans les 30 jours suivant la suppression du compte. Les données analytiques sont conservées 13 mois maximum."
+        },
+        {
+          "title": "Vos droits (RGPD)",
+          "content": "Vous disposez d'un droit d'accès, de rectification, de suppression, de portabilité et d'opposition au traitement de vos données. Pour exercer ces droits, contactez privacy@zenith.xyz."
+        },
+        {
+          "title": "Contact DPO",
+          "content": "Notre délégué à la protection des données est joignable à dpo@zenith.xyz. Vous avez également le droit d'introduire une réclamation auprès de l'autorité de contrôle compétente (APD en Belgique)."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Politique des cookies",
+      "lastUpdated": "1er juin 2026",
+      "intro": "Cette page explique comment Zenith utilise les cookies et technologies similaires.",
+      "sections": [
+        {
+          "title": "Qu'est-ce qu'un cookie",
+          "content": "Un cookie est un petit fichier texte stocké sur votre appareil lorsque vous visitez un site web. Il permet au site de mémoriser vos actions et préférences sur une période donnée."
+        },
+        {
+          "title": "Cookies essentiels",
+          "content": "Ces cookies sont nécessaires au fonctionnement du service : session d'authentification Clerk, préférences de langue, panier d'alertes. Ils ne peuvent pas être désactivés."
+        },
+        {
+          "title": "Cookies analytiques",
+          "content": "Zenith utilise des outils d'analytics anonymisés (PostHog en option) pour comprendre comment les utilisateurs interagissent avec la plateforme. Ces données sont agrégées et ne permettent pas de vous identifier."
+        },
+        {
+          "title": "Cookies marketing",
+          "content": "Zenith n'utilise pas de cookies marketing ou publicitaire. Aucun cookie tiers n'est déposé pour du retargeting ou de la publicité ciblée."
+        },
+        {
+          "title": "Gestion de vos préférences",
+          "content": "Vous pouvez gérer vos préférences cookies depuis les paramètres de votre navigateur. La désactivation de certains cookies peut limiter certaines fonctionnalités de la plateforme."
+        }
+      ]
+    },
+    "accessibility": {
+      "title": "Accessibilité",
+      "lastUpdated": "1er juin 2026",
+      "intro": "Zenith s'engage à rendre sa plateforme accessible à tous, conformément aux standards internationaux.",
+      "sections": [
+        {
+          "title": "Notre engagement",
+          "content": "Zenith vise à fournir un service utilisable par tous, y compris les personnes en situation de handicap. Nous suivons les recommandations WCAG 2.1 niveau AA."
+        },
+        {
+          "title": "Standards WCAG 2.1 AA",
+          "content": "Notre interface respecte les principes d'accessibilité : contrastes de couleurs suffisants, navigation au clavier, textes alternatifs sur les images, structure sémantique HTML, ARIA labels sur les éléments interactifs."
+        },
+        {
+          "title": "Fonctionnalités d'accessibilité",
+          "content": "Navigation complète au clavier (Tab, Enter, Échap), raccourcis ⌘K (command palette), mode sombre natif, support des lecteurs d'écran (NVDA, JAWS, VoiceOver), textes redimensionnables jusqu'à 200% sans perte de lisibilité."
+        },
+        {
+          "title": "Limitations connues",
+          "content": "Certains graphiques de prix (sparklines, heatmaps) peuvent être difficiles à interpréter pour les utilisateurs de lecteurs d'écran. Une version textuelle des données est disponible via la command palette."
+        },
+        {
+          "title": "Contact pour signaler un problème",
+          "content": "Si vous rencontrez un problème d'accessibilité, contactez accessibilite@zenith.xyz. Nous nous engageons à répondre sous 5 jours ouvrés et à corriger les problèmes sous 30 jours."
+        }
+      ]
+    }
+  },
+  "resources": {
+    "api": "Documentation API",
+    "status": "État du système"
+  },
+  "currency": {
+    "USD": "Dollar américain",
+    "EUR": "Euro",
+    "GBP": "Livre sterling",
+    "CHF": "Franc suisse",
+    "JPY": "Yen japonais",
+    "RUB": "Rouble russe",
+    "PLN": "Zloty polonais",
+    "TRY": "Livre turque",
+    "BRL": "Réal brésilien",
+    "IDR": "Roupie indonésienne",
+    "MYR": "Ringgit malaisien",
+    "THB": "Baht thaïlandais",
+    "VND": "Dong vietnamien",
+    "KRW": "Won sud-coréen",
+    "CNY": "Yuan chinois (CN)",
+    "TWD": "Dollar taïwanais",
+    "AED": "Dirham des Émirats",
+    "SAR": "Riyal saoudien",
+    "EGP": "Livre égyptienne",
+    "ILS": "Shekel israélien",
+    "MXN": "Peso mexicain",
+    "ARS": "Peso argentin",
+    "BTC": "Bitcoin",
+    "ETH": "Ethereum"
+  },
+  "watchlist": {
+    "added": "Ajouté à la watchlist",
+    "removed": "Retiré de la watchlist",
+    "empty": "Votre watchlist est vide",
+    "title": "Ma watchlist"
   }
 }
