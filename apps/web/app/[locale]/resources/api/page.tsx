@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Code, Server, KeyRound, FlaskConical, Globe } from "lucide-react";
 
+export const metadata = { title: "API" };
+
 export default async function ApiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 
 const VALID_SLUGS = [
@@ -21,6 +22,16 @@ const CATEGORY_LABELS: Record<(typeof VALID_SLUGS)[number], string> = {
   analysis: "Analyses",
   sentiment: "Sentiment & On-chain",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const label = CATEGORY_LABELS[slug as (typeof VALID_SLUGS)[number]];
+  return { title: label ? `Apprendre — ${label}` : "Apprendre" };
+}
 
 const THUMB_GRADIENTS = [
   { from: "rgba(214,182,246,0.18)", to: "rgba(33,49,131,0.25)" },

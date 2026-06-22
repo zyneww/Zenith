@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import LegalPage, { LegalSection } from "@/components/ui/LegalPage";
 import { Eye } from "lucide-react";
 
+export const metadata = { title: "Accessibilité" };
+
 export default async function AccessibilityPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

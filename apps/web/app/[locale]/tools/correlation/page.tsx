@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { GitBranch, Grid3x3, Flame, History, Download } from "lucide-react";
 
+export const metadata = { title: "Corrélations" };
+
 export default async function CorrelationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

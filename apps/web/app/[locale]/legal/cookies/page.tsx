@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import LegalPage, { LegalSection } from "@/components/ui/LegalPage";
 import { Cookie } from "lucide-react";
 
+export const metadata = { title: "Cookies" };
+
 export default async function CookiesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

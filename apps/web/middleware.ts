@@ -34,6 +34,12 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/help(.*)",
   "/legal(.*)",
   "/:locale/legal(.*)",
+  "/dashboard(.*)",
+  "/:locale/dashboard(.*)",
+  "/portfolio(.*)",
+  "/:locale/portfolio(.*)",
+  "/pricing(.*)",
+  "/:locale/pricing(.*)",
   "/api(.*)",
 ]);
 

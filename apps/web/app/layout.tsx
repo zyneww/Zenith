@@ -9,7 +9,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Zenith",
+  title: {
+    default: "Zenith",
+    template: "Zenith | %s",
+  },
   description: "Multi-asset financial intelligence platform.",
 };
 

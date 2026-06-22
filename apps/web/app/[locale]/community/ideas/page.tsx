@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Lightbulb, TrendingUp, TrendingDown, Eye, MessageCircle } from "lucide-react";
 
+export const metadata = { title: "Idées de trading" };
+
 export default async function IdeasPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

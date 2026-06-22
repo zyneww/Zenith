@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { FileText, TrendingUp, BookOpen, Newspaper, Code } from "lucide-react";
 
+export const metadata = { title: "Blog" };
+
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { Metadata } from "next";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import AssetDetailClient from "./AssetDetailClient";
@@ -10,6 +11,19 @@ interface AssetPageProps {
 }
 
 export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const asset = getAsset(slug);
+  return {
+    title: asset ? `${asset.name} (${asset.symbol})` : "Marchés",
+    description: asset?.description,
+  };
+}
 
 function getBaseUrl() {
   if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;

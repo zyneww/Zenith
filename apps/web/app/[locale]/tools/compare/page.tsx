@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { BarChart4, Columns, LineChart, TrendingUp, Download } from "lucide-react";
 
+export const metadata = { title: "Comparateur" };
+
 export default async function ComparePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

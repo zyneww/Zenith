@@ -4,7 +4,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "Centre d'aide — Zenith",
+  title: "Centre d'aide",
   description: "Centre d'aide et documentation de Zenith.",
 };
 

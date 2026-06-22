@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Code, Edit3, Store, Github, Webhook } from "lucide-react";
 
+export const metadata = { title: "Pine Script" };
+
 export default async function PineScriptPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

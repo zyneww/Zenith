@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import LegalPage, { LegalSection } from "@/components/ui/LegalPage";
 import { ShieldCheck } from "lucide-react";
 
+export const metadata = { title: "Confidentialité" };
+
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

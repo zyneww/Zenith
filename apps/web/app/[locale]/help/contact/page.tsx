@@ -4,7 +4,7 @@ import Footer from "@/components/landing/Footer";
 import ContactForm from "./ContactForm";
 
 export const metadata = {
-  title: "Nous contacter — Zenith",
+  title: "Contact",
   description: "Contactez l'équipe Zenith.",
 };
 

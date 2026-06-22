@@ -5,7 +5,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "Communauté — Zenith",
+  title: "Communauté",
   description: "Rejoignez la communauté Zenith.",
 };
 

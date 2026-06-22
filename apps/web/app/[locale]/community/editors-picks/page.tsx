@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Bookmark, Calendar, Star, Award, Archive } from "lucide-react";
 
+export const metadata = { title: "Sélections de la rédaction" };
+
 export default async function EditorsPicksPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

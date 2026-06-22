@@ -4,7 +4,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "Roadmap 2026 — Zenith",
+  title: "Roadmap",
   description: "Ce que nous construisons, trimestre par trimestre.",
 };
 

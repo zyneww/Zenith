@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Users, MessageSquare, ShieldCheck, ThumbsUp, Search } from "lucide-react";
 
+export const metadata = { title: "Réseaux sociaux" };
+
 export default async function SocialPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

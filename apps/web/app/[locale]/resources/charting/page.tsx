@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { BarChart3, TrendingUp, Clock, Bookmark, Download } from "lucide-react";
 
+export const metadata = { title: "Charting" };
+
 export default async function ChartingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

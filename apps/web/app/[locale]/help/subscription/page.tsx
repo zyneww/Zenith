@@ -4,7 +4,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "Abonnement & Tarifs — Zenith",
+  title: "Abonnement & Tarifs",
   description: "Découvrez nos offres d'abonnement.",
 };
 

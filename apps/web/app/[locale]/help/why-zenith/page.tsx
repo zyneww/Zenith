@@ -5,7 +5,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata = {
-  title: "Pourquoi Zenith — Zenith",
+  title: "Pourquoi Zenith",
   description: "Ce qui différencie Zenith des autres plateformes de trading.",
 };
 

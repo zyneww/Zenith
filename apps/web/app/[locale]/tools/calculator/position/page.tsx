@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Crosshair, ShieldAlert, Percent, Target, Scale } from "lucide-react";
 
+export const metadata = { title: "Calculateur de position" };
+
 export default async function PositionPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

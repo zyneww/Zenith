@@ -45,7 +45,7 @@ export async function generateMetadata({
   return {
     title: {
       default: t("title"),
-      template: "%s | Zenith",
+      template: "Zenith | %s",
     },
     description: t("description"),
     metadataBase: new URL("https://zenith.xyz"),

@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import LegalPage, { LegalSection } from "@/components/ui/LegalPage";
 import { FileText } from "lucide-react";
 
+export const metadata = { title: "Conditions générales" };
+
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

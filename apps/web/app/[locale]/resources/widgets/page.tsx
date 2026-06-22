@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Code2, Tag, Activity, ArrowRightLeft, Grid3x3 } from "lucide-react";
 
+export const metadata = { title: "Widgets" };
+
 export default async function WidgetsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

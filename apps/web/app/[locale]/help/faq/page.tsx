@@ -4,7 +4,7 @@ import Footer from "@/components/landing/Footer";
 import FAQAccordion from "./FAQAccordion";
 
 export const metadata = {
-  title: "FAQ — Zenith",
+  title: "FAQ",
   description: "Questions fréquemment posées sur Zenith.",
 };
 

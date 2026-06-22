@@ -11,6 +11,8 @@ import {
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
+export const metadata = { title: "Apprendre" };
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

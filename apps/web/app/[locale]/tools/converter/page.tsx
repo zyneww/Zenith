@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { ArrowRightLeft, Zap, History, Star, Globe } from "lucide-react";
 
+export const metadata = { title: "Convertisseur" };
+
 export default async function ConverterPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

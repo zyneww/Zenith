@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
+import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  return { title: `Apprendre — ${slug}` };
+}
 
 export function generateStaticParams() {
   // Placeholder: surface a few static slugs so static export can succeed.

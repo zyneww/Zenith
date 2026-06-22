@@ -8,7 +8,7 @@ import { getMockCalendar, CALENDAR_LABELS } from "@/lib/calendar/mock";
 import { CALENDAR_TYPES, type CalendarType } from "@/lib/calendar/types";
 
 export const metadata: Metadata = {
-  title: "Calendrier — Zenith",
+  title: "Calendrier",
   description: "Calendrier économique, résultats, dividendes, IPOs, splits et jours fériés.",
 };
 

@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { BookOpen, Zap, KeyRound, Wifi, Server } from "lucide-react";
 
+export const metadata = { title: "Documentation" };
+
 export default async function DocsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

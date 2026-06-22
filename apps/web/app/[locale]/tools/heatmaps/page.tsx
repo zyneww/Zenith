@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { Grid3x3, Layers, Filter, Calendar, MousePointerClick } from "lucide-react";
 
+export const metadata = { title: "Heatmaps" };
+
 export default async function HeatmapsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
