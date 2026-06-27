@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 import AssetDetailClient from "./AssetDetailClient";
-import { getAsset, getAllSlugs } from "@/lib/assets/registry";
+import { resolveAsset, getAllSlugs } from "@/lib/assets/registry";
 
 interface AssetPageProps {
   params: Promise<{ slug: string; locale: string }>;
@@ -18,10 +18,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const asset = getAsset(slug);
+  const resolved = resolveAsset(slug);
   return {
-    title: asset ? `${asset.name} (${asset.symbol})` : "Marchés",
-    description: asset?.description,
+    title: resolved ? `${resolved.asset.name} (${resolved.asset.symbol})` : "Marchés",
+    description: resolved?.asset.description,
   };
 }
 
@@ -58,8 +58,10 @@ export default async function AssetPage({ params }: AssetPageProps) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
 
-  const asset = getAsset(slug);
-  if (!asset) notFound();
+  const resolved = resolveAsset(slug);
+  if (!resolved) notFound();
+  if (resolved.redirectSlug) redirect(`/${locale}/markets/${resolved.redirectSlug}`);
+  const asset = resolved.asset;
 
   const base = getBaseUrl();
   const [priceData, ohlcvData] = await Promise.all([
@@ -71,7 +73,7 @@ export default async function AssetPage({ params }: AssetPageProps) {
     <>
       <Header />
       <main className="min-h-screen bg-canvas text-primary">
-        <AssetDetailClient asset={asset} priceData={priceData} ohlcv={ohlcvData} />
+        <AssetDetailClient asset={asset} priceData={priceData} ohlcv={ohlcvData} locale={locale} />
       </main>
       <Footer />
     </>

@@ -3,10 +3,11 @@ import MarketsClient from "./MarketsClient";
 
 export const metadata = { title: "Marchés" };
 
-export default function MarketsPage() {
+export default async function MarketsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   return (
     <Suspense fallback={null}>
-      <MarketsClient />
+      <MarketsClient locale={locale} />
     </Suspense>
   );
 }

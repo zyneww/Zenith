@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   outputFileTracingRoot: path.resolve(process.cwd(), "../.."),
+  turbopack: {
+    root: path.resolve(process.cwd(), "../.."),
+  },
   env: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
@@ -48,7 +51,6 @@ const nextConfig: NextConfig = {
       { source: "/:locale/news/technical-analysis", destination: "/:locale/apprendre/category/analysis", permanent: true },
       { source: "/:locale/news/fundamental-analysis", destination: "/:locale/apprendre/category/analysis", permanent: true },
       { source: "/:locale/news/sentiment", destination: "/:locale/apprendre/category/sentiment", permanent: true },
-      { source: "/:locale/news", destination: "/:locale/apprendre", permanent: true },
       { source: "/news/economic-calendar", destination: "/calendrier", permanent: true },
       { source: "/news/crypto", destination: "/apprendre/category/market-news", permanent: true },
       { source: "/news/forex", destination: "/apprendre/category/market-news", permanent: true },
@@ -57,7 +59,6 @@ const nextConfig: NextConfig = {
       { source: "/news/technical-analysis", destination: "/apprendre/category/analysis", permanent: true },
       { source: "/news/fundamental-analysis", destination: "/apprendre/category/analysis", permanent: true },
       { source: "/news/sentiment", destination: "/apprendre/category/sentiment", permanent: true },
-      { source: "/news", destination: "/apprendre", permanent: true },
     ];
   },
   async headers() {

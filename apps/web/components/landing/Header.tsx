@@ -69,6 +69,10 @@ const marketsItems: DropdownItem[] = [
   { iconName: "Zap", label: "Gainers & Losers", href: "/markets?view=gainers", group: "Populaire" },
   { iconName: "Flame", label: "Tendances", href: "/markets?view=trending", group: "Populaire" },
   { iconName: "Clock", label: "Nouveaux actifs", href: "/markets?view=new", group: "Populaire" },
+  { iconName: "LineChart", label: "Derivatives", href: "/derivatives", group: "Nouveau" },
+  { iconName: "Activity", label: "Stocks", href: "/stocks", group: "Nouveau" },
+  { iconName: "Coins", label: "NFT", href: "/nfts", group: "Nouveau" },
+  { iconName: "Globe", label: "Forex", href: "/forex", group: "Nouveau" },
 ];
 
 const newsItems: DropdownItem[] = [
@@ -79,12 +83,17 @@ const newsItems: DropdownItem[] = [
     href: "/calendrier",
     featured: true,
   },
+  { iconName: "Newspaper", label: "Actualités", href: "/news", group: "Actualités" },
   { iconName: "TrendingUp", label: "Tendances", href: "/apprendre/category/trends", group: "Apprendre" },
   { iconName: "BookOpen", label: "Tutoriels débutants", href: "/apprendre/category/beginners-tutorial", group: "Apprendre" },
   { iconName: "Target", label: "Stratégies", href: "/apprendre/category/strategies", group: "Apprendre" },
   { iconName: "Activity", label: "Analyses", href: "/apprendre/category/analysis", group: "Apprendre" },
-  { iconName: "Newspaper", label: "Actualités marché", href: "/apprendre/category/market-news", group: "Apprendre" },
   { iconName: "Globe", label: "Sentiment", href: "/apprendre/category/sentiment", group: "Apprendre" },
+  { iconName: "CalendarDays", label: "Earnings", href: "/calendrier/earnings", group: "Calendrier" },
+  { iconName: "CalendarDays", label: "Dividendes", href: "/calendrier/dividends", group: "Calendrier" },
+  { iconName: "CalendarDays", label: "IPO", href: "/calendrier/ipos", group: "Calendrier" },
+  { iconName: "CalendarDays", label: "Splits", href: "/calendrier/splits", group: "Calendrier" },
+  { iconName: "CalendarDays", label: "Fermetures", href: "/calendrier/holidays", group: "Calendrier" },
 ];
 
 const toolsItems: DropdownItem[] = [

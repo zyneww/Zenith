@@ -117,35 +117,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} className={`${inter.variable} ${jetbrainsMono.variable} dark`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            (async function(){
-              if("serviceWorker" in navigator) {
-                try {
-                  const regs = await navigator.serviceWorker.getRegistrations();
-                  let needsReload = false;
-                  for(const r of regs) {
-                    await r.unregister();
-                    needsReload = true;
-                  }
-                  const keys = await caches.keys();
-                  await Promise.all(keys.filter(k => !k.includes("zenith-v2")).map(k => caches.delete(k)));
-                  if(needsReload && !sessionStorage.getItem("sw-reloaded")) {
-                    sessionStorage.setItem("sw-reloaded","1");
-                    location.reload();
-                  }
-                } catch(e) {
-                  console.warn("SW cleanup:", e);
-                }
-              }
-            })();
-          `,
-        }} />
-      </head>
+      <head />
       <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-canvas text-primary">
         <ClerkProvider>
-        <SerwistProvider swUrl="/serwist/sw.js">
+        <SerwistProvider swUrl="/serwist/sw.js" disable={process.env.NODE_ENV === 'development'}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent-dark focus:text-primary focus:px-4 focus:py-2 focus:rounded-sm font-mono-caps"

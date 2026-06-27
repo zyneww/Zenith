@@ -1,8 +1,15 @@
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
+import CategoryPage from "../CategoryPage";
 
-export default async function IndicesRedirect({ params }: { params: Promise<{ locale: string }> }) {
+export const metadata = { title: "Indices" };
+
+export default async function IndicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  redirect(`/${locale}/markets?category=indices`);
+  return (
+    <Suspense fallback={null}>
+      <CategoryPage locale={locale} tab="indices" />
+    </Suspense>
+  );
 }

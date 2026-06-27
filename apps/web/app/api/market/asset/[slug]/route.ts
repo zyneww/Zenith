@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Redis from "ioredis";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
+import { getAsset, AssetType } from "@/lib/assets/registry";
 
 const redis = new Redis(process.env.REDIS_URL || "redis://default:dragonfly_dev@localhost:6379");
 const FINNHUB_BASE = "https://finnhub.io/api/v1";
@@ -9,51 +10,6 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const CACHE_TTL = 60;
-
-type AssetType = "crypto" | "forex" | "commodity" | "index";
-
-interface AssetSlug {
-  type: AssetType;
-  coingeckoId?: string;
-  finnhubSymbol?: string;
-}
-
-const ASSET_MAP: Record<string, AssetSlug> = {
-  // crypto
-  bitcoin: { type: "crypto", coingeckoId: "bitcoin" },
-  ethereum: { type: "crypto", coingeckoId: "ethereum" },
-  solana: { type: "crypto", coingeckoId: "solana" },
-  binancecoin: { type: "crypto", coingeckoId: "binancecoin" },
-  ripple: { type: "crypto", coingeckoId: "ripple" },
-  cardano: { type: "crypto", coingeckoId: "cardano" },
-  dogecoin: { type: "crypto", coingeckoId: "dogecoin" },
-  "matic-network": { type: "crypto", coingeckoId: "matic-network" },
-  polkadot: { type: "crypto", coingeckoId: "polkadot" },
-  "avalanche-2": { type: "crypto", coingeckoId: "avalanche-2" },
-  // forex
-  eurusd: { type: "forex", finnhubSymbol: "OANDA:EUR_USD" },
-  gbpusd: { type: "forex", finnhubSymbol: "OANDA:GBP_USD" },
-  usdjpy: { type: "forex", finnhubSymbol: "OANDA:USD_JPY" },
-  usdcad: { type: "forex", finnhubSymbol: "OANDA:USD_CAD" },
-  usdchf: { type: "forex", finnhubSymbol: "OANDA:USD_CHF" },
-  // commodities
-  gold: { type: "commodity", finnhubSymbol: "OANDA:XAU_USD" },
-  silver: { type: "commodity", finnhubSymbol: "OANDA:XAG_USD" },
-  "crude-oil-wti": { type: "commodity", finnhubSymbol: "NYMEX:CL1!" },
-  brent: { type: "commodity", finnhubSymbol: "ICE:B1!" },
-  "natural-gas": { type: "commodity", finnhubSymbol: "NYMEX:NG1!" },
-  // indices
-  spx: { type: "index", finnhubSymbol: "INDEX:SPX" },
-  ndx: { type: "index", finnhubSymbol: "INDEX:NDX" },
-  dax: { type: "index", finnhubSymbol: "INDEX:DAX" },
-  ftse: { type: "index", finnhubSymbol: "INDEX:FTSE" },
-  cac40: { type: "index", finnhubSymbol: "INDEX:CAC" },
-  nikkei: { type: "index", finnhubSymbol: "INDEX:N225" },
-  "hang-seng": { type: "index", finnhubSymbol: "INDEX:HSI" },
-  shanghai: { type: "index", finnhubSymbol: "INDEX:SHCOMP" },
-  "dow-jones": { type: "index", finnhubSymbol: "INDEX:DJI" },
-  "russell-2000": { type: "index", finnhubSymbol: "INDEX:RUT" },
-};
 
 async function fetchCrypto(slug: string, coingeckoId: string) {
   const base = "https://api.coingecko.com/api/v3";
@@ -98,7 +54,7 @@ async function fetchCrypto(slug: string, coingeckoId: string) {
   };
 }
 
-async function fetchFinnhub(slug: string, type: AssetType, finnhubSymbol: string, apiKey: string) {
+async function fetchFinnhub(slug: string, type: string, finnhubSymbol: string, apiKey: string) {
   const now = Math.floor(Date.now() / 1000);
   const from = now - 86400;
   const [quoteRes, candleRes] = await Promise.all([
@@ -174,11 +130,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
     );
   }
 
-  const mapping = ASSET_MAP[slug.toLowerCase()];
-  if (!mapping) {
+  const assetMeta = getAsset(slug);
+  if (!assetMeta) {
     return NextResponse.json({ error: "unknown_asset" }, { status: 404 });
   }
-  if (typeParam && typeParam !== mapping.type) {
+  if (typeParam && typeParam !== assetMeta.type) {
     return NextResponse.json({ error: "type_mismatch" }, { status: 400 });
   }
 
@@ -192,8 +148,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
 
   try {
     let payload;
-    if (mapping.type === "crypto") {
-      payload = await fetchCrypto(slug, mapping.coingeckoId!);
+    if (assetMeta.type === "crypto" && assetMeta.coingeckoId) {
+      payload = await fetchCrypto(slug, assetMeta.coingeckoId);
     } else {
       const apiKey = process.env.FINNHUB_API_KEY;
       if (!apiKey) {
@@ -202,7 +158,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
           { status: 503, headers: { "Cache-Control": "no-store" } }
         );
       }
-      const result = await fetchFinnhub(slug, mapping.type, mapping.finnhubSymbol!, apiKey);
+      const result = await fetchFinnhub(slug, assetMeta.type, assetMeta.finnhubSymbol, apiKey);
       if ("rateLimited" in result) {
         return NextResponse.json(
           { error: "upstream_unavailable" },

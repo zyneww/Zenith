@@ -40,6 +40,16 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/portfolio(.*)",
   "/pricing(.*)",
   "/:locale/pricing(.*)",
+  "/derivatives(.*)",
+  "/:locale/derivatives(.*)",
+  "/stocks(.*)",
+  "/:locale/stocks(.*)",
+  "/nfts(.*)",
+  "/:locale/nfts(.*)",
+  "/forex(.*)",
+  "/:locale/forex(.*)",
+  "/onchain(.*)",
+  "/:locale/onchain(.*)",
   "/api(.*)",
 ]);
 

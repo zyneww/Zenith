@@ -1,28 +1,58 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Header from "@/components/landing/Header";
 import MetricsCards from "@/components/dashboard/MetricsCards";
 import PortfolioChart from "@/components/dashboard/PortfolioChart";
 import ActivePositions from "@/components/dashboard/ActivePositions";
 import RecentAlerts from "@/components/dashboard/RecentAlerts";
 
+interface GlobalData {
+  totalMarketCap: number;
+  totalVolume: number;
+  btcDominance: number;
+  marketCapChange24h: number;
+}
+
 export default function DashboardPage() {
-return (
+  const [global, setGlobal] = useState<GlobalData | null>(null);
+
+  useEffect(() => {
+    fetch("/api/market/global").then(r => r.json()).then(setGlobal).catch(() => {});
+  }, []);
+
+  return (
     <>
       <Header />
       <main className="min-h-screen bg-canvas text-primary">
         <div className="max-w-7xl mx-auto px-6 py-8">
-          {/* Header */}
-          <div
-            className="mb-8"
-          >
+          <div className="mb-8">
             <h1 className="text-3xl font-medium text-primary mb-2">Dashboard</h1>
             <p className="text-secondary">
               Vue d'ensemble de votre portfolio et performances du marché.
             </p>
           </div>
 
-          {/* Metrics */}
+          {global && (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div className="bg-card border border-surface rounded-lg p-5">
+                <p className="text-secondary text-sm mb-1">Capitalisation Totale</p>
+                <p className="text-2xl font-medium text-primary">${(global.totalMarketCap / 1e12).toFixed(2)}T</p>
+                <p className={`text-sm font-medium mt-2 ${global.marketCapChange24h >= 0 ? "text-up" : "text-down"}`}>
+                  {global.marketCapChange24h >= 0 ? "+" : ""}{global.marketCapChange24h.toFixed(2)}%
+                </p>
+              </div>
+              <div className="bg-card border border-surface rounded-lg p-5">
+                <p className="text-secondary text-sm mb-1">Dominance BTC</p>
+                <p className="text-2xl font-medium text-primary">{global.btcDominance.toFixed(1)}%</p>
+              </div>
+              <div className="bg-card border border-surface rounded-lg p-5">
+                <p className="text-secondary text-sm mb-1">Volume 24h Marché</p>
+                <p className="text-2xl font-medium text-primary">${(global.totalVolume / 1e9).toFixed(1)}B</p>
+              </div>
+            </div>
+          )}
+
           <div className="mb-8">
             <MetricsCards />
           </div>

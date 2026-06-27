@@ -4,5 +4,5 @@ import { setRequestLocale } from "next-intl/server";
 export default async function ForexRedirect({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  redirect(`/${locale}/markets?category=forex`);
+  redirect(`/${locale}/markets/forex`);
 }

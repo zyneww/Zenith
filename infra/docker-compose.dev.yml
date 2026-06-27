@@ -50,6 +50,7 @@ services:
       - BINANCE_WS_URL=wss://stream.binance.com:9443/ws
       - NODE_ENV=production
       - CORS_ORIGINS=http://localhost:3000,https://zenith.xyz
+      - QUESTDB_URL=postgresql://zenith:${QUESTDB_PASSWORD:-questdb_dev}@questdb:8812/qdb
     ports:
       - "3001:3001"
     depends_on:
