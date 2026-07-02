@@ -3,12 +3,15 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
-import { Search, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, TrendingUp, BarChart3, DollarSign, Landmark, Globe, Wheat } from "lucide-react";
+import { Search, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, TrendingUp, BarChart3, DollarSign, Landmark, Globe, Wheat, Star } from "lucide-react";
 import { MarketDataPoint, AssetClass } from "@/lib/market-data/types";
 import SymbolLogo from "./SymbolLogo";
 import Sparkline from "./Sparkline";
 import FeaturedCard from "./FeaturedCard";
-import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
+import MarketSummaryWidgets from "./MarketSummaryWidgets";
+
+import { useFormatPrice, useCurrency } from "@/lib/context/CurrencyContext";
+import { getAssetBySymbol } from "@/lib/assets/registry";
 
 type SortKey = "rank" | "symbol" | "price" | "change1h" | "change24h" | "change7d" | "high" | "low" | "volume" | "marketCap";
 type SortDir = "asc" | "desc";
@@ -31,29 +34,28 @@ const tabs: Tab[] = [
   { id: "commodities", label: "markets.tabCommodities", icon: <Wheat className="w-3.5 h-3.5" />, assetClass: "commodities", path: "/markets/commodities" },
 ];
 
-const PAGE_SIZES = [50, 100, 300];
-const CRYPTO_SYMBOLS = ["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE", "ADA", "AVAX"];
+const PAGE_SIZES = [50, 100, 250];
+const PAGE_SIZE_KEY = "zenith:markets:pageSize";
 
-const fmtPrice = (p: number, assetClass?: AssetClass) => {
-  if (assetClass === "forex") return p.toFixed(5);
-  if (p >= 1000) return p.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  if (p >= 1) return p.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
-  return p.toLocaleString("fr-FR", { minimumFractionDigits: 4, maximumFractionDigits: 8 });
-};
 
-const fmtVol = (n: number) => {
-  if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-  if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
-  return `$${(n / 1e3).toFixed(0)}K`;
-};
+// Dynamic category pills generated from data tags
 
-const fmtMC = (n: number) => {
-  if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-  if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
-  return `$${(n / 1e3).toFixed(0)}K`;
-};
+const FAV_KEY = "zenith:favorites";
+
+function getFavorites(): string[] {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function setFavorites(list: string[]) {
+  try {
+    localStorage.setItem(FAV_KEY, JSON.stringify(list));
+  } catch {}
+}
 
 interface MarketsLayoutProps {
   activeTab?: string;
@@ -70,9 +72,71 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
   const [sortKey, setSortKey] = useState<SortKey>("rank");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(100);
+  const [pageSize, setPageSize] = useState(() => {
+    if (typeof window === "undefined") return 50;
+    const saved = parseInt(localStorage.getItem(PAGE_SIZE_KEY) || "");
+    return PAGE_SIZES.includes(saved) ? saved : 50;
+  });
   const [searchQuery, setSearchQuery] = useState("");
-  const ws = useRealtimePrice(CRYPTO_SYMBOLS);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [favorites, setFavoritesState] = useState<string[]>([]);
+  const formatPrice = useFormatPrice();
+  const { convertFromUsd, currency } = useCurrency();
+
+  const formatCompact = useCallback((n: number) => {
+    try {
+      return new Intl.NumberFormat(locale, {
+        notation: "compact",
+        compactDisplay: "short",
+        maximumFractionDigits: 2,
+      }).format(n);
+    } catch {
+      if (n >= 1e12) return `${(n / 1e12).toFixed(2)}T`;
+      if (n >= 1e9) return `${(n / 1e9).toFixed(1)}B`;
+      if (n >= 1e6) return `${(n / 1e6).toFixed(0)}M`;
+      return `${(n / 1e3).toFixed(0)}K`;
+    }
+  }, [locale]);
+
+  useEffect(() => {
+    setFavoritesState(getFavorites());
+  }, []);
+
+  // Persist pageSize to localStorage
+  useEffect(() => {
+    try { localStorage.setItem(PAGE_SIZE_KEY, String(pageSize)); } catch {}
+  }, [pageSize]);
+
+  // Reset category filter when switching tabs
+  useEffect(() => {
+    setSelectedCategory("all");
+    setPage(0);
+  }, [assetClass]);
+
+  // Sync category with URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("category");
+    if (cat && cat !== "all") setSelectedCategory(cat);
+  }, []);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (selectedCategory === "all") {
+      url.searchParams.delete("category");
+    } else {
+      url.searchParams.set("category", selectedCategory);
+    }
+    window.history.replaceState({}, "", url.toString());
+  }, [selectedCategory]);
+
+  const toggleFavorite = useCallback((symbol: string) => {
+    setFavoritesState((prev) => {
+      const next = prev.includes(symbol) ? prev.filter((s) => s !== symbol) : [...prev, symbol];
+      setFavorites(next);
+      return next;
+    });
+  }, []);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -99,17 +163,35 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
 
   useEffect(() => {
     fetchData();
-    const i = setInterval(fetchData, 30000);
+    const i = setInterval(fetchData, 60000); // ponytail: CoinGecko free tier = 10-30 req/min
     return () => clearInterval(i);
   }, [fetchData]);
 
   // ponytail: WS price merge not applied to table — data refreshes every 30s
 
+  // Dynamic category pills from data tags
+  const categoryPills = useMemo(() => {
+    const allTags = new Set<string>();
+    data.forEach((d) => d.tags?.forEach((t) => allTags.add(t)));
+    return [
+      { key: "all", label: "All" },
+      ...Array.from(allTags).sort().map((tag) => ({ key: tag, label: tag })),
+    ];
+  }, [data]);
+
+  // Reset page when category changes
+  useEffect(() => {
+    setPage(0);
+  }, [selectedCategory, searchQuery, pageSize]);
+
   const sorted = useMemo(() => {
-    const copy = [...data];
+    let copy = [...data];
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      return copy.filter((d) => d.symbol.toLowerCase().includes(q) || d.name?.toLowerCase().includes(q));
+      copy = copy.filter((d) => d.symbol.toLowerCase().includes(q) || d.name?.toLowerCase().includes(q));
+    }
+    if (assetClass === "crypto" && selectedCategory !== "all") {
+      copy = copy.filter((d) => d.tags?.includes(selectedCategory));
     }
     copy.sort((a, b) => {
       const getVal = (item: MarketDataPoint, key: SortKey): number => {
@@ -131,7 +213,7 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
       return sortDir === "asc" ? va - vb : vb - va;
     });
     return copy;
-  }, [data, sortKey, sortDir, searchQuery]);
+  }, [data, sortKey, sortDir, searchQuery, selectedCategory, assetClass]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
   const pageData = sorted.slice(page * pageSize, (page + 1) * pageSize);
@@ -150,7 +232,7 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
 
   const TH = ({ col, label, align = "left" }: { col: SortKey; label: string; align?: "left" | "right" }) => (
     <th
-      className={`py-2.5 px-2 text-[11px] font-mono-caps text-secondary font-medium cursor-pointer hover:text-primary select-none border-b border-surface whitespace-nowrap ${align === "right" ? "text-right" : "text-left"}`}
+      className={`py-2.5 px-2 text-[11px] font-mono-caps text-[#848E9C] font-medium cursor-pointer hover:text-[#EAECEF] select-none border-b border-[#222930] whitespace-nowrap ${align === "right" ? "text-right" : "text-left"}`}
       onClick={() => handleSort(col)}
     >
       {label}
@@ -163,14 +245,14 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
       <div className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-card border border-surface rounded-sm p-4 h-[120px] animate-pulse" />
+            <div key={i} className="bg-[#161A1E] border border-[#222930] rounded-sm p-4 h-[120px] animate-pulse" />
           ))}
         </div>
-        <div className="bg-card border border-surface rounded-sm">
+        <div className="bg-[#161A1E] border border-[#222930] rounded-sm">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead><tr>{Array.from({ length: 10 }).map((_, i) => <th key={i} className="py-3 px-2"><div className="h-3 bg-raised rounded animate-pulse w-14" /></th>)}</tr></thead>
-              <tbody>{Array.from({ length: 10 }).map((_, i) => <tr key={i} className="border-b border-surface/50">{Array.from({ length: 10 }).map((_, j) => <td key={j} className="py-3 px-2"><div className="h-4 bg-raised rounded animate-pulse w-16" /></td>)}</tr>)}</tbody>
+              <thead><tr>{Array.from({ length: 10 }).map((_, i) => <th key={i} className="py-3 px-2"><div className="h-3 bg-[#1A1E23] rounded animate-pulse w-14" /></th>)}</tr></thead>
+              <tbody>{Array.from({ length: 10 }).map((_, i) => <tr key={i} className="border-b border-[#222930]/50">{Array.from({ length: 10 }).map((_, j) => <td key={j} className="py-3 px-2"><div className="h-4 bg-[#1A1E23] rounded animate-pulse w-16" /></td>)}</tr>)}</tbody>
             </table>
           </div>
         </div>
@@ -180,8 +262,14 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
 
   return (
     <div className="space-y-5">
+      {/* Page Title */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-16 pt-4">
+        <h1 className="text-2xl font-bold text-[#EAECEF]">{t("markets.title")}</h1>
+        <p className="text-sm text-[#848E9C] mt-1">{t("markets.subtitle")}</p>
+      </div>
+
       {/* Tab Nav */}
-      <div className="border-b border-surface overflow-x-auto hide-scrollbar sticky top-0 bg-canvas/95 backdrop-blur-sm z-20 -mx-4 sm:-mx-8 lg:-mx-16 px-4 sm:px-8 lg:px-16">
+      <div className="border-b border-[#222930] overflow-x-auto hide-scrollbar z-20 -mx-4 sm:-mx-8 lg:-mx-16 px-4 sm:px-8 lg:px-16">
         <div className="flex max-w-7xl mx-auto">
           {tabs.map((tab) => {
             const isActive = tab.id === activeTab;
@@ -190,7 +278,7 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
                 key={tab.id}
                 href={`/${locale}${tab.path}`}
                 className={`flex items-center gap-1.5 px-3 py-3 text-xs font-medium whitespace-nowrap transition-colors border-b-2 ${
-                  isActive ? "border-accent text-accent" : "border-transparent text-secondary hover:text-primary hover:border-hover"
+                  isActive ? "border-[#F5A623] text-[#F5A623]" : "border-transparent text-[#848E9C] hover:text-[#EAECEF] hover:border-[#2A3038]"
                 }`}
               >
                 {tab.icon}
@@ -204,33 +292,43 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
       {/* Search + LIVE badge */}
       <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-secondary" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#848E9C]" />
           <input
             type="text"
             placeholder={t("markets.searchPlaceholder")}
             value={searchQuery}
             onChange={(e) => { setSearchQuery(e.target.value); setPage(0); }}
-            className="w-full bg-card border border-surface rounded-sm pl-9 pr-4 py-2 text-xs text-primary placeholder-secondary focus:outline-none focus:border-accent transition"
+            className="w-full bg-[#161A1E] border border-[#222930] rounded-sm pl-9 pr-4 py-2 text-xs text-[#EAECEF] placeholder-secondary focus:outline-none focus:border-[#F5A623] transition"
           />
         </div>
-        <span className={`text-xs px-2 py-1 rounded-sm font-medium uppercase ${
-          ws.isConnected ? "bg-accent-subtle text-accent" : "bg-[#f59e0b]/10 text-[#f59e0b]"
-        }`}>
-          {ws.isConnected ? t("markets.live") : t("markets.offline")}
-        </span>
+
       </div>
 
-      {/* Featured Cards (overview or when no search) */}
-      {!searchQuery && featured.length >= 3 && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-7xl mx-auto w-full">
-          {featured.map((item) => (
-            <FeaturedCard key={item.symbol} data={item} />
+      {/* Category Pills (crypto tab only) */}
+      {assetClass === "crypto" && (
+        <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar max-w-7xl mx-auto w-full">
+          {categoryPills.map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => { setSelectedCategory(key); }}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors flex-shrink-0 ${
+                selectedCategory === key
+                  ? "bg-[#F5A623] text-[#0B0E11]"
+                  : "bg-[#161A1E] border border-[#222930] text-[#848E9C] hover:text-[#EAECEF] hover:bg-[#1A1E23]"
+              }`}
+              type="button"
+            >
+              {label}
+            </button>
           ))}
         </div>
       )}
 
+      {/* Market Summary Widgets */}
+      {!searchQuery && <MarketSummaryWidgets activeTab={activeTab} />}
+
       {/* Main Table */}
-      <div className="bg-card border border-surface rounded-sm overflow-hidden max-w-7xl mx-auto w-full">
+      <div className="bg-[#161A1E] border border-[#222930] rounded-sm overflow-hidden max-w-7xl mx-auto w-full">
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
@@ -245,27 +343,37 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
                 <TH col="low" label={t("markets.colLow")} align="right" />
                 <TH col="volume" label={t("markets.colVolume")} align="right" />
                 <TH col="marketCap" label={t("markets.colMarketCap")} align="right" />
-                <th className="py-2.5 px-2 text-right text-[11px] font-mono-caps text-secondary font-medium border-b border-surface whitespace-nowrap">{t("markets.colTrend")}</th>
-                <th className="py-2.5 px-2 text-center text-[11px] font-mono-caps text-secondary font-medium border-b border-surface whitespace-nowrap">{t("markets.colTrade")}</th>
+                <th className="py-2.5 px-2 text-right text-[11px] font-mono-caps text-[#848E9C] font-medium border-b border-[#222930] whitespace-nowrap">{t("markets.colTrend")}</th>
+                <th className="py-2.5 px-2 text-center text-[11px] text-[#848E9C] border-b border-[#222930] whitespace-nowrap w-8"><Star className="w-3 h-3 inline" /></th>
               </tr>
             </thead>
             <tbody>
               {pageData.map((item) => {
                 const isUp24h = item.changePercent >= 0;
+                const assetMeta = getAssetBySymbol(item.symbol);
+                const detailHref = assetMeta ? `/${locale}/markets/${assetMeta.slug}` : undefined;
                 return (
-                  <tr key={item.symbol} className="border-b border-surface/50 hover:bg-raised/50 transition-colors">
-                    <td className="py-2.5 px-2 text-right text-secondary font-mono text-[11px] tabular-nums">
+                  <tr key={item.symbol} className="border-b border-[#222930]/50 hover:bg-[#1A1E23]/50 transition-colors h-[48px]">
+                    <td className="py-2.5 px-2 text-right text-[#848E9C] font-mono text-[11px] tabular-nums">
                       {item.marketCapRank || "-"}
                     </td>
                     <td className="py-2.5 px-2">
-                      <Link href={`/${locale}/markets/${item.symbol.toLowerCase()}`} className="flex items-center gap-2 hover:text-accent transition-colors">
-                        <SymbolLogo symbol={item.symbol} assetClass={item.assetClass} size="xs" />
-                        <span className="font-medium text-primary">{item.name || item.symbol}</span>
-                        <span className="text-secondary text-[11px]">{item.symbol}</span>
-                      </Link>
+                      {detailHref ? (
+                        <Link href={detailHref} className="flex items-center gap-2 hover:text-[#F5A623] transition-colors">
+                          <SymbolLogo symbol={item.symbol} assetClass={item.assetClass} logoUrl={assetMeta?.logoUrl} name={item.name} size="xs" />
+                          <span className="font-medium text-[#EAECEF]">{item.name || item.symbol}</span>
+                          <span className="text-[#848E9C] text-[11px]">{item.symbol}</span>
+                        </Link>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <SymbolLogo symbol={item.symbol} assetClass={item.assetClass} logoUrl={assetMeta?.logoUrl} name={item.name} size="xs" />
+                          <span className="font-medium text-[#EAECEF]">{item.name || item.symbol}</span>
+                          <span className="text-[#848E9C] text-[11px]">{item.symbol}</span>
+                        </div>
+                      )}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-primary tabular-nums text-[12px]">
-                      ${fmtPrice(item.price, item.assetClass)}
+                    <td className="py-2.5 px-2 text-right font-mono text-[#EAECEF] tabular-nums text-[12px]">
+                      {item.assetClass === "forex" ? item.price.toFixed(5) : formatPrice(item.price)}
                     </td>
                     <td className={`py-2.5 px-2 text-right font-mono tabular-nums ${(item.changePercent1h ?? 0) >= 0 ? "text-up" : "text-down"}`}>
                       {(item.changePercent1h ?? 0) >= 0 ? "+" : ""}{(item.changePercent1h ?? 0).toFixed(1)}%
@@ -276,17 +384,17 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
                     <td className={`py-2.5 px-2 text-right font-mono tabular-nums ${(item.changePercent7d ?? 0) >= 0 ? "text-up" : "text-down"}`}>
                       {(item.changePercent7d ?? 0) >= 0 ? "+" : ""}{(item.changePercent7d ?? 0).toFixed(1)}%
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums text-[11px]">
-                      {item.high ? `$${fmtPrice(item.high)}` : "-"}
+                    <td className="py-2.5 px-2 text-right font-mono text-[#848E9C] tabular-nums text-[11px]">
+                      {item.high ? formatPrice(item.high) : "-"}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums text-[11px]">
-                      {item.low ? `$${fmtPrice(item.low)}` : "-"}
+                    <td className="py-2.5 px-2 text-right font-mono text-[#848E9C] tabular-nums text-[11px]">
+                      {item.low ? formatPrice(item.low) : "-"}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums text-[11px]">
-                      {item.volume ? fmtVol(item.volume) : "-"}
+                    <td className="py-2.5 px-2 text-right font-mono text-[#848E9C] tabular-nums text-[11px]">
+                      {item.volume ? formatCompact(convertFromUsd(item.volume)) : "-"}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums text-[11px]">
-                      {item.marketCap ? fmtMC(item.marketCap) : "-"}
+                    <td className="py-2.5 px-2 text-right font-mono text-[#848E9C] tabular-nums text-[11px]">
+                      {item.marketCap ? formatCompact(convertFromUsd(item.marketCap)) : "-"}
                     </td>
                     <td className="py-2.5 px-2 text-right">
                       {item.sparkline7d && item.sparkline7d.length > 0 ? (
@@ -294,12 +402,12 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
                       ) : null}
                     </td>
                     <td className="py-2.5 px-2 text-center">
-                      <Link
-                        href={`/${locale}/markets/${item.symbol.toLowerCase()}`}
-                        className="text-[11px] px-2.5 py-1 rounded-sm bg-raised border border-surface text-secondary hover:text-primary hover:border-accent/30 transition-colors font-mono-caps"
+                      <button
+                        onClick={(e) => { e.preventDefault(); toggleFavorite(item.symbol); }}
+                        className="p-1 hover:scale-110 transition-transform"
                       >
-                        {t("markets.colTradeAction")}
-                      </Link>
+                        <Star className={`w-4 h-4 ${favorites.includes(item.symbol) ? 'text-warning' : 'text-[#848E9C]'}`} fill={favorites.includes(item.symbol) ? 'currentColor' : 'none'} />
+                      </button>
                     </td>
                   </tr>
                 );
@@ -317,26 +425,26 @@ export default function MarketsLayout({ activeTab = "apercu", locale }: MarketsL
               key={size}
               onClick={() => { setPageSize(size); setPage(0); }}
               className={`text-xs px-2 py-0.5 rounded-sm transition-colors ${
-                pageSize === size ? "bg-accent-subtle text-accent font-medium" : "bg-card border border-surface text-secondary hover:text-primary"
+                pageSize === size ? "bg-[#F5A623]/10 text-[#F5A623] font-medium" : "bg-[#161A1E] border border-[#222930] text-[#848E9C] hover:text-[#EAECEF]"
               }`}
             >
               {size}
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2 text-xs text-secondary">
+        <div className="flex items-center gap-2 text-xs text-[#848E9C]">
           <span>{page * pageSize + 1}–{Math.min((page + 1) * pageSize, sorted.length)} {t("markets.of")} {sorted.length}</span>
           <button
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             disabled={page === 0}
-            className="p-1 hover:text-primary disabled:opacity-30 transition-colors bg-card border border-surface rounded"
+            className="p-1 hover:text-[#EAECEF] disabled:opacity-30 transition-colors bg-[#161A1E] border border-[#222930] rounded"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
             disabled={page >= totalPages - 1}
-            className="p-1 hover:text-primary disabled:opacity-30 transition-colors bg-card border border-surface rounded"
+            className="p-1 hover:text-[#EAECEF] disabled:opacity-30 transition-colors bg-[#161A1E] border border-[#222930] rounded"
           >
             <ChevronRight className="w-3.5 h-3.5" />
           </button>

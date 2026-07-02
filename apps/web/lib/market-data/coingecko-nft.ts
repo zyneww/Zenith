@@ -12,7 +12,10 @@ export interface NFTCollection {
 export async function fetchNFTList(): Promise<NFTCollection[]> {
   try {
     const url = `${COINGECKO_BASE}/nfts/list${API_KEY ? `?x_cg_demo_api_key=${API_KEY}` : ""}`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 300 },
+    });
     if (!res.ok) throw new Error(`CoinGecko /nfts ${res.status}`);
     const data = await res.json();
     return Array.isArray(data) ? data.slice(0, 50) : [];

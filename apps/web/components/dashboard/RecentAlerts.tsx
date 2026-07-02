@@ -1,11 +1,13 @@
 "use client";
 
 import { Bell, TrendingUp, AlertTriangle } from "lucide-react";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface Alert {
   id: string;
   type: "price" | "performance" | "risk";
   message: string;
+  price?: number;
   time: string;
   severity: "info" | "warning" | "success";
 }
@@ -14,7 +16,8 @@ const RECENT_ALERTS: Alert[] = [
   {
     id: "1",
     type: "price",
-    message: "BTC a atteint votre alerte à $65,000",
+    message: "BTC a atteint votre alerte à ",
+    price: 65000,
     time: "Il y a 2h",
     severity: "success",
   },
@@ -46,6 +49,7 @@ function AlertIcon({ severity }: { severity: Alert["severity"] }) {
 }
 
 export default function RecentAlerts() {
+  const formatPrice = useFormatPrice();
   return (
     <div className="bg-card border border-surface rounded-lg p-5">
       <div className="flex items-center justify-between mb-4">
@@ -62,7 +66,7 @@ export default function RecentAlerts() {
           >
             <div className="mt-0.5"><AlertIcon severity={alert.severity} /></div>
             <div className="flex-1">
-              <p className="text-primary text-sm">{alert.message}</p>
+              <p className="text-primary text-sm">{alert.message}{alert.price !== undefined ? formatPrice(alert.price) : null}</p>
               <p className="text-tertiary text-xs mt-1">{alert.time}</p>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { ArrowRight, TrendingUp, TrendingDown, WifiOff } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 type AssetType = "index" | "commodity" | "forex" | "crypto";
 
@@ -14,7 +15,7 @@ interface AssetRow {
   name: string;
   logoUrl: string | null;
   fallbackColor: string;
-  price: string;
+  price: number;
   change24h: number;
   changePercent: string;
   sparklinePath: string;
@@ -60,17 +61,6 @@ function buildSparkPath(closes: { t: number; c: number }[]): string {
     .join(" ");
 }
 
-function formatPrice(price: number, type: AssetType): string {
-  if (type === "forex") return price.toFixed(4);
-  if (type === "index" || type === "commodity") {
-    if (price >= 1000) return price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return price.toFixed(2);
-  }
-  if (price >= 1000) return `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  if (price >= 1) return `$${price.toFixed(2)}`;
-  return `$${price.toFixed(4)}`;
-}
-
 function formatChange(pct: number): string {
   const sign = pct >= 0 ? "+" : "";
   return `${sign}${pct.toFixed(2)}%`;
@@ -104,7 +94,7 @@ async function fetchNonCrypto(asset: typeof NON_CRYPTO_ASSETS[number]): Promise<
       name: data.asset?.name ?? asset.name,
       logoUrl: asset.logoUrl,
       fallbackColor: asset.fallbackColor,
-      price: formatPrice(data.price.current, asset.type),
+      price: data.price.current,
       change24h: data.price.change24h,
       changePercent: formatChange(data.price.change24h),
       sparklinePath: buildSparkPath((data.ohlcv1h ?? []).map((p) => ({ t: p.t, c: p.c }))),
@@ -126,7 +116,7 @@ async function fetchCryptoTop(limit = 4): Promise<AssetRow[]> {
       name: c.name,
       logoUrl: c.image,
       fallbackColor: "#1f2937",
-      price: formatPrice(c.current_price, "crypto"),
+      price: c.current_price,
       change24h: c.price_change_percentage_24h ?? 0,
       changePercent: formatChange(c.price_change_percentage_24h ?? 0),
       sparklinePath: buildSparkPath(((c.sparkline_in_7d?.price ?? []).slice(-24).map((p, i) => ({ t: i, c: p })))),
@@ -138,6 +128,7 @@ async function fetchCryptoTop(limit = 4): Promise<AssetRow[]> {
 
 function Row({ asset }: { asset: AssetRow }) {
   const positive = asset.change24h >= 0;
+  const formatPrice = useFormatPrice();
   return (
     <Link
       href={`/markets/${asset.slug}`}
@@ -172,7 +163,7 @@ function Row({ asset }: { asset: AssetRow }) {
           />
         </svg>
         <div className="text-right w-24">
-          <div className="text-sm font-medium text-primary">{asset.price}</div>
+          <div className="text-sm font-medium text-primary">{formatPrice(asset.price)}</div>
           <div className={`text-xs flex items-center gap-0.5 justify-end ${positive ? "text-up" : "text-down"}`}>
             {positive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
             {asset.changePercent}

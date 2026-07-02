@@ -11,7 +11,10 @@ export interface GlobalData {
 
 export async function fetchGlobalData(): Promise<GlobalData> {
   const url = `${COINGECKO_BASE}/global${API_KEY ? `?x_cg_demo_api_key=${API_KEY}` : ""}`;
-  const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(5000),
+    next: { revalidate: 60 },
+  });
   if (!res.ok) throw new Error(`CoinGecko /global ${res.status}`);
   const json = await res.json();
   return {

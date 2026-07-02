@@ -3,8 +3,7 @@ import { getTwelveQuote, getMockMarketData } from "@/lib/market-data/twelve-data
 import { getTopCoins } from "@/lib/market-data/coingecko";
 import { MarketDataPoint } from "@/lib/market-data/types";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const ALL_SYMBOLS = {
   indices: ["^GSPC", "^IXIC", "^DJI", "^FCHI", "^GDAXI", "^FTSE", "^N225", "^HSI"],
@@ -38,7 +37,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ gainers, losers }, {
       status: 200,
-      headers: { "Cache-Control": "no-store, must-revalidate" },
+      headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
     });
   } catch (error) {
     console.error("Error fetching movers:", error);

@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Redis from "ioredis";
+import { redis } from "@/lib/redis";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
 
-const redis = new Redis(process.env.REDIS_URL || "redis://default:dragonfly_dev@localhost:6379");
-
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 const CACHE_TTL = 3600;
 const CACHE_KEY = "sentiment:fear-greed";
@@ -38,7 +34,8 @@ export async function GET(req: NextRequest) {
   try {
     const res = await fetch("https://api.alternative.me/fng/?limit=1&format=json", {
       headers: { Accept: "application/json" },
-      cache: "no-store",
+      signal: AbortSignal.timeout(5000),
+      next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error(`fng ${res.status}`);
     const data = await res.json();

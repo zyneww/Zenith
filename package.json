@@ -9,11 +9,14 @@
     "clean": "turbo run clean"
   },
   "devDependencies": {
-    "turbo": "^2.4.0"
+    "turbo": "^2.10.2"
   },
   "packageManager": "bun@1.3.13",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "apexcharts": "^5.15.2"
+  }
 }

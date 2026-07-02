@@ -2,6 +2,7 @@
 
 import { PieChart, TrendingUp, Clock, ArrowRight } from "lucide-react";
 import Header from "@/components/landing/Header";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface Asset {
   name: string;
@@ -38,6 +39,7 @@ const TRANSACTIONS: Transaction[] = [
 ];
 
 function AssetAllocation() {
+  const formatPrice = useFormatPrice();
   const totalValue = ASSETS.reduce((sum, a) => sum + a.value, 0);
 
   return (
@@ -82,7 +84,7 @@ function AssetAllocation() {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-primary font-medium">${asset.value.toLocaleString()}</p>
+              <p className="text-primary font-medium">{formatPrice(asset.value)}</p>
               <p className="text-secondary text-sm">{asset.allocation}%</p>
             </div>
           </div>
@@ -92,7 +94,7 @@ function AssetAllocation() {
       <div className="mt-4 pt-4 border-t border-surface">
         <div className="flex justify-between text-sm">
           <span className="text-secondary">Valeur Totale</span>
-          <span className="text-primary font-medium">${totalValue.toLocaleString()}</span>
+          <span className="text-primary font-medium">{formatPrice(totalValue)}</span>
         </div>
       </div>
     </div>
@@ -100,6 +102,8 @@ function AssetAllocation() {
 }
 
 function TransactionTable() {
+  const formatPrice = useFormatPrice();
+
   return (
     <div className="bg-card border border-surface rounded-sm p-5">
       <div className="flex items-center justify-between mb-6">
@@ -143,9 +147,9 @@ function TransactionTable() {
                 </td>
                 <td className="py-3 text-primary font-medium">{tx.asset}</td>
                 <td className="py-3 text-right text-primary">{tx.amount}</td>
-                <td className="py-3 text-right text-primary">${tx.price.toLocaleString()}</td>
+                <td className="py-3 text-right text-primary">{formatPrice(tx.price)}</td>
                 <td className="py-3 text-right text-primary font-medium">
-                  ${tx.total.toLocaleString()}
+                  {formatPrice(tx.total)}
                 </td>
                 <td className="py-3 text-right text-secondary text-sm">{tx.date}</td>
               </tr>
@@ -184,7 +188,7 @@ function PerformanceMetrics() {
 }
 
 export default function PortfolioPage() {
-return (
+  return (
     <>
       <Header />
       <main className="min-h-screen bg-canvas text-primary">

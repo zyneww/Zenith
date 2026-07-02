@@ -31,6 +31,7 @@ function stripHtml(html: string): string {
 async function fetchRSS(url: string, source: string): Promise<NewsItem[]> {
   const res = await fetch(url, {
     headers: { Accept: "application/rss+xml, application/xml, text/xml" },
+    signal: AbortSignal.timeout(5000),
     next: { revalidate: 300 },
   });
   if (!res.ok) return [];

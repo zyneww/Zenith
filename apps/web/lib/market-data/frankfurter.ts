@@ -13,7 +13,10 @@ const FALLBACK_RATES: Record<string, Record<string, number>> = {
 
 export async function fetchFXRates(base = "USD"): Promise<FXRates> {
   try {
-    const res = await fetch(`${BASE}/latest?base=${base}`, { signal: AbortSignal.timeout(3000) });
+    const res = await fetch(`${BASE}/latest?base=${base}`, {
+      signal: AbortSignal.timeout(3000),
+      next: { revalidate: 3600 },
+    });
     if (!res.ok) throw new Error(`Frankfurter ${res.status}`);
     return await res.json();
   } catch {
@@ -26,7 +29,10 @@ export async function fetchFXHistory(from: string, to: string, days = 30): Promi
   const today = new Date();
   const start = new Date(today.getTime() - days * 86400000).toISOString().split("T")[0];
   const end = today.toISOString().split("T")[0];
-  const res = await fetch(`${BASE}/${start}..${end}?base=${from}&to=${to}`, { signal: AbortSignal.timeout(5000) });
+  const res = await fetch(`${BASE}/${start}..${end}?base=${from}&to=${to}`, {
+    signal: AbortSignal.timeout(5000),
+    next: { revalidate: 3600 },
+  });
   if (!res.ok) throw new Error(`Frankfurter history ${res.status}`);
   const json = await res.json();
   return json.rates;

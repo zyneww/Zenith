@@ -13,8 +13,8 @@ import { getOHLCV, questdbHealth } from '@/lib/db/questdb';
 import { rateLimit } from '@/lib/rate-limit';
 
 export async function GET() {
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  if (process.env.NODE_ENV !== 'development' || process.env.ALLOW_DEV_ROUTES !== 'true') {
+    return NextResponse.json({ error: 'Not available' }, { status: 403 });
   }
 
   const results: Record<string, any> = {

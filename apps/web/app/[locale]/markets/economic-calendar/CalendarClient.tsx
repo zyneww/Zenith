@@ -168,7 +168,7 @@ export default function CalendarClient() {
                     className="border-b border-surface/50 hover:bg-raised transition-colors"
                   >
                     <td className="px-4 py-3 text-primary text-sm">
-                      {formatDate(event.date)}
+                      {formatDate(event.date || event.time?.split(' ')[0] || '—')}
                     </td>
                     <td className="px-4 py-3 text-primary text-sm font-mono">
                       {event.time}

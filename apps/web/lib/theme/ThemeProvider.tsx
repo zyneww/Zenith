@@ -6,7 +6,7 @@ interface ThemeContextType {
   theme: "dark";
   resolvedTheme: "dark";
   toggleTheme: () => void;
-  setTheme: (theme: "dark") => void;
+  setTheme: (_theme: "light" | "dark") => void;
   animationsEnabled: boolean;
   toggleAnimations: () => void;
 }
@@ -14,7 +14,6 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 const STORAGE_KEY_ANIMATIONS = "zenith-animations-v2";
-const STORAGE_KEY_THEME = "zenith-theme-v3";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [animationsEnabled, setAnimationsEnabled] = useState(true);
@@ -22,9 +21,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    const root = document.documentElement;
-    root.classList.add("dark");
-    localStorage.setItem(STORAGE_KEY_THEME, "dark");
     const storedAnimations = localStorage.getItem(STORAGE_KEY_ANIMATIONS);
     if (storedAnimations !== null) setAnimationsEnabled(storedAnimations !== "false");
   }, []);

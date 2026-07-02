@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+
 
 export async function GET(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
@@ -15,6 +14,8 @@ export async function GET(req: NextRequest) {
   try {
     const res = await fetch(`https://finnhub.io/api/v1/stock/dividend?${params}`, {
       headers: { "X-Finnhub-Token": process.env.FINNHUB_API_KEY || "" },
+      signal: AbortSignal.timeout(5000),
+      next: { revalidate: 300 },
     });
     if (!res.ok) throw new Error(`Finnhub dividend ${res.status}`);
     const json = await res.json();

@@ -26,10 +26,10 @@ export default function OnchainPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-[#e3e2e0] mb-1">On-chain</h1>
-      <p className="text-zinc-400 text-sm mb-6">Métriques on-chain & DeFi</p>
+      <h1 className="text-2xl font-semibold text-primary mb-1">On-chain</h1>
+      <p className="text-secondary text-sm mb-6">Métriques on-chain & DeFi</p>
 
-      {loading ? <p className="text-zinc-500">Chargement...</p> : (
+      {loading ? <p className="text-tertiary">Chargement...</p> : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {METRICS.map(m => {
             const data = metrics[m];

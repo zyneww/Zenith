@@ -37,12 +37,12 @@ export default function CalendarSubClient({ type, title, endpoint }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-[#e3e2e0] mb-1">{title}</h1>
-      <p className="text-zinc-400 text-sm mb-6">Calendrier {title.toLowerCase()} via Finnhub</p>
+      <h1 className="text-2xl font-semibold text-primary mb-1">{title}</h1>
+      <p className="text-secondary text-sm mb-6">Calendrier {title.toLowerCase()} via Finnhub</p>
 
       <div className="flex flex-wrap gap-2 mb-6">
         <select value={country} onChange={e => setCountry(e.target.value)}
-          className="px-3 py-1.5 bg-[#252525] border border-[#333] rounded-lg text-[12px] text-zinc-300">
+          className="px-3 py-1.5 bg-card border border-default rounded-lg text-[12px] text-primary">
           <option value="all">Tous les pays</option>
           <option value="US">États-Unis</option>
           <option value="FR">France</option>
@@ -50,7 +50,7 @@ export default function CalendarSubClient({ type, title, endpoint }: Props) {
           <option value="UK">Royaume-Uni</option>
         </select>
         <select value={industry} onChange={e => setIndustry(e.target.value)}
-          className="px-3 py-1.5 bg-[#252525] border border-[#333] rounded-lg text-[12px] text-zinc-300">
+          className="px-3 py-1.5 bg-card border border-default rounded-lg text-[12px] text-primary">
           <option value="all">Toutes les industries</option>
           <option value="Technology">Technologie</option>
           <option value="Finance">Finance</option>
@@ -59,21 +59,21 @@ export default function CalendarSubClient({ type, title, endpoint }: Props) {
         </select>
       </div>
 
-      {loading ? <p className="text-zinc-500">Chargement...</p> : (
-        <div className="bg-[#1a1a1a] rounded-xl border border-[#333] overflow-hidden">
+      {loading ? <p className="text-tertiary">Chargement...</p> : (
+        <div className="bg-canvas rounded-xl border border-default overflow-hidden">
           <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-[#333]">
+              <tr className="border-b border-default">
                 {columns.map((col, i) => (
-                  <th key={i} className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-left">{col.l}</th>
+                  <th key={i} className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-left">{col.l}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {data.map((row: any, i: number) => (
-                <tr key={i} className="border-b border-[#222] hover:bg-[#2a2a2a]">
+                <tr key={i} className="border-b border-default hover:bg-raised">
                   {columns.map((col, j) => (
-                    <td key={j} className="py-2.5 px-4 text-zinc-300">
+                    <td key={j} className="py-2.5 px-4 text-primary">
                       {col.f ? col.f(row) : row[col.k] != null ? String(row[col.k]) : "-"}
                     </td>
                   ))}

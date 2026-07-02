@@ -75,6 +75,7 @@ function mapEconomic(payload: any): EconomicEvent[] {
   return list.map((e: any): EconomicEvent => ({
     country: e.country || '',
     countryCode: e.countryCode || '',
+    date: e.date || (e.time?.split(' ')[0] ?? ''),
     event: e.event || '',
     time: e.time || '',
     importance: (e.impact || e.importance || 'low').toLowerCase() as EconomicEvent['importance'],

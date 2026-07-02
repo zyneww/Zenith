@@ -8,6 +8,7 @@ import {
   Activity,
   DollarSign,
 } from "lucide-react";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface MetricCardProps {
   title: string;
@@ -51,38 +52,40 @@ function MetricCard({ title, value, change, changeType, icon }: MetricCardProps)
   );
 }
 
-const METRICS = [
-  {
-    title: "Valeur du Portfolio",
-    value: "$124,592.40",
-    change: "+2.45%",
-    changeType: "positive" as const,
-    icon: <Wallet className="w-5 h-5 text-accent" />,
-  },
-  {
-    title: "P&L Total",
-    value: "+$18,234.12",
-    change: "+17.1%",
-    changeType: "positive" as const,
-    icon: <DollarSign className="w-5 h-5 text-up" />,
-  },
-  {
-    title: "Performance 24h",
-    value: "+$1,245.80",
-    change: "+1.02%",
-    changeType: "positive" as const,
-    icon: <Activity className="w-5 h-5 text-accent" />,
-  },
-  {
-    title: "Actifs Détenus",
-    value: "12",
-    change: "0",
-    changeType: "neutral" as const,
-    icon: <PieChart className="w-5 h-5 text-warning" />,
-  },
-];
-
 export default function MetricsCards() {
+  const formatPrice = useFormatPrice();
+
+  const METRICS = [
+    {
+      title: "Valeur du Portfolio",
+      value: formatPrice(124592.40),
+      change: "+2.45%",
+      changeType: "positive" as const,
+      icon: <Wallet className="w-5 h-5 text-accent" />,
+    },
+    {
+      title: "P&L Total",
+      value: formatPrice(18234.12),
+      change: "+17.1%",
+      changeType: "positive" as const,
+      icon: <DollarSign className="w-5 h-5 text-up" />,
+    },
+    {
+      title: "Performance 24h",
+      value: formatPrice(1245.80),
+      change: "+1.02%",
+      changeType: "positive" as const,
+      icon: <Activity className="w-5 h-5 text-accent" />,
+    },
+    {
+      title: "Actifs Détenus",
+      value: "12",
+      change: "0",
+      changeType: "neutral" as const,
+      icon: <PieChart className="w-5 h-5 text-warning" />,
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {METRICS.map((metric) => (

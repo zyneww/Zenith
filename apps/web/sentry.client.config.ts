@@ -4,10 +4,10 @@ init({
   dsn: process.env.SENTRY_DSN || '',
   
   // Enable performance monitoring
-  tracesSampleRate: 1.0,
-  
+  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+
   // Enable profiling (requires @sentry/profiling-node)
-  profilesSampleRate: 1.0,
+  profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
   
   // Environment
   environment: process.env.NODE_ENV || 'development',

@@ -6,49 +6,39 @@ import {
   Menu,
   BarChart3,
   LineChart,
-  Newspaper,
   CalendarDays,
   TrendingUp,
-  TrendingDown,
   Search,
   Bell,
-  LayoutDashboard,
-  Briefcase,
-  CreditCard,
-  Headphones,
+  Newspaper,
   HelpCircle,
   MessageSquare,
   Rocket,
-  ArrowRight,
   Bitcoin,
   Coins,
   DollarSign,
   Package,
   Landmark,
   Zap,
-  Flame,
-  Scale,
   Clock,
   Globe,
   Eye,
   PieChart,
-  Calculator,
   Target,
   BookOpen,
-  LifeBuoy,
   Map,
   Users,
   CandlestickChart,
   Activity,
-  Wallet,
+  Briefcase,
 } from "lucide-react";
-import { SignUpButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import DropdownMenu from "@/components/ui/DropdownMenu";
 import MobileDrawer from "@/components/ui/MobileDrawer";
 import UserMenu from "@/components/ui/UserMenu";
-import LocaleCurrencySwitcher from "@/components/ui/LocaleCurrencySwitcher";
+import SettingsDropdown from "@/components/ui/SettingsDropdown";
 import { useCommandPalette } from "@/lib/context/CommandPaletteContext";
+import { useNewsDrawer } from "@/lib/context/NewsDrawerContext";
 import type { DropdownItem } from "@/components/ui/DropdownMenu";
 
 // ─── Données des dropdowns ───
@@ -61,18 +51,17 @@ const marketsItems: DropdownItem[] = [
     href: "/markets",
     featured: true,
   },
-  { iconName: "Bitcoin", label: "Crypto", href: "/markets?category=crypto", group: "Par catégorie" },
-  { iconName: "DollarSign", label: "Forex", href: "/markets?category=forex", group: "Par catégorie" },
-  { iconName: "Package", label: "Commodités", href: "/markets?category=commodities", group: "Par catégorie" },
-  { iconName: "Landmark", label: "Indices", href: "/markets?category=indices", group: "Par catégorie" },
-  { iconName: "Coins", label: "ETFs", href: "/markets?category=etfs", group: "Par catégorie" },
-  { iconName: "Zap", label: "Gainers & Losers", href: "/markets?view=gainers", group: "Populaire" },
-  { iconName: "Flame", label: "Tendances", href: "/markets?view=trending", group: "Populaire" },
-  { iconName: "Clock", label: "Nouveaux actifs", href: "/markets?view=new", group: "Populaire" },
-  { iconName: "LineChart", label: "Derivatives", href: "/derivatives", group: "Nouveau" },
-  { iconName: "Activity", label: "Stocks", href: "/stocks", group: "Nouveau" },
-  { iconName: "Coins", label: "NFT", href: "/nfts", group: "Nouveau" },
-  { iconName: "Globe", label: "Forex", href: "/forex", group: "Nouveau" },
+  { iconName: "Bitcoin", label: "Crypto", href: "/markets/cryptocurrencies", group: "Par catégorie" },
+  { iconName: "DollarSign", label: "Forex", href: "/markets/forex", group: "Par catégorie" },
+  { iconName: "Package", label: "Commodités", href: "/markets/commodities", group: "Par catégorie" },
+  { iconName: "Landmark", label: "Indices", href: "/markets/indices", group: "Par catégorie" },
+  { iconName: "Activity", label: "Actions", href: "/markets/stocks", group: "Par catégorie" },
+  { iconName: "Zap", label: "Futures", href: "/markets/futures", group: "Par catégorie" },
+  { iconName: "CandlestickChart", label: "Dérivés", href: "/derivatives", group: "Marchés avancés" },
+  { iconName: "LineChart", label: "NFT", href: "/nfts", group: "Marchés avancés" },
+  { iconName: "Globe", label: "On-chain", href: "/onchain", group: "Marchés avancés" },
+  { iconName: "Eye", label: "Idées", href: "/markets/ideas", group: "Marchés avancés" },
+  { iconName: "CalendarDays", label: "Calendrier éco", href: "/markets/economic-calendar", group: "Marchés avancés" },
 ];
 
 const newsItems: DropdownItem[] = [
@@ -83,7 +72,6 @@ const newsItems: DropdownItem[] = [
     href: "/calendrier",
     featured: true,
   },
-  { iconName: "Newspaper", label: "Actualités", href: "/news", group: "Actualités" },
   { iconName: "TrendingUp", label: "Tendances", href: "/apprendre/category/trends", group: "Apprendre" },
   { iconName: "BookOpen", label: "Tutoriels débutants", href: "/apprendre/category/beginners-tutorial", group: "Apprendre" },
   { iconName: "Target", label: "Stratégies", href: "/apprendre/category/strategies", group: "Apprendre" },
@@ -97,16 +85,13 @@ const newsItems: DropdownItem[] = [
 ];
 
 const toolsItems: DropdownItem[] = [
-  { iconName: "BarChart3", label: "SuperChart", href: "/markets", group: "Analyse" },
   { iconName: "Search", label: "Screener", href: "/tools/screener", group: "Analyse" },
-  { iconName: "Scale", label: "Comparer", href: "/tools/compare", group: "Analyse" },
+  { iconName: "PieChart", label: "Heatmaps", href: "/tools/heatmaps", group: "Analyse" },
   { iconName: "Activity", label: "Corrélation", href: "/tools/correlation", group: "Analyse" },
   { iconName: "Bell", label: "Alertes prix", href: "/tools/alerts", group: "Suivi" },
   { iconName: "Eye", label: "Watchlist", href: "/tools/watchlist", group: "Suivi" },
-  { iconName: "PieChart", label: "Portfolio", href: "/portfolio", group: "Suivi" },
-  { iconName: "Coins", label: "Convertisseur", href: "/tools/converter", group: "Calculatrices" },
-  { iconName: "Calculator", label: "Calculateur P&L", href: "/tools/calculator/pnl", group: "Calculatrices" },
-  { iconName: "Target", label: "Calculateur position", href: "/tools/calculator/position", group: "Calculatrices" },
+  { iconName: "Briefcase", label: "Portfolio", href: "/portfolio", group: "Suivi" },
+  { iconName: "Coins", label: "Convertisseur", href: "/tools/converter", group: "Utilitaires" },
 ];
 
 const helpItems: DropdownItem[] = [
@@ -126,13 +111,13 @@ const mobileSections = [
 ];
 
 export default function Header() {
-  const { isSignedIn } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { open: openPalette } = useCommandPalette();
+  const { toggle: toggleNews } = useNewsDrawer();
 
   return (
     <header
-      className="sticky top-4 z-50 bg-transparent border-b border-transparent"
+      className="sticky top-0 z-50 bg-[#0B0E11] border-b border-[#222930]"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[96px] px-4 sm:px-8 lg:px-16 xl:px-28">
         {/* ─── Logo ─── */}
@@ -157,13 +142,23 @@ export default function Header() {
 
         {/* ─── Actions ─── */}
         <div className="flex items-center self-center justify-end gap-3">
-          {/* Language switcher */}
-          <LocaleCurrencySwitcher mode="language" iconOnly />
+          {/* Settings */}
+          <SettingsDropdown />
+
+          {/* News drawer toggle */}
+          <button
+            onClick={toggleNews}
+            className="text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2 rounded-full hover:bg-[#1A1E23]/50 hidden lg:flex"
+            aria-label="Actualités"
+            type="button"
+          >
+            <Newspaper className="w-5 h-5" />
+          </button>
 
           {/* Search icon */}
           <button
             onClick={openPalette}
-            className="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-raised/50 hidden lg:flex"
+            className="text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2 rounded-full hover:bg-[#1A1E23]/50 hidden lg:flex"
             aria-label="Rechercher"
             type="button"
           >
@@ -175,21 +170,17 @@ export default function Header() {
             <UserMenu />
           </div>
 
-          {/* Commencer button — hidden when signed in */}
-          {!isSignedIn && (
-            <SignUpButton mode="modal" forceRedirectUrl="/pricing">
-              <button
-                className="hidden lg:block bg-inverse text-on-inverse font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-sm transition-colors hover:bg-raised cursor-pointer"
-                type="button"
-              >
-                Commencer
-              </button>
-            </SignUpButton>
-          )}
+          {/* Get Pro */}
+          <Link
+            href="/pricing"
+            className="hidden lg:flex items-center gap-1.5 bg-pro text-on-accent font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-md transition-colors hover:opacity-90 cursor-pointer"
+          >
+            Get Pro
+          </Link>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden text-secondary hover:text-primary transition-colors p-2"
+            className="lg:hidden text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2"
             onClick={() => setDrawerOpen(true)}
             aria-label="Ouvrir le menu"
             type="button"

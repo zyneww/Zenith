@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Star, TrendingUp, TrendingDown } from "lucide-react";
 import { AssetMeta } from "@/lib/assets/registry";
+import { useFormatPrice, useCurrency, CURRENCY_SYMBOLS } from "@/lib/context/CurrencyContext";
 
 const TYPE_LABELS: Record<string, string> = {
   crypto: "Crypto",
@@ -29,21 +30,8 @@ interface AssetHeaderProps {
   isFavorite: boolean;
   onToggleFavorite: () => void;
   isConnected: boolean;
-  locale?: string;
 }
 
-function fmtPrice(val: number, decimals: number, locale = "fr-FR"): string {
-  if (!val && val !== 0) return "—";
-  return val.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-}
-
-function fmtCompact(val: number | undefined): string {
-  if (!val) return "—";
-  if (val >= 1e12) return `$${(val / 1e12).toFixed(2)}T`;
-  if (val >= 1e9) return `$${(val / 1e9).toFixed(2)}B`;
-  if (val >= 1e6) return `$${(val / 1e6).toFixed(2)}M`;
-  return `$${val.toLocaleString("fr-FR")}`;
-}
 
 function ChangePill({ value, label }: { value: number; label: string }) {
   if (!value && value !== 0) return null;
@@ -56,9 +44,18 @@ function ChangePill({ value, label }: { value: number; label: string }) {
   );
 }
 
-export default function AssetHeader({ asset, price, isServiceDown, isFavorite, onToggleFavorite, isConnected, locale = "fr-FR" }: AssetHeaderProps) {
+export default function AssetHeader({ asset, price, isServiceDown, isFavorite, onToggleFavorite, isConnected }: AssetHeaderProps) {
   const change24h = price?.change24h ?? 0;
   const isUp = change24h >= 0;
+  const formatPrice = useFormatPrice();
+  const { convertFromUsd, formatNumber, currency } = useCurrency();
+
+  const fmtCompact = (val: number | undefined) => {
+    if (!val) return "—";
+    const converted = convertFromUsd(val);
+    const compact = formatNumber(converted, { notation: "compact", compactDisplay: "short", maximumFractionDigits: 2 });
+    return `${CURRENCY_SYMBOLS[currency]}${compact}`;
+  };
 
   return (
     <div className="bg-card border border-surface rounded-lg p-4 md:p-5">
@@ -96,7 +93,7 @@ export default function AssetHeader({ asset, price, isServiceDown, isFavorite, o
         <>
           <div className="mt-4 flex flex-wrap items-baseline gap-3">
             <span className="text-3xl md:text-4xl font-bold text-primary" style={{ fontVariantNumeric: "tabular-nums" }}>
-              ${fmtPrice(price.current, asset.displayDecimals, locale)}
+              {formatPrice(price.current)}
             </span>
             <span className={`text-base font-medium ${isUp ? "text-up" : "text-down"}`}>
               {isUp ? "+" : ""}{change24h.toFixed(2)}%
@@ -108,8 +105,8 @@ export default function AssetHeader({ asset, price, isServiceDown, isFavorite, o
           </div>
 
           <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-            <div><span className="text-secondary">High 24h</span><p className="text-primary font-medium tabular-nums">${fmtPrice(price.high24h, asset.displayDecimals, locale)}</p></div>
-            <div><span className="text-secondary">Low 24h</span><p className="text-primary font-medium tabular-nums">${fmtPrice(price.low24h, asset.displayDecimals, locale)}</p></div>
+            <div><span className="text-secondary">High 24h</span><p className="text-primary font-medium tabular-nums">{formatPrice(price.high24h)}</p></div>
+            <div><span className="text-secondary">Low 24h</span><p className="text-primary font-medium tabular-nums">{formatPrice(price.low24h)}</p></div>
             <div><span className="text-secondary">Volume 24h</span><p className="text-primary font-medium">{fmtCompact(price.volume24h)}</p></div>
             <div><span className="text-secondary">Market Cap</span><p className="text-primary font-medium">{fmtCompact(price.marketCap)}</p></div>
           </div>

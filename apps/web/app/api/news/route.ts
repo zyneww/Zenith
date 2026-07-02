@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { getLatestNews } from "@/lib/news/rss";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function GET() {
   try {

@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(process.cwd(), "../.."),
   },
+  poweredByHeader: false,
   env: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },
@@ -23,11 +24,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.cloudfront.net",
-      },
-      {
-        protocol: "https",
-        hostname: "**.tradingview.com",
+        hostname: "cdn.jsdelivr.net",
       },
       {
         protocol: "https",
@@ -35,7 +32,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "coin-images.coingecko.com",
+      },
+      {
+        protocol: "https",
         hostname: "assets.coingecko.com",
+      },
+      {
+        protocol: "https",
+        hostname: "s3.tradingview.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
       },
     ],
     formats: ["image/avif", "image/webp"],
@@ -67,6 +76,14 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: [
           {
+            key: "Content-Security-Policy",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://s3.tradingview.com https://*.tradingview.com https://*.clerk.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src 'self' https://*.clerk.com https://*.tradingview.com wss://*.tradingview.com https://*.zenith.xyz ws://localhost:3001 wss://*.zenith.xyz https://api.coingecko.com https://v6.exchangerate-api.com; frame-src 'self' https://*.clerk.com https://*.tradingview.com; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
             key: "X-Frame-Options",
             value: "DENY",
           },
@@ -77,6 +94,18 @@ const nextConfig: NextConfig = {
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
+          },
+          {
+            key: "Cross-Origin-Resource-Policy",
+            value: "same-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
           },
         ],
       },

@@ -9,6 +9,8 @@ import { ThemeProvider } from "@/lib/theme/ThemeProvider";
 import { CommandPaletteProvider } from "@/lib/context/CommandPaletteContext";
 import CommandPalette from "@/components/command-palette/CommandPalette";
 import { CurrencyProvider } from "@/lib/context/CurrencyContext";
+import { NewsDrawerProvider } from "@/lib/context/NewsDrawerContext";
+import GlobalNewsDrawer from "@/components/home/GlobalNewsDrawer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SerwistProvider } from "@serwist/turbopack/react";
 import "./globals.css";
@@ -27,9 +29,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const viewport: Viewport = {
-  themeColor: "#1a1a1a",
-};
+export const viewport: Viewport = {};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -52,7 +52,7 @@ export async function generateMetadata({
     applicationName: "Zenith",
     appleWebApp: {
       capable: true,
-      statusBarStyle: "black-translucent",
+      statusBarStyle: "default",
       title: "Zenith",
     },
     formatDetection: {
@@ -116,14 +116,16 @@ export default async function LocaleLayout({
   const dir = isRTL(locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={`${inter.variable} ${jetbrainsMono.variable} dark`} suppressHydrationWarning>
-      <head />
+    <html lang={locale} dir={dir} className={`dark ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#1a1d29" />
+      </head>
       <body className="font-sans antialiased min-h-screen min-h-[100dvh] bg-canvas text-primary">
         <ClerkProvider>
         <SerwistProvider swUrl="/serwist/sw.js" disable={process.env.NODE_ENV === 'development'}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent-dark focus:text-primary focus:px-4 focus:py-2 focus:rounded-sm font-mono-caps"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-on-accent focus:px-4 focus:py-2 focus:rounded-sm font-mono-caps"
         >
           Skip to main content
         </a>
@@ -132,8 +134,11 @@ export default async function LocaleLayout({
             <CurrencyProvider>
               <SocketProvider>
                 <CommandPaletteProvider>
-                  <main id="main-content">{children}</main>
-                  <CommandPalette />
+                  <NewsDrawerProvider>
+                    <main id="main-content">{children}</main>
+                    <CommandPalette />
+                    <GlobalNewsDrawer />
+                  </NewsDrawerProvider>
                 </CommandPaletteProvider>
               </SocketProvider>
             </CurrencyProvider>

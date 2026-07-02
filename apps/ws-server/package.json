@@ -11,12 +11,13 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "ioredis": "^5.4.0",
+    "ioredis": "^5.11.1",
     "pg": "^8.22.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
-    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3",
+    "@types/node": "^22.20.0",
+    "@types/pg": "^8.20.0",
     "bun-types": "latest"
   }
 }

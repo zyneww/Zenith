@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+
 
 const HOLIDAYS: Record<string, { date: string; name: string; market: string }[]> = {
   US: [

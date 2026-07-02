@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import Redis from "ioredis";
+import { redis } from "@/lib/redis";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
 import { fetchNFTList } from "@/lib/market-data/coingecko-nft";
 
-const redis = new Redis(process.env.REDIS_URL || "redis://default:dragonfly_dev@localhost:6379");
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+
 const CACHE_TTL = 300;
 
 const OPENSEA_KEY = process.env.OPENSEA_API_KEY || "";
@@ -24,6 +22,8 @@ export async function GET(req: NextRequest) {
     try {
       const res = await fetch("https://api.opensea.io/api/v2/collections?limit=50", {
         headers: { "X-API-KEY": OPENSEA_KEY },
+        signal: AbortSignal.timeout(8000),
+        next: { revalidate: 300 },
       });
       if (!res.ok) throw new Error(`OpenSea ${res.status}`);
       const json = await res.json();

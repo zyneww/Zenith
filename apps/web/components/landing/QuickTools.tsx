@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
@@ -15,6 +15,7 @@ import {
   RefreshCw,
   AlertCircle,
 } from "lucide-react";
+import { useFormatPrice, useCurrency, type Currency } from "@/lib/context/CurrencyContext";
 
 type Mover = {
   id: string;
@@ -52,17 +53,9 @@ const CHAIN_LABEL: Record<string, string> = {
   arbitrum: "Arbitrum",
 };
 
-const FIAT_RATES: Record<string, number> = { USD: 1, EUR: 0.92 };
-
 const CRYPTO_OPTIONS = ["BTC", "ETH", "SOL", "BNB", "XRP"];
-const ALL_OPTIONS = [...CRYPTO_OPTIONS, "USD", "EUR"];
-
-function formatPrice(p: number): string {
-  if (!isFinite(p)) return "—";
-  if (p >= 1) return p.toLocaleString("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
-  if (p >= 0.01) return p.toLocaleString("en-US", { maximumFractionDigits: 4 });
-  return p.toLocaleString("en-US", { maximumFractionDigits: 8 });
-}
+const FIAT_OPTIONS = ["USD", "EUR"];
+const ALL_OPTIONS = [...CRYPTO_OPTIONS, ...FIAT_OPTIONS];
 
 function gasDotColor(level: number): string {
   if (level < 30) return "bg-up";
@@ -70,8 +63,18 @@ function gasDotColor(level: number): string {
   return "bg-down";
 }
 
+function formatCrypto(p: number, locale: string): string {
+  if (!isFinite(p)) return "—";
+  if (p >= 1) return p.toLocaleString(locale, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  if (p >= 0.01) return p.toLocaleString(locale, { maximumFractionDigits: 4 });
+  return p.toLocaleString(locale, { maximumFractionDigits: 8 });
+}
+
 export default function QuickTools() {
   const t = useTranslations("quickTools");
+  const locale = useLocale();
+  const formatPrice = useFormatPrice();
+  const { rates, currency, convertFromUsd, formatNumber } = useCurrency();
 
   // --- Daily Movers ---
   const [activeTab, setActiveTab] = useState<"trending" | "gainers" | "losers">("trending");
@@ -119,27 +122,43 @@ export default function QuickTools() {
     return () => ctrl.abort();
   }, []);
 
+  const fiatRates = useMemo(() => {
+    const m: Record<string, number> = { USD: 1 };
+    if (rates) {
+      for (const fiat of FIAT_OPTIONS) {
+        if (fiat !== "USD") m[fiat] = rates.rates[fiat as Currency] ?? 1;
+      }
+    }
+    return m;
+  }, [rates]);
+
   const priceMap = useMemo(() => {
-    const m: Record<string, number> = { USD: 1, EUR: FIAT_RATES.EUR };
+    const m: Record<string, number> = { ...fiatRates };
     for (const c of cryptos) {
       const sym = c.symbol?.toUpperCase();
       if (sym && c.current_price > 0) m[sym] = c.current_price;
     }
     return m;
-  }, [cryptos]);
+  }, [cryptos, fiatRates]);
 
   const toAmount = useMemo(() => {
     const n = parseFloat(fromAmount);
     if (!isFinite(n)) return 0;
-    const fromUsd = FIAT_RATES[fromSymbol] !== undefined
-      ? FIAT_RATES[fromSymbol]
+    const fromUsd = fiatRates[fromSymbol] !== undefined
+      ? fiatRates[fromSymbol]
       : priceMap[fromSymbol] ?? 0;
-    const toUsd = FIAT_RATES[toSymbol] !== undefined
-      ? FIAT_RATES[toSymbol]
+    const toUsd = fiatRates[toSymbol] !== undefined
+      ? fiatRates[toSymbol]
       : priceMap[toSymbol] ?? 0;
     if (!toUsd) return 0;
     return (n * fromUsd) / toUsd;
-  }, [fromAmount, fromSymbol, toSymbol, priceMap]);
+  }, [fromAmount, fromSymbol, toSymbol, priceMap, fiatRates]);
+
+  const usdValue = useMemo(() => {
+    const n = parseFloat(fromAmount);
+    if (!isFinite(n)) return 0;
+    return n * (fiatRates[fromSymbol] !== undefined ? fiatRates[fromSymbol] : priceMap[fromSymbol] ?? 0);
+  }, [fromAmount, fromSymbol, priceMap, fiatRates]);
 
   const swap = () => {
     setFromSymbol(toSymbol);
@@ -297,7 +316,7 @@ export default function QuickTools() {
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="font-medium text-sm text-primary">
-                          ${formatPrice(item.price)}
+                          {formatPrice(item.price)}
                         </span>
                         <span
                           className={`px-1.5 py-0.5 rounded-sm text-xs font-medium ${
@@ -360,7 +379,7 @@ export default function QuickTools() {
                   <input
                     type="text"
                     readOnly
-                    value={toAmount ? formatPrice(toAmount) : "—"}
+                    value={toAmount ? (FIAT_OPTIONS.includes(toSymbol) ? formatPrice(usdValue) : formatCrypto(toAmount, locale)) : "—"}
                     aria-label="Montant converti"
                     className="bg-transparent text-primary font-medium w-full focus:outline-none px-2"
                   />
@@ -381,10 +400,13 @@ export default function QuickTools() {
 
               <div className="text-[10px] text-tertiary mt-3 font-mono-caps">
                 {fromAmount || "0"} {fromSymbol} ={" "}
-                <span className="text-primary font-medium">{formatPrice(toAmount)}</span> {toSymbol}
+                <span className="text-primary font-medium">
+                  {toAmount ? (FIAT_OPTIONS.includes(toSymbol) ? formatPrice(usdValue) : formatCrypto(toAmount, locale)) : "—"}
+                </span>{" "}
+                {FIAT_OPTIONS.includes(toSymbol) ? currency : toSymbol}
                 {priceMap[fromSymbol] ? (
                   <span className="ml-2">
-                    · 1 {fromSymbol} = ${formatPrice(priceMap[fromSymbol])}
+                    · 1 {fromSymbol} = {formatPrice(priceMap[fromSymbol])}
                   </span>
                 ) : null}
               </div>

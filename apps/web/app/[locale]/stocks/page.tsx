@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Sparkline from "@/components/ui/Sparkline";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface StockRow {
   symbol: string;
@@ -18,6 +19,7 @@ export default function StocksPage() {
   const [sparklines, setSparklines] = useState<Record<string, any[]>>({});
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const formatPrice = useFormatPrice();
 
   useEffect(() => {
     fetch("/api/market/stocks/quote?list=popular").then(r => r.json()).then((list: StockRow[]) => {
@@ -45,26 +47,26 @@ export default function StocksPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-[#e3e2e0] mb-1">Stocks</h1>
-      <p className="text-zinc-400 text-sm mb-6">Top 50 stocks US — prix temps réel via Twelve Data</p>
+      <h1 className="text-2xl font-semibold text-primary mb-1">Stocks</h1>
+      <p className="text-secondary text-sm mb-6">Top 50 stocks US — prix temps réel via Twelve Data</p>
 
       <input
         type="text" placeholder="Rechercher par symbole ou nom..."
         value={search} onChange={(e) => setSearch(e.target.value)}
-        className="w-full mb-6 px-4 py-2.5 bg-[#252525] border border-[#333] rounded-xl text-[#e3e2e0] text-sm focus:outline-none focus:border-[#4da6ff]"
+        className="w-full mb-6 px-4 py-2.5 bg-card border border-default rounded-xl text-primary text-sm focus:outline-none focus:border-accent"
       />
 
-      {loading ? <p className="text-zinc-500">Chargement...</p> : (
-        <div className="bg-[#1a1a1a] rounded-xl border border-[#333] overflow-hidden">
+      {loading ? <p className="text-tertiary">Chargement...</p> : (
+        <div className="bg-canvas rounded-xl border border-default overflow-hidden">
           <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-[#333]">
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-left">#</th>
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-left">Symbole</th>
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-left">Nom</th>
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-right">Prix</th>
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-right">Change</th>
-                <th className="py-3 px-4 text-[11px] text-zinc-400 uppercase tracking-wider text-right">Sparkline</th>
+              <tr className="border-b border-default">
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-left">#</th>
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-left">Symbole</th>
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-left">Nom</th>
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-right">Prix</th>
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-right">Change</th>
+                <th className="py-3 px-4 text-[11px] text-secondary uppercase tracking-wider text-right">Sparkline</th>
               </tr>
             </thead>
             <tbody>
@@ -72,16 +74,16 @@ export default function StocksPage() {
                 const q = quotes[stock.symbol];
                 const sp = sparklines[stock.symbol];
                 return (
-                  <tr key={stock.symbol} className="border-b border-[#222] hover:bg-[#2a2a2a]">
-                    <td className="py-2.5 px-4 text-zinc-500">{i + 1}</td>
+                  <tr key={stock.symbol} className="border-b border-default hover:bg-raised">
+                    <td className="py-2.5 px-4 text-tertiary">{i + 1}</td>
                     <td className="py-2.5 px-4">
-                      <Link href={`/stocks/${stock.symbol}`} className="text-[#4da6ff] hover:underline font-medium">{stock.symbol}</Link>
+                      <Link href={`/stocks/${stock.symbol}`} className="text-accent hover:underline font-medium">{stock.symbol}</Link>
                     </td>
-                    <td className="py-2.5 px-4 text-zinc-300">{stock.name}</td>
-                    <td className="py-2.5 px-4 text-right font-mono text-[#e3e2e0]">${q?.price?.toFixed(2) || "-"}</td>
+                    <td className="py-2.5 px-4 text-primary">{stock.name}</td>
+                    <td className="py-2.5 px-4 text-right font-mono text-primary">{q?.price ? formatPrice(q.price) : "-"}</td>
                     <td className="py-2.5 px-4 text-right">
                       {q && (
-                        <span className={`font-medium ${q.changePercent >= 0 ? "text-[#4dab9a]" : "text-[#ff7369]"}`}>
+                        <span className={`font-medium ${q.changePercent >= 0 ? "text-up" : "text-down"}`}>
                           {q.changePercent >= 0 ? "+" : ""}{q.changePercent.toFixed(2)}%
                         </span>
                       )}

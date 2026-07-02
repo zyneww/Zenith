@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, BarChart3 } from "lucide-react";
-import TradingViewChart, { TimeframeSelector, Timeframe } from "@/components/charts/TradingViewChart";
-import AssetHeader from "@/components/markets/AssetHeader";
-import OrderBookPanel from "@/components/markets/OrderBookPanel";
-import RecentTradesPanel from "@/components/markets/RecentTradesPanel";
-import MetricsPanel from "@/components/markets/MetricsPanel";
-import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
-import { useSocket } from "@/lib/realtime/SocketContext";
+import { useEffect, useState, useMemo } from "react";
+import AssetHeaderBar from "@/components/markets/AssetHeaderBar";
+import AssetSidebar from "@/components/markets/AssetSidebar";
+import ChartSection from "@/components/markets/ChartSection";
+import MarketSidePanel from "@/components/markets/MarketSidePanel";
+import BottomTabs from "@/components/markets/BottomTabs";
+import TickerMarquee from "@/components/markets/TickerMarquee";
+import { useBinanceMarketData } from "@/lib/hooks/useBinanceMarketData";
+import { tokens } from "@/lib/theme/bybit";
 import type { AssetMeta } from "@/lib/assets/registry";
 
 type PricePayload = {
@@ -19,90 +17,41 @@ type PricePayload = {
   lastUpdated?: string;
 } | null;
 
-type OhlcvPoint = { t: number; o: number; h: number; l: number; c: number; v?: number };
-
-type OhlcvPayload = {
-  slug: string;
-  type: string;
-  range: string;
-  points: OhlcvPoint[];
-} | null;
-
 interface Props {
   asset: AssetMeta;
   priceData: PricePayload;
-  ohlcv: OhlcvPayload;
+  ohlcv: { slug: string; type: string; range: string; points: any[] } | null;
   locale?: string;
 }
 
 const FAV_KEY = "zenith:favorites";
 
-function formatPrice(val: number | undefined, decimals: number): string {
-  if (val === undefined || val === null || Number.isNaN(val)) return "—";
-  return val.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+function isCryptoStable(symbol: string): boolean {
+  const stables = ["USDT", "USDC", "DAI", "USDE", "PYUSD", "USD1", "USDS", "USDG", "BUIDL", "USDY", "USDF", "USDD", "BFUSD", "USD0", "RLUSD", "USDTB"];
+  return stables.includes(symbol.toUpperCase());
 }
 
-function getAssetMetrics(asset: AssetMeta, price: NonNullable<NonNullable<Props["priceData"]>["price"]>) {
-  switch (asset.type) {
-    case "crypto":
-      return [
-        { label: "Market Cap", value: price.marketCap ? `$${(price.marketCap / 1e9).toFixed(2)}B` : "—" },
-        { label: "Volume 24h", value: price.volume24h ? `$${(price.volume24h / 1e9).toFixed(2)}B` : "—" },
-        { label: "High 24h", value: `$${formatPrice(price.high24h, asset.displayDecimals)}` },
-        { label: "Low 24h", value: `$${formatPrice(price.low24h, asset.displayDecimals)}` },
-        { label: "Change 1h", value: `${price.change1h >= 0 ? "+" : ""}${price.change1h?.toFixed(2) ?? "—"}%` },
-        { label: "Change 7d", value: `${price.change7d >= 0 ? "+" : ""}${price.change7d?.toFixed(2) ?? "—"}%` },
-        { label: "Type", value: "Crypto" },
-        { label: "Symbole", value: asset.symbol },
-      ];
-    case "forex":
-      return [
-        { label: "Volume 24h", value: price.volume24h ? `$${(price.volume24h / 1e6).toFixed(2)}M` : "—" },
-        { label: "High 24h", value: `$${formatPrice(price.high24h, asset.displayDecimals)}` },
-        { label: "Low 24h", value: `$${formatPrice(price.low24h, asset.displayDecimals)}` },
-        { label: "Change 24h", value: `${price.change24h >= 0 ? "+" : ""}${price.change24h?.toFixed(2) ?? "—"}%` },
-        { label: "Paire", value: asset.symbol },
-        { label: "Type", value: "Forex" },
-      ];
-    case "commodity":
-      return [
-        { label: "High 24h", value: `$${formatPrice(price.high24h, asset.displayDecimals)}` },
-        { label: "Low 24h", value: `$${formatPrice(price.low24h, asset.displayDecimals)}` },
-        { label: "Change 24h", value: `${price.change24h >= 0 ? "+" : ""}${price.change24h?.toFixed(2) ?? "—"}%` },
-        { label: "Volume 24h", value: price.volume24h ? `$${(price.volume24h / 1e6).toFixed(2)}M` : "—" },
-        { label: "Symbole", value: asset.symbol },
-        { label: "Type", value: "Matière première" },
-      ];
-    case "index":
-      return [
-        { label: "Change 24h", value: `${price.change24h >= 0 ? "+" : ""}${price.change24h?.toFixed(2) ?? "—"}%` },
-        { label: "High 24h", value: `$${formatPrice(price.high24h, asset.displayDecimals)}` },
-        { label: "Low 24h", value: `$${formatPrice(price.low24h, asset.displayDecimals)}` },
-        { label: "Volume", value: price.volume24h ? `$${(price.volume24h / 1e9).toFixed(2)}B` : "—" },
-        { label: "Symbole", value: asset.symbol },
-        { label: "Type", value: "Indice" },
-      ];
-    default:
-      return [
-        { label: "Change 24h", value: `${price.change24h >= 0 ? "+" : ""}${price.change24h?.toFixed(2) ?? "—"}%` },
-        { label: "High 24h", value: `$${formatPrice(price.high24h, asset.displayDecimals)}` },
-        { label: "Low 24h", value: `$${formatPrice(price.low24h, asset.displayDecimals)}` },
-        { label: "Volume 24h", value: price.volume24h ? `$${(price.volume24h / 1e6).toFixed(2)}M` : "—" },
-        { label: "Symbole", value: asset.symbol },
-      ];
-  }
+function toDepthData(depth: { bids: [string, string][]; asks: [string, string][]; timestamp: number } | null) {
+  if (!depth || (depth.bids.length === 0 && depth.asks.length === 0)) return null;
+  return { symbol: "", bids: depth.bids, asks: depth.asks, timestamp: depth.timestamp };
+}
+
+function toTradeData(trades: { price: number; size: number; side: "BUY" | "SELL"; time: number }[]) {
+  return trades.map((t) => ({ symbol: "", ...t }));
 }
 
 export default function AssetDetailClient({ asset, priceData, ohlcv, locale = "fr-FR" }: Props) {
-  const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
-  const [activeTimeframe, setActiveTimeframe] = useState<Timeframe>("1h");
-  const [chartData, setChartData] = useState<OhlcvPoint[]>(ohlcv?.points ?? []);
-  const { isConnected } = useSocket();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [rightPanelOpen, setRightPanelOpen] = useState(true);
 
-  const wsSymbol = asset.type === "crypto" ? asset.symbol : null;
-  const { getPrice } = useRealtimePrice(wsSymbol ? [wsSymbol] : []);
-  const livePrice = wsSymbol ? getPrice(wsSymbol) : null;
+  const binanceSymbol = useMemo(() => {
+    if (asset.type !== "crypto" || isCryptoStable(asset.symbol)) return null;
+    return `${asset.symbol}USDT`.toLowerCase();
+  }, [asset]);
+
+  const liveData = useBinanceMarketData(binanceSymbol);
+  const { ticker, depth, trades, status } = liveData;
 
   useEffect(() => {
     try {
@@ -122,111 +71,79 @@ export default function AssetDetailClient({ asset, priceData, ohlcv, locale = "f
   };
 
   const price = priceData?.price;
-  const isServiceDown = !priceData || !price;
-
-  const displayPrice = livePrice?.price ?? price?.current ?? 0;
-  const displayChange24h = price?.change24h ?? 0;
-  const displayChange1h = price?.change1h ?? 0;
-  const displayChange7d = price?.change7d ?? 0;
-
-  const metricPrice = price || { current: 0, change24h: 0, change1h: 0, change7d: 0, high24h: 0, low24h: 0, marketCap: 0, volume24h: 0 };
-  const metrics = price ? getAssetMetrics(asset, price) : [];
-
-  const chartOhlcv = chartData.map((p) => ({ time: p.t, open: p.o, high: p.h, low: p.l, close: p.c }));
-  const chartVolume = chartData.map((p) => ({
-    time: p.t,
-    value: p.v ?? 0,
-    color: p.c >= p.o ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)",
-  }));
-
-  const handleTimeframeChange = useCallback(async (tf: Timeframe) => {
-    setActiveTimeframe(tf);
-    try {
-      const res = await fetch(`/api/market/ohlcv/${asset.slug}?range=${tf}&type=${asset.type}`);
-      if (res.ok) {
-        const data = await res.json();
-        if (data?.points) setChartData(data.points);
-      }
-    } catch {}
-  }, [asset.slug, asset.type]);
-
-  const chartHeight = asset.type === "crypto" ? 400 : 420;
-  const chartType = asset.type === "forex" ? "area" : "candlestick";
+  const displayPrice = ticker?.price ?? price?.current ?? 0;
+  const displayChange24h = ticker?.changePercent24h ?? price?.change24h ?? 0;
+  const displayHigh24h = ticker?.high24h ?? price?.high24h ?? 0;
+  const displayLow24h = ticker?.low24h ?? price?.low24h ?? 0;
+  const displayVolume24h = ticker?.volume24h ?? price?.volume24h ?? 0;
+  const displayTurnover24h = ticker?.quoteVolume24h ?? 0;
 
   const isCrypto = asset.type === "crypto";
+  const binanceReady = isCrypto && !!binanceSymbol;
+  const isLive = binanceReady && status === "live";
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4">
-      <div className="mb-3">
-        <Link href="/markets" className="inline-flex items-center gap-1.5 text-xs text-secondary hover:text-primary transition">
-          <ArrowLeft className="w-3.5 h-3.5" />
-          Marchés
-        </Link>
-      </div>
+    <div className="w-full min-w-0" style={{ backgroundColor: tokens.color.bg.dark }}>
+      <AssetSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} currentSlug={asset.slug} />
+      <TickerMarquee />
 
-      <AssetHeader
-        asset={asset}
-        price={{
-          current: displayPrice,
-          change1h: displayChange1h,
-          change24h: displayChange24h,
-          change7d: displayChange7d,
-          high24h: price?.high24h ?? 0,
-          low24h: price?.low24h ?? 0,
-          marketCap: price?.marketCap ?? 0,
-          volume24h: price?.volume24h ?? 0,
-        }}
-        isServiceDown={isServiceDown}
-        isFavorite={isFavorite}
-        onToggleFavorite={toggleFavorite}
-        isConnected={isConnected}
-        locale={locale}
-      />
+      <div className="px-2 py-2">
+        <AssetHeaderBar
+          asset={asset}
+          price={{
+            current: displayPrice,
+            change24h: displayChange24h,
+            high24h: displayHigh24h,
+            low24h: displayLow24h,
+            volume24h: displayVolume24h,
+            turnover24h: displayTurnover24h,
+            marketCap: price?.marketCap ?? 0,
+          }}
+          symbol={asset.symbol}
+          isFavorite={isFavorite}
+          onToggleFavorite={toggleFavorite}
+          isConnected={isLive}
+          locale={locale}
+        />
 
-      <div className="mt-3 flex items-center gap-3">
-        <div className="flex items-center gap-2 text-sm font-bold text-primary">
-          <BarChart3 className="w-4 h-4 text-accent" />
-          Graphique
+        <div className="mt-2 grid grid-cols-1 lg:grid-cols-12 gap-2">
+          <div className={`min-w-0 space-y-2 ${rightPanelOpen ? "lg:col-span-9 xl:col-span-9" : "lg:col-span-12"}`}>
+            <ChartSection
+              symbol={asset.symbol}
+              assetSlug={asset.slug}
+              assetType={asset.type}
+              depth={toDepthData(depth)}
+              currentPrice={displayPrice}
+              rightPanelOpen={rightPanelOpen}
+              onToggleRightPanel={() => setRightPanelOpen((v) => !v)}
+            />
+
+            <BottomTabs asset={asset} currentPrice={displayPrice} />
+          </div>
+
+          {rightPanelOpen && (
+            <div className="lg:col-span-3 xl:col-span-3">
+              <MarketSidePanel
+                asset={asset}
+                price={{
+                  change1h: price?.change1h ?? 0,
+                  change24h: price?.change24h ?? 0,
+                  change7d: price?.change7d ?? 0,
+                  marketCap: price?.marketCap ?? 0,
+                  volume24h: displayVolume24h,
+                  high24h: displayHigh24h,
+                  low24h: displayLow24h,
+                }}
+                supportsOrderBook={binanceReady}
+                supportsTrades={binanceReady}
+                depthOverride={toDepthData(depth)}
+                tradesOverride={toTradeData(trades)}
+                open={rightPanelOpen}
+                onToggle={() => setRightPanelOpen((v) => !v)}
+              />
+            </div>
+          )}
         </div>
-        <TimeframeSelector active={activeTimeframe} onChange={handleTimeframeChange} />
-      </div>
-
-      {isCrypto ? (
-        <div className="mt-2 grid grid-cols-1 lg:grid-cols-12 gap-3">
-          <div className="lg:col-span-7 xl:col-span-8">
-            {chartOhlcv.length > 0 ? (
-              <TradingViewChart data={chartOhlcv} volumeData={chartVolume} height={chartHeight} chartType={chartType} />
-            ) : (
-              <div className="bg-card border border-surface rounded-lg flex items-center justify-center text-secondary text-sm" style={{ height: chartHeight }}>
-                Données graphique indisponibles
-              </div>
-            )}
-          </div>
-          <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-3">
-            <OrderBookPanel symbol={wsSymbol || asset.symbol} />
-            <RecentTradesPanel symbol={wsSymbol || asset.symbol} decimals={asset.displayDecimals} />
-          </div>
-        </div>
-      ) : (
-        <div className="mt-2 grid grid-cols-1 lg:grid-cols-12 gap-3">
-          <div className="lg:col-span-8 xl:col-span-9">
-            {chartOhlcv.length > 0 ? (
-              <TradingViewChart data={chartOhlcv} volumeData={chartVolume} height={chartHeight} chartType={chartType} />
-            ) : (
-              <div className="bg-card border border-surface rounded-lg flex items-center justify-center text-secondary text-sm" style={{ height: chartHeight }}>
-                Données graphique indisponibles
-              </div>
-            )}
-          </div>
-          <div className="lg:col-span-4 xl:col-span-3">
-            <MetricsPanel metrics={metrics} />
-          </div>
-        </div>
-      )}
-
-      <div className="mt-3 bg-card border border-surface rounded-lg p-4">
-        <h3 className="text-sm font-bold mb-1 text-primary">À propos de {asset.name}</h3>
-        <p className="text-xs text-secondary leading-relaxed">{asset.description}</p>
       </div>
     </div>
   );

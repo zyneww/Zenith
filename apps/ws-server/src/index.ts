@@ -12,6 +12,18 @@ const BINANCE_WS_URL =
 const rawCors = process.env.CORS_ORIGINS || "http://localhost:3000";
 const ALLOWED_ORIGINS = rawCors.split(",").map((s) => s.trim());
 
+const TRUSTED_PROXIES = (process.env.TRUSTED_PROXIES || "").split(",").map((s) => s.trim()).filter(Boolean);
+
+function maskRedisUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    if (u.password) u.password = "***";
+    return u.toString();
+  } catch {
+    return url.includes(":") ? url.replace(/\/\/[^:]+:[^@]+@/, "//***:***@") : url;
+  }
+}
+
 const TRACKED_SYMBOLS = [
   "btcusdt", "ethusdt", "solusdt", "bnbusdt", "xrpusdt",
   "adausdt", "dogeusdt", "maticusdt", "dotusdt", "avaxusdt",
@@ -45,12 +57,25 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 
 function getClientIP(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0].trim();
+  if (forwarded) {
+    const chain = forwarded.split(",").map((s) => s.trim()).filter(Boolean);
+    // ponytail: if you run behind known proxies, put their IPs in TRUSTED_PROXIES
+    // and the rightmost trusted proxy's left neighbor is the real client.
+    // Without a trusted proxy list we use the leftmost value but do not trust it.
+    if (TRUSTED_PROXIES.length > 0) {
+      for (let i = chain.length - 1; i >= 0; i--) {
+        if (TRUSTED_PROXIES.includes(chain[i])) {
+          return chain[i - 1] || chain[0] || "unknown";
+        }
+      }
+    }
+    return chain[0] || "unknown";
+  }
   return "unknown";
 }
 
 function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) return true;
+  if (!origin) return false;
   return ALLOWED_ORIGINS.includes(origin);
 }
 
@@ -206,7 +231,7 @@ async function main() {
 
   console.log(`✅ WS Server listening on port ${PORT}`);
   console.log(`📡 Tracking ${TRACKED_SYMBOLS.length} symbols from Binance`);
-  console.log(`🐉 Dragonfly Pub/Sub: ${DRAGONFLY_URL}`);
+  console.log(`🐉 Dragonfly Pub/Sub: ${maskRedisUrl(DRAGONFLY_URL)}`);
   console.log(`🔒 CORS origins: ${ALLOWED_ORIGINS.join(", ")}`);
 
   startCandleAggregation();

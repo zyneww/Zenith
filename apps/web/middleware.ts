@@ -34,10 +34,6 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/help(.*)",
   "/legal(.*)",
   "/:locale/legal(.*)",
-  "/dashboard(.*)",
-  "/:locale/dashboard(.*)",
-  "/portfolio(.*)",
-  "/:locale/portfolio(.*)",
   "/pricing(.*)",
   "/:locale/pricing(.*)",
   "/derivatives(.*)",
@@ -50,7 +46,18 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/forex(.*)",
   "/onchain(.*)",
   "/:locale/onchain(.*)",
-  "/api(.*)",
+  // Public data APIs (webhooks and market data remain public; all others require auth)
+  "/api/contact",
+  "/api/fx/rates",
+  "/api/market/:path*",
+  "/api/markets/:path*",
+  "/api/news/:path*",
+  "/api/calendar/:path*",
+  "/api/ohlcv",
+  "/api/questdb/health",
+  "/api/sentiment/fear-greed",
+  "/api/gas/:path*",
+  "/api/webhooks/clerk/:path*",
 ]);
 
 export default clerkMiddleware(async (auth, request) => {

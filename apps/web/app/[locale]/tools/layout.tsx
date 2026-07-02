@@ -1,5 +1,7 @@
-import { ReactNode } from "react";
+import AppShell from "@/components/layout/AppShell";
 
-export default function ToolsLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+export const metadata = { title: "Outils" };
+
+export default function ToolsLayout({ children }: { children: React.ReactNode }) {
+  return <AppShell>{children}</AppShell>;
 }

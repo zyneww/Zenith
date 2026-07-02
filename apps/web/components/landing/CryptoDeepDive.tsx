@@ -1,10 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
+import { useFormatPrice, useCurrency, CURRENCY_SYMBOLS } from "@/lib/context/CurrencyContext";
 
 interface CoinGeckoMarket {
   id: string;
@@ -39,20 +40,6 @@ const CATEGORY_API_NAMES: Record<string, string> = {
 const WATCHLIST_KEY = "zenith:watchlist";
 const WS_TOP_N = 5;
 const REFRESH_MS = 60_000;
-
-function formatPrice(price: number): string {
-  if (price >= 1) return `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  if (price >= 0.01) return `$${price.toFixed(4)}`;
-  return `$${price.toFixed(6)}`;
-}
-
-function formatLargeNumber(n: number | undefined): string {
-  if (!n) return "—";
-  if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-  if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
-  if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
-  return `$${n.toLocaleString("en-US")}`;
-}
 
 function PercentBadge({ value }: { value: number | undefined }) {
   if (value === undefined || value === null) return <span className="text-secondary">—</span>;
@@ -98,10 +85,20 @@ function Sparkline({ prices }: { prices: number[] | undefined }) {
 
 export default function CryptoDeepDive() {
   const t = useTranslations("crypto");
+  const locale = useLocale();
+  const formatPrice = useFormatPrice();
+  const { convertFromUsd, formatNumber, currency } = useCurrency();
   const [assets, setAssets] = useState<CoinGeckoMarket[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [flashSymbol, setFlashSymbol] = useState<string | null>(null);
+
+  const formatLargeNumber = useMemo(() => (n: number | undefined) => {
+    if (!n) return "—";
+    const converted = convertFromUsd(n);
+    const compact = formatNumber(converted, { notation: "compact", compactDisplay: "short", maximumFractionDigits: 2 });
+    return `${CURRENCY_SYMBOLS[currency]}${compact}`;
+  }, [convertFromUsd, formatNumber, currency]);
 
   useEffect(() => {
     try {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 const SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"] as const;
 
@@ -21,16 +22,9 @@ function formatTime(ts: number): string {
   return `${h}:${m}:${s}.${ms}`;
 }
 
-function formatPrice(p: number): string {
-  if (p >= 1000) {
-    return `$${p.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  }
-  if (p >= 1) return `$${p.toFixed(4)}`;
-  return `$${p.toFixed(6)}`;
-}
-
 export default function RealtimeTicker() {
   const { prices, isConnected } = useRealtimePrice([...SYMBOLS]);
+  const formatPrice = useFormatPrice();
 
   return (
     <div className="bg-card border border-surface rounded-xl p-4 w-full max-w-md">

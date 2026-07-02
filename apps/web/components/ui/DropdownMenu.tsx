@@ -265,7 +265,7 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full left-0 mt-2 w-[340px] bg-card border border-surface rounded-sm overflow-hidden z-50"
+            className="absolute top-full left-0 mt-2 w-[560px] bg-card border border-surface rounded-sm overflow-hidden z-50"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             role="menu"
@@ -318,52 +318,61 @@ export default function DropdownMenu({ trigger, items }: DropdownMenuProps) {
               <div className="border-b border-surface/40 mx-3 my-2" />
             )}
 
-            {/* Groups */}
-            <div className="p-2 pb-3">
-              {groupKeys.map((groupKey, groupIndex) => (
-                <div key={groupKey}>
-                  {/* Group title */}
-                  <div className="font-mono-caps text-secondary px-3 py-1.5 mt-1">
-                    {groupKey === "default" ? "" : groupKey}
-                  </div>
-
-                  {/* Group items */}
-                  <div className="space-y-0.5">
-                    {groups[groupKey].map((item, index) => (
-                      <div key={index}>
-                        {item.separator ? (
-                          <div className="border-t border-surface/40 my-1.5 mx-2" />
-                        ) : item.disabled || !item.href ? (
-                          <div className="flex items-center gap-3 px-3 py-2 text-sm text-secondary cursor-not-allowed opacity-60 rounded-sm">
-                            {item.iconName && (
-                              <NormalIcon name={item.iconName} />
-                            )}
-                            <span>{item.label}</span>
-                            <span className="ml-auto text-[10px] text-secondary bg-raised/50 px-1.5 py-0.5 rounded-sm">
-                              bientôt
-                            </span>
-                          </div>
-                        ) : (
-                          <Link
-                            href={item.href}
-                            className="flex items-center gap-3 px-3 py-2 text-sm text-secondary hover:bg-raised hover:text-primary transition-colors rounded-sm"
-                          >
-                            {item.iconName && (
-                              <NormalIcon name={item.iconName} />
-                            )}
-                            <span>{item.label}</span>
-                          </Link>
-                        )}
+            {/* Groups — multi-column grid */}
+            <div
+              className="p-3 pt-1"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+                gap: "0 24px",
+              }}
+            >
+              {groupKeys.map((groupKey) => {
+                const isLastCol =
+                  groupKeys.indexOf(groupKey) % 3 === 2 ||
+                  groupKey === groupKeys[groupKeys.length - 1];
+                return (
+                  <div
+                    key={groupKey}
+                    className={!isLastCol ? "border-r border-surface/30 pr-2" : ""}
+                  >
+                    {/* Group title */}
+                    {groupKey !== "default" && (
+                      <div className="text-[10px] uppercase tracking-widest text-secondary font-semibold px-3 py-2">
+                        {groupKey}
                       </div>
-                    ))}
-                  </div>
+                    )}
 
-                  {/* Separator between groups */}
-                  {groupIndex < groupKeys.length - 1 && (
-                    <div className="border-b border-surface/40 mx-2 my-2" />
-                  )}
-                </div>
-              ))}
+                    {/* Group items */}
+                    <div className="space-y-0.5">
+                      {groups[groupKey].map((item, index) => (
+                        <div key={index}>
+                          {item.separator ? (
+                            <div className="border-t border-surface/40 my-1.5 mx-2" />
+                          ) : item.disabled || !item.href ? (
+                            <div className="flex items-center gap-2.5 px-3 py-1.5 text-sm text-secondary cursor-not-allowed opacity-60 rounded-sm">
+                              {item.iconName && (
+                                <NormalIcon name={item.iconName} />
+                              )}
+                              <span>{item.label}</span>
+                            </div>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              className="flex items-center gap-2.5 px-3 py-1.5 text-sm text-secondary hover:bg-raised hover:text-primary transition-colors rounded-sm"
+                            >
+                              {item.iconName && (
+                                <NormalIcon name={item.iconName} />
+                              )}
+                              <span>{item.label}</span>
+                            </Link>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         )}

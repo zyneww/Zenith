@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const COINGECKO_BASE = "https://api.coingecko.com/api/v3";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+
 
 export async function GET(req: NextRequest) {
   const limit = req.nextUrl.searchParams.get("limit") || "10";
@@ -15,7 +14,8 @@ export async function GET(req: NextRequest) {
         Accept: "application/json",
         ...(process.env.COINGECKO_API_KEY ? { "x-cg-demo-api-key": process.env.COINGECKO_API_KEY } : {}),
       },
-      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {

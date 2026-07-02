@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import Redis from "ioredis";
+import { redis } from "@/lib/redis";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
-
-const redis = new Redis(process.env.REDIS_URL || "redis://default:dragonfly_dev@localhost:6379");
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const CACHE_TTL = 30;

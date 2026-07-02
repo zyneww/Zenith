@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTwelveQuote, getMockMarketData, getSymbolsByAssetClass } from "@/lib/market-data/twelve-data";
+import { getMergedMarketData, getSymbolsByAssetClass } from "@/lib/market-data/twelve-data";
 import { getTopCoins } from "@/lib/market-data/coingecko";
 import { MarketDataPoint } from "@/lib/market-data/types";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
-const ASSET_CLASSES = ["crypto", "forex", "indices", "commodities", "futures", "stocks"] as const;
+
+const ASSET_CLASSES = ["crypto", "forex", "index", "indices", "commodity", "commodities", "futures", "stock", "stocks", "etf"] as const;
 
 export async function GET(
   req: NextRequest,
@@ -26,38 +25,27 @@ export async function GET(
     let data: MarketDataPoint[] = [];
 
     if (assetClass === "crypto") {
-      // Crypto uses CoinGecko + Binance WS
-      const limit = parseInt(limitParam || "10", 10);
-      data = await getTopCoins(limit);
+      const limit = parseInt(limitParam || "250", 10);
+      const page = parseInt(searchParams.get("page") || "1", 10);
+      data = await getTopCoins(limit, page);
     } else {
-      // All other assets use Twelve Data
-      let symbols: string[];
+      // All other assets: merge real Twelve Data + auto-generated mocks
+      let symbols: string[] | undefined;
 
       if (symbolsParam) {
         symbols = symbolsParam.split(",");
-      } else {
-        symbols = getSymbolsByAssetClass(assetClass as (typeof ASSET_CLASSES)[number]);
       }
 
-      if (symbols.length === 0) {
-        return NextResponse.json([], { status: 200 });
-      }
-
-      // Try Twelve Data API first
-      const apiData = await getTwelveQuote(symbols);
-
-      if (apiData.length > 0) {
-        data = apiData;
-      } else {
-        // Fallback to mock data
-        data = getMockMarketData(symbols);
-      }
+      data = await getMergedMarketData(
+        assetClass as (typeof ASSET_CLASSES)[number],
+        symbols
+      );
     }
 
     return NextResponse.json(data, {
       status: 200,
       headers: {
-        "Cache-Control": "no-store, must-revalidate",
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
       },
     });
   } catch (error) {

@@ -24,7 +24,8 @@ async function finnhubFetch<T>(endpoint: string, ttl = CACHE_TTL): Promise<T | n
 
     const res = await fetch(url.toString(), {
       headers: { Accept: "application/json" },
-      next: { revalidate: 0 },
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {

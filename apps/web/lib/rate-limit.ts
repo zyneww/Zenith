@@ -1,7 +1,5 @@
 // apps/web/lib/rate-limit.ts
-import Redis from 'ioredis';
-
-const redis = new Redis(process.env.DRAGONFLY_URL || 'redis://:dragonfly_dev@localhost:6379');
+import { redis } from "@/lib/redis";
 
 interface RateLimitConfig {
   maxRequests: number;

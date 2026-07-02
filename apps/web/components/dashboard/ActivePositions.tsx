@@ -6,6 +6,7 @@ import {
   ArrowDownRight,
 } from "lucide-react";
 import { useRealtimePrice } from "@/lib/hooks/useRealtimePrice";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface Position {
   symbol: string;
@@ -26,6 +27,7 @@ const POSITIONS: Position[] = [
 function PositionRow({ position, index }: { position: Position; index: number }) {
   const symbols = useMemo(() => [position.symbol + "USDT"], [position.symbol]);
   const { getPrice } = useRealtimePrice(symbols);
+  const formatPrice = useFormatPrice();
   const priceData = getPrice(position.symbol + "USDT");
   const currentPrice = priceData?.price || position.avgBuyPrice;
   const totalValue = currentPrice * position.quantity;
@@ -47,7 +49,7 @@ function PositionRow({ position, index }: { position: Position; index: number })
 
       <div className="text-right">
         <p className="text-primary font-medium">
-          ${totalValue.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {formatPrice(totalValue)}
         </p>
         <div className={`flex items-center gap-1 ${pnl >= 0 ? "text-up" : "text-down"}`}>
           {pnl >= 0 ? (

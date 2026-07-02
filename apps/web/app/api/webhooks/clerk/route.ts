@@ -87,8 +87,8 @@ export async function POST(req: Request) {
 
 // Debug endpoint
 export async function GET() {
-  if (process.env.NODE_ENV !== "development") {
-    return NextResponse.json({ error: "Not available in production" }, { status: 403 })
+  if (process.env.NODE_ENV !== "development" || process.env.ALLOW_DEV_ROUTES !== "true") {
+    return NextResponse.json({ error: "Not available" }, { status: 403 })
   }
 
   const allUsers = await db.select().from(users)

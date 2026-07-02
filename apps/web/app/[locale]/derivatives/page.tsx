@@ -14,7 +14,7 @@ const columns = [
   { key: "symbol", label: "Symbole", sortable: true },
   { key: "fundingRate", label: "Funding Rate", sortable: true, align: "right" as const, render: (r: FundingRow) => {
     const pct = r.fundingRate * 100;
-    const color = pct > 0.005 ? "#ff7369" : pct < -0.005 ? "#4dab9a" : "#e3e2e0";
+    const color = pct > 0.005 ? "var(--text-down)" : pct < -0.005 ? "var(--text-up)" : "var(--text-primary)";
     return <span style={{ color }}>{(pct > 0 ? "+" : "")}{pct.toFixed(4)}%</span>;
   }},
   { key: "exchange", label: "Exchange", sortable: true, render: (r: FundingRow) => {
@@ -48,19 +48,19 @@ export default function DerivativesPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-[#e3e2e0] mb-1">Derivatives</h1>
-      <p className="text-zinc-400 text-sm mb-6">Funding rates temps réel — Binance, OKX, Bybit</p>
+      <h1 className="text-2xl font-semibold text-primary mb-1">Derivatives</h1>
+      <p className="text-secondary text-sm mb-6">Funding rates temps réel — Binance, OKX, Bybit</p>
 
       <div className="flex gap-2 mb-4">
         {["all", "binance", "okx", "bybit"].map(ex => (
           <button key={ex} onClick={() => setExchange(ex)}
-            className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition ${exchange === ex ? "bg-[#4da6ff] text-white" : "bg-[#252525] text-zinc-400 hover:text-zinc-200 border border-[#333]"}`}
+            className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition ${exchange === ex ? "bg-accent-solid text-white" : "bg-card text-secondary hover:text-primary border border-default"}`}
           >{ex === "all" ? "Tous" : ex}</button>
         ))}
       </div>
 
-      {loading ? <p className="text-zinc-500">Chargement...</p> : (
-        <div className="bg-[#1a1a1a] rounded-xl border border-[#333] overflow-hidden">
+      {loading ? <p className="text-tertiary">Chargement...</p> : (
+        <div className="bg-canvas rounded-xl border border-default overflow-hidden">
           <DataTable columns={columns} data={filtered} defaultSort="fundingRate" />
         </div>
       )}

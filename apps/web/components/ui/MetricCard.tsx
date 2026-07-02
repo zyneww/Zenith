@@ -1,6 +1,7 @@
 "use client";
 
 import Sparkline from "./Sparkline";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 
 interface Props {
   label: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function MetricCard({ label, value, change, unit, sparkline, icon }: Props) {
+  const formatPrice = useFormatPrice();
   const changeColor = change != null ? (change >= 0 ? "#4dab9a" : "#ff7369") : undefined;
   return (
     <div className="rounded-xl bg-[#252525] p-4 border border-[#333]">
@@ -21,7 +23,7 @@ export default function MetricCard({ label, value, change, unit, sparkline, icon
       </div>
       <div className="flex items-end gap-2 mt-1">
         <span className="text-2xl font-semibold text-[#e3e2e0]">
-          {typeof value === "number" ? (value >= 1e12 ? `$${(value / 1e12).toFixed(2)}T` : value >= 1e9 ? `$${(value / 1e9).toFixed(1)}B` : value.toLocaleString()) : value}
+          {typeof value === "number" && !unit ? formatPrice(value) : value}
         </span>
         {unit && <span className="text-[11px] text-zinc-500 mb-1">{unit}</span>}
       </div>

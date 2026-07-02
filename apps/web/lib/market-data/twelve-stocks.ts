@@ -69,7 +69,7 @@ export interface StockQuote {
 
 export async function fetchStockQuote(symbol: string): Promise<StockQuote> {
   const url = `${BASE}/quote?symbol=${symbol}&apikey=${API_KEY}`;
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000), next: { revalidate: 60 } });
   if (!res.ok) throw new Error(`Twelve Data quote ${res.status}`);
   const json = await res.json();
   if (json.status === "error") throw new Error(json.message || "Twelve Data error");
@@ -90,7 +90,7 @@ export async function fetchStockQuote(symbol: string): Promise<StockQuote> {
 
 export async function fetchStockSparkline(symbol: string): Promise<{ time: number; value: number }[]> {
   const url = `${BASE}/time_series?symbol=${symbol}&interval=1min&outputsize=120&apikey=${API_KEY}`;
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000), next: { revalidate: 60 } });
   if (!res.ok) throw new Error(`Twelve Data sparkline ${res.status}`);
   const json = await res.json();
   if (!json.values) return [];

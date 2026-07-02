@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState, useMemo, useCallback } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { MarketDataPoint, AssetClass } from "@/lib/market-data/types";
 import SymbolLogo from "./SymbolLogo";
 import Sparkline from "./Sparkline";
+import { useFormatPrice, useCurrency } from "@/lib/context/CurrencyContext";
+import { getAssetBySymbol } from "@/lib/assets/registry";
 
 type SortKey = "rank" | "symbol" | "price" | "change1h" | "change24h" | "change7d" | "volume" | "marketCap";
 type SortDir = "asc" | "desc";
@@ -14,15 +18,60 @@ interface CoinGeckoTableProps {
   view?: "default" | "gainers" | "trending";
 }
 
-const PAGE_SIZES = [50, 100, 300];
+const PAGE_SIZES = [50, 100, 250];
+const PAGE_SIZE_KEY = "zenith:markets:pageSize";
+const FAV_KEY = "zenith:favorites";
+
+// Dynamic category pills generated from data tags
+
+function getFavorites(): string[] {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function setFavorites(list: string[]) {
+  try {
+    localStorage.setItem(FAV_KEY, JSON.stringify(list));
+  } catch {}
+}
 
 export default function CoinGeckoTable({ category, view = "default" }: CoinGeckoTableProps) {
+  const t = useTranslations();
+  const locale = useLocale();
+  const formatPrice = useFormatPrice();
+  const { convertFromUsd } = useCurrency();
   const [data, setData] = useState<MarketDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("rank");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(100);
+  const [pageSize, setPageSize] = useState(() => {
+    if (typeof window === "undefined") return 50;
+    const saved = parseInt(localStorage.getItem(PAGE_SIZE_KEY) || "");
+    return PAGE_SIZES.includes(saved) ? saved : 50;
+  });
+  const [favorites, setFavoritesState] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  useEffect(() => {
+    setFavoritesState(getFavorites());
+  }, []);
+
+  useEffect(() => {
+    try { localStorage.setItem(PAGE_SIZE_KEY, String(pageSize)); } catch {}
+  }, [pageSize]);
+
+  const toggleFavorite = useCallback((symbol: string) => {
+    setFavoritesState((prev) => {
+      const next = prev.includes(symbol) ? prev.filter((s) => s !== symbol) : [...prev, symbol];
+      setFavorites(next);
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -46,12 +95,25 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
       }
     }
     fetchData();
-    const i = setInterval(fetchData, 30000);
+    const i = setInterval(fetchData, 15000);
     return () => clearInterval(i);
   }, [category, view]);
 
+  // Dynamic category pills from data tags
+  const categoryPills = useMemo(() => {
+    const allTags = new Set<string>();
+    data.forEach((d) => d.tags?.forEach((t) => allTags.add(t)));
+    return [
+      { key: "all", label: "All" },
+      ...Array.from(allTags).sort().map((tag) => ({ key: tag, label: tag })),
+    ];
+  }, [data]);
+
   const sorted = useMemo(() => {
-    const copy = [...data];
+    let copy = [...data];
+    if (category === "crypto" && selectedCategory !== "all") {
+      copy = copy.filter((d) => d.tags?.includes(selectedCategory));
+    }
     copy.sort((a, b) => {
       const getVal = (item: MarketDataPoint, key: SortKey): number => {
         switch (key) {
@@ -70,7 +132,7 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
       return sortDir === "asc" ? va - vb : vb - va;
     });
     return copy;
-  }, [data, sortKey, sortDir]);
+  }, [data, sortKey, sortDir, selectedCategory, category]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
   const pageData = sorted.slice(page * pageSize, (page + 1) * pageSize);
@@ -86,25 +148,20 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
     return sortDir === "asc" ? <ChevronUp className="w-3 h-3 inline ml-0.5" /> : <ChevronDown className="w-3 h-3 inline ml-0.5" />;
   };
 
-  const fmtPrice = (p: number) => {
-    if (p >= 1000) return p.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    if (p >= 1) return p.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
-    return p.toLocaleString("fr-FR", { minimumFractionDigits: 4, maximumFractionDigits: 8 });
-  };
-
-  const fmtMC = (n: number) => {
-    if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-    if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-    if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
-    return `$${(n / 1e3).toFixed(0)}K`;
-  };
-
-  const fmtVol = (n: number) => {
-    if (n >= 1e12) return `$${(n / 1e12).toFixed(2)}T`;
-    if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
-    if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
-    return `$${(n / 1e3).toFixed(0)}K`;
-  };
+  const formatCompact = useCallback((n: number) => {
+    try {
+      return new Intl.NumberFormat(locale, {
+        notation: "compact",
+        compactDisplay: "short",
+        maximumFractionDigits: 2,
+      }).format(n);
+    } catch {
+      if (n >= 1e12) return `${(n / 1e12).toFixed(2)}T`;
+      if (n >= 1e9) return `${(n / 1e9).toFixed(1)}B`;
+      if (n >= 1e6) return `${(n / 1e6).toFixed(0)}M`;
+      return `${(n / 1e3).toFixed(0)}K`;
+    }
+  }, [locale]);
 
   const TH = ({ col, label, align = "left" }: { col: SortKey; label: string; align?: "left" | "right" }) => (
     <th
@@ -133,40 +190,69 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
 
   return (
     <div>
+      {/* Category Pills (crypto only) */}
+      {category === "crypto" && (
+        <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar mb-3">
+          {categoryPills.map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => { setSelectedCategory(key); setPage(0); }}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors flex-shrink-0 ${
+                selectedCategory === key
+                  ? "bg-accent text-on-accent"
+                  : "bg-card border border-surface text-secondary hover:text-primary hover:bg-raised"
+              }`}
+              type="button"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="bg-card border border-surface rounded-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-surface">
-                <TH col="rank" label="#" align="right" />
-                <TH col="symbol" label="Coin" />
-                <TH col="price" label="Prix" align="right" />
-                <TH col="change1h" label="1h" align="right" />
-                <TH col="change24h" label="24h" align="right" />
-                <TH col="change7d" label="7j" align="right" />
-                <TH col="volume" label="Volume 24h" align="right" />
-                <TH col="marketCap" label="Market Cap" align="right" />
-                <th className="py-2 px-2 text-right text-[10px] font-mono-caps text-secondary font-medium">7j</th>
+                <th className="py-2 px-2 text-center text-[10px] text-secondary w-8"><Star className="w-3 h-3 inline" /></th>
+                <TH col="rank" label={t("markets.colRank")} align="right" />
+                <TH col="symbol" label={t("markets.colName")} />
+                <TH col="price" label={t("markets.colPrice")} align="right" />
+                <TH col="change1h" label={t("markets.col1h")} align="right" />
+                <TH col="change24h" label={t("markets.col24h")} align="right" />
+                <TH col="change7d" label={t("markets.col7d")} align="right" />
+                <TH col="volume" label={t("markets.colVolume")} align="right" />
+                <TH col="marketCap" label={t("markets.colMarketCap")} align="right" />
+                <th className="py-2 px-2 text-right text-[10px] font-mono-caps text-secondary font-medium">{t("markets.colTrend")}</th>
               </tr>
             </thead>
             <tbody>
-              {pageData.map((coin, i) => (
-                <tr
-                  key={coin.symbol}
-                  className="border-b border-surface/50 hover:bg-raised/50 transition-colors"
-                >
-                  <td className="py-2.5 px-2 text-right text-secondary font-mono text-[11px]">
+              {pageData.map((coin, i) => {
+                const assetMeta = getAssetBySymbol(coin.symbol);
+                const detailHref = assetMeta ? `/markets/${assetMeta.slug}` : undefined;
+                const rowContent = (
+                  <>
+                    <td className="py-2.5 px-2 text-center">
+                      <button
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(coin.symbol); }}
+                        className="p-1 hover:scale-110 transition-transform"
+                      >
+                        <Star className={`w-4 h-4 ${favorites.includes(coin.symbol) ? 'text-warning' : 'text-secondary'}`} fill={favorites.includes(coin.symbol) ? 'currentColor' : 'none'} />
+                      </button>
+                    </td>
+                    <td className="py-2.5 px-2 text-right text-secondary font-mono text-[11px]">
                     {coin.marketCapRank || page * pageSize + i + 1}
                   </td>
                   <td className="py-2.5 px-2">
                     <div className="flex items-center gap-2">
-                      <SymbolLogo symbol={coin.symbol} assetClass={coin.assetClass} size="xs" />
+                      <SymbolLogo symbol={coin.symbol} assetClass={coin.assetClass} logoUrl={assetMeta?.logoUrl} name={coin.name} size="xs" />
                       <span className="font-medium text-primary">{coin.name}</span>
                       <span className="text-secondary">{coin.symbol}</span>
                     </div>
                   </td>
                   <td className="py-2.5 px-2 text-right font-mono text-primary tabular-nums">
-                    {category === "forex" ? coin.price.toFixed(5) : fmtPrice(coin.price)}
+                    {category === "forex" ? coin.price.toFixed(5) : formatPrice(coin.price)}
                   </td>
                   <td className={`py-2.5 px-2 text-right font-mono tabular-nums ${(coin.changePercent1h ?? 0) >= 0 ? "text-up" : "text-down"}`}>
                     {(coin.changePercent1h ?? 0) >= 0 ? "+" : ""}{(coin.changePercent1h ?? 0).toFixed(1)}%
@@ -178,19 +264,30 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
                     {(coin.changePercent7d ?? 0) >= 0 ? "+" : ""}{(coin.changePercent7d ?? 0).toFixed(1)}%
                   </td>
                   <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums">
-                    {coin.volume ? fmtVol(coin.volume) : "-"}
+                    {coin.volume ? formatCompact(convertFromUsd(coin.volume)) : "-"}
                   </td>
                   <td className="py-2.5 px-2 text-right font-mono text-secondary tabular-nums">
-                    {coin.marketCap ? fmtMC(coin.marketCap) : "-"}
+                    {coin.marketCap ? formatCompact(convertFromUsd(coin.marketCap)) : "-"}
                   </td>
                   <td className="py-2.5 px-2 text-right">
                     {coin.sparkline7d && coin.sparkline7d.length > 0 ? (
                       <Sparkline data={coin.sparkline7d} />
                     ) : null}
                   </td>
-                </tr>
-              ))}
-            </tbody>
+                  </>
+                );
+                return detailHref ? (
+                  <Link key={coin.symbol} href={detailHref} className="contents">
+                    <tr className="border-b border-surface/50 hover:bg-raised/50 transition-colors h-[48px] cursor-pointer">
+                      {rowContent}
+                    </tr>
+                  </Link>
+                ) : (
+                  <tr key={coin.symbol} className="border-b border-surface/50 hover:bg-raised/50 transition-colors h-[48px]">
+                    {rowContent}
+                  </tr>
+                );
+              })}</tbody>
           </table>
         </div>
       </div>
@@ -211,7 +308,7 @@ export default function CoinGeckoTable({ category, view = "default" }: CoinGecko
           ))}
         </div>
         <div className="flex items-center gap-2 text-xs text-secondary">
-          <span>{page * pageSize + 1}–{Math.min((page + 1) * pageSize, sorted.length)} sur {sorted.length}</span>
+          <span>{page * pageSize + 1}–{Math.min((page + 1) * pageSize, sorted.length)} {t("markets.of")} {sorted.length}</span>
           <button
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             disabled={page === 0}

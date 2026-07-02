@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Redis from "ioredis";
+import { redis } from "@/lib/redis";
 import { rateLimit, rateLimits } from "@/lib/rate-limit";
 
-const redis = new Redis(process.env.REDIS_URL || "redis://default:dragonfly_dev@localhost:6379");
-
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 const CACHE_TTL = 60;
 const CACHE_KEY = "market:movers";
@@ -59,7 +55,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ type
         Accept: "application/json",
         ...(process.env.COINGECKO_API_KEY ? { "x-cg-demo-api-key": process.env.COINGECKO_API_KEY } : {}),
       },
-      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 60 },
     });
     if (!res.ok) throw new Error(`coingecko ${res.status}`);
     const data = (await res.json()) as CoinGeckoItem[];

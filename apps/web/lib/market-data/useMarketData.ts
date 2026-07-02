@@ -77,7 +77,7 @@ export function useMarketData(
       let hasUpdate = false;
       const updatedData = state.data.map((item) => {
         const wsUpdate = getLatestPrice(item.symbol);
-        if (wsUpdate && wsUpdate.timestamp > item.timestamp) {
+        if (wsUpdate && item.timestamp != null && wsUpdate.timestamp > item.timestamp) {
           hasUpdate = true;
           return {
             ...item,

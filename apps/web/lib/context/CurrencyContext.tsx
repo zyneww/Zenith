@@ -51,10 +51,7 @@ const CACHE_TTL = 60_000; // 60s
 
 function defaultCurrencyForLocale(loc: string): Currency {
   const map: Record<string, Currency> = {
-    fr: "EUR", "en-US": "USD", "en-UK": "GBP", ru: "RUB", it: "EUR", es: "EUR",
-    ja: "JPY", nl: "EUR", de: "EUR", pl: "PLN", tr: "TRY", pt: "BRL", id: "IDR",
-    ms: "MYR", th: "THB", vi: "VND", ko: "KRW", "zh-CN": "CNY", "zh-TW": "TWD",
-    ar: "AED", he: "ILS",
+    fr: "EUR", en: "USD", ru: "RUB", es: "EUR", de: "EUR",
   };
   return map[loc] ?? "USD";
 }
@@ -73,9 +70,9 @@ async function fetchRates(): Promise<Rates> {
     // ignore
   }
 
-  // Fetch from our own /api/fx endpoint (proxied to CoinGecko, cached in Dragonfly)
+  // Use the server-side proxy so the API key is never exposed to the browser
   try {
-    const res = await fetch("/api/fx/rates", { cache: "no-store" });
+    const res = await fetch("/api/fx/rates");
     if (res.ok) {
       const data = (await res.json()) as Rates;
       try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch { /* */ }
@@ -83,32 +80,6 @@ async function fetchRates(): Promise<Rates> {
     }
   } catch {
     // fall through to fallback
-  }
-
-  // Fallback: direct CoinGecko call (no key needed for simple price)
-  try {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd,eur,gbp,chf,jpy,rub,pln,try,brl,idr,myr,thb,vnd,krw,cny,try,aed,sar,egp,ils,mxn,ars",
-      { cache: "no-store" }
-    );
-    if (res.ok) {
-      const data = (await res.json()) as Record<string, Record<string, number>>;
-      const usd = data.bitcoin?.usd ?? 0;
-      const eth = data.ethereum?.usd ?? 0;
-      const rates: Record<Currency, number> = {} as Record<Currency, number>;
-      for (const fiat of FIAT_CURRENCIES) {
-        rates[fiat] = (data.bitcoin as any)?.[fiat.toLowerCase()] ?? 0;
-        if (!rates[fiat] && fiat === "TRY") rates[fiat] = (data.bitcoin as any)?.try ?? 0;
-      }
-      rates.USD = 1;
-      rates.BTC = 1 / usd;
-      rates.ETH = 1 / eth;
-      const out: Rates = { base: "USD", rates, fetchedAt: Date.now() };
-      try { localStorage.setItem(CACHE_KEY, JSON.stringify(out)); } catch { /* */ }
-      return out;
-    }
-  } catch {
-    // fall through
   }
 
   // Final fallback: hardcoded approximate rates

@@ -3,8 +3,7 @@ import { getTwelveQuote, getMockMarketData } from "@/lib/market-data/twelve-data
 import { getTopCoins } from "@/lib/market-data/coingecko";
 import { MarketDataPoint } from "@/lib/market-data/types";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 // Summary: picks key assets from each class for the ticker strip + market overview
 const SUMMARY_SYMBOLS = {
@@ -38,7 +37,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(allData, {
       status: 200,
       headers: {
-        "Cache-Control": "no-store, must-revalidate",
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
       },
     });
   } catch (error) {

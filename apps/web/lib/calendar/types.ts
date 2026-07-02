@@ -1,15 +1,18 @@
 export type CalendarType = 'economic' | 'earnings' | 'dividends' | 'ipos' | 'splits' | 'holidays';
 
 export interface EconomicEvent {
-  country: string;
-  countryCode: string;
-  event: string;
+  date?: string;
   time: string;
+  country?: string;
+  countryCode?: string;
+  currency?: string;
+  event: string;
   importance: 'high' | 'medium' | 'low';
   actual?: string | number;
   forecast?: string | number;
   previous?: string | number;
   source?: string;
+  impact?: string;
 }
 
 export interface EarningsEvent {

@@ -1,0 +1,145 @@
+"use client";
+
+import { useEffect, useState, useCallback } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { Flame, TrendingUp, BarChart3 } from "lucide-react";
+import { useFormatPrice, useCurrency } from "@/lib/context/CurrencyContext";
+
+interface GlobalData {
+  totalMarketCap: number;
+  totalVolume: number;
+  marketCapChange24h: number;
+  btcDominance: number;
+}
+
+interface Gainer {
+  symbol: string;
+  name: string;
+  changePercent: number;
+}
+
+const formatCompact = (n: number, locale: string) => {
+  try {
+    return new Intl.NumberFormat(locale, {
+      notation: "compact",
+      compactDisplay: "short",
+      maximumFractionDigits: 2,
+    }).format(n);
+  } catch {
+    if (n >= 1e12) return `${(n / 1e12).toFixed(2)}T`;
+    if (n >= 1e9) return `${(n / 1e9).toFixed(1)}B`;
+    if (n >= 1e6) return `${(n / 1e6).toFixed(0)}M`;
+    return `${(n / 1e3).toFixed(0)}K`;
+  }
+};
+
+export default function MarketSummaryWidgets() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const formatPrice = useFormatPrice();
+  const { convertFromUsd } = useCurrency();
+  const [global, setGlobal] = useState<GlobalData | null>(null);
+  const [gainers, setGainers] = useState<Gainer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const [globalRes, cryptoRes] = await Promise.all([
+        fetch("/api/market/global"),
+        fetch("/api/markets/crypto?limit=100"),
+      ]);
+
+      if (globalRes.ok) {
+        const g = await globalRes.json();
+        if (!g.error) setGlobal(g);
+      }
+
+      if (cryptoRes.ok) {
+        const coins = await cryptoRes.json();
+        const top = coins
+          .sort((a: any, b: any) => (b.changePercent ?? 0) - (a.changePercent ?? 0))
+          .slice(0, 3)
+          .map((c: any) => ({
+            symbol: c.symbol,
+            name: c.name,
+            changePercent: c.changePercent ?? 0,
+          }));
+        setGainers(top);
+      }
+    } catch {
+      // silent
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+    const i = setInterval(fetchData, 15000);
+    return () => clearInterval(i);
+  }, [fetchData]);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-7xl mx-auto w-full">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="bg-card border border-surface rounded-sm p-4 h-[100px] animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-7xl mx-auto w-full">
+      {/* Market Cap */}
+      <div className="bg-card border border-surface rounded-sm p-4">
+        <div className="flex items-center gap-2 mb-1">
+          <BarChart3 className="w-3.5 h-3.5 text-secondary" />
+          <span className="text-xs text-secondary font-medium">Market Cap</span>
+        </div>
+        <div className="text-xl font-mono font-medium text-primary tabular-nums">
+          {global ? formatPrice(global.totalMarketCap) : "—"}
+        </div>
+        {global && (
+          <span className={`text-xs font-mono ${global.marketCapChange24h >= 0 ? "text-up" : "text-down"}`}>
+            {global.marketCapChange24h >= 0 ? "+" : ""}{global.marketCapChange24h.toFixed(2)}%
+          </span>
+        )}
+      </div>
+
+      {/* Volume 24h */}
+      <div className="bg-card border border-surface rounded-sm p-4">
+        <div className="flex items-center gap-2 mb-1">
+          <TrendingUp className="w-3.5 h-3.5 text-secondary" />
+          <span className="text-xs text-secondary font-medium">Volume 24h</span>
+        </div>
+        <div className="text-xl font-mono font-medium text-primary tabular-nums">
+          {global ? formatPrice(global.totalVolume) : "—"}
+        </div>
+        <span className="text-xs text-tertiary">Total across all exchanges</span>
+      </div>
+
+      {/* Top Gainers */}
+      <div className="bg-card border border-surface rounded-sm p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Flame className="w-3.5 h-3.5 text-orange-400" />
+          <span className="text-xs text-secondary font-medium">Top Gainers (24h)</span>
+        </div>
+        {gainers.length > 0 ? (
+          <div className="space-y-1.5">
+            {gainers.map((g) => (
+              <div key={g.symbol} className="flex items-center justify-between">
+                <span className="text-sm text-primary font-medium">{g.symbol}</span>
+                <span className="text-sm font-mono text-up tabular-nums">
+                  +{g.changePercent.toFixed(2)}%
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <span className="text-sm text-tertiary">—</span>
+        )}
+      </div>
+    </div>
+  );
+}

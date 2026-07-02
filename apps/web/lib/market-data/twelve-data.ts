@@ -1,4 +1,5 @@
 import { MarketDataPoint, AssetClass } from "./types";
+import { getAssetsByType } from "@/lib/assets/registry";
 
 const TWELVE_DATA_BASE = "https://api.twelvedata.com";
 
@@ -8,8 +9,8 @@ const API_KEY = process.env.TWELVE_DATA_API_KEY || "";
 // We cache aggressively to stay within limits
 
 const cache = new Map<string, { data: unknown; timestamp: number }>();
-const CACHE_TTL = 30000; // 30s for live prices
-const CACHE_TTL_LONG = 300000; // 5min for less critical data
+const CACHE_TTL = 300000; // 5min — ponytail: Twelve Data free tier = 800 req/day
+const CACHE_TTL_LONG = 600000; // 10min for less critical data
 
 async function twelveDataFetch<T>(endpoint: string, ttl = CACHE_TTL): Promise<T | null> {
   if (!API_KEY || API_KEY === "your_free_twelve_data_key_here") {
@@ -29,7 +30,8 @@ async function twelveDataFetch<T>(endpoint: string, ttl = CACHE_TTL): Promise<T 
 
     const res = await fetch(url.toString(), {
       headers: { Accept: "application/json" },
-      next: { revalidate: 0 },
+      signal: AbortSignal.timeout(8000),
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
@@ -67,38 +69,79 @@ interface TwelveQuote {
   timestamp: number;
 }
 
-export async function getTwelveQuote(symbols: string[]): Promise<MarketDataPoint[]> {
-  const symbolStr = symbols.join(",");
-  const data = await twelveDataFetch<{ [symbol: string]: TwelveQuote | { status: string } }>(
-    `/quote?symbol=${symbolStr}`
-  );
+// Seeded random for consistent mock prices
+function seededRandom(seed: string): number {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) | 0;
+  const x = Math.sin(h) * 10000;
+  return x - Math.floor(x);
+}
 
-  if (!data) {
-    return [];
+function generateMockPrice(symbol: string, type: string): number {
+  const base = seededRandom(symbol);
+  switch (type) {
+    case "forex": return 0.5 + base * 200;        // 0.5 – 200.5
+    case "index": return 1000 + base * 39000;     // 1,000 – 40,000
+    case "commodity": return 1 + base * 2500;    // 1 – 2,501
+    case "futures": return 50 + base * 5000;     // 50 – 5,050
+    case "stock": return 5 + base * 995;         // 5 – 1,000
+    default: return 1 + base * 100;
   }
+}
 
+function generateMockChange(symbol: string): number {
+  return (seededRandom(symbol + "_chg") - 0.5) * 4; // -2% à +2%
+}
+
+// Batch Twelve Data quote — free tier: 8 symbols per call
+export async function getTwelveQuote(symbols: string[]): Promise<MarketDataPoint[]> {
   const results: MarketDataPoint[] = [];
+  const BATCH = 8;
 
-  for (const symbol of symbols) {
-    const item = data[symbol];
-    if (!item || "status" in item) continue;
+  for (let i = 0; i < symbols.length; i += BATCH) {
+    const batch = symbols.slice(i, i + BATCH);
+    const symbolStr = batch.join(",");
+    const data = await twelveDataFetch<{ [symbol: string]: TwelveQuote | { status: string } }>(
+      `/quote?symbol=${symbolStr}`
+    );
 
-    const assetClass = classifySymbol(symbol);
+    if (!data) continue;
 
-    results.push({
-      symbol,
-      name: item.name || symbol,
-      price: parseFloat(item.close),
-      change: parseFloat(item.change),
-      changePercent: parseFloat(item.percent_change),
-      high: parseFloat(item.high),
-      low: parseFloat(item.low),
-      open: parseFloat(item.open),
-      close: parseFloat(item.close),
-      volume: parseFloat(item.volume),
-      timestamp: typeof item.timestamp === "number" ? item.timestamp * 1000 : Date.now(),
-      assetClass,
-    });
+    for (const symbol of batch) {
+      const item = data[symbol];
+      if (!item || "status" in item) continue;
+
+      const assetClass = classifySymbol(symbol);
+      const price = parseFloat(item.close);
+
+      results.push({
+        id: symbol,
+        symbol,
+        name: item.name || symbol,
+        image: "",
+        current_price: price,
+        price_change_percentage_24h: parseFloat(item.percent_change),
+        high_24h: parseFloat(item.high),
+        low_24h: parseFloat(item.low),
+        total_volume: parseFloat(item.volume) || 0,
+        market_cap: 0,
+        circulating_supply: 0,
+        max_supply: null,
+        ath: price,
+        atl: 0,
+        assetClass,
+        price,
+        change: parseFloat(item.change),
+        changePercent: parseFloat(item.percent_change),
+        high: parseFloat(item.high),
+        low: parseFloat(item.low),
+        open: parseFloat(item.open),
+        close: price,
+        volume: parseFloat(item.volume) || 0,
+        marketCap: 0,
+        timestamp: typeof item.timestamp === "number" ? item.timestamp * 1000 : Date.now(),
+      });
+    }
   }
 
   return results;
@@ -112,20 +155,19 @@ export async function getTwelveEOD(symbol: string): Promise<MarketDataPoint | nu
 
   const item = data[symbol];
   const assetClass = classifySymbol(symbol);
+  const price = parseFloat(item.close);
 
   return {
-    symbol,
-    name: item.name || symbol,
-    price: parseFloat(item.close),
-    change: parseFloat(item.change),
-    changePercent: parseFloat(item.percent_change),
-    high: parseFloat(item.high),
-    low: parseFloat(item.low),
-    open: parseFloat(item.open),
-    close: parseFloat(item.close),
-    timestamp: Date.now(),
+    id: symbol, symbol,
+    name: item.name || symbol, image: "",
+    current_price: price, price_change_percentage_24h: parseFloat(item.percent_change),
+    high_24h: parseFloat(item.high), low_24h: parseFloat(item.low),
+    total_volume: 0, market_cap: 0, circulating_supply: 0, max_supply: null, ath: price, atl: 0,
     assetClass,
-  };
+    price, change: parseFloat(item.change), changePercent: parseFloat(item.percent_change),
+    high: parseFloat(item.high), low: parseFloat(item.low), open: parseFloat(item.open),
+    close: price, volume: 0, marketCap: 0, timestamp: Date.now(),
+  } as MarketDataPoint;
 }
 
 function classifySymbol(symbol: string): AssetClass {
@@ -140,8 +182,18 @@ function classifySymbol(symbol: string): AssetClass {
 }
 
 // Mock data fallback for when no API key is configured
-const MOCK_DATA: Record<string, MarketDataPoint> = {
-  "EUR/USD": { symbol: "EUR/USD", name: "Euro / Dollar", price: 1.0845, change: 0.0023, changePercent: 0.21, high: 1.0860, low: 1.0810, open: 1.0822, close: 1.0845, timestamp: Date.now(), assetClass: "forex" },
+function mockPoint(base: any): MarketDataPoint {
+  return {
+    id: base.symbol, image: "", current_price: base.price,
+    price_change_percentage_24h: base.changePercent,
+    high_24h: base.high, low_24h: base.low, total_volume: base.volume ?? 0,
+    market_cap: 0, circulating_supply: 0, max_supply: null, ath: base.price, atl: 0,
+    ...base, assetClass: base.assetClass,
+  } as MarketDataPoint;
+}
+
+const MOCK_DATA: Record<string, any> = {
+  "EUR/USD": mockPoint({ symbol: "EUR/USD", name: "Euro / Dollar", price: 1.0845, change: 0.0023, changePercent: 0.21, high: 1.0860, low: 1.0810, open: 1.0822, close: 1.0845, timestamp: Date.now(), assetClass: "forex" }),
   "GBP/USD": { symbol: "GBP/USD", name: "Livre / Dollar", price: 1.2730, change: -0.0041, changePercent: -0.32, high: 1.2780, low: 1.2700, open: 1.2771, close: 1.2730, timestamp: Date.now(), assetClass: "forex" },
   "USD/JPY": { symbol: "USD/JPY", name: "Dollar / Yen", price: 149.85, change: 0.45, changePercent: 0.30, high: 150.20, low: 149.30, open: 149.40, close: 149.85, timestamp: Date.now(), assetClass: "forex" },
   "USD/CHF": { symbol: "USD/CHF", name: "Dollar / Franc", price: 0.8820, change: -0.0012, changePercent: -0.14, high: 0.8840, low: 0.8800, open: 0.8832, close: 0.8820, timestamp: Date.now(), assetClass: "forex" },
@@ -187,9 +239,89 @@ export function getMockMarketData(symbols: string[]): MarketDataPoint[] {
     }));
 }
 
-// Helper to get all symbols by asset class
+// Generate realistic mock for a single asset from registry
+function generateMockForAsset(symbol: string, type: string): MarketDataPoint {
+  const price = generateMockPrice(symbol, type);
+  const changePercent = generateMockChange(symbol);
+  const change = price * (changePercent / 100);
+  const open = price - change;
+  const high = Math.max(price, open) * (1 + Math.abs(seededRandom(symbol + "_high")) * 0.01);
+  const low = Math.min(price, open) * (1 - Math.abs(seededRandom(symbol + "_low")) * 0.01);
+  const volume = Math.floor(seededRandom(symbol + "_vol") * 1e8);
+
+  return {
+    id: symbol,
+    symbol,
+    name: symbol,
+    image: "",
+    current_price: price,
+    price_change_percentage_24h: changePercent,
+    high_24h: high,
+    low_24h: low,
+    total_volume: volume,
+    market_cap: 0,
+    circulating_supply: 0,
+    max_supply: null,
+    ath: high,
+    atl: low,
+    assetClass: type as AssetClass,
+    price,
+    change,
+    changePercent,
+    high,
+    low,
+    open,
+    close: price,
+    volume,
+    marketCap: 0,
+    timestamp: Date.now(),
+  } as MarketDataPoint;
+}
+
+// Merge real Twelve Data with auto-generated mocks for missing symbols
+export async function getMergedMarketData(assetClass: AssetClass, symbols?: string[]): Promise<MarketDataPoint[]> {
+  const typeMap: Record<string, string> = {
+    forex: "forex",
+    commodity: "commodity",
+    commodities: "commodity",
+    index: "index",
+    indices: "index",
+    stock: "stock",
+    stocks: "stock",
+    etf: "etf",
+    futures: "futures",
+  };
+  const type = typeMap[assetClass];
+  if (!type) return [];
+
+  const targetSymbols = symbols ?? getAssetsByType(type as any).map((a) => a.symbol);
+  if (targetSymbols.length === 0) return [];
+
+  // Fetch real data (batched internally)
+  const realData = await getTwelveQuote(targetSymbols);
+  const realMap = new Map(realData.map((d) => [d.symbol, d]));
+
+  // Merge: real if available, otherwise generate realistic mock
+  return targetSymbols.map((sym) => {
+    if (realMap.has(sym)) return realMap.get(sym)!;
+    return generateMockForAsset(sym, type);
+  });
+}
+
+// Helper to get all symbols by asset class from registry
 export function getSymbolsByAssetClass(assetClass: AssetClass): string[] {
-  return Object.values(MOCK_DATA)
-    .filter((d) => d.assetClass === assetClass)
-    .map((d) => d.symbol);
+  const typeMap: Record<string, string> = {
+    forex: "forex",
+    commodity: "commodity",
+    commodities: "commodity",
+    index: "index",
+    indices: "index",
+    stock: "stock",
+    stocks: "stock",
+    etf: "etf",
+    futures: "futures",
+  };
+  const type = typeMap[assetClass];
+  if (!type) return [];
+  return getAssetsByType(type as any).map((a) => a.symbol);
 }

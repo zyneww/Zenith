@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByGecko Pro Terminal - Full Width</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#F5A623', // Bybit Yellow
+                            gecko: '#8CC63F',   // CoinGecko Green
+                            dark: '#0B0E11',    // Ultra dark background
+                            panel: '#12161A',   // Clean panel bg
+                            card: '#161A1E',    // Secondary cards
+                            border: '#222930',  // Sharp dark borders
+                            textMuted: '#848E9C' // Clean crypto UI text
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- APEXCHARTS (Pour simuler le graphique Recharts de manière ultra-réactive et moderne en mode sombre) -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0E11;
+        }
+        /* Scrollbar styles matching professional terminals */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12161A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222930;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F5A623;
+        }
+        /* Tab transitions */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-gray-200 antialiased min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- BARRE DE NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-300 bg-brand-panel border border-brand-primary text-white px-5 py-3 rounded-lg shadow-2xl flex items-center space-x-3">
+        <span id="toast-icon" class="text-brand-primary"><i class="fas fa-info-circle"></i></span>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <!-- EN-TÊTE ULTRA COMPACT (STYLE BYBIT SPOT TERMINAL) -->
+    <header class="bg-brand-panel border-b border-brand-border sticky top-0 z-40 w-full px-4 py-2">
+        <div class="w-full flex flex-col xl:flex-row justify-between items-center gap-3">
+            
+            <!-- Logo & Sélecteur de Paire -->
+            <div class="flex items-center space-x-4 w-full xl:w-auto justify-between xl:justify-start">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-brand-primary text-black font-black px-2.5 py-1 rounded text-sm tracking-wider">BY</span>
+                    <span class="bg-brand-gecko text-black font-black px-2.5 py-1 rounded text-sm tracking-wider">GECKO</span>
+                    <span class="hidden md:inline-block text-xs font-bold text-gray-500 tracking-widest pl-2">PRO TERMINAL</span>
+                </div>
+                <!-- Sélecteur de Crypto -->
+                <div class="relative">
+                    <select id="crypto-selector" class="bg-brand-dark border border-brand-border text-white font-bold rounded px-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-primary cursor-pointer transition">
+                        <option value="btc" selected>Bitcoin (BTC/USDT)</option>
+                        <option value="eth">Ethereum (ETH/USDT)</option>
+                        <option value="sol">Solana (SOL/USDT)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Ticker en Direct / Statistiques 24H -->
+            <div class="flex flex-wrap items-center gap-4 md:gap-8 text-xs w-full xl:w-auto justify-between xl:justify-end">
+                <div class="flex items-center space-x-2 bg-brand-dark px-3 py-1 rounded border border-brand-border">
+                    <span class="text-brand-textMuted text-[10px] font-bold uppercase">PRIX :</span>
+                    <span id="ticker-price" class="text-sm font-extrabold text-emerald-500 flex items-center gap-1 font-mono">
+                        $0.00
+                    </span>
+                </div>
+                <div>
+                    <span class="text-brand-textMuted block text-[10px] font-bold">VARIATION 24H</span>
+                    <span id="ticker-change" class="text-xs font-bold text-emerald-500 font-mono">
+                        +0.00%
+                    </span>
+                </div>
+                <div>
+                    <span class="text-brand-textMuted block text-[10px] font-bold">HAUT 24H</span>
+                    <span id="ticker-high" class="text-xs font-semibold text-gray-300 font-mono">$0.00</span>
+                </div>
+                <div>
+                    <span class="text-brand-textMuted block text-[10px] font-bold">BAS 24H</span>
+                    <span id="ticker-low" class="text-xs font-semibold text-gray-300 font-mono">$0.00</span>
+                </div>
+                <div>
+                    <span class="text-brand-textMuted block text-[10px] font-bold">VOLUME 24H (USDT)</span>
+                    <span id="ticker-volume" class="text-xs font-semibold text-gray-300 font-mono">$0.00</span>
+                </div>
+                <!-- Flux Info -->
+                <div class="flex items-center space-x-1.5 bg-brand-dark px-2.5 py-1 rounded border border-brand-border">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-[9px] text-brand-gecko font-bold uppercase tracking-wider">Simulateur HF Actif</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MARQUEE TRENDING COINGECKO (FULL WIDTH) -->
+    <div class="w-full bg-[#161a1e]/40 border-b border-brand-border/60 py-1.5 px-4 overflow-x-auto whitespace-nowrap text-xs flex items-center gap-8">
+        <span class="text-brand-gecko font-bold flex items-center gap-1 text-[11px] shrink-0">
+            <i class="fas fa-fire"></i> Tendance CoinGecko :
+        </span>
+        <div class="flex gap-6 font-mono text-[11px]">
+            <span class="text-gray-400">1. <strong class="text-white">Solana (SOL)</strong> <span class="text-emerald-500 font-bold">+5.4%</span></span>
+            <span class="text-gray-400">2. <strong class="text-white">Bitcoin (BTC)</strong> <span class="text-emerald-500 font-bold">+1.2%</span></span>
+            <span class="text-gray-400">3. <strong class="text-white">Render (RENDER)</strong> <span class="text-rose-500 font-bold">-2.1%</span></span>
+            <span class="text-gray-400">4. <strong class="text-white">Sui (SUI)</strong> <span class="text-emerald-500 font-bold">+12.8%</span></span>
+            <span class="text-gray-400">5. <strong class="text-white">Ethereum (ETH)</strong> <span class="text-gray-400">0.0%</span></span>
+        </div>
+    </div>
+
+    <!-- GRILLE DE TERMINAL PRINCIPALE (FULL WIDTH / DISPOSITION SOUHAITÉE BYBIT) -->
+    <main class="w-full flex-grow p-2 grid grid-cols-1 xl:grid-cols-12 gap-2">
+        
+        <!-- ================= COLONNE DE GAUCHE (ZONE GRAPHIQUE & MODULES INFÉRIEURS) - 75% LARGEUR ================= -->
+        <section class="xl:col-span-9 flex flex-col space-y-2">
+            
+            <!-- CONTENEUR DU GRAPHIQUE AVEC HAUTEUR AUGMENTÉE ET TOGGLE CHART -->
+            <div class="bg-brand-panel border border-brand-border rounded overflow-hidden shadow-lg flex flex-col h-[640px]">
+                <div class="px-4 py-2 bg-brand-panel border-b border-brand-border flex justify-between items-center shrink-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-chart-line text-brand-primary"></i>
+                        <span class="font-semibold text-xs uppercase tracking-wider text-gray-300">Graphique Avancé Temps Réel</span>
+                    </div>
+                    <!-- SELECTEUR DE TYPE DE GRAPHIQUE -->
+                    <div class="flex items-center bg-brand-dark rounded border border-brand-border p-0.5">
+                        <button id="chart-toggle-tv" onclick="switchChartEngine('tv')" class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all bg-brand-primary text-black">
+                            <i class="fas fa-tv mr-1"></i>TradingView
+                        </button>
+                        <button id="chart-toggle-recharts" onclick="switchChartEngine('recharts')" class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all text-gray-400 hover:text-white">
+                            <i class="fas fa-chart-area mr-1"></i>Recharts (Sim)
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ZONE D'AFFICHAGE DU GRAPHIQUE (TradingView ou Recharts) -->
+                <div class="flex-grow w-full relative" id="chart-view-host">
+                    <!-- Fenêtre TradingView -->
+                    <div id="tv-chart-container" class="absolute inset-0 w-full h-full"></div>
+                    <!-- Fenêtre Recharts (Masquée par défaut) -->
+                    <div id="recharts-chart-container" class="absolute inset-0 w-full h-full hidden p-4 flex flex-col bg-brand-dark/20">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[11px] text-brand-gecko font-bold uppercase tracking-wider">
+                                <i class="fas fa-sync-alt animate-spin mr-1"></i> Flux Recharts Actif (Temps Réel)
+                            </span>
+                            <span class="text-[10px] text-brand-textMuted font-mono">Actualisation dynamique par seconde</span>
+                        </div>
+                        <div id="recharts-chart-element" class="w-full h-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ZONE DE CONTENU COINGECKO & INFOS COMPLÈTES (DANS L'ONGLET INFÉRIEUR - STYLE "ORDRES OUVERTS/ASSETS" DE BYBIT) -->
+            <div class="bg-brand-panel border border-brand-border rounded shadow-lg flex flex-col min-h-[350px]">
+                
+                <!-- En-tête des Onglets (Inspiré de l'onglet de gestion d'actifs de Bybit) -->
+                <div class="bg-[#161a1e] border-b border-brand-border px-2 flex flex-wrap items-center justify-between">
+                    <div class="flex space-x-1">
+                        <button onclick="switchInfoTab('tab-fundamentals')" id="btn-tab-fundamentals" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-primary border-b-2 border-brand-primary transition focus:outline-none">
+                            <i class="fas fa-database mr-1.5"></i>Statistiques Fondamentales
+                        </button>
+                        <button onclick="switchInfoTab('tab-news')" id="btn-tab-news" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white transition focus:outline-none">
+                            <i class="fas fa-newspaper mr-1.5"></i>Actualités Chaudes
+                        </button>
+                        <button onclick="switchInfoTab('tab-sentiment')" id="btn-tab-sentiment" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white transition focus:outline-none">
+                            <i class="fas fa-chart-pie mr-1.5"></i>Sentiment & Tokenomics
+                        </button>
+                        <button onclick="switchInfoTab('tab-converter')" id="btn-tab-converter" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white transition focus:outline-none">
+                            <i class="fas fa-calculator mr-1.5"></i>Convertisseur & Liens
+                        </button>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-2 text-[10px] text-brand-textMuted pr-3">
+                        <i class="fab fa-envira text-brand-gecko"></i> Source de données : CoinGecko API
+                    </div>
+                </div>
+
+                <!-- Contenu des Onglets -->
+                <div class="p-4 flex-grow">
+                    
+                    <!-- Onglet 1 : Statistiques Fondamentales -->
+                    <div id="tab-fundamentals" class="tab-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Chiffres Clés -->
+                            <div class="space-y-3 text-xs bg-brand-dark/40 p-3.5 rounded border border-brand-border/40">
+                                <span class="text-brand-gecko font-bold uppercase tracking-wider text-[10px] block mb-2">Valorisation Globale</span>
+                                <div class="flex justify-between items-center py-1 border-b border-brand-border/30">
+                                    <span class="text-brand-textMuted">Capitalisation</span>
+                                    <span id="stat-mcap" class="font-bold text-gray-200">$0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center py-1 border-b border-brand-border/30">
+                                    <span class="text-brand-textMuted">Val. Entièrement Diluée (FDV)</span>
+                                    <span id="stat-fdv" class="font-semibold text-gray-200">$0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center py-1">
+                                    <span class="text-brand-textMuted">Rank Global CoinGecko</span>
+                                    <span id="crypto-badge" class="font-mono font-bold bg-brand-primary text-black px-2 py-0.5 rounded text-[10px]">Rank #1</span>
+                                </div>
+                            </div>
+                            <!-- Offre Globale -->
+                            <div class="space-y-3 text-xs bg-brand-dark/40 p-3.5 rounded border border-brand-border/40">
+                                <span class="text-brand-gecko font-bold uppercase tracking-wider text-[10px] block mb-2">Offre de jetons</span>
+                                <div class="flex justify-between items-center py-1 border-b border-brand-border/30">
+                                    <span class="text-brand-textMuted">Offre en Circulation</span>
+                                    <span id="stat-circulating" class="font-semibold text-gray-200">0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center py-1">
+                                    <span class="text-brand-textMuted">Offre Maximale</span>
+                                    <span id="stat-max-supply" class="font-semibold text-gray-200">0.00</span>
+                                </div>
+                            </div>
+                            <!-- Records Historiques -->
+                            <div class="space-y-3 text-xs bg-brand-dark/40 p-3.5 rounded border border-brand-border/40">
+                                <span class="text-brand-gecko font-bold uppercase tracking-wider text-[10px] block mb-2">Historique des records</span>
+                                <div class="flex justify-between items-center py-1 border-b border-brand-border/30">
+                                    <span class="text-emerald-500 font-medium">All-Time High (ATH)</span>
+                                    <div class="text-right">
+                                        <span id="stat-ath" class="font-bold text-gray-200">$0.00</span>
+                                        <span id="stat-ath-percent" class="block text-[10px] text-red-500 font-mono font-bold">-0.00%</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center py-1">
+                                    <span class="text-rose-500 font-medium">All-Time Low (ATL)</span>
+                                    <div class="text-right">
+                                        <span id="stat-atl" class="font-bold text-gray-200">$0.00</span>
+                                        <span id="stat-atl-percent" class="block text-[10px] text-emerald-500 font-mono font-bold">+0.00%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet 2 : Actualités Chaudes -->
+                    <div id="tab-news" class="tab-content">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-brand-gecko uppercase tracking-wider"><i class="fas fa-bullhorn mr-1.5"></i>Flash Infos & Sentiments de Marché</span>
+                            <span class="text-[10px] text-brand-textMuted font-mono">Mise à jour en temps réel</span>
+                        </div>
+                        <div id="news-feed-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[250px] overflow-y-auto pr-2">
+                            <!-- Les cartes d'actualités seront injectées ici dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Onglet 3 : Sentiment & Tokenomics -->
+                    <div id="tab-sentiment" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                            <!-- Vote de sentiment -->
+                            <div class="md:col-span-5 bg-brand-dark/40 p-4 rounded border border-brand-border/40">
+                                <span class="text-xs font-bold text-brand-gecko uppercase tracking-wider block mb-2"><i class="fas fa-users mr-1.5"></i>Sentiment de la Communauté</span>
+                                <p class="text-[11px] text-brand-textMuted leading-relaxed mb-3">Votez en direct pour influencer l'indice local de cette crypto.</p>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex justify-between text-xs font-bold">
+                                        <span class="text-emerald-500" id="sentiment-bull-pct">68% Haussier</span>
+                                        <span class="text-rose-500" id="sentiment-bear-pct">32% Baissier</span>
+                                    </div>
+                                    <div class="w-full bg-brand-dark h-2 rounded-full overflow-hidden flex">
+                                        <div id="sentiment-bull-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 68%;"></div>
+                                        <div id="sentiment-bear-bar" class="bg-rose-500 h-full transition-all duration-500" style="width: 32%;"></div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2 pt-1.5">
+                                        <button onclick="voteSentiment('bull')" class="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-500 hover:text-black transition py-1.5 rounded text-[10px] font-bold border border-emerald-500/20 uppercase">
+                                            <i class="fas fa-thumbs-up mr-1"></i> Haussier
+                                        </button>
+                                        <button onclick="voteSentiment('bear')" class="bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white transition py-1.5 rounded text-[10px] font-bold border border-rose-500/20 uppercase">
+                                            <i class="fas fa-thumbs-down mr-1"></i> Baissier
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Détail Tokenomics -->
+                            <div class="md:col-span-7 bg-brand-dark/40 p-4 rounded border border-brand-border/40 flex flex-col justify-between">
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider block mb-2"><i class="fas fa-coins mr-1.5"></i>Fiche d'identité Tokenomics</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                                    <div class="bg-brand-panel p-2 rounded border border-brand-border/40">
+                                        <span class="text-brand-textMuted block text-[9px] font-bold uppercase">Emission</span>
+                                        <span id="tokenomics-emission" class="font-semibold block text-white mt-1">S/O</span>
+                                    </div>
+                                    <div class="bg-brand-panel p-2 rounded border border-brand-border/40">
+                                        <span class="text-brand-textMuted block text-[9px] font-bold uppercase">Consensus</span>
+                                        <span id="tokenomics-consensus" class="font-semibold block text-white mt-1">S/O</span>
+                                    </div>
+                                    <div class="bg-brand-panel p-2 rounded border border-brand-border/40">
+                                        <span class="text-brand-textMuted block text-[9px] font-bold uppercase">Usage clé</span>
+                                        <span id="tokenomics-utility" class="font-semibold block text-white mt-1">S/O</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-[11px] text-brand-textMuted leading-relaxed">
+                                    <strong class="text-gray-300">Description :</strong> <span id="crypto-desc">Chargement des données...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet 4 : Convertisseur & Liens de Ressources -->
+                    <div id="tab-converter" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                            <!-- Convertisseur Dynamique -->
+                            <div class="md:col-span-6 bg-brand-dark/40 p-4 rounded border border-brand-border/40">
+                                <span class="text-xs font-bold text-brand-gecko uppercase tracking-wider block mb-2.5"><i class="fas fa-calculator mr-1.5"></i>Convertisseur instantané</span>
+                                <div class="space-y-2">
+                                    <div class="flex items-center bg-brand-panel rounded border border-brand-border px-3 py-2">
+                                        <input id="calc-crypto-amount" type="number" value="1" step="any" oninput="calculateConversion('crypto')" class="w-full bg-transparent text-sm focus:outline-none font-semibold font-mono text-white">
+                                        <span id="calc-crypto-symbol" class="text-xs font-bold text-brand-primary min-w-[50px] text-center uppercase font-mono">BTC</span>
+                                    </div>
+                                    <div class="text-center text-gray-500 py-0.5">
+                                        <i class="fas fa-exchange-alt rotate-90 xl:rotate-0"></i>
+                                    </div>
+                                    <div class="flex items-center bg-brand-panel rounded border border-brand-border px-3 py-2">
+                                        <input id="calc-fiat-amount" type="number" step="any" oninput="calculateConversion('fiat')" class="w-full bg-transparent text-sm focus:outline-none font-semibold font-mono text-white">
+                                        <span class="text-xs font-bold text-emerald-400 min-w-[50px] text-center font-mono">USD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Liens de redirection de projet -->
+                            <div class="md:col-span-6 bg-brand-dark/40 p-4 rounded border border-brand-border/40 flex flex-col justify-between">
+                                <span class="text-xs font-bold text-brand-primary uppercase tracking-wider block mb-2.5"><i class="fas fa-link mr-1.5"></i>Ressources Projet Externes</span>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <a id="link-web" href="#" target="_blank" class="bg-brand-panel hover:bg-brand-border text-gray-300 py-2 px-2.5 rounded flex items-center justify-between transition border border-brand-border/60">
+                                        <span>Site Officiel</span> <i class="fas fa-external-link-alt text-[9px] text-gray-500"></i>
+                                    </a>
+                                    <a id="link-explorer" href="#" target="_blank" class="bg-brand-panel hover:bg-brand-border text-gray-300 py-2 px-2.5 rounded flex items-center justify-between transition border border-brand-border/60">
+                                        <span>Explorateur de Blocs</span> <i class="fas fa-search text-[9px] text-gray-500"></i>
+                                    </a>
+                                    <a id="link-community" href="#" target="_blank" class="bg-brand-panel hover:bg-brand-border text-gray-300 py-2 px-2.5 rounded flex items-center justify-between transition border border-brand-border/60">
+                                        <span>Communauté Reddit</span> <i class="fab fa-reddit-alien text-[9px] text-gray-500"></i>
+                                    </a>
+                                    <a id="link-source" href="#" target="_blank" class="bg-brand-panel hover:bg-brand-border text-gray-300 py-2 px-2.5 rounded flex items-center justify-between transition border border-brand-border/60">
+                                        <span>Code Github</span> <i class="fab fa-github text-[9px] text-gray-500"></i>
+                                    </a>
+                                </div>
+                                <div class="text-[10px] text-brand-textMuted mt-4 italic">
+                                    <i class="fas fa-info-circle"></i> Ces liens sont extraits de l'inventaire officiel de CoinGecko pour permettre une navigation rapide.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= COLONNE DE DROITE (CARNET D'ORDRES ET TRANSACTIONS DU MARCHÉ) - 25% LARGEUR ================= -->
+        <section class="xl:col-span-3 flex flex-col space-y-2">
+            
+            <!-- BYBIT CARNET D'ORDRES (TEMPS RÉEL) -->
+            <div class="bg-brand-panel border border-brand-border rounded p-3 shadow-lg flex flex-col">
+                <div class="flex justify-between items-center border-b border-brand-border pb-2 mb-2">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-brand-primary text-xs"><i class="fas fa-list-ul"></i></span>
+                        <span class="font-bold text-xs tracking-wider uppercase text-brand-primary">Carnet d'Ordres Bybit</span>
+                    </div>
+                    <span class="text-[10px] text-brand-textMuted">Précision Auto</span>
+                </div>
+
+                <div class="grid grid-cols-3 text-[9px] text-brand-textMuted font-bold uppercase mb-1">
+                    <span>Prix (USDT)</span>
+                    <span class="text-right">Taille (Quantité)</span>
+                    <span class="text-right">Total</span>
+                </div>
+
+                <!-- Ventes (Asks) - Rouge -->
+                <div id="asks-list" class="space-y-0.5 text-[11px] font-mono flex flex-col-reverse justify-end h-[105px] overflow-hidden">
+                    <!-- Injection JS -->
+                </div>
+
+                <!-- Prix Spread Courant -->
+                <div class="my-2 py-1 bg-brand-dark border-y border-brand-border flex justify-between items-center px-2">
+                    <span id="spread-price" class="text-sm font-extrabold text-emerald-500 font-mono">0.00</span>
+                    <span id="spread-diff" class="text-[10px] text-brand-textMuted font-mono">Spread: 0.12 (0.01%)</span>
+                </div>
+
+                <!-- Achats (Bids) - Vert -->
+                <div id="bids-list" class="space-y-0.5 text-[11px] font-mono h-[105px] overflow-hidden">
+                    <!-- Injection JS -->
+                </div>
+            </div>
+
+            <!-- HISTORIQUE DES TRANSACTIONS EN TEMPS RÉEL (STYLE BYBIT RECENT TRADES) -->
+            <div class="bg-brand-panel border border-brand-border rounded p-3 shadow-lg flex flex-col flex-grow min-h-[220px]">
+                <div class="flex justify-between items-center border-b border-brand-border pb-2 mb-2">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-brand-primary text-xs"><i class="fas fa-history"></i></span>
+                        <span class="font-bold text-xs tracking-wider uppercase text-brand-primary">Transactions Récentes</span>
+                    </div>
+                    <span class="text-[9px] bg-brand-dark px-1.5 py-0.5 rounded text-emerald-500 font-mono font-bold uppercase">Live</span>
+                </div>
+
+                <div class="grid grid-cols-3 text-[9px] text-brand-textMuted font-bold uppercase mb-1">
+                    <span>Prix (USDT)</span>
+                    <span class="text-right">Quantité</span>
+                    <span class="text-right">Heure</span>
+                </div>
+
+                <!-- Liste des transactions publiques simulées -->
+                <div id="recent-trades-list" class="space-y-1 text-[11px] font-mono flex-grow overflow-y-auto max-h-[190px] pr-1">
+                    <!-- Les micro-transactions défilent ici en temps réel -->
+                </div>
+            </div>
+
+            <!-- PORTEFEUILLE DE SIMULATION SIMPLIFIÉ (RÉCAPITULATIF SANS LA ZONE DE TRADING RETIRÉE) -->
+            <div class="bg-brand-panel border border-brand-border rounded p-3 shadow-lg">
+                <div class="flex justify-between items-center border-b border-brand-border pb-1.5 mb-2">
+                    <span class="font-bold text-[11px] tracking-wider text-brand-gecko uppercase"><i class="fas fa-briefcase mr-1"></i>Portefeuille Fictif</span>
+                    <button onclick="resetWallet()" class="text-[9px] text-gray-500 hover:text-red-400 transition" title="Réinitialiser">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+
+                <!-- Soldes -->
+                <div class="space-y-1.5 text-[11px]">
+                    <div class="flex justify-between items-center bg-brand-dark/40 px-2 py-1 rounded">
+                        <span class="text-brand-textMuted">Solde USDT</span>
+                        <span id="balance-usdt" class="font-bold font-mono text-white">10000.00 USDT</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-brand-dark/40 px-2 py-1 rounded">
+                        <span id="balance-crypto-label" class="text-brand-textMuted">Solde BTC</span>
+                        <span id="balance-crypto" class="font-bold font-mono text-white">0.054320 BTC</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-brand-border/60 pt-1.5 mt-1 font-bold text-brand-primary">
+                        <span>Total Nette</span>
+                        <span id="balance-total" class="font-mono">$10,000.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- PIED DE PAGE / FOOTER -->
+    <footer class="bg-brand-panel border-t border-brand-border mt-auto py-4 px-4">
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-brand-textMuted max-w-[1920px] mx-auto">
+            <div>
+                <h4 class="font-bold text-gray-200 mb-1 uppercase tracking-widest text-[9px]">Directives d'unification</h4>
+                <p class="leading-relaxed text-[11px]">
+                    Cette structure déploie le graphique sur les 3/4 gauches de l'espace d'affichage avec une proportion d'échelle calquée sur l'onglet Bybit officiel.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-200 mb-1 uppercase tracking-widest text-[9px]">Moteur de Graphique Recharts</h4>
+                <p class="leading-relaxed text-[11px]">
+                    Le bouton de bascule permet d'activer un graphique local style Recharts qui trace en temps réel les oscillations financières du simulateur.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-200 mb-1 uppercase tracking-widest text-[9px]">Intégration d'onglets</h4>
+                <p class="leading-relaxed text-[11px]">
+                    Toutes les informations fondamentales et l'indice d'actualités de CoinGecko sont condensées dans les onglets de bordure inférieurs pour préserver la compacité.
+                </p>
+            </div>
+        </div>
+        <div class="text-center text-[10px] text-gray-600 mt-3 pt-3 border-t border-brand-border/40">
+            ByGecko Unified Interface Terminal Pro © 2026. Tous droits réservés.
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE TRADINGVIEW WIDGET -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <!-- CODE SCRIPT & STRUCTURE DE SIMULATION COMMUNE -->
+    <script>
+        // CONFIGURATIONS GÉNÉRALES CRYPTOS (COINGECKO & BYBIT COMBINÉS)
+        const cryptoConfig = {
+            btc: {
+                name: 'Bitcoin',
+                symbol: 'BTC',
+                tvSymbol: 'BYBIT:BTCUSDT',
+                rank: 'Rank #1',
+                mcap: '$1,920,450,110,240',
+                fdv: '$1,920,450,110,240',
+                circulating: '19,692,000 BTC',
+                maxSupply: '21,000,000 BTC',
+                ath: '$104,230.00',
+                athPercent: '-8.5%',
+                atl: '$67.81',
+                atlPercent: '+142,500%',
+                web: 'https://bitcoin.org',
+                explorer: 'https://blockstream.info',
+                community: 'https://www.reddit.com/r/Bitcoin/',
+                source: 'https://github.com/bitcoin/bitcoin',
+                description: 'Le Bitcoin est un protocole de transfert de valeur décentralisé à l\'échelle mondiale, développé par l\'entité pseudonyme Satoshi Nakamoto en 2008. Il repose sur un consensus de preuve de travail (Proof-of-Work).',
+                tokenomics: {
+                    emission: 'Strictement limité à 21M (Halving)',
+                    consensus: 'Proof-of-Work (SHA-256)',
+                    utility: 'Réserve de valeur majeure'
+                },
+                news: [
+                    { title: "Satoshi Nakamoto : De nouvelles analyses suggèrent un réveil de portefeuilles de l'ère primitive.", source: "CoinGecko News", time: "Il y a 10m", type: "Neutre" },
+                    { title: "Adoption institutionnelle : Les flux d'investissements d'ETF BTC surpassent les sommets historiques de 2024.", source: "Financial Ledger", time: "Il y a 32m", type: "Bullish" },
+                    { title: "Réseau Bitcoin : Le taux de hashage global atteint un niveau de résilience record face aux hausses d'énergie.", source: "ChainAnalysis", time: "Il y a 1h", type: "Bullish" },
+                    { title: "MicroStrategy achète à nouveau pour $1,5M de Bitcoin en renforçant son bilan institutionnel.", source: "Bloomberg", time: "Il y a 2h", type: "Bullish" }
+                ],
+                initialPrice: 96450.00,
+                sentiment: { bull: 72, bear: 28 }
+            },
+            eth: {
+                name: 'Ethereum',
+                symbol: 'ETH',
+                tvSymbol: 'BYBIT:ETHUSDT',
+                rank: 'Rank #2',
+                mcap: '$450,210,500,800',
+                fdv: '$450,210,500,800',
+                circulating: '120,112,000 ETH',
+                maxSupply: 'Infini (Dynamique)',
+                ath: '$4,878.26',
+                athPercent: '-35.2%',
+                atl: '$0.43',
+                atlPercent: '+735,210%',
+                web: 'https://ethereum.org',
+                explorer: 'https://etherscan.io',
+                community: 'https://www.reddit.com/r/ethereum/',
+                source: 'https://github.com/ethereum',
+                description: 'Ethereum est un ordinateur mondial décentralisé permettant le déploiement de contrats intelligents (Smart Contracts). Il alimente la majorité de l\'écosystème de la Finance Décentralisée (DeFi).',
+                tokenomics: {
+                    emission: 'Inflation dynamique (EIP-1559)',
+                    consensus: 'Proof-of-Stake (Gas Fees)',
+                    utility: 'Carburant pour dApps & DeFi'
+                },
+                news: [
+                    { title: "Vitalik Buterin propose 'The Splurge' : un plan d'amélioration majeur pour l'évolutivité d'Ethereum.", source: "L2 Insights", time: "Il y a 15m", type: "Bullish" },
+                    { title: "Activité DeFi : Le volume d'échange sur les bourses décentralisées Ethereum bondit de 45% ce trimestre.", source: "CoinGecko News", time: "Il y a 44m", type: "Bullish" },
+                    { title: "Mise à niveau Layer-2 : Les frais de transaction chutent de 95% suite à l'introduction des nouveaux blobs de données.", source: "Tech-Crypto", time: "Il y a 2h", type: "Bullish" },
+                    { title: "Staking Ethereum : Plus de 28% de l'offre totale d'ETH est désormais verrouillée pour sécuriser le consensus.", source: "Lido Protocol", time: "Il y a 3h", type: "Neutre" }
+                ],
+                initialPrice: 2780.50,
+                sentiment: { bull: 64, bear: 36 }
+            },
+            sol: {
+                name: 'Solana',
+                symbol: 'SOL',
+                tvSymbol: 'BYBIT:SOLUSDT',
+                rank: 'Rank #5',
+                mcap: '$82,140,550,000',
+                fdv: '$104,210,000,000',
+                circulating: '446,120,000 SOL',
+                maxSupply: '569,000,000 SOL',
+                ath: '$260.06',
+                athPercent: '-28.1%',
+                atl: '$0.50',
+                atlPercent: '+37,120%',
+                web: 'https://solana.com',
+                explorer: 'https://solscan.io',
+                community: 'https://www.reddit.com/r/solana/',
+                source: 'https://github.com/solana-labs',
+                description: 'Solana est une blockchain ultra-rapide à hautes performances conçue pour une adoption de masse. Elle combine la Proof-of-History (PoH) et la Proof-of-Stake (PoS) pour traiter des milliers de transactions à faible coût.',
+                tokenomics: {
+                    emission: 'Désinflation planifiée (Taux cible à 1.5%)',
+                    consensus: 'Proof-of-History (PoH) + PoS',
+                    utility: 'Frais de réseau / Staking / NFTs'
+                },
+                news: [
+                    { title: "Transactions Solana : La bande passante atteint des sommets grâce à l'implémentation de validateurs alternatifs Firedancer.", source: "Solana Foundation", time: "Il y a 5m", type: "Bullish" },
+                    { title: "Saga Phone 3.0 : Une pré-vente record confirme l'attrait grandissant de l'écosystème mobile crypto native.", source: "Hardware Daily", time: "Il y a 18m", type: "Neutre" },
+                    { title: "Rapport de congestion : Les développeurs Solana peaufinent un patch pour éliminer les retards de micro-paiement.", source: "Dev Update", time: "Il y a 1h", type: "Bearish" },
+                    { title: "Flux de Liquidité : Solana mène les volumes des échanges sur agrégateurs devant toutes les chaînes concurrentes.", source: "Jupiter Labs", time: "Il y a 3h", type: "Bullish" }
+                ],
+                initialPrice: 145.25,
+                sentiment: { bull: 77, bear: 23 }
+            }
+        };
+
+        // VARIABLES D'ÉTAT PRINCIPALES
+        let currentCrypto = 'btc';
+        let currentPrice = 0;
+        let marketInterval = null;
+        let activeChartEngine = 'tv'; // 'tv' ou 'recharts'
+        let rechartsInstance = null;
+        let simulatedChartData = []; // Historique de prix pour Recharts
+
+        // Portefeuille de simulation (en lecture seule car la partie Trade est supprimée)
+        let wallet = {
+            USDT: 10000.00,
+            BTC: 0.05432,
+            ETH: 1.250,
+            SOL: 12.80
+        };
+
+        // INITIALISATION AU CHARGEMENT
+        window.onload = function() {
+            loadCryptoStats(currentCrypto);
+            initTradingViewWidget(cryptoConfig[currentCrypto].tvSymbol);
+            initRechartsSimulator();
+            startMarketSimulation(currentCrypto);
+            updateWalletUI();
+        };
+
+        // DÉTECTION DU CHANGEMENT DE SÉLECTEUR
+        document.getElementById('crypto-selector').addEventListener('change', function(e) {
+            const selected = e.target.value;
+            switchCrypto(selected);
+        });
+
+        // CHANGEMENT DE CRYPTO ACTIVE
+        function switchCrypto(cryptoKey) {
+            currentCrypto = cryptoKey;
+            showToast(`Chargement analytique : ${cryptoConfig[cryptoKey].name}`, 'info');
+
+            // 1. Recharger les infos fondamentales CoinGecko
+            loadCryptoStats(cryptoKey);
+
+            // 2. Ré-init l'historique pour le graphique Recharts local
+            resetRechartsData();
+
+            // 3. Initialiser le graphique
+            if (activeChartEngine === 'tv') {
+                initTradingViewWidget(cryptoConfig[cryptoKey].tvSymbol);
+            } else {
+                updateRechartsView();
+            }
+
+            // 4. Activer le flux de simulation
+            startMarketSimulation(cryptoKey);
+
+            // 5. Mettre à jour l'UI du terminal
+            document.getElementById('balance-crypto-label').innerText = `Solde ${cryptoConfig[cryptoKey].symbol}`;
+            
+            // Réinitialiser la calculatrice
+            document.getElementById('calc-crypto-symbol').innerText = cryptoConfig[cryptoKey].symbol;
+            document.getElementById('calc-crypto-amount').value = 1;
+            
+            updateWalletUI();
+        }
+
+        // CHARGEMENT DES DONNÉES COINGECKO EN UI
+        function loadCryptoStats(key) {
+            const data = cryptoConfig[key];
+            document.getElementById('crypto-badge').innerText = data.rank;
+            document.getElementById('stat-mcap').innerText = data.mcap;
+            document.getElementById('stat-fdv').innerText = data.fdv;
+            document.getElementById('stat-circulating').innerText = data.circulating;
+            document.getElementById('stat-max-supply').innerText = data.maxSupply;
+            document.getElementById('stat-ath').innerText = data.ath;
+            document.getElementById('stat-ath-percent').innerText = data.athPercent;
+            document.getElementById('stat-atl').innerText = data.atl;
+            document.getElementById('stat-atl-percent').innerText = data.atlPercent;
+
+            // Liens ressources
+            document.getElementById('link-web').href = data.web;
+            document.getElementById('link-explorer').href = data.explorer;
+            document.getElementById('link-community').href = data.community;
+            document.getElementById('link-source').href = data.source;
+
+            // Description & Tokenomics
+            document.getElementById('crypto-desc').innerText = data.description;
+            document.getElementById('tokenomics-emission').innerText = data.tokenomics.emission;
+            document.getElementById('tokenomics-consensus').innerText = data.tokenomics.consensus;
+            document.getElementById('tokenomics-utility').innerText = data.tokenomics.utility;
+
+            // Actualités
+            updateNewsFeed(data.news);
+
+            // Sentiments
+            updateSentimentUI(data.sentiment.bull, data.sentiment.bear);
+        }
+
+        // SWITCH ENTRE LES ONGLET DE SÉLECTION INFERIEURS
+        function switchInfoTab(tabId) {
+            // Désactiver tous les onglets
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Réinitialiser l'apparence des boutons
+            const btnFundamentals = document.getElementById('btn-tab-fundamentals');
+            const btnNews = document.getElementById('btn-tab-news');
+            const btnSentiment = document.getElementById('btn-tab-sentiment');
+            const btnConverter = document.getElementById('btn-tab-converter');
+
+            [btnFundamentals, btnNews, btnSentiment, btnConverter].forEach(btn => {
+                btn.className = "px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-white transition focus:outline-none";
+            });
+
+            // Activer le bon onglet
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activer le bon bouton
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.className = "px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-primary border-b-2 border-brand-primary transition focus:outline-none";
+        }
+
+        // RENDU DU FLUX D'ACTUALITÉS COINGECKO
+        function updateNewsFeed(articles) {
+            const container = document.getElementById('news-feed-container');
+            container.innerHTML = articles.map(article => {
+                let badgeClass = "bg-gray-500/20 text-gray-400";
+                if (article.type === 'Bullish') badgeClass = "bg-emerald-500/20 text-emerald-400";
+                if (article.type === 'Bearish') badgeClass = "bg-rose-500/20 text-rose-400";
+
+                return `
+                    <div class="bg-brand-dark hover:bg-brand-border/60 p-2.5 rounded border border-brand-border/40 transition group cursor-pointer">
+                        <div class="flex justify-between items-start gap-2 mb-1">
+                            <h5 class="text-xs font-semibold text-gray-200 group-hover:text-brand-primary transition leading-snug">${article.title}</h5>
+                            <span class="text-[9px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider ${badgeClass} shrink-0">${article.type}</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-[10px] text-brand-textMuted font-mono">
+                            <span class="font-bold text-brand-gecko">${article.source}</span>
+                            <span>•</span>
+                            <span>${article.time}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // SENTIMENTS COMMUNAUTÉ COINGECKO
+        function updateSentimentUI(bull, bear) {
+            document.getElementById('sentiment-bull-pct').innerText = `${bull}% Haussier`;
+            document.getElementById('sentiment-bear-pct').innerText = `${bear}% Baissier`;
+            document.getElementById('sentiment-bull-bar').style.width = `${bull}%`;
+            document.getElementById('sentiment-bear-bar').style.width = `${bear}%`;
+        }
+
+        function voteSentiment(vote) {
+            const data = cryptoConfig[currentCrypto].sentiment;
+            if (vote === 'bull') {
+                data.bull += 1;
+            } else {
+                data.bear += 1;
+            }
+            const total = data.bull + data.bear;
+            const newBull = Math.round((data.bull / total) * 100);
+            const newBear = 100 - newBull;
+            
+            updateSentimentUI(newBull, newBear);
+            showToast("Votre sentiment a été comptabilisé sur CoinGecko !", "success");
+        }
+
+        // INITIALISATION TRADINGVIEW (STYLE SOMBRE BYBIT)
+        function initTradingViewWidget(symbol) {
+            document.getElementById('tv-chart-container').innerHTML = ''; // Nettoyer
+            const div = document.createElement('div');
+            div.id = 'tv-widget';
+            div.style.height = '100%';
+            div.style.width = '100%';
+            document.getElementById('tv-chart-container').appendChild(div);
+
+            new TradingView.widget({
+                "autosize": true,
+                "symbol": symbol,
+                "interval": "15",
+                "timezone": "Europe/Paris",
+                "theme": "dark",
+                "style": "1",
+                "locale": "fr",
+                "toolbar_bg": "#12161A",
+                "enable_publishing": false,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": false,
+                "container_id": "tv-widget",
+                "studies": [
+                    "RSI@tv-basicstudies",
+                    "MASimple@tv-basicstudies"
+                ]
+            });
+        }
+
+        // SÉLECTEUR ET INTERACTION DE COMMUTATION DE GRAPHIQUE
+        function switchChartEngine(engine) {
+            activeChartEngine = engine;
+            
+            const btnTv = document.getElementById('chart-toggle-tv');
+            const btnRecharts = document.getElementById('chart-toggle-recharts');
+            const tvContainer = document.getElementById('tv-chart-container');
+            const rechartsContainer = document.getElementById('recharts-chart-container');
+
+            if (engine === 'tv') {
+                btnTv.className = "px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all bg-brand-primary text-black";
+                btnRecharts.className = "px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all text-gray-400 hover:text-white";
+                
+                tvContainer.classList.remove('hidden');
+                rechartsContainer.classList.add('hidden');
+                
+                initTradingViewWidget(cryptoConfig[currentCrypto].tvSymbol);
+            } else {
+                btnRecharts.className = "px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all bg-brand-primary text-black";
+                btnTv.className = "px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition-all text-gray-400 hover:text-white";
+                
+                rechartsContainer.classList.remove('hidden');
+                tvContainer.classList.add('hidden');
+                
+                updateRechartsView();
+            }
+            showToast(`Graphique configuré sur : ${engine === 'tv' ? 'TradingView Live' : 'Recharts Simulator'}`, 'success');
+        }
+
+        // INITIALISATION ET SIMULATION RECHARTS (Via un graphique d'aires moderne sombre ApexCharts)
+        function initRechartsSimulator() {
+            resetRechartsData();
+
+            const options = {
+                series: [{
+                    name: 'Prix',
+                    data: simulatedChartData
+                }],
+                chart: {
+                    type: 'area',
+                    height: '100%',
+                    width: '100%',
+                    animations: {
+                        enabled: false // Évite les micro-sauts de rendering en HF
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                    background: 'transparent'
+                },
+                theme: {
+                    mode: 'dark'
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    colors: ['#F5A623'],
+                    width: 2
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.45,
+                        opacityTo: 0.05,
+                        stops: [0, 95]
+                    }
+                },
+                grid: {
+                    borderColor: '#222930',
+                    strokeDashArray: 3,
+                    yaxis: {
+                        lines: {
+                            show: true
+                        }
+                    }
+                },
+                xaxis: {
+                    type: 'datetime',
+                    labels: {
+                        style: {
+                            colors: '#848E9C',
+                            fontSize: '10px'
+                        }
+                    },
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#848E9C',
+                            fontSize: '10px'
+                        },
+                        formatter: function (value) {
+                            return '$' + value.toLocaleString('en-US', { minimumFractionDigits: 1 });
+                        }
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    x: {
+                        format: 'HH:mm:ss'
+                    }
+                }
+            };
+
+            rechartsInstance = new ApexCharts(document.querySelector("#recharts-chart-element"), options);
+            rechartsInstance.render();
+        }
+
+        function resetRechartsData() {
+            simulatedChartData = [];
+            let tempPrice = cryptoConfig[currentCrypto].initialPrice;
+            let timeCursor = Date.now() - (60 * 1000 * 30); // 30 minutes d'historique initialisé
+
+            for (let i = 0; i < 30; i++) {
+                tempPrice = tempPrice * (1 + (Math.random() - 0.5) * 0.003);
+                simulatedChartData.push({
+                    x: timeCursor,
+                    y: parseFloat(tempPrice.toFixed(2))
+                });
+                timeCursor += (1000 * 60); // 1 minute d'intervalle
+            }
+        }
+
+        function updateRechartsView() {
+            if (rechartsInstance) {
+                rechartsInstance.updateSeries([{
+                    data: simulatedChartData
+                }]);
+            }
+        }
+
+        // SIMULATEUR DE PRIX EN TEMPS RÉEL (HAUTE FRÉQUENCE)
+        function startMarketSimulation(key) {
+            if (marketInterval) {
+                clearInterval(marketInterval);
+            }
+
+            currentPrice = cryptoConfig[key].initialPrice;
+            let currentTrendChange = 1.25; // Valeur simulée départ % change 24h
+
+            const generateTick = () => {
+                const volatility = key === 'sol' ? 0.0012 : 0.0006; // Solana est plus volatile
+                const randomWalk = (Math.random() - 0.495) * volatility;
+                
+                currentPrice = currentPrice * (1 + randomWalk);
+                currentTrendChange += (randomWalk * 100);
+
+                // Formatage des éléments de l'en-tête
+                const formattedPrice = currentPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const priceEl = document.getElementById('ticker-price');
+                priceEl.innerHTML = `$${formattedPrice}`;
+
+                // Evolution visuelle
+                if (randomWalk >= 0) {
+                    priceEl.className = "text-sm font-extrabold text-emerald-400 font-mono";
+                } else {
+                    priceEl.className = "text-sm font-extrabold text-rose-400 font-mono";
+                }
+
+                const sign = currentTrendChange >= 0 ? '+' : '';
+                const changeEl = document.getElementById('ticker-change');
+                changeEl.innerText = `${sign}${currentTrendChange.toFixed(2)}%`;
+                changeEl.className = `text-xs font-bold font-mono ${currentTrendChange >= 0 ? 'text-emerald-500' : 'text-rose-500'}`;
+
+                // Haut / Bas / Volume fictifs ajustés au prix
+                document.getElementById('ticker-high').innerText = `$${(currentPrice * 1.025).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+                document.getElementById('ticker-low').innerText = `$${(currentPrice * 0.975).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+                document.getElementById('ticker-volume').innerText = `$${(1420 + currentPrice * 0.02).toLocaleString('en-US', { maximumFractionDigits: 2 })} USDT`;
+
+                // Spread carnet d'ordres
+                document.getElementById('spread-price').innerText = formattedPrice;
+                document.getElementById('spread-price').className = `text-sm font-extrabold font-mono ${randomWalk >= 0 ? 'text-emerald-500' : 'text-rose-500'}`;
+
+                // Actualiser le convertisseur
+                calculateConversion('crypto');
+
+                // Générer le carnet d'ordres
+                renderOrderBook(currentPrice, key);
+
+                // Générer une transaction publique aléatoire
+                addSimulatedTrade(currentPrice, key);
+
+                // Mettre à jour le solde total évalué
+                updateWalletTotal();
+
+                // Alimenter le flux Recharts (Ajouter un tick en temps réel)
+                simulatedChartData.push({
+                    x: Date.now(),
+                    y: parseFloat(currentPrice.toFixed(2))
+                });
+                if (simulatedChartData.length > 50) {
+                    simulatedChartData.shift(); // Conserver une fenêtre glissante optimale
+                }
+                
+                if (activeChartEngine === 'recharts' && rechartsInstance) {
+                    rechartsInstance.updateSeries([{
+                        data: simulatedChartData
+                    }]);
+                }
+            };
+
+            generateTick();
+            marketInterval = setInterval(generateTick, 1000);
+        }
+
+        // CALCULATEUR DE CONVERSION COINGECKO INTERACTIF
+        function calculateConversion(direction) {
+            const cryptoAmtInput = document.getElementById('calc-crypto-amount');
+            const fiatAmtInput = document.getElementById('calc-fiat-amount');
+
+            if (direction === 'crypto') {
+                const amt = parseFloat(cryptoAmtInput.value);
+                if (!isNaN(amt) && currentPrice > 0) {
+                    fiatAmtInput.value = (amt * currentPrice).toFixed(2);
+                } else {
+                    fiatAmtInput.value = '';
+                }
+            } else {
+                const amt = parseFloat(fiatAmtInput.value);
+                if (!isNaN(amt) && currentPrice > 0) {
+                    cryptoAmtInput.value = (amt / currentPrice).toFixed(6);
+                } else {
+                    cryptoAmtInput.value = '';
+                }
+            }
+        }
+
+        // CARNET D'ORDRES DYNAMIQUES BYBIT SIMULÉ
+        function renderOrderBook(midPrice, key) {
+            const asksContainer = document.getElementById('asks-list');
+            const bidsContainer = document.getElementById('bids-list');
+            
+            asksContainer.innerHTML = '';
+            bidsContainer.innerHTML = '';
+
+            const rowCount = 5;
+            const step = key === 'sol' ? 0.08 : 1.25;
+
+            // Ventes (Asks) - Rouge
+            for (let i = rowCount; i >= 1; i--) {
+                const price = midPrice + (i * step);
+                const size = (Math.random() * (key === 'sol' ? 120 : 1.4) + 0.01).toFixed(3);
+                const total = (price * size).toLocaleString('en-US', { maximumFractionDigits: 0 });
+                const percentage = Math.min(100, size * 25);
+
+                const row = document.createElement('div');
+                row.className = "relative grid grid-cols-3 py-0.5 px-1";
+                row.style.background = `linear-gradient(270deg, rgba(239, 68, 68, 0.08) ${percentage}%, transparent ${percentage}%)`;
+                row.innerHTML = `
+                    <span class="text-rose-500 font-bold">$${price.toFixed(2)}</span>
+                    <span class="text-right text-gray-300 font-mono">${size}</span>
+                    <span class="text-right text-gray-400 font-mono">${total}</span>
+                `;
+                asksContainer.appendChild(row);
+            }
+
+            // Achats (Bids) - Vert
+            for (let i = 1; i <= rowCount; i++) {
+                const price = midPrice - (i * step);
+                const size = (Math.random() * (key === 'sol' ? 120 : 1.4) + 0.01).toFixed(3);
+                const total = (price * size).toLocaleString('en-US', { maximumFractionDigits: 0 });
+                const percentage = Math.min(100, size * 25);
+
+                const row = document.createElement('div');
+                row.className = "relative grid grid-cols-3 py-0.5 px-1";
+                row.style.background = `linear-gradient(270deg, rgba(16, 185, 129, 0.08) ${percentage}%, transparent ${percentage}%)`;
+                row.innerHTML = `
+                    <span class="text-emerald-500 font-bold">$${price.toFixed(2)}</span>
+                    <span class="text-right text-gray-300 font-mono">${size}</span>
+                    <span class="text-right text-gray-400 font-mono">${total}</span>
+                `;
+                bidsContainer.appendChild(row);
+            }
+        }
+
+        // GENERATION D'UN FLUX DE TRANSACTIONS PUBLIQUES SIMULÉES (RECENT TRADES)
+        const recentTrades = [];
+        function addSimulatedTrade(basePrice, key) {
+            const listContainer = document.getElementById('recent-trades-list');
+            const isBuy = Math.random() > 0.45; // Plus d'achats que de ventes simulés
+            const priceDev = (Math.random() - 0.5) * (key === 'sol' ? 0.05 : 0.6);
+            const tradePrice = basePrice + priceDev;
+            const quantity = (Math.random() * (key === 'sol' ? 35 : 0.8) + 0.005).toFixed(key === 'sol' ? 2 : 4);
+            const timeStr = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+            const trade = {
+                price: tradePrice,
+                qty: quantity,
+                time: timeStr,
+                buy: isBuy
+            };
+
+            recentTrades.unshift(trade);
+            if (recentTrades.length > 20) {
+                recentTrades.pop();
+            }
+
+            listContainer.innerHTML = recentTrades.map(t => `
+                <div class="grid grid-cols-3 py-0.5 transition hover:bg-brand-dark px-1">
+                    <span class="font-bold ${t.buy ? 'text-emerald-500' : 'text-rose-500'}">$${t.price.toFixed(2)}</span>
+                    <span class="text-right text-gray-300 font-mono">${t.qty}</span>
+                    <span class="text-right text-gray-500 font-mono text-[10px]">${t.time}</span>
+                </div>
+            `).join('');
+        }
+
+        // SYNCHRONISATION DU PORTEFEUILLE FICTIF
+        function updateWalletUI() {
+            const sym = cryptoConfig[currentCrypto].symbol;
+            document.getElementById('balance-usdt').innerText = `${wallet.USDT.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT`;
+            document.getElementById('balance-crypto').innerText = `${wallet[sym].toFixed(6)} ${sym}`;
+
+            updateWalletTotal();
+        }
+
+        function updateWalletTotal() {
+            const sym = cryptoConfig[currentCrypto].symbol;
+            let totalValue = wallet.USDT;
+            
+            Object.keys(cryptoConfig).forEach(key => {
+                const config = cryptoConfig[key];
+                const assetSymbol = config.symbol;
+                let assetPrice = config.initialPrice;
+                if (key === currentCrypto) {
+                    assetPrice = currentPrice;
+                }
+                totalValue += wallet[assetSymbol] * assetPrice;
+            });
+
+            const totalEl = document.getElementById('balance-total');
+            if (totalEl) {
+                totalEl.innerText = `$${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
+        }
+
+        function resetWallet() {
+            wallet = {
+                USDT: 10000.00,
+                BTC: 0.05432,
+                ETH: 1.250,
+                SOL: 12.80
+            };
+            updateWalletUI();
+            showToast("Votre portefeuille d'entraînement a été réinitialisé !", "success");
+        }
+
+        // TOAST SYSTÈME PERSONNALISÉ
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = message;
+
+            if (type === 'success') {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 bg-brand-panel border border-emerald-500 text-emerald-400 px-5 py-3 rounded-lg shadow-2xl flex items-center space-x-3";
+                toastIcon.innerHTML = '<i class="fas fa-check-circle text-emerald-500"></i>';
+            } else if (type === 'error') {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 bg-brand-panel border border-rose-500 text-rose-400 px-5 py-3 rounded-lg shadow-2xl flex items-center space-x-3";
+                toastIcon.innerHTML = '<i class="fas fa-times-circle text-rose-500"></i>';
+            } else {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 bg-brand-panel border border-brand-primary text-brand-primary px-5 py-3 rounded-lg shadow-2xl flex items-center space-x-3";
+                toastIcon.innerHTML = '<i class="fas fa-info-circle text-brand-primary"></i>';
+            }
+
+            setTimeout(() => {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-300 bg-brand-panel border border-brand-border text-white px-5 py-3 rounded-lg shadow-2xl flex items-center space-x-3";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

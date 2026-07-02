@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { RefreshCw, CalendarOff } from "lucide-react";
+import { useFormatPrice } from "@/lib/context/CurrencyContext";
 import type { CalendarEvent, CalendarType } from "@/lib/calendar/types";
 
 type AvailableType = { value: CalendarType; label: string };
@@ -43,6 +44,8 @@ export function CalendarClient({ type, data, from, to, availableTypes }: Props) 
   const [countries, setCountries] = useState<string[]>([]);
   const [importances, setImportances] = useState<string[]>(["high", "medium", "low"]);
   const [rotating, setRotating] = useState(false);
+  const formatPrice = useFormatPrice();
+  const fmtMoney = (n: number | undefined) => n == null ? "—" : formatPrice(n);
 
   function changeType(next: CalendarType) {
     setActiveType(next);
@@ -204,7 +207,7 @@ export function CalendarClient({ type, data, from, to, availableTypes }: Props) 
       </div>
 
       {/* Table */}
-      <CalendarTable type={activeType} data={filtered} />
+      <CalendarTable type={activeType} data={filtered} fmtMoney={fmtMoney} />
 
       <div className="text-xs text-tertiary">
         {filtered.length} événement{filtered.length > 1 ? "s" : ""} •{" "}
@@ -214,7 +217,7 @@ export function CalendarClient({ type, data, from, to, availableTypes }: Props) 
   );
 }
 
-function CalendarTable({ type, data }: { type: CalendarType; data: CalendarEvent[] }) {
+function CalendarTable({ type, data, fmtMoney }: { type: CalendarType; data: CalendarEvent[]; fmtMoney: (n: number | undefined) => string }) {
   if (data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 rounded-lg border border-surface bg-card">
@@ -225,7 +228,7 @@ function CalendarTable({ type, data }: { type: CalendarType; data: CalendarEvent
   }
 
   const headers = tableHeaders(type);
-  const rows = data.map((row) => tableRow(type, row));
+  const rows = data.map((row) => tableRow(type, row, fmtMoney));
 
   return (
     <div className="overflow-x-auto rounded-lg border border-surface bg-card">
@@ -313,10 +316,6 @@ function fmtValue(v: string | number | undefined): string {
   return String(v);
 }
 
-function fmtMoney(n: number | undefined): string {
-  if (n === undefined || n === null) return "—";
-  return `$${n.toFixed(2)}`;
-}
 
 function statusChip(status: string) {
   const cls =
@@ -326,7 +325,7 @@ function statusChip(status: string) {
   return <span className={`text-xs font-medium ${cls}`}>{status}</span>;
 }
 
-function tableRow(type: CalendarType, row: CalendarEvent): React.ReactNode[] {
+function tableRow(type: CalendarType, row: CalendarEvent, fmtMoney: (n: number | undefined) => string): React.ReactNode[] {
   switch (type) {
     case "economic": {
       const e = row as any;
@@ -382,7 +381,7 @@ function tableRow(type: CalendarType, row: CalendarEvent): React.ReactNode[] {
     case "ipos": {
       const e = row as any;
       const range = (e.priceRangeLow !== undefined && e.priceRangeHigh !== undefined)
-        ? `$${e.priceRangeLow}–$${e.priceRangeHigh}`
+        ? `${fmtMoney(e.priceRangeLow)}–${fmtMoney(e.priceRangeHigh)}`
         : "—";
       return [
         <span key="d" className="text-secondary tabular-nums">{e.date}</span>,

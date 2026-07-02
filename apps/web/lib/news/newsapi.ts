@@ -15,7 +15,7 @@ export async function fetchMacroNews(): Promise<NewsArticle[]> {
   if (!API_KEY) return [];
   const res = await fetch(
     `https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=20&apiKey=${API_KEY}`,
-    { signal: AbortSignal.timeout(5000) }
+    { signal: AbortSignal.timeout(5000), next: { revalidate: 900 } }
   );
   if (!res.ok) throw new Error(`NewsAPI ${res.status}`);
   const json = await res.json();

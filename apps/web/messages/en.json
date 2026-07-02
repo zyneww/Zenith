@@ -326,7 +326,8 @@
       "trend": "7d Trend",
       "trade": "Action",
       "tradeAction": "Trade",
-      "of": "of"
+      "of": "of",
+      "marketcap": "Market Cap"
     },
     "tabOverview": "Overview",
     "tabCrypto": "Crypto",
@@ -349,7 +350,6 @@
     "colTrade": "Action",
     "colTradeAction": "Trade",
     "of": "of",
-
     "searchPlaceholder": "Search an asset (e.g. BTC, EUR/USD, S&P 500)...",
     "filters": "Filters",
     "overview": "Market Overview",

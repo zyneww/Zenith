@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const FIAT_CURRENCIES = [
   "USD", "EUR", "GBP", "CHF", "JPY", "RUB", "PLN", "TRY",
@@ -21,7 +20,11 @@ const CACHE_TTL = 60_000; // 60s
 
 async function fetchFromCoinGecko(): Promise<Record<string, number>> {
   const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=${Object.values(COINGECKO_IDS).join(",")}`;
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  const res = await fetch(url, {
+    headers: { Accept: "application/json" },
+    signal: AbortSignal.timeout(8000),
+    next: { revalidate: 60 },
+  });
   if (!res.ok) throw new Error(`CoinGecko returned ${res.status}`);
   return (await res.json()) as Record<string, number>;
 }

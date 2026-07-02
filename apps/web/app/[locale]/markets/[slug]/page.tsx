@@ -8,6 +8,7 @@ import { resolveAsset, getAllSlugs } from "@/lib/assets/registry";
 
 interface AssetPageProps {
   params: Promise<{ slug: string; locale: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export const revalidate = 60;
@@ -54,14 +55,40 @@ async function fetchJson<T>(url: string): Promise<T | null> {
   }
 }
 
-export default async function AssetPage({ params }: AssetPageProps) {
+export default async function AssetPage({ params, searchParams }: AssetPageProps) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
 
   const resolved = resolveAsset(slug);
-  if (!resolved) notFound();
-  if (resolved.redirectSlug) redirect(`/${locale}/markets/${resolved.redirectSlug}`);
-  const asset = resolved.asset;
+  let asset = resolved?.asset ?? null;
+
+  if (resolved?.redirectSlug) {
+    redirect(`/${locale}/markets/${resolved.redirectSlug}`);
+  }
+
+  if (!asset) {
+    const sp = searchParams ? await searchParams : {};
+    const symbol = sp.symbol;
+    if (typeof symbol === "string" && symbol) {
+      // Dynamic asset creation for unknown Binance pairs
+      const baseSymbol = symbol.replace(/USDT$/i, "");
+      asset = {
+        slug: slugFromSymbol(baseSymbol),
+        name: baseSymbol,
+        symbol: baseSymbol,
+        type: "crypto" as const,
+        coingeckoId: undefined,
+        finnhubSymbol: `BINANCE:${symbol}`,
+        logoUrl: `https://cryptoicons.org/api/icon/${baseSymbol.toLowerCase()}/200`,
+        fallbackColor: "#4dab9a",
+        description: `Paire de trading ${symbol} sur Binance`,
+        displayDecimals: 2,
+        quoteAsset: "USDT",
+      };
+    }
+  }
+
+  if (!asset) notFound();
 
   const base = getBaseUrl();
   const [priceData, ohlcvData] = await Promise.all([
@@ -78,6 +105,10 @@ export default async function AssetPage({ params }: AssetPageProps) {
       <Footer />
     </>
   );
+}
+
+function slugFromSymbol(symbol: string): string {
+  return symbol.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 export function generateStaticParams() {

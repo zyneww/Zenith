@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getEconomicCalendar } from "@/lib/market-data/finnhub";
 import { EconomicEvent } from "@/lib/market-data/types";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+
 
 export async function GET(req: NextRequest) {
   try {
@@ -16,7 +15,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(data, {
       status: 200,
       headers: {
-        "Cache-Control": "no-store, must-revalidate",
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900",
       },
     });
   } catch (error) {

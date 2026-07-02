@@ -29,7 +29,7 @@ export default function CTAFinal() {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
-              <button className="bg-brand-blue text-on-accent font-mono text-sm uppercase tracking-wider px-8 py-2.5 rounded-full hover:bg-raised transition-colors flex items-center gap-2">
+              <button className="bg-accent text-on-accent font-mono text-sm uppercase tracking-wider px-8 py-2.5 rounded-full hover:opacity-90 transition-opacity flex items-center gap-2">
                 {t("primary")}
                 <ArrowRight className="w-4 h-4" />
               </button>
