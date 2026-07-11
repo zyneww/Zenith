@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, TrendingUp, BarChart3, Globe } from "lucide-react";
 import Link from "next/link";
 import { motion } from "motion/react";
+import HeroVisual from "./HeroVisual";
 
 const SUGGESTIONS = [
   { label: "Bitcoin", icon: "₿" },
@@ -17,6 +18,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[calc(100svh-80px)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-canvas">
+      <HeroVisual />
       {/* Soft ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-rausch/[0.06] rounded-full blur-[120px] opacity-60" />
