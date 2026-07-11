@@ -118,7 +118,7 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 bg-[#0B0E11] border-b border-[#222930]"
+      className="sticky top-0 z-50 bg-canvas border-b border-surface"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center h-[96px] px-4 sm:px-8 lg:px-16 xl:px-28">
         {/* ─── Logo ─── */}
@@ -152,7 +152,7 @@ export default function Header() {
           {/* News drawer toggle */}
           <button
             onClick={toggleNews}
-            className="text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2 rounded-full hover:bg-[#1A1E23]/50 hidden lg:flex"
+            className="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-raised hidden lg:flex"
             aria-label="Actualités"
             type="button"
           >
@@ -162,7 +162,7 @@ export default function Header() {
           {/* Search icon */}
           <button
             onClick={openPalette}
-            className="text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2 rounded-full hover:bg-[#1A1E23]/50 hidden lg:flex"
+            className="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-raised hidden lg:flex"
             aria-label="Rechercher"
             type="button"
           >
@@ -177,14 +177,14 @@ export default function Header() {
           {/* Get Pro */}
           <Link
             href="/pricing"
-            className="hidden lg:flex items-center gap-1.5 bg-pro text-on-accent font-mono text-sm uppercase tracking-wider px-5 py-2 rounded-md transition-colors hover:opacity-90 cursor-pointer"
+            className="hidden lg:flex items-center gap-1.5 bg-rausch text-white font-medium text-sm px-5 py-2 rounded-full transition-colors hover:bg-rausch-active cursor-pointer"
           >
             Get Pro
           </Link>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden text-[#848E9C] hover:text-[#EAECEF] transition-colors p-2"
+            className="lg:hidden text-secondary hover:text-primary transition-colors p-2"
             onClick={() => setDrawerOpen(true)}
             aria-label="Ouvrir le menu"
             type="button"

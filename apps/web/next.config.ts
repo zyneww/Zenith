@@ -77,7 +77,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://s3.tradingview.com https://*.tradingview.com https://*.clerk.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src 'self' https://*.clerk.com https://*.tradingview.com wss://*.tradingview.com https://*.zenith.xyz ws://localhost:3001 wss://*.zenith.xyz https://api.coingecko.com https://v6.exchangerate-api.com; frame-src 'self' https://*.clerk.com https://*.tradingview.com; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://s3.tradingview.com https://*.tradingview.com https://*.clerk.com https://*.clerk.accounts.dev https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src 'self' https://*.clerk.com https://*.clerk.accounts.dev https://*.tradingview.com wss://*.tradingview.com https://*.zenith.xyz ws://localhost:3001 wss://*.zenith.xyz https://api.coingecko.com https://v6.exchangerate-api.com; frame-src 'self' https://*.clerk.com https://*.tradingview.com; worker-src 'self' blob:; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;",
           },
           {
             key: "Strict-Transport-Security",

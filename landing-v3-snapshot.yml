@@ -1,0 +1,1240 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e6]:
+        - link [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Zenith" [ref=e8]
+        - navigation [ref=e9]:
+          - button "Marchés" [ref=e11]
+          - button "Apprendre" [ref=e15]
+          - button "Outils" [ref=e19]
+          - button "Aide" [ref=e23]
+        - generic [ref=e26]:
+          - button "Passer en mode sombre" [ref=e27]
+          - button "Réglages" [ref=e35]
+          - button "Actualités" [ref=e39]
+          - button "Rechercher" [ref=e43]
+          - button "Menu utilisateur" [ref=e49]
+          - link "Get Pro" [ref=e53] [cursor=pointer]:
+            - /url: /pricing
+      - main [ref=e54]:
+        - generic [ref=e56]:
+          - generic [ref=e57]: Données temps réel sur 250+ actifs
+          - heading "L'intelligence des marchés, enfin claire." [level=1] [ref=e62]
+          - paragraph [ref=e63]: Crypto, forex, matières premières, indices et actions. Toute la donnée dont les traders et investisseurs ont besoin, dans une expérience pensée pour décider vite.
+          - generic [ref=e64]:
+            - generic [ref=e65]:
+              - textbox "Rechercher un actif, un marché, une catégorie..." [ref=e70]
+              - generic [ref=e74]:
+                - paragraph [ref=e75]: Marché
+                - paragraph [ref=e76]: Tous les marchés
+              - link "Explorer" [ref=e77] [cursor=pointer]:
+                - /url: /markets
+            - generic [ref=e81]:
+              - generic [ref=e82]: "Suggestions :"
+              - link "₿ Bitcoin" [ref=e83] [cursor=pointer]:
+                - /url: /markets/bitcoin
+                - generic [ref=e84]: ₿
+                - text: Bitcoin
+              - link "€ EUR/USD" [ref=e85] [cursor=pointer]:
+                - /url: /markets/eur-usd
+                - generic [ref=e86]: €
+                - text: EUR/USD
+              - link "🥇 Or" [ref=e87] [cursor=pointer]:
+                - /url: /markets/or
+                - generic [ref=e88]: 🥇
+                - text: Or
+              - link "📈 S&P 500" [ref=e89] [cursor=pointer]:
+                - /url: /markets/s-p-500
+                - generic [ref=e90]: 📈
+                - text: S&P 500
+          - generic [ref=e91]:
+            - generic [ref=e92]: Cours temps réel
+            - generic [ref=e96]: •
+            - generic [ref=e97]: Charts TradingView
+            - generic [ref=e98]: •
+            - generic [ref=e99]: Alertes personnalisées
+            - generic [ref=e100]: •
+            - generic [ref=e101]: Gratuit, sans carte
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - heading "Explorer les marchés" [level=2] [ref=e105]
+            - paragraph [ref=e106]: Des données centralisées pour tous les types d'actifs. Passez d'un marché à l'autre en un clic.
+          - generic [ref=e107]:
+            - link [ref=e109] [cursor=pointer]:
+              - /url: /markets/cryptocurrencies
+              - generic [ref=e111]:
+                - heading "Crypto" [level=3] [ref=e115]
+                - paragraph [ref=e116]: Bitcoin, Ethereum, Solana et 200+ altcoins avec données live.
+            - link [ref=e118] [cursor=pointer]:
+              - /url: /markets/forex
+              - generic [ref=e120]:
+                - heading "Forex" [level=3] [ref=e124]
+                - paragraph [ref=e125]: Paires de devises majeures, mineures et exotiques.
+            - link [ref=e127] [cursor=pointer]:
+              - /url: /markets/commodities
+              - generic [ref=e129]:
+                - heading "Matières premières" [level=3] [ref=e135]
+                - paragraph [ref=e136]: Or, pétrole, gaz naturel, blé et autres matières premières.
+            - link [ref=e138] [cursor=pointer]:
+              - /url: /markets/indices
+              - generic [ref=e140]:
+                - heading "Indices" [level=3] [ref=e144]
+                - paragraph [ref=e145]: S&P 500, NASDAQ, CAC 40, DAX et indices mondiaux.
+            - link [ref=e147] [cursor=pointer]:
+              - /url: /markets/stocks
+              - generic [ref=e149]:
+                - heading "Actions" [level=3] [ref=e153]
+                - paragraph [ref=e154]: Actions américaines, européennes et internationales.
+            - link [ref=e156] [cursor=pointer]:
+              - /url: /markets/futures
+              - generic [ref=e158]:
+                - heading "Futures" [level=3] [ref=e162]
+                - paragraph [ref=e163]: Contrats à terme sur crypto, indices et matières premières.
+        - generic [ref=e165]:
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - heading "Tendances du jour" [level=2] [ref=e168]
+              - paragraph [ref=e169]: Les actifs les plus suivis par la communauté Zenith.
+            - link "Voir tous les marchés" [ref=e170] [cursor=pointer]:
+              - /url: /markets
+          - generic [ref=e173]:
+            - link [ref=e175] [cursor=pointer]:
+              - /url: /markets/bitcoin
+              - generic [ref=e176]:
+                - generic [ref=e180]:
+                  - heading "Bitcoin" [level=3] [ref=e181]
+                  - paragraph [ref=e182]: btc
+                - generic [ref=e183]: +0.44%
+              - generic [ref=e188]:
+                - paragraph [ref=e189]: Prix actuel
+                - paragraph [ref=e190]: 73 408 €
+            - link [ref=e194] [cursor=pointer]:
+              - /url: /markets/ethereum
+              - generic [ref=e195]:
+                - generic [ref=e199]:
+                  - heading "Ethereum" [level=3] [ref=e200]
+                  - paragraph [ref=e201]: eth
+                - generic [ref=e202]: +1.62%
+              - generic [ref=e207]:
+                - paragraph [ref=e208]: Prix actuel
+                - paragraph [ref=e209]: 2 082 €
+            - link [ref=e213] [cursor=pointer]:
+              - /url: /markets/tether
+              - generic [ref=e214]:
+                - generic [ref=e218]:
+                  - heading "Tether" [level=3] [ref=e219]
+                  - paragraph [ref=e220]: usdt
+                - generic [ref=e221]: "-0.00%"
+              - generic [ref=e226]:
+                - paragraph [ref=e227]: Prix actuel
+                - paragraph [ref=e228]: 1,14 €
+            - link [ref=e232] [cursor=pointer]:
+              - /url: /markets/binancecoin
+              - generic [ref=e233]:
+                - generic [ref=e237]:
+                  - heading "BNB" [level=3] [ref=e238]
+                  - paragraph [ref=e239]: bnb
+                - generic [ref=e240]: +0.78%
+              - generic [ref=e245]:
+                - paragraph [ref=e246]: Prix actuel
+                - paragraph [ref=e247]: 663 €
+            - link [ref=e251] [cursor=pointer]:
+              - /url: /markets/usd-coin
+              - generic [ref=e252]:
+                - generic [ref=e256]:
+                  - heading "USDC" [level=3] [ref=e257]
+                  - paragraph [ref=e258]: usdc
+                - generic [ref=e259]: "-0.00%"
+              - generic [ref=e264]:
+                - paragraph [ref=e265]: Prix actuel
+                - paragraph [ref=e266]: 1,14 €
+            - link [ref=e270] [cursor=pointer]:
+              - /url: /markets/ripple
+              - generic [ref=e271]:
+                - generic [ref=e275]:
+                  - heading "XRP" [level=3] [ref=e276]
+                  - paragraph [ref=e277]: xrp
+                - generic [ref=e278]: +0.81%
+              - generic [ref=e283]:
+                - paragraph [ref=e284]: Prix actuel
+                - paragraph [ref=e285]: 1,27 €
+            - link [ref=e289] [cursor=pointer]:
+              - /url: /markets/solana
+              - generic [ref=e290]:
+                - generic [ref=e294]:
+                  - heading "Solana" [level=3] [ref=e295]
+                  - paragraph [ref=e296]: sol
+                - generic [ref=e297]: +0.28%
+              - generic [ref=e302]:
+                - paragraph [ref=e303]: Prix actuel
+                - paragraph [ref=e304]: 89,25 €
+            - link [ref=e308] [cursor=pointer]:
+              - /url: /markets/tron
+              - generic [ref=e309]:
+                - generic [ref=e313]:
+                  - heading "TRON" [level=3] [ref=e314]
+                  - paragraph [ref=e315]: trx
+                - generic [ref=e316]: +0.09%
+              - generic [ref=e321]:
+                - paragraph [ref=e322]: Prix actuel
+                - paragraph [ref=e323]: 0,3774 €
+        - generic [ref=e327]:
+          - generic [ref=e328]:
+            - generic [ref=e329]:
+              - heading "Cryptocurrency Prices by Market Cap" [level=1] [ref=e330]
+              - paragraph [ref=e331]: Total market cap —
+            - link "Read more about cryptocurrencies" [ref=e332] [cursor=pointer]:
+              - /url: /markets
+          - generic [ref=e335]:
+            - generic [ref=e336]:
+              - generic [ref=e337]: Market Cap
+              - generic [ref=e338]: —
+              - generic [ref=e339]: —
+            - generic [ref=e342]:
+              - generic [ref=e343]: Volume 24h
+              - generic [ref=e344]: —
+              - generic [ref=e345]: Total across all exchanges
+            - generic [ref=e348]:
+              - generic [ref=e349]: 🔥 Top Gainers (24h)
+              - generic [ref=e350]:
+                - generic [ref=e351]:
+                  - link "dexe DEXE" [ref=e352] [cursor=pointer]:
+                    - /url: /markets/dexe
+                    - img "dexe" [ref=e353]
+                    - generic [ref=e354]: DEXE
+                  - generic [ref=e355]: +9.82%
+                - generic [ref=e356]:
+                  - link "uni UNI" [ref=e357] [cursor=pointer]:
+                    - /url: /markets/uniswap
+                    - img "uni" [ref=e358]
+                    - generic [ref=e359]: UNI
+                  - generic [ref=e360]: +7.20%
+                - generic [ref=e361]:
+                  - link "zec ZEC" [ref=e362] [cursor=pointer]:
+                    - /url: /markets/zcash
+                    - img "zec" [ref=e363]
+                    - generic [ref=e364]: ZEC
+                  - generic [ref=e365]: +5.05%
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - generic [ref=e368]:
+                - button "All" [ref=e369]
+                - button "DeFi" [ref=e370]
+                - button "NFT" [ref=e371]
+                - button "AI" [ref=e372]
+                - button "Meme" [ref=e373]
+                - button "Layer 2" [ref=e374]
+                - button "Gaming" [ref=e375]
+                - button "SocialFi" [ref=e376]
+                - button "RWA" [ref=e377]
+                - button "Infrastructure" [ref=e378]
+              - table [ref=e380]:
+                - rowgroup [ref=e381]:
+                  - row [ref=e382]:
+                    - columnheader "#" [ref=e383]
+                    - columnheader "Coin" [ref=e384]
+                    - columnheader "Price" [ref=e385]
+                    - columnheader "1h" [ref=e386]
+                    - columnheader "24h" [ref=e387]
+                    - columnheader "7d" [ref=e388]
+                    - columnheader "Volume 24h" [ref=e389]
+                    - columnheader "Market Cap" [ref=e390]
+                - rowgroup [ref=e391]:
+                  - row [ref=e392]:
+                    - cell "1" [ref=e393]
+                    - cell [ref=e394]:
+                      - link "Bitcoin BTC" [ref=e395] [cursor=pointer]:
+                        - /url: /markets/bitcoin
+                        - generic [ref=e396]:
+                          - generic [ref=e397]: Bitcoin
+                          - generic [ref=e398]: BTC
+                    - cell "73 409 €" [ref=e399]
+                    - cell "+0.00%" [ref=e400]
+                    - cell "+0.44%" [ref=e401]
+                    - cell "+1.66%" [ref=e402]
+                    - cell "€16,48 Md" [ref=e403]
+                    - cell "€1,47 Bn" [ref=e404]
+                  - row [ref=e405]:
+                    - cell "2" [ref=e406]
+                    - cell [ref=e407]:
+                      - link "Ethereum ETH" [ref=e408] [cursor=pointer]:
+                        - /url: /markets/ethereum
+                        - generic [ref=e409]:
+                          - generic [ref=e410]: Ethereum
+                          - generic [ref=e411]: ETH
+                    - cell "2 082 €" [ref=e412]
+                    - cell "-0.05%" [ref=e413]
+                    - cell "+1.61%" [ref=e414]
+                    - cell "+1.76%" [ref=e415]
+                    - cell "€7,03 Md" [ref=e416]
+                    - cell "€251,24 Md" [ref=e417]
+                  - row [ref=e418]:
+                    - cell "3" [ref=e419]
+                    - cell [ref=e420]:
+                      - link "Tether USDT" [ref=e421] [cursor=pointer]:
+                        - /url: /markets/tether
+                        - generic [ref=e422]:
+                          - generic [ref=e423]: Tether
+                          - generic [ref=e424]: USDT
+                    - cell "1,14 €" [ref=e425]
+                    - cell "-0.01%" [ref=e426]
+                    - cell "-0.00%" [ref=e427]
+                    - cell "+0.01%" [ref=e428]
+                    - cell "€30,4 Md" [ref=e429]
+                    - cell "€210,24 Md" [ref=e430]
+                  - row [ref=e431]:
+                    - cell "4" [ref=e432]
+                    - cell [ref=e433]:
+                      - link "BNB BNB" [ref=e434] [cursor=pointer]:
+                        - /url: /markets/binancecoin
+                        - generic [ref=e435]:
+                          - generic [ref=e436]: BNB
+                          - generic [ref=e437]: BNB
+                    - cell "663 €" [ref=e438]
+                    - cell "+0.03%" [ref=e439]
+                    - cell "+0.78%" [ref=e440]
+                    - cell "+1.38%" [ref=e441]
+                    - cell "€448,89 M" [ref=e442]
+                    - cell "€89,36 Md" [ref=e443]
+                  - row [ref=e444]:
+                    - cell "5" [ref=e445]
+                    - cell [ref=e446]:
+                      - link "USDC USDC" [ref=e447] [cursor=pointer]:
+                        - /url: /markets/usd-coin
+                        - generic [ref=e448]:
+                          - generic [ref=e449]: USDC
+                          - generic [ref=e450]: USDC
+                    - cell "1,14 €" [ref=e451]
+                    - cell "-0.00%" [ref=e452]
+                    - cell "-0.00%" [ref=e453]
+                    - cell "-0.00%" [ref=e454]
+                    - cell "€8,21 Md" [ref=e455]
+                    - cell "€83,72 Md" [ref=e456]
+                  - row [ref=e457]:
+                    - cell "6" [ref=e458]
+                    - cell [ref=e459]:
+                      - link "XRP XRP" [ref=e460] [cursor=pointer]:
+                        - /url: /markets/ripple
+                        - generic [ref=e461]:
+                          - generic [ref=e462]: XRP
+                          - generic [ref=e463]: XRP
+                    - cell "1,27 €" [ref=e464]
+                    - cell "-0.03%" [ref=e465]
+                    - cell "+0.80%" [ref=e466]
+                    - cell "-4.57%" [ref=e467]
+                    - cell "€670,08 M" [ref=e468]
+                    - cell "€79,42 Md" [ref=e469]
+                  - row [ref=e470]:
+                    - cell "7" [ref=e471]
+                    - cell [ref=e472]:
+                      - link "Solana SOL" [ref=e473] [cursor=pointer]:
+                        - /url: /markets/solana
+                        - generic [ref=e474]:
+                          - generic [ref=e475]: Solana
+                          - generic [ref=e476]: SOL
+                    - cell "89,25 €" [ref=e477]
+                    - cell "+0.03%" [ref=e478]
+                    - cell "+0.28%" [ref=e479]
+                    - cell "-4.56%" [ref=e480]
+                    - cell "€1,43 Md" [ref=e481]
+                    - cell "€51,96 Md" [ref=e482]
+                  - row [ref=e483]:
+                    - cell "8" [ref=e484]
+                    - cell [ref=e485]:
+                      - link "TRON TRX" [ref=e486] [cursor=pointer]:
+                        - /url: /markets/tron
+                        - generic [ref=e487]:
+                          - generic [ref=e488]: TRON
+                          - generic [ref=e489]: TRX
+                    - cell "0,3774 €" [ref=e490]
+                    - cell "-0.01%" [ref=e491]
+                    - cell "+0.08%" [ref=e492]
+                    - cell "+1.40%" [ref=e493]
+                    - cell "€312,44 M" [ref=e494]
+                    - cell "€35,8 Md" [ref=e495]
+                  - row [ref=e496]:
+                    - cell "9" [ref=e497]
+                    - cell [ref=e498]:
+                      - link "Figure Heloc FIGR_HELOC" [ref=e499] [cursor=pointer]:
+                        - /url: /markets/figure-heloc
+                        - generic [ref=e500]:
+                          - generic [ref=e501]: Figure Heloc
+                          - generic [ref=e502]: FIGR_HELOC
+                    - cell "1,18 €" [ref=e503]
+                    - cell "+0.00%" [ref=e504]
+                    - cell "+3.05%" [ref=e505]
+                    - cell "+2.38%" [ref=e506]
+                    - cell "€152,34 M" [ref=e507]
+                    - cell "€23,42 Md" [ref=e508]
+                  - row [ref=e509]:
+                    - cell "10" [ref=e510]
+                    - cell [ref=e511]:
+                      - link "Hyperliquid HYPE" [ref=e512] [cursor=pointer]:
+                        - /url: /markets/hyperliquid
+                        - generic [ref=e513]:
+                          - generic [ref=e514]: Hyperliquid
+                          - generic [ref=e515]: HYPE
+                    - cell "77,60 €" [ref=e516]
+                    - cell "+0.32%" [ref=e517]
+                    - cell "+1.10%" [ref=e518]
+                    - cell "-2.49%" [ref=e519]
+                    - cell "€314,49 M" [ref=e520]
+                    - cell "€17,26 Md" [ref=e521]
+                  - row [ref=e522]:
+                    - cell "11" [ref=e523]
+                    - cell [ref=e524]:
+                      - link "Dogecoin DOGE" [ref=e525] [cursor=pointer]:
+                        - /url: /markets/dogecoin
+                        - generic [ref=e526]:
+                          - generic [ref=e527]: Dogecoin
+                          - generic [ref=e528]: DOGE
+                    - cell "0,0859 €" [ref=e529]
+                    - cell "-0.05%" [ref=e530]
+                    - cell "+1.44%" [ref=e531]
+                    - cell "-4.23%" [ref=e532]
+                    - cell "€402,79 M" [ref=e533]
+                    - cell "€13,31 Md" [ref=e534]
+                  - row [ref=e535]:
+                    - cell "12" [ref=e536]
+                    - cell [ref=e537]:
+                      - link "USDS USDS" [ref=e538] [cursor=pointer]:
+                        - /url: /markets/usds
+                        - generic [ref=e539]:
+                          - generic [ref=e540]: USDS
+                          - generic [ref=e541]: USDS
+                    - cell "1,14 €" [ref=e542]
+                    - cell "+0.01%" [ref=e543]
+                    - cell "+0.02%" [ref=e544]
+                    - cell "+0.00%" [ref=e545]
+                    - cell "€91,17 M" [ref=e546]
+                    - cell "€12,51 Md" [ref=e547]
+                  - row [ref=e548]:
+                    - cell "13" [ref=e549]
+                    - cell [ref=e550]:
+                      - link "Rain RAIN" [ref=e551] [cursor=pointer]:
+                        - /url: /markets/rain
+                        - generic [ref=e552]:
+                          - generic [ref=e553]: Rain
+                          - generic [ref=e554]: RAIN
+                    - cell "0,0165 €" [ref=e555]
+                    - cell "-0.31%" [ref=e556]
+                    - cell "+0.17%" [ref=e557]
+                    - cell "-6.48%" [ref=e558]
+                    - cell "€26,88 M" [ref=e559]
+                    - cell "€10,9 Md" [ref=e560]
+                  - row [ref=e561]:
+                    - cell "14" [ref=e562]
+                    - cell [ref=e563]:
+                      - link "Zcash ZEC" [ref=e564] [cursor=pointer]:
+                        - /url: /markets/zcash
+                        - generic [ref=e565]:
+                          - generic [ref=e566]: Zcash
+                          - generic [ref=e567]: ZEC
+                    - cell "600 €" [ref=e568]
+                    - cell "+1.07%" [ref=e569]
+                    - cell "+5.05%" [ref=e570]
+                    - cell "+12.08%" [ref=e571]
+                    - cell "€269,78 M" [ref=e572]
+                    - cell "€10,08 Md" [ref=e573]
+                  - row [ref=e574]:
+                    - cell "15" [ref=e575]
+                    - cell [ref=e576]:
+                      - link "LEO Token LEO" [ref=e577] [cursor=pointer]:
+                        - /url: /markets/leo-token
+                        - generic [ref=e578]:
+                          - generic [ref=e579]: LEO Token
+                          - generic [ref=e580]: LEO
+                    - cell "10,87 €" [ref=e581]
+                    - cell "+0.19%" [ref=e582]
+                    - cell "+0.50%" [ref=e583]
+                    - cell "+4.06%" [ref=e584]
+                    - cell "€758,27 k" [ref=e585]
+                    - cell "€10 Md" [ref=e586]
+                  - row [ref=e587]:
+                    - cell "16" [ref=e588]
+                    - cell [ref=e589]:
+                      - link "WhiteBIT Coin WBT" [ref=e590] [cursor=pointer]:
+                        - /url: /markets/whitebit
+                        - generic [ref=e591]:
+                          - generic [ref=e592]: WhiteBIT Coin
+                          - generic [ref=e593]: WBT
+                    - cell "64,38 €" [ref=e594]
+                    - cell "-0.01%" [ref=e595]
+                    - cell "+0.74%" [ref=e596]
+                    - cell "-1.38%" [ref=e597]
+                    - cell "€45,32 M" [ref=e598]
+                    - cell "€7,6 Md" [ref=e599]
+                  - row [ref=e600]:
+                    - cell "17" [ref=e601]
+                    - cell [ref=e602]:
+                      - link "Stellar XLM" [ref=e603] [cursor=pointer]:
+                        - /url: /markets/stellar
+                        - generic [ref=e604]:
+                          - generic [ref=e605]: Stellar
+                          - generic [ref=e606]: XLM
+                    - cell "0,2190 €" [ref=e607]
+                    - cell "-0.06%" [ref=e608]
+                    - cell "+1.11%" [ref=e609]
+                    - cell "-8.48%" [ref=e610]
+                    - cell "€119,99 M" [ref=e611]
+                    - cell "€7,48 Md" [ref=e612]
+                  - row [ref=e613]:
+                    - cell "18" [ref=e614]
+                    - cell [ref=e615]:
+                      - link "Cardano ADA" [ref=e616] [cursor=pointer]:
+                        - /url: /markets/cardano
+                        - generic [ref=e617]:
+                          - generic [ref=e618]: Cardano
+                          - generic [ref=e619]: ADA
+                    - cell "0,1937 €" [ref=e620]
+                    - cell "-0.78%" [ref=e621]
+                    - cell "+1.66%" [ref=e622]
+                    - cell "-12.12%" [ref=e623]
+                    - cell "€262,18 M" [ref=e624]
+                    - cell "€7,22 Md" [ref=e625]
+                  - row [ref=e626]:
+                    - cell "19" [ref=e627]
+                    - cell [ref=e628]:
+                      - link "Monero XMR" [ref=e629] [cursor=pointer]:
+                        - /url: /markets/monero
+                        - generic [ref=e630]:
+                          - generic [ref=e631]: Monero
+                          - generic [ref=e632]: XMR
+                    - cell "368 €" [ref=e633]
+                    - cell "-0.42%" [ref=e634]
+                    - cell "-0.27%" [ref=e635]
+                    - cell "-1.99%" [ref=e636]
+                    - cell "€32,29 M" [ref=e637]
+                    - cell "€6,91 Md" [ref=e638]
+                  - row [ref=e639]:
+                    - cell "20" [ref=e640]
+                    - cell [ref=e641]:
+                      - link "Chainlink LINK" [ref=e642] [cursor=pointer]:
+                        - /url: /markets/chainlink
+                        - generic [ref=e643]:
+                          - generic [ref=e644]: Chainlink
+                          - generic [ref=e645]: LINK
+                    - cell "9,19 €" [ref=e646]
+                    - cell "-0.19%" [ref=e647]
+                    - cell "+1.49%" [ref=e648]
+                    - cell "-0.19%" [ref=e649]
+                    - cell "€139,02 M" [ref=e650]
+                    - cell "€6,88 Md" [ref=e651]
+                  - row [ref=e652]:
+                    - cell "21" [ref=e653]
+                    - cell [ref=e654]:
+                      - link "Canton CC" [ref=e655] [cursor=pointer]:
+                        - /url: /markets/canton-network
+                        - generic [ref=e656]:
+                          - generic [ref=e657]: Canton
+                          - generic [ref=e658]: CC
+                    - cell "0,1543 €" [ref=e659]
+                    - cell "+0.10%" [ref=e660]
+                    - cell "+1.54%" [ref=e661]
+                    - cell "-3.36%" [ref=e662]
+                    - cell "€10,31 M" [ref=e663]
+                    - cell "€6,03 Md" [ref=e664]
+                  - row [ref=e665]:
+                    - cell "22" [ref=e666]
+                    - cell [ref=e667]:
+                      - link "Bitcoin Cash BCH" [ref=e668] [cursor=pointer]:
+                        - /url: /markets/bitcoin-cash
+                        - generic [ref=e669]:
+                          - generic [ref=e670]: Bitcoin Cash
+                          - generic [ref=e671]: BCH
+                    - cell "282 €" [ref=e672]
+                    - cell "-0.23%" [ref=e673]
+                    - cell "+0.11%" [ref=e674]
+                    - cell "+5.60%" [ref=e675]
+                    - cell "€102,48 M" [ref=e676]
+                    - cell "€5,65 Md" [ref=e677]
+                  - row [ref=e678]:
+                    - cell "23" [ref=e679]
+                    - cell [ref=e680]:
+                      - link "Dai DAI" [ref=e681] [cursor=pointer]:
+                        - /url: /markets/dai
+                        - generic [ref=e682]:
+                          - generic [ref=e683]: Dai
+                          - generic [ref=e684]: DAI
+                    - cell "1,14 €" [ref=e685]
+                    - cell "-0.00%" [ref=e686]
+                    - cell "-0.00%" [ref=e687]
+                    - cell "+0.00%" [ref=e688]
+                    - cell "€171,01 M" [ref=e689]
+                    - cell "€5,3 Md" [ref=e690]
+                  - row [ref=e691]:
+                    - cell "24" [ref=e692]
+                    - cell [ref=e693]:
+                      - link "Gram (prev. Toncoin) GRAM" [ref=e694] [cursor=pointer]:
+                        - /url: /markets/the-open-network
+                        - generic [ref=e695]:
+                          - generic [ref=e696]: Gram (prev. Toncoin)
+                          - generic [ref=e697]: GRAM
+                    - cell "1,89 €" [ref=e698]
+                    - cell "-0.14%" [ref=e699]
+                    - cell "+0.18%" [ref=e700]
+                    - cell "-7.35%" [ref=e701]
+                    - cell "€33,74 M" [ref=e702]
+                    - cell "€5,17 Md" [ref=e703]
+                  - row [ref=e704]:
+                    - cell "25" [ref=e705]
+                    - cell [ref=e706]:
+                      - link "USD1 USD1" [ref=e707] [cursor=pointer]:
+                        - /url: /markets/usd1-wlfi
+                        - generic [ref=e708]:
+                          - generic [ref=e709]: USD1
+                          - generic [ref=e710]: USD1
+                    - cell "1,14 €" [ref=e711]
+                    - cell "+0.03%" [ref=e712]
+                    - cell "+0.03%" [ref=e713]
+                    - cell "+0.04%" [ref=e714]
+                    - cell "€543,61 M" [ref=e715]
+                    - cell "€5,09 Md" [ref=e716]
+                  - row [ref=e717]:
+                    - cell "26" [ref=e718]
+                    - cell [ref=e719]:
+                      - link "Ethena USDe USDE" [ref=e720] [cursor=pointer]:
+                        - /url: /markets/ethena-usde
+                        - generic [ref=e721]:
+                          - generic [ref=e722]: Ethena USDe
+                          - generic [ref=e723]: USDE
+                    - cell "1,14 €" [ref=e724]
+                    - cell "-0.01%" [ref=e725]
+                    - cell "+0.04%" [ref=e726]
+                    - cell "+0.13%" [ref=e727]
+                    - cell "€341,91 M" [ref=e728]
+                    - cell "€4,5 Md" [ref=e729]
+                  - row [ref=e730]:
+                    - cell "27" [ref=e731]
+                    - cell [ref=e732]:
+                      - link "Litecoin LTC" [ref=e733] [cursor=pointer]:
+                        - /url: /markets/litecoin
+                        - generic [ref=e734]:
+                          - generic [ref=e735]: Litecoin
+                          - generic [ref=e736]: LTC
+                    - cell "51,74 €" [ref=e737]
+                    - cell "-0.17%" [ref=e738]
+                    - cell "+1.63%" [ref=e739]
+                    - cell "+0.36%" [ref=e740]
+                    - cell "€162,08 M" [ref=e741]
+                    - cell "€4 Md" [ref=e742]
+                  - row [ref=e743]:
+                    - cell "28" [ref=e744]
+                    - cell [ref=e745]:
+                      - link "Global Dollar USDG" [ref=e746] [cursor=pointer]:
+                        - /url: /markets/global-dollar
+                        - generic [ref=e747]:
+                          - generic [ref=e748]: Global Dollar
+                          - generic [ref=e749]: USDG
+                    - cell "1,14 €" [ref=e750]
+                    - cell "-0.00%" [ref=e751]
+                    - cell "-0.16%" [ref=e752]
+                    - cell "-0.06%" [ref=e753]
+                    - cell "€279,12 M" [ref=e754]
+                    - cell "€3,59 Md" [ref=e755]
+                  - row [ref=e756]:
+                    - cell "29" [ref=e757]
+                    - cell [ref=e758]:
+                      - link "Circle USYC USYC" [ref=e759] [cursor=pointer]:
+                        - /url: /markets/hashnote-usyc
+                        - generic [ref=e760]:
+                          - generic [ref=e761]: Circle USYC
+                          - generic [ref=e762]: USYC
+                    - cell "1,29 €" [ref=e763]
+                    - cell "+0.00%" [ref=e764]
+                    - cell "-0.01%" [ref=e765]
+                    - cell "+0.05%" [ref=e766]
+                    - cell "€1,16 k" [ref=e767]
+                    - cell "€3,51 Md" [ref=e768]
+                  - row [ref=e769]:
+                    - cell "30" [ref=e770]
+                    - cell [ref=e771]:
+                      - link "Hedera HBAR" [ref=e772] [cursor=pointer]:
+                        - /url: /markets/hedera-hashgraph
+                        - generic [ref=e773]:
+                          - generic [ref=e774]: Hedera
+                          - generic [ref=e775]: HBAR
+                    - cell "0,0794 €" [ref=e776]
+                    - cell "-0.34%" [ref=e777]
+                    - cell "-0.60%" [ref=e778]
+                    - cell "-6.98%" [ref=e779]
+                    - cell "€116,38 M" [ref=e780]
+                    - cell "€3,48 Md" [ref=e781]
+                  - row [ref=e782]:
+                    - cell "31" [ref=e783]
+                    - cell [ref=e784]:
+                      - link "Sui SUI" [ref=e785] [cursor=pointer]:
+                        - /url: /markets/sui
+                        - generic [ref=e786]:
+                          - generic [ref=e787]: Sui
+                          - generic [ref=e788]: SUI
+                    - cell "0,8505 €" [ref=e789]
+                    - cell "-0.33%" [ref=e790]
+                    - cell "+1.04%" [ref=e791]
+                    - cell "-3.36%" [ref=e792]
+                    - cell "€179,47 M" [ref=e793]
+                    - cell "€3,45 Md" [ref=e794]
+                  - row [ref=e795]:
+                    - cell "32" [ref=e796]
+                    - cell [ref=e797]:
+                      - link "Avalanche AVAX" [ref=e798] [cursor=pointer]:
+                        - /url: /markets/avalanche-2
+                        - generic [ref=e799]:
+                          - generic [ref=e800]: Avalanche
+                          - generic [ref=e801]: AVAX
+                    - cell "7,68 €" [ref=e802]
+                    - cell "-0.22%" [ref=e803]
+                    - cell "-0.31%" [ref=e804]
+                    - cell "-3.93%" [ref=e805]
+                    - cell "€97,54 M" [ref=e806]
+                    - cell "€3,32 Md" [ref=e807]
+                  - row [ref=e808]:
+                    - cell "33" [ref=e809]
+                    - cell [ref=e810]:
+                      - link "BlackRock USD Institutional Digital Liquidity Fund BUIDL" [ref=e811] [cursor=pointer]:
+                        - /url: /markets/blackrock-usd-institutional-digital-liquidity-fund
+                        - generic [ref=e812]:
+                          - generic [ref=e813]: BlackRock USD Institutional Digital Liquidity Fund
+                          - generic [ref=e814]: BUIDL
+                    - cell "1,14 €" [ref=e815]
+                    - cell "+0.00%" [ref=e816]
+                    - cell "+0.00%" [ref=e817]
+                    - cell "+0.00%" [ref=e818]
+                    - cell "€0" [ref=e819]
+                    - cell "€3,29 Md" [ref=e820]
+                  - row [ref=e821]:
+                    - cell "34" [ref=e822]
+                    - cell [ref=e823]:
+                      - link "PayPal USD PYUSD" [ref=e824] [cursor=pointer]:
+                        - /url: /markets/paypal-usd
+                        - generic [ref=e825]:
+                          - generic [ref=e826]: PayPal USD
+                          - generic [ref=e827]: PYUSD
+                    - cell "1,14 €" [ref=e828]
+                    - cell "+0.01%" [ref=e829]
+                    - cell "-0.00%" [ref=e830]
+                    - cell "-0.02%" [ref=e831]
+                    - cell "€63,92 M" [ref=e832]
+                    - cell "€3,26 Md" [ref=e833]
+                  - row [ref=e834]:
+                    - cell "35" [ref=e835]
+                    - cell [ref=e836]:
+                      - link "Cronos CRO" [ref=e837] [cursor=pointer]:
+                        - /url: /markets/crypto-com-chain
+                        - generic [ref=e838]:
+                          - generic [ref=e839]: Cronos
+                          - generic [ref=e840]: CRO
+                    - cell "0,0644 €" [ref=e841]
+                    - cell "-0.10%" [ref=e842]
+                    - cell "+1.27%" [ref=e843]
+                    - cell "-6.95%" [ref=e844]
+                    - cell "€7,31 M" [ref=e845]
+                    - cell "€2,97 Md" [ref=e846]
+                  - row [ref=e847]:
+                    - cell "36" [ref=e848]
+                    - cell [ref=e849]:
+                      - link "Shiba Inu SHIB" [ref=e850] [cursor=pointer]:
+                        - /url: /markets/shiba-inu
+                        - generic [ref=e851]:
+                          - generic [ref=e852]: Shiba Inu
+                          - generic [ref=e853]: SHIB
+                    - cell "0,0000 €" [ref=e854]
+                    - cell "-0.18%" [ref=e855]
+                    - cell "-0.19%" [ref=e856]
+                    - cell "-2.36%" [ref=e857]
+                    - cell "€47,08 M" [ref=e858]
+                    - cell "€2,95 Md" [ref=e859]
+                  - row [ref=e860]:
+                    - cell "37" [ref=e861]
+                    - cell [ref=e862]:
+                      - link "Tether Gold XAUT" [ref=e863] [cursor=pointer]:
+                        - /url: /markets/tether-gold
+                        - generic [ref=e864]:
+                          - generic [ref=e865]: Tether Gold
+                          - generic [ref=e866]: XAUT
+                    - cell "4 679 €" [ref=e867]
+                    - cell "-0.05%" [ref=e868]
+                    - cell "-0.24%" [ref=e869]
+                    - cell "-1.45%" [ref=e870]
+                    - cell "€66,15 M" [ref=e871]
+                    - cell "€2,87 Md" [ref=e872]
+                  - row [ref=e873]:
+                    - cell "38" [ref=e874]
+                    - cell [ref=e875]:
+                      - link "NEAR Protocol NEAR" [ref=e876] [cursor=pointer]:
+                        - /url: /markets/near
+                        - generic [ref=e877]:
+                          - generic [ref=e878]: NEAR Protocol
+                          - generic [ref=e879]: NEAR
+                    - cell "2,18 €" [ref=e880]
+                    - cell "+0.19%" [ref=e881]
+                    - cell "+1.38%" [ref=e882]
+                    - cell "-4.92%" [ref=e883]
+                    - cell "€107,1 M" [ref=e884]
+                    - cell "€2,83 Md" [ref=e885]
+                  - row [ref=e886]:
+                    - cell "39" [ref=e887]
+                    - cell [ref=e888]:
+                      - link "Uniswap UNI" [ref=e889] [cursor=pointer]:
+                        - /url: /markets/uniswap
+                        - generic [ref=e890]:
+                          - generic [ref=e891]: Uniswap
+                          - generic [ref=e892]: UNI
+                    - cell "4,35 €" [ref=e893]
+                    - cell "+0.59%" [ref=e894]
+                    - cell "+7.20%" [ref=e895]
+                    - cell "+17.75%" [ref=e896]
+                    - cell "€214,88 M" [ref=e897]
+                    - cell "€2,7 Md" [ref=e898]
+                  - row [ref=e899]:
+                    - cell "40" [ref=e900]
+                    - cell [ref=e901]:
+                      - link "Ondo US Dollar Yield USDY" [ref=e902] [cursor=pointer]:
+                        - /url: /markets/ondo-us-dollar-yield
+                        - generic [ref=e903]:
+                          - generic [ref=e904]: Ondo US Dollar Yield
+                          - generic [ref=e905]: USDY
+                    - cell "1,30 €" [ref=e906]
+                    - cell "+0.26%" [ref=e907]
+                    - cell "+0.74%" [ref=e908]
+                    - cell "+0.02%" [ref=e909]
+                    - cell "€486,33 k" [ref=e910]
+                    - cell "€2,46 Md" [ref=e911]
+                  - row [ref=e912]:
+                    - cell "41" [ref=e913]
+                    - cell [ref=e914]:
+                      - link "Bittensor TAO" [ref=e915] [cursor=pointer]:
+                        - /url: /markets/bittensor
+                        - generic [ref=e916]:
+                          - generic [ref=e917]: Bittensor
+                          - generic [ref=e918]: TAO
+                    - cell "243 €" [ref=e919]
+                    - cell "-0.59%" [ref=e920]
+                    - cell "+0.30%" [ref=e921]
+                    - cell "-1.96%" [ref=e922]
+                    - cell "€92,48 M" [ref=e923]
+                    - cell "€2,34 Md" [ref=e924]
+                  - row [ref=e925]:
+                    - cell "42" [ref=e926]
+                    - cell [ref=e927]:
+                      - link "World Liberty Financial WLFI" [ref=e928] [cursor=pointer]:
+                        - /url: /markets/world-liberty-financial
+                        - generic [ref=e929]:
+                          - generic [ref=e930]: World Liberty Financial
+                          - generic [ref=e931]: WLFI
+                    - cell "0,0671 €" [ref=e932]
+                    - cell "+0.15%" [ref=e933]
+                    - cell "+1.21%" [ref=e934]
+                    - cell "+2.32%" [ref=e935]
+                    - cell "€18,44 M" [ref=e936]
+                    - cell "€2,13 Md" [ref=e937]
+                  - row [ref=e938]:
+                    - cell "43" [ref=e939]
+                    - cell [ref=e940]:
+                      - link "PAX Gold PAXG" [ref=e941] [cursor=pointer]:
+                        - /url: /markets/pax-gold
+                        - generic [ref=e942]:
+                          - generic [ref=e943]: PAX Gold
+                          - generic [ref=e944]: PAXG
+                    - cell "4 681 €" [ref=e945]
+                    - cell "-0.08%" [ref=e946]
+                    - cell "-0.26%" [ref=e947]
+                    - cell "-1.47%" [ref=e948]
+                    - cell "€40,39 M" [ref=e949]
+                    - cell "€2,1 Md" [ref=e950]
+                  - row [ref=e951]:
+                    - cell "44" [ref=e952]
+                    - cell [ref=e953]:
+                      - link "DeXe DEXE" [ref=e954] [cursor=pointer]:
+                        - /url: /markets/dexe
+                        - generic [ref=e955]:
+                          - generic [ref=e956]: DeXe
+                          - generic [ref=e957]: DEXE
+                    - cell "44,00 €" [ref=e958]
+                    - cell "+0.32%" [ref=e959]
+                    - cell "+9.82%" [ref=e960]
+                    - cell "+63.12%" [ref=e961]
+                    - cell "€76,86 M" [ref=e962]
+                    - cell "€2,06 Md" [ref=e963]
+                  - row [ref=e964]:
+                    - cell "45" [ref=e965]
+                    - cell [ref=e966]:
+                      - link "OKB OKB" [ref=e967] [cursor=pointer]:
+                        - /url: /markets/okb
+                        - generic [ref=e968]:
+                          - generic [ref=e969]: OKB
+                          - generic [ref=e970]: OKB
+                    - cell "92,40 €" [ref=e971]
+                    - cell "-0.05%" [ref=e972]
+                    - cell "+0.41%" [ref=e973]
+                    - cell "-0.05%" [ref=e974]
+                    - cell "€12,35 M" [ref=e975]
+                    - cell "€1,94 Md" [ref=e976]
+                  - row [ref=e977]:
+                    - cell "46" [ref=e978]
+                    - cell [ref=e979]:
+                      - link "Aster ASTER" [ref=e980] [cursor=pointer]:
+                        - /url: /markets/aster-2
+                        - generic [ref=e981]:
+                          - generic [ref=e982]: Aster
+                          - generic [ref=e983]: ASTER
+                    - cell "0,7221 €" [ref=e984]
+                    - cell "+0.04%" [ref=e985]
+                    - cell "+0.44%" [ref=e986]
+                    - cell "-2.19%" [ref=e987]
+                    - cell "€39,36 M" [ref=e988]
+                    - cell "€1,94 Md" [ref=e989]
+                  - row [ref=e990]:
+                    - cell "47" [ref=e991]
+                    - cell [ref=e992]:
+                      - link "MemeCore M" [ref=e993] [cursor=pointer]:
+                        - /url: /markets/memecore
+                        - generic [ref=e994]:
+                          - generic [ref=e995]: MemeCore
+                          - generic [ref=e996]: M
+                    - cell "1,46 €" [ref=e997]
+                    - cell "+1.40%" [ref=e998]
+                    - cell "-2.94%" [ref=e999]
+                    - cell "-8.48%" [ref=e1000]
+                    - cell "€13,27 M" [ref=e1001]
+                    - cell "€1,93 Md" [ref=e1002]
+                  - row [ref=e1003]:
+                    - cell "48" [ref=e1004]
+                    - cell [ref=e1005]:
+                      - link "HTX DAO HTX" [ref=e1006] [cursor=pointer]:
+                        - /url: /markets/htx-dao
+                        - generic [ref=e1007]:
+                          - generic [ref=e1008]: HTX DAO
+                          - generic [ref=e1009]: HTX
+                    - cell "0,0000 €" [ref=e1010]
+                    - cell "+0.11%" [ref=e1011]
+                    - cell "-0.08%" [ref=e1012]
+                    - cell "+8.32%" [ref=e1013]
+                    - cell "€70,12 M" [ref=e1014]
+                    - cell "€1,91 Md" [ref=e1015]
+                  - row [ref=e1016]:
+                    - cell "49" [ref=e1017]
+                    - cell [ref=e1018]:
+                      - link "Ondo ONDO" [ref=e1019] [cursor=pointer]:
+                        - /url: /markets/ondo-finance
+                        - generic [ref=e1020]:
+                          - generic [ref=e1021]: Ondo
+                          - generic [ref=e1022]: ONDO
+                    - cell "0,3802 €" [ref=e1023]
+                    - cell "-0.35%" [ref=e1024]
+                    - cell "+1.86%" [ref=e1025]
+                    - cell "-1.44%" [ref=e1026]
+                    - cell "€41,44 M" [ref=e1027]
+                    - cell "€1,85 Md" [ref=e1028]
+                  - row [ref=e1029]:
+                    - cell "50" [ref=e1030]
+                    - cell [ref=e1031]:
+                      - link "USDD USDD" [ref=e1032] [cursor=pointer]:
+                        - /url: /markets/usdd
+                        - generic [ref=e1033]:
+                          - generic [ref=e1034]: USDD
+                          - generic [ref=e1035]: USDD
+                    - cell "1,14 €" [ref=e1036]
+                    - cell "+0.00%" [ref=e1037]
+                    - cell "-0.00%" [ref=e1038]
+                    - cell "-0.14%" [ref=e1039]
+                    - cell "€3,06 M" [ref=e1040]
+                    - cell "€1,81 Md" [ref=e1041]
+              - link "View all 50 coins" [ref=e1043] [cursor=pointer]:
+                - /url: /markets
+            - complementary [ref=e1046]:
+              - generic [ref=e1047]:
+                - heading "📈 Market Overview" [level=3] [ref=e1048]
+                - paragraph [ref=e1049]: Loading market overview...
+              - generic [ref=e1050]:
+                - heading "🔥 Trending Categories" [level=3] [ref=e1051]
+                - generic [ref=e1052]:
+                  - link "Decentralized Lottery +1065.49% Cap €8,03 M · Vol €2,64 M" [ref=e1053] [cursor=pointer]:
+                    - /url: /markets?category=Decentralized%20Lottery
+                    - generic [ref=e1054]:
+                      - generic [ref=e1055]: Decentralized Lottery
+                      - generic [ref=e1056]: +1065.49%
+                    - generic [ref=e1057]: Cap €8,03 M · Vol €2,64 M
+                  - link "Flaunch Ecosystem +823.71% Cap €124,17 k · Vol €165,62" [ref=e1058] [cursor=pointer]:
+                    - /url: /markets?category=Flaunch%20Ecosystem
+                    - generic [ref=e1059]:
+                      - generic [ref=e1060]: Flaunch Ecosystem
+                      - generic [ref=e1061]: +823.71%
+                    - generic [ref=e1062]: Cap €124,17 k · Vol €165,62
+                  - link "Robinhood Chain Meme +149.96% Cap €314,54 M · Vol €89,78 M" [ref=e1063] [cursor=pointer]:
+                    - /url: /markets?category=Robinhood%20Chain%20Meme
+                    - generic [ref=e1064]:
+                      - generic [ref=e1065]: Robinhood Chain Meme
+                      - generic [ref=e1066]: +149.96%
+                    - generic [ref=e1067]: Cap €314,54 M · Vol €89,78 M
+                  - link "Zora Creator +122.34% Cap €3,04 M · Vol €227,5 k" [ref=e1068] [cursor=pointer]:
+                    - /url: /markets?category=Zora%20Creator
+                    - generic [ref=e1069]:
+                      - generic [ref=e1070]: Zora Creator
+                      - generic [ref=e1071]: +122.34%
+                    - generic [ref=e1072]: Cap €3,04 M · Vol €227,5 k
+                  - link "Yoink.fun Launchpad +106.31% Cap €265,92 M · Vol €50,92 M" [ref=e1073] [cursor=pointer]:
+                    - /url: /markets?category=Yoink.fun%20Launchpad
+                    - generic [ref=e1074]:
+                      - generic [ref=e1075]: Yoink.fun Launchpad
+                      - generic [ref=e1076]: +106.31%
+                    - generic [ref=e1077]: Cap €265,92 M · Vol €50,92 M
+                  - link "Bankr Ecosystem +79.82% Cap €15,42 M · Vol €5,36 M" [ref=e1078] [cursor=pointer]:
+                    - /url: /markets?category=Bankr%20Ecosystem
+                    - generic [ref=e1079]:
+                      - generic [ref=e1080]: Bankr Ecosystem
+                      - generic [ref=e1081]: +79.82%
+                    - generic [ref=e1082]: Cap €15,42 M · Vol €5,36 M
+                  - link "TRON Meme +76.19% Cap €14,66 M · Vol €6,4 M" [ref=e1083] [cursor=pointer]:
+                    - /url: /markets?category=TRON%20Meme
+                    - generic [ref=e1084]:
+                      - generic [ref=e1085]: TRON Meme
+                      - generic [ref=e1086]: +76.19%
+                    - generic [ref=e1087]: Cap €14,66 M · Vol €6,4 M
+                  - link "Farming-as-a-Service (FaaS) -59.67% Cap €23,02 k · Vol €0" [ref=e1088] [cursor=pointer]:
+                    - /url: /markets?category=Farming-as-a-Service%20(FaaS)
+                    - generic [ref=e1089]:
+                      - generic [ref=e1090]: Farming-as-a-Service (FaaS)
+                      - generic [ref=e1091]: "-59.67%"
+                    - generic [ref=e1092]: Cap €23,02 k · Vol €0
+        - generic [ref=e1094]:
+          - generic [ref=e1095]:
+            - generic [ref=e1096]:
+              - paragraph [ref=e1097]: Fig 02
+              - heading "Built for beginners, built for pros." [level=2] [ref=e1098]
+              - paragraph [ref=e1099]: Guided onboarding for newcomers, ⌘K command palette for power users. Same app, two speeds.
+              - list [ref=e1100]:
+                - listitem [ref=e1101]: Command palette ⌘K — keyboard-speed navigation
+                - listitem [ref=e1105]: Pro lightweight charts + technical indicators
+                - listitem [ref=e1109]: Multi-condition alerts with configurable cooldown
+                - listitem [ref=e1113]: Dark mode by default, light mode optional
+            - generic [ref=e1118]:
+              - generic [ref=e1119]: Command Palette
+              - generic [ref=e1120]:
+                - link "Open palette ⌘ K" [ref=e1121] [cursor=pointer]:
+                  - /url: /markets
+                  - generic [ref=e1122]: Open palette
+                  - generic [ref=e1123]:
+                    - generic [ref=e1124]: ⌘
+                    - generic [ref=e1125]: K
+                - link "Go to markets G M" [ref=e1126] [cursor=pointer]:
+                  - /url: /markets
+                  - generic [ref=e1127]: Go to markets
+                  - generic [ref=e1128]:
+                    - generic [ref=e1129]: G
+                    - generic [ref=e1130]: M
+                - link "Go to dashboard G D" [ref=e1131] [cursor=pointer]:
+                  - /url: /dashboard
+                  - generic [ref=e1132]: Go to dashboard
+                  - generic [ref=e1133]:
+                    - generic [ref=e1134]: G
+                    - generic [ref=e1135]: D
+                - link "Navigate ↑ ↓" [ref=e1136] [cursor=pointer]:
+                  - /url: /markets
+                  - generic [ref=e1137]: Navigate
+                  - generic [ref=e1138]:
+                    - generic [ref=e1139]: ↑
+                    - generic [ref=e1140]: ↓
+          - generic [ref=e1141]:
+            - generic [ref=e1142]:
+              - paragraph [ref=e1143]: Fig 03
+              - heading "Real-time data, really real-time." [level=2] [ref=e1144]
+              - paragraph [ref=e1145]: Direct Binance WebSocket, no polling, no stale cache. What you see is what's happening on the market right now.
+              - list [ref=e1146]:
+                - listitem [ref=e1147]: Dragonfly pub/sub for sub-10ms propagation
+                - listitem [ref=e1151]: QuestDB for native ultra-fast time-series
+                - listitem [ref=e1155]: Socket.IO frontend with auto-reconnect
+                - listitem [ref=e1159]: Incremental chart update on every tick
+            - generic [ref=e1164]:
+              - generic [ref=e1165]:
+                - generic [ref=e1166]:
+                  - generic [ref=e1167]: Cap
+                  - generic [ref=e1171]: —
+                  - generic [ref=e1172]: —
+                - generic [ref=e1173]:
+                  - generic [ref=e1174]: Vol 24h
+                  - generic [ref=e1177]: —
+                  - generic [ref=e1178]: global
+                - generic [ref=e1179]:
+                  - generic [ref=e1180]: BTC Dom
+                  - generic [ref=e1184]: —
+                  - generic [ref=e1185]: dominance
+              - generic [ref=e1186]:
+                - generic [ref=e1187]:
+                  - generic [ref=e1188]: WebSocket Feed
+                  - generic [ref=e1189]: ● LIVE
+                - generic [ref=e1191]:
+                  - generic [ref=e1192]:
+                    - generic [ref=e1193]:
+                      - generic [ref=e1194]: "--:--:--.---"
+                      - generic [ref=e1195]: BTC
+                      - generic [ref=e1196]: —
+                      - generic [ref=e1197]: —
+                    - generic [ref=e1198]:
+                      - generic [ref=e1199]: "--:--:--.---"
+                      - generic [ref=e1200]: ETH
+                      - generic [ref=e1201]: —
+                      - generic [ref=e1202]: —
+                    - generic [ref=e1203]:
+                      - generic [ref=e1204]: "--:--:--.---"
+                      - generic [ref=e1205]: SOL
+                      - generic [ref=e1206]: —
+                      - generic [ref=e1207]: —
+                    - generic [ref=e1208]:
+                      - generic [ref=e1209]: "--:--:--.---"
+                      - generic [ref=e1210]: BNB
+                      - generic [ref=e1211]: —
+                      - generic [ref=e1212]: —
+                    - generic [ref=e1213]:
+                      - generic [ref=e1214]: "--:--:--.---"
+                      - generic [ref=e1215]: XRP
+                      - generic [ref=e1216]: —
+                      - generic [ref=e1217]: —
+                  - generic [ref=e1218]:
+                    - generic [ref=e1219]:
+                      - generic [ref=e1220]: "--:--:--.---"
+                      - generic [ref=e1221]: BTC
+                      - generic [ref=e1222]: —
+                      - generic [ref=e1223]: —
+                    - generic [ref=e1224]:
+                      - generic [ref=e1225]: "--:--:--.---"
+                      - generic [ref=e1226]: ETH
+                      - generic [ref=e1227]: —
+                      - generic [ref=e1228]: —
+                    - generic [ref=e1229]:
+                      - generic [ref=e1230]: "--:--:--.---"
+                      - generic [ref=e1231]: SOL
+                      - generic [ref=e1232]: —
+                      - generic [ref=e1233]: —
+                    - generic [ref=e1234]:
+                      - generic [ref=e1235]: "--:--:--.---"
+                      - generic [ref=e1236]: BNB
+                      - generic [ref=e1237]: —
+                      - generic [ref=e1238]: —
+                    - generic [ref=e1239]:
+                      - generic [ref=e1240]: "--:--:--.---"
+                      - generic [ref=e1241]: XRP
+                      - generic [ref=e1242]: —
+                      - generic [ref=e1243]: —
+              - generic [ref=e1244]:
+                - generic [ref=e1245]:
+                  - heading "Quick Converter" [level=4] [ref=e1246]
+                  - generic [ref=e1250]: LIVE RATES
+                - generic [ref=e1251]:
+                  - generic [ref=e1252]:
+                    - textbox "Amount" [ref=e1253]: "1"
+                    - combobox "From" [ref=e1254]:
+                      - option "BTC" [selected]
+                      - option "ETH"
+                      - option "SOL"
+                      - option "BNB"
+                      - option "XRP"
+                      - option "USD"
+                      - option "EUR"
+                  - button "Swap" [ref=e1256]
+                  - generic [ref=e1260]:
+                    - textbox "Converted amount" [ref=e1261]: 73 411 €
+                    - combobox "To" [ref=e1262]:
+                      - option "BTC"
+                      - option "ETH"
+                      - option "SOL"
+                      - option "BNB"
+                      - option "XRP"
+                      - option "USD" [selected]
+                      - option "EUR"
+                - generic [ref=e1263]: 1 BTC = 73 411 €
+        - generic [ref=e1268]:
+          - paragraph [ref=e1269]: 14 DAYS PREMIUM INCLUDED
+          - heading "Prêt à prendre de la hauteur ?" [level=2] [ref=e1272]
+          - paragraph [ref=e1273]: Rejoignez des milliers de traders qui utilisent Zenith pour suivre, analyser et anticiper les marchés.
+          - generic [ref=e1274]:
+            - button "Créer mon compte gratuit" [ref=e1275]
+            - button "Voir la démo" [ref=e1278]
+          - generic [ref=e1279]:
+            - generic [ref=e1280]: 14-day free trial
+            - generic [ref=e1284]: No credit card
+            - generic [ref=e1288]: GDPR native
+            - generic [ref=e1292]: EU hosting
+      - generic [ref=e1296]: zenith.xyz
+      - generic [ref=e1300]:
+        - generic [ref=e1301]:
+          - generic [ref=e1302]:
+            - link [ref=e1303] [cursor=pointer]:
+              - /url: /
+              - img "Zenith" [ref=e1304]
+            - paragraph [ref=e1305]: Votre sommet, vos marchés, votre clarté. Plateforme d'intelligence crypto multi-actifs, dark-mode natif, conçue en Europe.
+            - generic [ref=e1306]:
+              - generic [ref=e1307]:
+                - generic [ref=e1308]: Langue
+                - button "Change language" [ref=e1310]:
+                  - generic [ref=e1311]: Français
+              - generic [ref=e1314]:
+                - generic [ref=e1315]: Devise
+                - button "Change currency" [ref=e1317]:
+                  - generic [ref=e1323]: € EUR
+            - generic [ref=e1326]:
+              - link "Twitter" [ref=e1327] [cursor=pointer]:
+                - /url: https://twitter.com/zenithxyz
+              - link "Discord" [ref=e1330] [cursor=pointer]:
+                - /url: https://discord.gg/zenith
+              - link "Instagram" [ref=e1333] [cursor=pointer]:
+                - /url: https://www.instagram.com/zenithmrkt
+          - generic [ref=e1336]:
+            - heading "Produit" [level=4] [ref=e1337]
+            - list [ref=e1338]:
+              - listitem [ref=e1339]:
+                - link [ref=e1340] [cursor=pointer]:
+                  - /url: /markets
+              - listitem [ref=e1342]:
+                - link [ref=e1343] [cursor=pointer]:
+                  - /url: /tools/screener
+              - listitem [ref=e1345]:
+                - link [ref=e1346] [cursor=pointer]:
+                  - /url: /portfolio
+          - generic [ref=e1348]:
+            - heading "Communauté" [level=4] [ref=e1349]
+            - list [ref=e1350]:
+              - listitem [ref=e1351]:
+                - link [ref=e1352] [cursor=pointer]:
+                  - /url: /community/social
+              - listitem [ref=e1354]:
+                - link [ref=e1355] [cursor=pointer]:
+                  - /url: /community/ideas
+              - listitem [ref=e1357]:
+                - link [ref=e1358] [cursor=pointer]:
+                  - /url: /community/education
+              - listitem [ref=e1360]:
+                - link [ref=e1361] [cursor=pointer]:
+                  - /url: /help/contact
+          - generic [ref=e1363]:
+            - heading "Ressources" [level=4] [ref=e1364]
+            - list [ref=e1365]:
+              - listitem [ref=e1366]:
+                - link [ref=e1367] [cursor=pointer]:
+                  - /url: /resources/api
+              - listitem [ref=e1369]:
+                - link [ref=e1370] [cursor=pointer]:
+                  - /url: /resources/status
+          - generic [ref=e1372]:
+            - heading "Légal" [level=4] [ref=e1373]
+            - list [ref=e1374]:
+              - listitem [ref=e1375]:
+                - link [ref=e1376] [cursor=pointer]:
+                  - /url: /legal/terms
+              - listitem [ref=e1378]:
+                - link [ref=e1379] [cursor=pointer]:
+                  - /url: /legal/privacy
+              - listitem [ref=e1381]:
+                - link [ref=e1382] [cursor=pointer]:
+                  - /url: /legal/cookies
+              - listitem [ref=e1384]:
+                - link [ref=e1385] [cursor=pointer]:
+                  - /url: /legal/accessibility
+        - generic [ref=e1388]:
+          - paragraph [ref=e1389]: © 2026 Zenith. Tous droits réservés.
+          - paragraph [ref=e1390]: Conçu en Belgique. Données de marché en temps réel via Binance & CoinGecko.
+  - alert [ref=e1391]

@@ -50,12 +50,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [applyTheme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const resolved = prev === "system" ? getSystemTheme() : prev;
-      const next = resolved === "dark" ? "light" : "dark";
-      return next;
-    });
-  }, [setTheme]);
+    const resolved = theme === "system" ? getSystemTheme() : theme;
+    const next = resolved === "dark" ? "light" : "dark";
+    setTheme(next);
+  }, [setTheme, theme]);
 
   const toggleAnimations = useCallback(() => {
     setAnimationsEnabled((prev) => {
