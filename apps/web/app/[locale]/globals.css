@@ -1,28 +1,63 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Palette CoinGecko (dark) ─── */
+  /* ─── Semantic tokens — adapt to light/dark via CSS variables ─── */
   --color-brand-orange: #ff4f00;
   --color-brand-orange-active: #e04700;
   --color-brand-blue: #4da6ff;
   --color-brand-indigo: #213183;
-  --color-pro: #1aae39;
   --color-warm-paper: #1a1d29;
-  --color-white: #eaecef;
+
+  /* Airbnb Rausch for landing accents */
+  --color-rausch: #ff385c;
+  --color-rausch-active: #e00b41;
+  --color-rausch-disabled: #ffd1da;
 
   /* Surfaces */
-  --color-canvas: #1a1d29;
-  --color-canvas-soft: #242836;
-  --color-canvas-warm: #2e3344;
+  --color-canvas: var(--bg-canvas);
+  --color-canvas-soft: var(--bg-canvas-soft);
+  --color-canvas-warm: var(--bg-canvas-warm);
+  --color-card: var(--bg-card);
+  --color-raised: var(--bg-raised);
+  --color-input: var(--bg-input);
+  --color-inset: var(--bg-inset);
+  --color-accent: var(--bg-accent);
+  --color-accent-subtle: var(--bg-accent-subtle);
+  --color-pro: var(--bg-pro);
+  --color-pro-subtle: var(--bg-pro-subtle);
+  --color-inverse: var(--bg-inverse);
+  --color-accent-solid: var(--bg-accent-solid);
 
   /* Text */
-  --color-ink: #eaecef;
-  --color-ink-secondary: #848e9c;
-  --color-ink-muted: #5d6677;
-  --color-ink-faint: #3d4352;
-  --color-hairline: rgba(255, 255, 255, 0.1);
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-tertiary);
+  --color-ink-faint: var(--text-muted);
+  --color-white: var(--text-primary);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-tertiary: var(--text-tertiary);
+  --color-muted: var(--text-muted);
+  --color-accent-text: var(--text-accent);
+  --color-on-accent: var(--text-on-accent);
+  --color-on-inverse: var(--text-on-inverse);
+  --color-pro-text: var(--text-pro);
+  --color-inverse: var(--text-inverse);
+  --color-inverse-secondary: var(--text-inverse-secondary);
 
-  /* Accents (sticker palette) */
+  /* Hairlines & borders */
+  --color-hairline: var(--border-default);
+  --color-surface: var(--border-default);
+  --color-hover: var(--border-hover);
+  --color-border-accent: var(--border-accent);
+
+  /* Status */
+  --color-up: var(--text-up);
+  --color-down: var(--text-down);
+  --color-warning: var(--text-warning);
+  --color-danger: var(--text-danger);
+
+  /* Stickers */
   --color-sticker-purple: #d6b6f6;
   --color-sticker-pink: #ff64c8;
   --color-sticker-orange: #dd5b00;
@@ -30,35 +65,80 @@
   --color-sticker-green: #1aae39;
   --color-sticker-sky: #62aef0;
 
-  /* Status */
-  --color-up: #22c55e;
-  --color-down: #ef4444;
-  --color-warning: #f59e0b;
-
   /* Fonts */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Radii */
+  /* Radii — Airbnb-soft */
   --radius-xs: 4px;
-  --radius-sm: 5px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
 
-  /* Shadows (dark) */
-  --shadow-level-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-focus: 0 0 0 2px rgba(77, 166, 255, 0.4);
+  /* Shadows adapt via opacity */
+  --shadow-level-1: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0 0 0 2px var(--text-accent);
 }
 
-/* ─── Variables CSS — mode clair (défaut) ─── */
-/* ─── Variables CSS — mode sombre uniquement ─── */
+/* ─── Light mode (default) — Airbnb-inspired public surfaces ─── */
 :root {
-  --bg-canvas: #1a1d29;
-  --bg-card: #242836;
-  --bg-raised: #2e3344;
-  --bg-input: #242836;
-  --bg-inset: #1a1d29;
+  --bg-canvas: #ffffff;
+  --bg-canvas-soft: #f7f7f7;
+  --bg-canvas-warm: #f2f2f2;
+  --bg-card: #ffffff;
+  --bg-raised: #f2f2f2;
+  --bg-input: #ffffff;
+  --bg-inset: #f7f7f7;
+  --bg-accent: rgba(255, 56, 92, 0.12);
+  --bg-accent-subtle: rgba(255, 56, 92, 0.06);
+  --bg-pro: #16a34a;
+  --bg-pro-subtle: rgba(22, 163, 74, 0.12);
+
+  --text-primary: #222222;
+  --text-secondary: #6a6a6a;
+  --text-tertiary: #929292;
+  --text-muted: #b0b0b0;
+  --text-accent: #ff385c;
+  --text-on-accent: #ffffff;
+  --text-on-inverse: #ffffff;
+  --text-pro: #16a34a;
+  --text-inverse: #222222;
+  --text-inverse-secondary: #6a6a6a;
+
+  --border-default: #dddddd;
+  --border-hover: #222222;
+  --border-accent: #ff385c;
+
+  --icon-default: #929292;
+  --icon-hover: #222222;
+
+  --text-up: #16a34a;
+  --text-down: #dc2626;
+  --text-warning: #f59e0b;
+  --text-danger: #dc2626;
+  --bg-up-subtle: rgba(22, 163, 74, 0.12);
+  --bg-down-subtle: rgba(220, 38, 38, 0.12);
+  --bg-warning-subtle: rgba(245, 158, 11, 0.12);
+  --bg-danger-subtle: rgba(220, 38, 38, 0.12);
+
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --code-bg: #f7f7f7;
+  --code-border: rgba(0, 0, 0, 0.08);
+
+  --bg-inverse: #222222;
+  --bg-accent-solid: #ff385c;
+}
+
+/* ─── Dark mode (pro trading) ─── */
+.dark {
+  --bg-canvas: #0b0e11;
+  --bg-canvas-soft: #12161a;
+  --bg-canvas-warm: #161a1e;
+  --bg-card: #161a1e;
+  --bg-raised: #1a1e23;
+  --bg-input: #161a1e;
+  --bg-inset: #0b0e11;
   --bg-accent: rgba(77, 166, 255, 0.12);
   --bg-accent-subtle: rgba(77, 166, 255, 0.06);
   --bg-pro: #1aae39;
@@ -72,12 +152,14 @@
   --text-on-accent: #ffffff;
   --text-on-inverse: #ffffff;
   --text-pro: #1aae39;
+  --text-inverse: #eaecef;
+  --text-inverse-secondary: #848e9c;
 
   --border-default: rgba(255, 255, 255, 0.1);
   --border-hover: #4da6ff;
   --border-accent: #4da6ff;
 
-  --icon-default: #7d7c78;
+  --icon-default: #848e9c;
   --icon-hover: #eaecef;
 
   --text-up: #4dab9a;
@@ -94,8 +176,6 @@
   --code-border: rgba(255, 255, 255, 0.08);
 
   --bg-inverse: #f8f4f0;
-  --text-inverse: #201515;
-  --text-inverse-secondary: #605d52;
   --bg-accent-solid: #4da6ff;
 }
 
@@ -104,6 +184,10 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+  }
+
+  html.dark {
     color-scheme: dark;
   }
 

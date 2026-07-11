@@ -29,7 +29,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const viewport: Viewport = {};
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

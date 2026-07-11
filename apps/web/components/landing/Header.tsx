@@ -37,6 +37,7 @@ import DropdownMenu from "@/components/ui/DropdownMenu";
 import MobileDrawer from "@/components/ui/MobileDrawer";
 import UserMenu from "@/components/ui/UserMenu";
 import SettingsDropdown from "@/components/ui/SettingsDropdown";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useCommandPalette } from "@/lib/context/CommandPaletteContext";
 import { useNewsDrawer } from "@/lib/context/NewsDrawerContext";
 import type { DropdownItem } from "@/components/ui/DropdownMenu";
@@ -142,6 +143,9 @@ export default function Header() {
 
         {/* ─── Actions ─── */}
         <div className="flex items-center self-center justify-end gap-3">
+          {/* Theme */}
+          <ThemeToggle />
+
           {/* Settings */}
           <SettingsDropdown />
 
